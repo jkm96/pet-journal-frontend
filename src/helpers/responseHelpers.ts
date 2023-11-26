@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server";
 import {AxiosError, AxiosResponse} from "axios";
 import camelcaseKeys from 'camelcase-keys';
-import {AdminApiErrorResponse} from "@/boundary/interfaces/shared";
+import {ApiErrorResponse} from "@/boundary/interfaces/shared";
 
 export function handleAxiosResponse(response: AxiosResponse<any>) {
     const axiosResponse = response.data;
@@ -18,12 +18,14 @@ export function handleApiException(error: any) {
         // Handle Axios errors
         const axiosError = error as AxiosError;
         if (axiosError.response !== undefined) {
-            console.log("error response", axiosError.response);
             console.log("error response data", axiosError.response?.data);
             console.log("error response status", axiosError.response?.status);
             const errorData: any = axiosError.response?.data;
-            const errorResponse = camelcaseKeys(errorData, {deep: true}) as AdminApiErrorResponse;
-
+            const errorResponse = camelcaseKeys(errorData, {deep: true}) as ApiErrorResponse;
+            if (axiosError.response?.data){
+                const errData = axiosError.response?.data as ApiErrorResponse;
+                return createNextResponse(errData.statusCode, errData.message)
+            }
             return createNextResponse(axiosError.response?.status ?? 500, axiosError.response.statusText ?? errorResponse.message, errorResponse)
         }
 

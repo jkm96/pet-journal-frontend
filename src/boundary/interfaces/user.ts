@@ -1,9 +1,11 @@
 export interface User{
-    id: string;
+    id: number;
     name: string;
     email: string;
-    isDefaultAdmin:number;
     authToken: string;
+    "emailVerifiedAt": null,
+    "createdAt": Date,
+    "updatedAt": Date
 }
 
 export interface CreateUserRequest{

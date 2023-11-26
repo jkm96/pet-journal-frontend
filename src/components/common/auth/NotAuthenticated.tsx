@@ -8,7 +8,7 @@ export default function NotAuthenticated() {
             <h3 className="w3-center w3-animate-right text-black-2">You are not authenticated to access this resource.</h3>
             <h3 className="w3-center w3-animate-zoom">🚫🚫🚫🚫</h3>
             <h6 className="w3-center w3-animate-zoom text-black-2">error code:403 forbidden</h6>
-            <Link className="text-primary" href="/auth/login">Please Log in</Link>
+            <Link className="text-primary" href="/user/auth/login">Please Log in</Link>
         </div>
     );
 }

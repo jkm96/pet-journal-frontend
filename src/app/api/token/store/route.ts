@@ -1,10 +1,9 @@
 import {NextRequest, NextResponse} from "next/server";
-import {setCookieOnResponseHeaders} from "@/helpers/tokenHelpers";
+import {cookieName} from "@/boundary/constants/appConstants";
+
 export async function POST(request: NextRequest) {
     try {
-        const requestBody = await request.json();
-        const {accessToken, expiresAt, refreshToken} = requestBody;
-
+        const tokenRequest = await request.text();
         const response = NextResponse.json(
             {
                 "data":"",
@@ -12,7 +11,15 @@ export async function POST(request: NextRequest) {
                 "statusCode":200
             },
             {status: 200});
-        setCookieOnResponseHeaders(accessToken, refreshToken, expiresAt, response)
+
+        response.cookies.set({
+            name: `${cookieName}`,
+            value: tokenRequest,
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== "development",
+            sameSite: "strict",
+            path: "/",
+        });
 
         return response;
     } catch (e) {

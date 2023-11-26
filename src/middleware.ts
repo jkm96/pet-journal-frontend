@@ -1,6 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {setCookieOnResponseHeaders} from "@/helpers/tokenHelpers";
-import {apiKey, internalBaseUrl} from "@/boundary/constants/appConstants";
+import {apiKey, cookieName, internalBaseUrl} from "@/boundary/constants/appConstants";
 import {getAccessToken} from "@/lib/services/token/tokenService";
 
 export async function middleware(request: NextRequest) {
@@ -15,16 +14,20 @@ export async function middleware(request: NextRequest) {
         let response = await getAccessToken()
         if (response.statusCode === 200) {
             const tokenResponse = response.data;
-            if (tokenResponse.storeToken) {
+            if (tokenResponse) {
                 let response = NextResponse.next();
-                const {accessToken, expiresAt, refreshToken} = tokenResponse;
-
-                setCookieOnResponseHeaders(accessToken, refreshToken, expiresAt, response);
+                response.cookies.set({
+                    name: `${cookieName}`,
+                    value: JSON.stringify(tokenResponse),
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV !== "development",
+                    sameSite: "strict",
+                    path: "/",
+                });
 
                 return response;
             }
         }
-
     }
 
     return NextResponse.next();

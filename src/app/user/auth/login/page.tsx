@@ -2,8 +2,8 @@
 import React, {useState} from "react";
 import LoginForm from "@/components/user/auth/LoginForm";
 import {useAuth} from "@/hooks/useAuth";
-import Loader from "@/components/common/Loader";
 import {RedirectUser} from "@/components/common/auth/RedirectUser";
+import Loader from "@/components/common/Loader";
 
 export default function LoginPage() {
     const {user,loading: authLoading } = useAuth();

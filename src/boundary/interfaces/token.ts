@@ -1,8 +1,8 @@
+import {User} from "@/boundary/interfaces/user";
+
 export interface StoreTokenRequest{
     accessToken:string;
-    refreshToken:string;
-    expiresAt:string;
-    storeToken:boolean;
+    user : User;
 }
 
 export interface RefreshTokenRequest {
@@ -12,10 +12,5 @@ export interface RefreshTokenRequest {
 
 export interface TokenResponse {
     token: string;
-    refreshToken: string;
-    expiresAt: string;
-    refreshTokenExpiryTime: string;
-    securityTimeStamp: string;
-    isMFARequired: boolean;
-    userImageURL: string | null;
+    user : User
 }

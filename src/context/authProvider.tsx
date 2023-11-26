@@ -3,8 +3,7 @@ import React, {useEffect, useState} from "react";
 import {User} from "@/boundary/interfaces/user";
 import AuthContext from "./authContext";
 import {StoreTokenRequest, TokenResponse} from "@/boundary/interfaces/token";
-import {deleteAccessToken, getAccessToken, storeAccessTokenInCookie} from "@/lib/services/token/tokenService";
-import {getUserDetails} from "@/lib/jwt/readAuthToken";
+import {getAccessToken, storeAccessTokenInCookie} from "@/lib/services/token/tokenService";
 
 type AuthContextProps = {
     children: React.ReactNode;
@@ -15,35 +14,25 @@ export function AuthProvider({children}: AuthContextProps) {
     const [loading, setLoading] = useState(true); // Add the loading state
 
     const storeAuthToken = async (tokenData: TokenResponse) => {
-        // Store the authentication token in browser cookies or local storage
         const cookieRequest: StoreTokenRequest = {
-            storeToken: false,
             accessToken: tokenData.token,
-            expiresAt: tokenData.expiresAt,
-            refreshToken: tokenData.refreshToken
+            user: tokenData.user
         };
 
         await storeAccessTokenInCookie(cookieRequest);
-        const userData = getUserDetails(tokenData.token);
-        setUser(userData);
+        setUser(tokenData.user);
     };
 
     const clearAuthToken = async () => {
-        // Perform logout logic and unset the user
-        // Remove the authentication token from browser cookies or local storage
         setUser(null);
     };
 
     useEffect(() => {
-        // Check for the authentication token on page load and set the user accordingly
-        // Fetch user data based on the token, then set the user
         const fetchAccessToken = async () => {
             const response = await getAccessToken();
             if (response.statusCode === 200){
-                const tokenResponse = response.data;
-                const { accessToken } = tokenResponse;
-                const userData = getUserDetails(accessToken);
-                setUser(userData);
+                const tokenResponse = JSON.parse(response.data);
+                setUser(tokenResponse.user);
             }else{
                 setUser(null)
             }

@@ -1,9 +1,9 @@
 import axios from "axios";
 import * as https from "https";
-import {adminApiBaseUrl} from "@/boundary/constants/appConstants";
+import {petJournalApiBaseUrl} from "@/boundary/constants/appConstants";
 
-const adminApiClient = axios.create({
-    baseURL: `${adminApiBaseUrl}`,
+const petJournalApiClient = axios.create({
+    baseURL: `${petJournalApiBaseUrl}`,
     timeout: 30000,
     headers: {
         'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ const adminApiClient = axios.create({
     httpsAgent: new https.Agent({ rejectUnauthorized: false })
 });
 
-adminApiClient.interceptors.request.use(
+petJournalApiClient.interceptors.request.use(
     function (config) {
 
         return config;
@@ -22,4 +22,4 @@ adminApiClient.interceptors.request.use(
         return Promise.reject(error)
     }
 );
-export default adminApiClient;
+export default petJournalApiClient;

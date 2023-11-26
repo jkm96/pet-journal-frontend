@@ -1,12 +1,11 @@
 export interface LoginUserRequest {
-    email: string;
+    username: string;
     password: string;
 }
 
 export interface RegisterUserRequest {
     email: string;
-    firstName: string;
-    lastName: string;
+    username: string;
     password: string;
     confirmPassword: string;
 }
