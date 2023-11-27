@@ -10,6 +10,6 @@ export interface RegisterUserRequest {
     confirmPassword: string;
 }
 
-export interface PermissionModel {
+export interface Permissions {
     Permission:string
 }

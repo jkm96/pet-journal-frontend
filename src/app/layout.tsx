@@ -1,5 +1,4 @@
 import type {Metadata} from 'next'
-import {Inter} from 'next/font/google'
 import './globals.css'
 import {UIProvider} from "@/context/uiProvider";
 import {AuthProvider} from "@/context/authProvider";

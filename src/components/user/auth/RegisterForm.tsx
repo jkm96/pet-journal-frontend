@@ -278,7 +278,7 @@ export default function RegisterForm() {
                                            label="Confirm Password"
                                            name="confirmPassword"
                                            variant="bordered"
-                                           placeholder="Enter your confirm password"
+                                           placeholder="Confirm your password"
                                            onInput={() => {
                                                setInputErrors({...inputErrors, confirmPassword: ""});
                                            }}

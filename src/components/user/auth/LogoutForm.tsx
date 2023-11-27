@@ -12,7 +12,7 @@ export default function LogoutForm() {
         console.log("delete response", response)
         if (response.statusCode === 200) {
             clearAuthToken();
-            router.push("/auth/login")
+            router.push("/user/auth/login")
         }
     }
 

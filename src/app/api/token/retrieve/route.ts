@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     try {
         const tokenCookie = request.cookies.get(`${cookieName}`)?.value as string;
         if (tokenCookie === undefined) {
-            return createNextResponse(422, "Cookie was empty")
+            return createNextResponse(404, "Cookie was empty")
         }
 
         return createNextResponse(200, "Success", tokenCookie)

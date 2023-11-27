@@ -11,12 +11,13 @@ type AuthContextProps = {
 
 export function AuthProvider({children}: AuthContextProps) {
     const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true); // Add the loading state
+    const [loading, setLoading] = useState(true);
 
     const storeAuthToken = async (tokenData: TokenResponse) => {
         const cookieRequest: StoreTokenRequest = {
             accessToken: tokenData.token,
-            user: tokenData.user
+            user: tokenData.user,
+            permissions: tokenData.permissions
         };
 
         await storeAccessTokenInCookie(cookieRequest);

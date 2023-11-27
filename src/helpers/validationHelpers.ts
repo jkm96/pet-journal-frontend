@@ -2,7 +2,6 @@ import {LoginUserRequest, RegisterUserRequest} from "@/boundary/interfaces/auth"
 
 export function isEmailValid(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
     return emailPattern.test(email);
 }
 
@@ -15,6 +14,12 @@ export function validateRegisterFormInputErrors(formData: RegisterUserRequest) {
         errors.email = "Email cannot be empty";
     } else if (!isEmailValid(formData.email.trim())) {
         errors.email = "Invalid email address";
+    }
+
+    if (formData.username.trim() === "") {
+        errors.username = "Username cannot be empty";
+    } else if (formData.username.trim().length < 4) {
+        errors.username = "Username must be at least 4 characters long";
     }
 
     if (formData.password.trim() === "") {

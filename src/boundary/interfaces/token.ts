@@ -3,6 +3,7 @@ import {User} from "@/boundary/interfaces/user";
 export interface StoreTokenRequest{
     accessToken:string;
     user : User;
+    permissions : number[];
 }
 
 export interface RefreshTokenRequest {
@@ -12,5 +13,6 @@ export interface RefreshTokenRequest {
 
 export interface TokenResponse {
     token: string;
-    user : User
+    user : User;
+    permissions : number[];
 }
