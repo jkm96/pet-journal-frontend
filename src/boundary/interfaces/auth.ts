@@ -9,7 +9,3 @@ export interface RegisterUserRequest {
     password: string;
     confirmPassword: string;
 }
-
-export interface Permissions {
-    Permission:string
-}

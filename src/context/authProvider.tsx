@@ -17,11 +17,17 @@ export function AuthProvider({children}: AuthContextProps) {
         const cookieRequest: StoreTokenRequest = {
             accessToken: tokenData.token,
             user: tokenData.user,
-            permissions: tokenData.permissions
+            permissions: tokenData.user.permissions
         };
 
         await storeAccessTokenInCookie(cookieRequest);
-        setUser(tokenData.user);
+        const userObject:User = {
+            id: tokenData.user.id,
+            username: tokenData.user.username,
+            email: tokenData.user.email,
+            profileUrl: tokenData.user.profileUrl ?? "",
+        }
+        setUser(userObject);
     };
 
     const clearAuthToken = async () => {

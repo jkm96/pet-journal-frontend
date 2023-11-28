@@ -1,8 +1,8 @@
-import {User} from "@/boundary/interfaces/user";
+import {User, UserResponse} from "@/boundary/interfaces/user";
 
 export interface StoreTokenRequest{
     accessToken:string;
-    user : User;
+    user : UserResponse;
     permissions : number[];
 }
 
@@ -13,6 +13,5 @@ export interface RefreshTokenRequest {
 
 export interface TokenResponse {
     token: string;
-    user : User;
-    permissions : number[];
+    user : UserResponse;
 }

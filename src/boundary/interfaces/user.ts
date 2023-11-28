@@ -1,14 +1,18 @@
 export interface User{
     id: number;
-    name: string;
+    username: string;
     email: string;
-    authToken: string;
-    isAdmin: boolean;
-    emailVerifiedAt: null,
-    createdAt: Date,
-    updatedAt: Date
+    profileUrl: string;
 }
 
-export interface UserPermissions {
-    permissions: string[];
+export interface UserResponse{
+    id: number;
+    username: string;
+    email: string;
+    profileUrl: string | null;
+    isEmailVerified: boolean;
+    emailVerifiedAt: null;
+    createdAt: Date;
+    updatedAt: Date;
+    permissions : number[];
 }
