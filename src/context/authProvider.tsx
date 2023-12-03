@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from "react";
 import {User} from "@/boundary/interfaces/user";
 import AuthContext from "./authContext";
-import {StoreTokenRequest, TokenResponse} from "@/boundary/interfaces/token";
+import {AccessTokenModel} from "@/boundary/interfaces/token";
 import {getAccessToken, storeAccessTokenInCookie} from "@/lib/services/token/tokenService";
 
 type AuthContextProps = {
@@ -13,11 +13,10 @@ export function AuthProvider({children}: AuthContextProps) {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
 
-    const storeAuthToken = async (tokenData: TokenResponse) => {
-        const cookieRequest: StoreTokenRequest = {
-            accessToken: tokenData.token,
-            user: tokenData.user,
-            permissions: tokenData.user.permissions
+    const storeAuthToken = async (tokenData: AccessTokenModel) => {
+        const cookieRequest: AccessTokenModel = {
+            token: tokenData.token,
+            user: tokenData.user
         };
 
         await storeAccessTokenInCookie(cookieRequest);

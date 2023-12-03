@@ -8,6 +8,7 @@ import DashboardIcon from "@/components/shared/icons/DashboardIcon";
 import ProfileIcon from "@/components/shared/icons/ProfileIcon";
 import FormIcon from "@/components/shared/icons/FormIcon";
 import ShowMenuList from "@/components/common/dashboard/ShowMenuList";
+import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 
 interface SidebarProps {
     sidebarOpen: boolean;
@@ -69,7 +70,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
         >
             {/* <!-- SIDEBAR HEADER --> */}
             <div className="flex items-center gap-2 px-6 mb-0 py-2 lg:py-4">
-                <Link href="/dashboard">
+                <Link href={NAVIGATION_LINKS.DASHBOARD}>
                     Pet Journal
                 </Link>
 
@@ -96,7 +97,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                     <ul className="mb-6 flex flex-col gap-1.5">
                         {/* <!-- Menu Item Dashboard --> */}
                         <SidebarLinkGroup
-                            activeCondition={pathname === "/dashboard"}
+                            activeCondition={pathname === NAVIGATION_LINKS.DASHBOARD}
                         >
                             {(handleClick, open) => {
                                 return (
@@ -105,7 +106,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                             href="#"
                                             className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium 
                                             text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                                                (pathname === "/dashboard") && "bg-graydark dark:bg-meta-4"
+                                                (pathname === NAVIGATION_LINKS.DASHBOARD) && "bg-graydark dark:bg-meta-4"
                                             }`}
                                             onClick={(e) => {
                                                 e.preventDefault();
@@ -125,9 +126,10 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                                 <ul className="mt-2 flex flex-col gap-2.5 pl-6">
                                                     <li>
                                                         <Link
-                                                            href="/dashboard"
-                                                            className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                                                pathname === "/dashboard" && "text-white"
+                                                            href={NAVIGATION_LINKS.DASHBOARD}
+                                                            className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
+                                                            text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                                                pathname === NAVIGATION_LINKS.DASHBOARD && "text-white"
                                                             } `}>
                                                             Dashboard
                                                         </Link>
@@ -144,7 +146,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                         {/* <!-- Menu Item My Pets Mngt --> */}
                         <SidebarLinkGroup
                             activeCondition={
-                                pathname === "/dashboard/pet-profiles" || pathname.includes("pet-profiles")
+                                pathname === NAVIGATION_LINKS.PET_PROFILE || pathname.includes("pet-profile")
                             }>
                             {(handleClick, open) => {
                                 return (
@@ -153,7 +155,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                             href="#"
                                             className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium 
                                             text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                                                (pathname === "/dashboard/pet-profiles" || pathname.includes("pet-profiles")) &&
+                                                (pathname === NAVIGATION_LINKS.PET_PROFILE || pathname.includes("pet-profile")) &&
                                                 "bg-graydark dark:bg-meta-4"
                                             }`}
                                             onClick={(e) => {
@@ -175,9 +177,9 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                             <ul className="mt-2 flex flex-col gap-2.5 pl-6">
                                                 <li>
                                                     <Link
-                                                        href="/dashboard/pet-profiles"
+                                                        href={NAVIGATION_LINKS.PET_PROFILE}
                                                         className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
-                                                        text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === "/dashboard/pet-profiles" &&
+                                                        text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === NAVIGATION_LINKS.PET_PROFILE &&
                                                         "text-white"
                                                         }`}
                                                     >
@@ -196,8 +198,8 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                         {/* <!-- Menu Item My Journal Entries Mngt --> */}
                         <SidebarLinkGroup
                             activeCondition={
-                                pathname === "/dashboard/journal-entries" || pathname.includes("journal-entries") ||
-                                pathname === "/dashboard/timeline-view" || pathname.includes("timeline-view")
+                                pathname === NAVIGATION_LINKS.JOURNAL_ENTRIES || pathname.includes("journal-entries") ||
+                                pathname === NAVIGATION_LINKS.TIMELINE_VIEW || pathname.includes("timeline-view")
                             }>
                             {(handleClick, open) => {
                                 return (
@@ -206,7 +208,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                             href="#"
                                             className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium 
                                             text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                                                (pathname === "/dashboard/journal-entries" || pathname === "/dashboard/timeline-view" 
+                                                (pathname === NAVIGATION_LINKS.JOURNAL_ENTRIES || pathname === NAVIGATION_LINKS.TIMELINE_VIEW
                                                     || pathname.includes("journal-entries") || pathname.includes("timeline-view")) &&
                                                 "bg-graydark dark:bg-meta-4"
                                             }`}
@@ -229,9 +231,9 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                             <ul className="mt-2 flex flex-col gap-2.5 pl-6">
                                                 <li>
                                                     <Link
-                                                        href="/dashboard/journal-entries"
+                                                        href={NAVIGATION_LINKS.JOURNAL_ENTRIES}
                                                         className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
-                                                        text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === "/dashboard/journal-entries" &&
+                                                        text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === NAVIGATION_LINKS.JOURNAL_ENTRIES &&
                                                         "text-white"
                                                         }`}
                                                     >
@@ -240,10 +242,10 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                                 </li>
                                                 <li>
                                                     <Link
-                                                        href="/dashboard/timeline-view"
+                                                        href={NAVIGATION_LINKS.TIMELINE_VIEW}
                                                         className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
                                                         text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                                            pathname === "/dashboard/timeline-view" &&
+                                                            pathname === NAVIGATION_LINKS.TIMELINE_VIEW &&
                                                             "text-white"
                                                         }`}
                                                     >
@@ -262,8 +264,9 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                         {/* <!-- Menu Item Settings --> */}
                         <li>
                             <Link
-                                href="/dashboard/settings"
-                                className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                                href={NAVIGATION_LINKS.SETTINGS}
+                                className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 
+                                duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                                     pathname.includes("settings") &&
                                     "bg-graydark dark:bg-meta-4"
                                 }`}

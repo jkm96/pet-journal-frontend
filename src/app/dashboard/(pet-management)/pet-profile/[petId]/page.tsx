@@ -2,15 +2,15 @@
 
 import AuthorizeComponent from "@/components/common/auth/AuthorizeComponent";
 import PetJournalPermission, {MapPermission} from "@/boundary/enums/permissions";
-import DashboardSection from "@/components/pet/dashboard/DashboardSection";
+import ManagePetProfile from "@/components/pet/pets/profile/ManagePetProfile";
 
-function DashboardPage() {
+function ManagePetProfilePage({params}: { params: { petId: number } }) {
     return (
         <>
-            <DashboardSection/>
+            <ManagePetProfile petId={params.petId}/>
         </>
     )
 }
 
 const viewPermission = MapPermission(PetJournalPermission.PermissionsUsersView)
-export default AuthorizeComponent([viewPermission])(DashboardPage)
+export default AuthorizeComponent([viewPermission])(ManagePetProfilePage)

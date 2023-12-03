@@ -4,14 +4,13 @@ import {validateLoginFormInputErrors} from "@/helpers/validationHelpers";
 import {useAuth} from "@/hooks/useAuth";
 import {useRouter} from "next/navigation";
 import {LoginUserRequest} from "@/boundary/interfaces/auth";
-import {TokenResponse} from "@/boundary/interfaces/token";
+import {AccessTokenModel} from "@/boundary/interfaces/token";
 import {loginUser} from "@/lib/services/auth/authService";
 import {Input} from "@nextui-org/react";
 import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
 import {Button} from "@nextui-org/button";
 import {toast} from "react-toastify";
 import Spinner from "@/components/shared/icons/Spinner";
-import Image from "next/image";
 
 const initialFormState: LoginUserRequest = {
     username: "", password: ""
@@ -60,7 +59,7 @@ export default function LoginForm() {
             toast.success("Logged in successfully")
             setIsSubmitting(false);
             setLoginFormData(initialFormState)
-            let responseData: TokenResponse = response.data;
+            let responseData: AccessTokenModel = response.data;
             storeAuthToken(responseData);
             router.push("/dashboard")
         } else {

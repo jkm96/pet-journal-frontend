@@ -1,8 +1,7 @@
-import {StoreTokenRequest} from "@/boundary/interfaces/token";
+import {AccessTokenModel} from "@/boundary/interfaces/token";
 import {apiKey, internalBaseUrl} from "@/boundary/constants/appConstants";
 
-export async function storeAccessTokenInCookie(storeTokenRequest: StoreTokenRequest) {
-    console.log("storeTokenRequest",storeTokenRequest)
+export async function storeAccessTokenInCookie(storeTokenRequest: AccessTokenModel) {
     try {
         const response = await fetch(`${internalBaseUrl}/token/store`, {
             method: 'POST',
