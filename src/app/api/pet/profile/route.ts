@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
         };
 
         const response = await petJournalApiClient.get('pet/profiles', config);
-        console.log("pet-profile profile api response", response.data)
+        console.log("petmngt-profile profile api response", response.data)
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {

@@ -6,6 +6,7 @@ import {Avatar, Card, CardBody, CardHeader, CircularProgress, Image} from "@next
 import {Button} from "@nextui-org/button";
 import Link from "next/link";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
+import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 
 export default function PetProfilesOverviewSection() {
     const [petProfiles, setPetProfiles] = useState<PetProfileResponse[]>([]);
@@ -40,6 +41,7 @@ export default function PetProfilesOverviewSection() {
                 </div>
             ) : (
                 <>
+                    <Breadcrumb pageName="Pet Profiles" />
                     {petProfiles.length < 1 ? (
                         <>
                             <div className="text-center">

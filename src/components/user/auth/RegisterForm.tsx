@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, {useState} from "react";
-import {useRouter} from "next/navigation";
+import {redirect, useRouter} from "next/navigation";
 import {RegisterUserRequest} from "@/boundary/interfaces/auth";
 import {validateRegisterFormInputErrors} from "@/helpers/validationHelpers";
 import {Input} from "@nextui-org/react";
@@ -9,6 +9,7 @@ import {registerUser} from "@/lib/services/auth/authService";
 import {Button} from "@nextui-org/button";
 import {toast} from "react-toastify";
 import Spinner from "@/components/shared/icons/Spinner";
+import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 
 const initialFormState: RegisterUserRequest = {
     email: "", username: "", password: "", confirmPassword: ""
@@ -58,7 +59,7 @@ export default function RegisterForm() {
             setIsSubmitting(false)
             setRegisterFormData(initialFormState)
             toast.success("Registered in successfully")
-            router.push('/user/auth/login')
+            router.push(NAVIGATION_LINKS.LOGIN)
         } else {
             setIsSubmitting(false)
             toast.error(response.message ?? "Unknown error occurred")
@@ -203,7 +204,7 @@ export default function RegisterForm() {
                         </div>
                     </div>
                     <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
-                        <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
+                        <div className="w-3/4 p-4 sm:p-12.5 xl:p-17.5">
                             <div className="text-center">
                                 <span className="mb-1.5 block font-medium">Start for free</span>
                                 <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
@@ -314,7 +315,7 @@ export default function RegisterForm() {
                                 <div className="mt-6 text-center">
                                     <p>
                                         Already have an account?{" "}
-                                        <Link href="/user/auth/login" className="text-primary">
+                                        <Link href={NAVIGATION_LINKS.LOGIN} className="text-primary">
                                             Sign in
                                         </Link>
                                     </p>

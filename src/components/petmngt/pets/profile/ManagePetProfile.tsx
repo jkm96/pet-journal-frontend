@@ -15,7 +15,7 @@ export default function ManagePetProfile({petId}: { petId: number }) {
             const response = await getPetProfileDetails(petId);
             if (response.statusCode === 200) {
                 const petProfiles = response.data;
-                console.log("pet profile", petProfiles)
+                console.log("petmngt profile", petProfiles)
                 setPetProfileDetails(petProfiles)
             } else {
                 toast.error(`Error fetching your pet profile details ${response.message}`)

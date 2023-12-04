@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {useAuth} from "@/hooks/useAuth";
 import LogoutForm from "@/components/user/auth/LogoutForm";
+import {Avatar} from "@nextui-org/react";
 
 const DropdownUser = () => {
     const {user} = useAuth();
@@ -47,18 +48,22 @@ const DropdownUser = () => {
             >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-           {user?.name}
+           {user?.username}
           </span>
           <span className="block text-xs">UX Designer</span>
         </span>
 
                 <span className="h-12 w-12 rounded-full">
-          <Image
-              width={112}
-              height={112}
-              src={"/images/user/user-01.png"}
-              alt="User"
-          />
+                    <Avatar
+                        name={user?.username}
+                        size={"md"}
+                    />
+          {/*<Image*/}
+          {/*    width={112}*/}
+          {/*    height={112}*/}
+          {/*    src=""*/}
+          {/*    alt="User"*/}
+          {/*/>*/}
         </span>
 
                 <svg

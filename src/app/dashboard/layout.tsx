@@ -4,8 +4,10 @@ import React, {useState, useEffect} from "react";
 import Loader from "@/components/common/dashboard/Loader";
 import {useAuth} from "@/hooks/useAuth";
 import NotAuthenticated from "@/components/common/auth/NotAuthenticated";
-import Sidebar from "@/components/pet/navs/sidebar/SideBar";
-import Header from "@/components/pet/navs/header/Header";
+import Sidebar from "@/components/shared/navs/sidebar/SideBar";
+import Header from "@/components/shared/navs/header/Header";
+import {redirect} from "next/navigation";
+import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 
 export default function DashboardLayout({children}: { children: React.ReactNode; }) {
     const {user,loading: authLoading} = useAuth();
@@ -21,7 +23,7 @@ export default function DashboardLayout({children}: { children: React.ReactNode;
     }
 
     if (!user) {
-        return <NotAuthenticated/>
+        redirect(NAVIGATION_LINKS.LOGIN)
     }
 
     return (

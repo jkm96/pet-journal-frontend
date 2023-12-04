@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, {useState} from "react";
 import {validateLoginFormInputErrors} from "@/helpers/validationHelpers";
 import {useAuth} from "@/hooks/useAuth";
-import {useRouter} from "next/navigation";
+import {redirect, useRouter} from "next/navigation";
 import {LoginUserRequest} from "@/boundary/interfaces/auth";
 import {AccessTokenModel} from "@/boundary/interfaces/token";
 import {loginUser} from "@/lib/services/auth/authService";
@@ -11,6 +11,7 @@ import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
 import {Button} from "@nextui-org/button";
 import {toast} from "react-toastify";
 import Spinner from "@/components/shared/icons/Spinner";
+import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 
 const initialFormState: LoginUserRequest = {
     username: "", password: ""
@@ -61,7 +62,7 @@ export default function LoginForm() {
             setLoginFormData(initialFormState)
             let responseData: AccessTokenModel = response.data;
             storeAuthToken(responseData);
-            router.push("/dashboard")
+            router.push(NAVIGATION_LINKS.DASHBOARD)
         } else {
             setIsSubmitting(false);
             toast.error(response.message ?? "Unknown error occurred")
@@ -205,8 +206,9 @@ export default function LoginForm() {
               </span>
                         </div>
                     </div>
+
                     <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
-                        <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
+                        <div className="w-3/4 place-items-center p-4 sm:p-12.5 xl:p-17.5">
                             <div className="text-center">
                                 <span className="mb-1.5 block font-medium">Start for free</span>
                                 <span className="mb-1.5 block font-medium">or</span>
@@ -280,7 +282,7 @@ export default function LoginForm() {
                                 <div className="mt-6 text-center">
                                     <p>
                                         Don’t have any account?{" "}
-                                        <Link href="/user/auth/register" className="text-primary">
+                                        <Link href={NAVIGATION_LINKS.REGISTER} className="text-primary">
                                             Sign Up
                                         </Link>
                                     </p>

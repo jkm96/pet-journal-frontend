@@ -1,18 +1,19 @@
 import {useAuth} from "@/hooks/useAuth";
-import {useRouter} from "next/navigation";
+import {redirect, useRouter} from "next/navigation";
 import {deleteAccessToken} from "@/lib/services/token/tokenService";
 import LogoutIcon from "@/components/shared/icons/LogoutIcon";
+import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
+import {router} from "next/client";
 
 export default function LogoutForm() {
+    const router = useRouter()
     const {clearAuthToken} = useAuth();
-    const router = useRouter();
 
     async function handleLogout() {
         const response = await deleteAccessToken();
-        console.log("delete response", response)
         if (response.statusCode === 200) {
             clearAuthToken();
-            router.push("/user/auth/login")
+            router.push(NAVIGATION_LINKS.LOGIN)
         }
     }
 
