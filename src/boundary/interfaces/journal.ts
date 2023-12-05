@@ -19,5 +19,5 @@ export interface CreateJournalEntryRequest {
     mood: string;
     tags: string;
     petIds: number[]
-    profilePictures: string[];
+    profilePictures: FileList | null;
 }
