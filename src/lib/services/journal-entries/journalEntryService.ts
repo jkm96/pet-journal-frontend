@@ -1,20 +1,36 @@
 import {apiKey, internalBaseUrl} from "@/boundary/constants/appConstants";
 import {CreateJournalEntryRequest} from "@/boundary/interfaces/journal";
+import axios from "axios";
+import {handleApiException, handleAxiosResponse} from "@/helpers/responseHelpers";
 
-export async function createJournalEntry(createRequest:CreateJournalEntryRequest) {
+export async function createJournalEntry(createRequest: CreateJournalEntryRequest) {
     try {
-        const response = await fetch(`${internalBaseUrl}/journal-entry/create`, {
-            method: 'POST',
+        const formData = new FormData();
+        formData.append('title', createRequest.title);
+        formData.append('event', createRequest.event);
+        formData.append('content', createRequest.content);
+        formData.append('location', createRequest.location);
+        formData.append('mood', createRequest.mood);
+        formData.append('tags', createRequest.tags);
+        formData.append('petIds', JSON.stringify(createRequest.petIds));
+
+        if (createRequest.attachments) {
+            for (let i = 0; i < createRequest.attachments.length; i++) {
+                const file = createRequest.attachments[i];
+                formData.append(`attachment${i}`, file, file.name);
+            }
+        }
+
+        const response = await axios.post(`${internalBaseUrl}/journal-entry/create`, formData, {
             headers: {
-                'x-api-key':`${apiKey}`,
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(createRequest),
+                'x-api-key': `${apiKey}`,
+                "Content-Type": "multipart/form-data",
+            }
         });
 
-        return response.json();
-    } catch (error) {
-        throw error;
+        return response.data;
+    } catch (error: any) {
+        return handleApiException(error);
     }
 }
 

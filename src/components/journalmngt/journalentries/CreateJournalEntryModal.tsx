@@ -15,13 +15,11 @@ import Spinner from "@/components/shared/icons/Spinner";
 import {journalTags, moodTags} from "@/boundary/constants/petConstants";
 import {CustomCheckbox} from "@/components/shared/formelements/CustomCheckbox";
 import {Textarea} from "@nextui-org/input";
-import {AccessTokenModel} from "@/boundary/interfaces/token";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import {createJournalEntry} from "@/lib/services/journal-entries/journalEntryService";
 
 
 const initialFormState: CreateJournalEntryRequest = {
-    content: "", event: "", location: "", mood: "", petIds: [], profilePictures: null, tags: "", title: ""
+    content: "", event: "", location: "", mood: "", petIds: [], attachments: null, tags: "", title: ""
 };
 
 function resetForm(setCreateJournalFormData:any,
@@ -78,19 +76,28 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
         setCreateJournalFormData({...createJournalFormData, [name]: value});
     }
 
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        console.log('FileList:', files);
+
+        setCreateJournalFormData({
+            ...createJournalFormData,
+            attachments: files !== null ? files : null,
+        });
+    };
+
     const handleJournalCreation = async (e: any) => {
         e.preventDefault();
-        setIsSubmitting(true)
+        // setIsSubmitting(true)
         createJournalFormData.petIds = selectedUserPets
         createJournalFormData.tags = selectedJournalTags.join(', ')
         createJournalFormData.mood = selectedMoodTags.join(', ')
-        console.log("selectedUserPets",selectedUserPets)
-        console.log("selectedMoodTags",selectedMoodTags)
-        console.log("selectedJournalTags",selectedJournalTags)
-        console.log("createJournalFormData",createJournalFormData)
+
+        console.log("createJournalFormData", createJournalFormData)
+
         const response = await createJournalEntry(createJournalFormData);
         if (response.statusCode === 200) {
-            toast.success("Journal enrt created successfully")
+            toast.success("Journal entry created successfully")
             setIsSubmitting(false);
             resetForm(setCreateJournalFormData, setSelectedUserPets, setSelectedJournalTags, setSelectedMoodTags, setIsSubmitting);
             onClose()
@@ -203,13 +210,7 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
                                                 className="block text-sm font-medium text-gray-900 dark:text-white"
                                                 htmlFor="multiple_files">Attach files</label>
                                             <input
-                                                onChange={(e) => {
-                                                    const files = e.target.files;
-                                                    setCreateJournalFormData({
-                                                        ...createJournalFormData,
-                                                        profilePictures: files !== null ? files : createJournalFormData.profilePictures,
-                                                    });
-                                                }}
+                                                onChange={handleFileChange}
                                                 className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer
                                                 bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                                 id="multiple_files" type="file" multiple>

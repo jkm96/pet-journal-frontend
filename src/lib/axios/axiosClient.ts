@@ -5,10 +5,10 @@ import {petJournalApiBaseUrl} from "@/boundary/constants/appConstants";
 const petJournalApiClient = axios.create({
     baseURL: `${petJournalApiBaseUrl}`,
     timeout: 30000,
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    },
+    // headers: {
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json',
+    // },
     httpsAgent: new https.Agent({ rejectUnauthorized: false })
 });
 

@@ -11,13 +11,13 @@ export async function POST(request: NextRequest) {
         const tokenData: AccessTokenModel = JSON.parse(tokenCookie);
         const config: AxiosRequestConfig = {
             headers: {
-                Authorization: `Bearer ${tokenData.token.token}`
+                Authorization: `Bearer ${tokenData.token.token}`,
             }
         };
 
-        const requestBody = await request.text();
+        const formData = await request.formData();
         const response = await petJournalApiClient
-            .post('journal-entry/create', `${requestBody}`,config);
+            .post('journal-entry/create', formData,config);
         console.log("create journal response", response.data)
         return handleAxiosResponse(response);
     } catch (error: unknown) {
