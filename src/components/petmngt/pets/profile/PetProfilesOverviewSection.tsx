@@ -68,7 +68,7 @@ export default function PetProfilesOverviewSection() {
                                                 <h5 className="text-small tracking-tight text-default-400">{profile.nickname}</h5>
                                             </div>
                                         </div>
-                                        <Link href={`${NAVIGATION_LINKS.PET_PROFILE}/${profile.name}`}>
+                                        <Link href={`${NAVIGATION_LINKS.PET_PROFILE}/${profile.slug}`}>
                                             <Button
                                                 variant="bordered"
                                                 color={profile.species == "dog" ? "success" : "secondary"}

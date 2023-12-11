@@ -17,9 +17,9 @@ export async function getPetProfiles() {
     }
 }
 
-export async function getPetProfileDetails(petId:number) {
+export async function getPetProfileDetails(petSlug:string) {
     try {
-        const response = await fetch(`${internalBaseUrl}/pet/${petId}`, {
+        const response = await fetch(`${internalBaseUrl}/pet/${petSlug}`, {
             method: 'GET',
             headers: {
                 'x-api-key':`${apiKey}`,

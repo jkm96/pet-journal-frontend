@@ -88,7 +88,7 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
 
     const handleJournalCreation = async (e: any) => {
         e.preventDefault();
-        // setIsSubmitting(true)
+        setIsSubmitting(true)
         createJournalFormData.petIds = selectedUserPets
         createJournalFormData.tags = selectedJournalTags.join(', ')
         createJournalFormData.mood = selectedMoodTags.join(', ')

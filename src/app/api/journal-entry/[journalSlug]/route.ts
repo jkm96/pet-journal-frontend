@@ -5,19 +5,19 @@ import {AxiosRequestConfig} from "axios";
 import {cookieName} from "@/boundary/constants/appConstants";
 import {AccessTokenModel} from "@/boundary/interfaces/token";
 
-export async function GET(request: NextRequest,{params}: { params: { petId: string } }) {
+export async function GET(request: NextRequest,{params}: { params: { journalSlug: string } }) {
     try {
         const tokenCookie = request.cookies.get(`${cookieName}`)?.value as string;
         const tokenData: AccessTokenModel = JSON.parse(tokenCookie);
-        const petId = params.petId;
+        const journalSlug = params.journalSlug;
         const config: AxiosRequestConfig = {
             headers: {
                 Authorization: `Bearer ${tokenData.token.token}`
             }
         };
 
-        const response = await petJournalApiClient.get(`pet/${petId}/profile`, config);
-        console.log("petmngt profile api response", response.data)
+        const response = await petJournalApiClient.get(`journal-entry/${journalSlug}`, config);
+        console.log("journal mngt profile api response", response.data)
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {

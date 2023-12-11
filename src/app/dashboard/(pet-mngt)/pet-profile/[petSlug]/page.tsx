@@ -4,10 +4,10 @@ import AuthorizeComponent from "@/components/common/auth/AuthorizeComponent";
 import PetJournalPermission, {MapPermission} from "@/boundary/enums/permissions";
 import ManagePetProfile from "@/components/petmngt/pets/profile/ManagePetProfile";
 
-function ManagePetProfilePage({params}: { params: { petId: number } }) {
+function ManagePetProfilePage({params}: { params: { slug: string } }) {
     return (
         <>
-            <ManagePetProfile petId={params.petId}/>
+            <ManagePetProfile slug={params.slug}/>
         </>
     )
 }

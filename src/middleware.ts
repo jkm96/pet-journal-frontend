@@ -29,6 +29,10 @@ export async function middleware(request: NextRequest) {
             }
         }
     }
-
-    return NextResponse.next();
+    if (request.url.includes('http://127.0.0.1:8000/')) {
+        console.log("url",request.url)
+        let response = NextResponse.next();
+        response.headers.set('Access-Control-Allow-Origin','*')
+        return response;
+    }
 }

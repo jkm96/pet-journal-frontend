@@ -51,9 +51,26 @@ export async function getJournalEntries() {
     }
 }
 
-export async function getJournalEntryDetails(journalEntryId:number) {
+export async function getJournalEntryDetails(journalSlug:string) {
     try {
-        const response = await fetch(`${internalBaseUrl}/journal-entry/${journalEntryId}`, {
+        const response = await fetch(`${internalBaseUrl}/journal-entry/${journalSlug}`, {
+            method: 'GET',
+            headers: {
+                'x-api-key':`${apiKey}`,
+                'Content-type': 'application/json',
+            },
+            body: null,
+        });
+
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function getJournalEntryAttachmentBuffers(journalId:number) {
+    try {
+        const response = await fetch(`${internalBaseUrl}/journal-entry/attachments/${journalId}`, {
             method: 'GET',
             headers: {
                 'x-api-key':`${apiKey}`,

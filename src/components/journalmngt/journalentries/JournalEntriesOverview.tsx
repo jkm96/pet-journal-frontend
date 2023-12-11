@@ -10,6 +10,8 @@ import {Button} from "@nextui-org/button";
 import {PlusIcon} from "@/components/shared/icons/PlusIcon";
 import SearchComponent from "@/components/common/filter/SearchComponent";
 import CreateJournalEntryModal from "@/components/journalmngt/journalentries/CreateJournalEntryModal";
+import {formatDate} from "@/helpers/dateHelpers";
+import {getMoodColorClass} from "@/helpers/stylingHelpers";
 
 export default function JournalEntriesOverview() {
     const [journalEntries, setJournalEntries] = useState<JournalEntryResponse[]>([]);
@@ -22,6 +24,7 @@ export default function JournalEntriesOverview() {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
+        fetchJournalEntries();
     };
 
     const fetchJournalEntries = async () => {
@@ -30,8 +33,7 @@ export default function JournalEntriesOverview() {
             .then((response) => {
                 if (response.statusCode === 200) {
                     const entries = response.data;
-                    console.log("journal entries", entries)
-                   setJournalEntries(entries)
+                    setJournalEntries(entries)
                 }
             })
             .catch((error) => {
@@ -48,13 +50,14 @@ export default function JournalEntriesOverview() {
 
     return (
         <>
+            <Breadcrumb pageName="Journal Entries"/>
+
             {isLoadingJournalEntries ? (
                 <div className={"grid place-items-center"}>
                     <CircularProgress color={"primary"} className={"p-4"} label="Loading your journal entries...."/>
                 </div>
             ) : (
                 <>
-                    <Breadcrumb pageName="Journal Entries" />
                     <div className="flex flex-col gap-4 mb-2">
                         <div className="flex justify-between gap-3 items-end">
                             <SearchComponent placeholder="Search for journal entries"/>
@@ -77,14 +80,39 @@ export default function JournalEntriesOverview() {
                         </>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+
                             {journalEntries.map((journal) => (
-                                <Card
-                                    isBlurred
-                                    key={journal.id}
-                                    shadow="sm"
-                                    className="py-4">
-                                    {journal.content}
-                                </Card>
+                                <Link key={journal.id} href={`${NAVIGATION_LINKS.JOURNAL_ENTRIES}/${journal.slug}`}>
+                                    <Card
+                                        key={journal.id}
+                                        isBlurred
+                                        className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
+                                        shadow="sm"
+                                    >
+                                        <CardBody>
+                                            <div
+                                                className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
+                                                <div className="relative col-span-1 md:col-span-1">
+                                                    <Avatar
+                                                        name={journal.title}
+                                                        radius={"sm"}
+                                                        isBordered
+                                                        color={getMoodColorClass(journal.mood)}
+                                                    />
+                                                </div>
+
+                                                <div className="flex flex-col col-span-11 md:col-span-11 ml-2">
+                                                    <div className="flex justify-between items-start">
+                                                        <div className="flex flex-col gap-0">
+                                                            <h3 className="font-semibold text-foreground/90">{journal.title}</h3>
+                                                            <p className="text-small text-foreground/80">{formatDate(journal.createdAt)} | {journal.event}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </CardBody>
+                                    </Card>
+                                </Link>
                             ))}
                         </div>
                     )}

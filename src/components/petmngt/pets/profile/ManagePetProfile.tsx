@@ -5,14 +5,14 @@ import {toast} from "react-toastify";
 import {Card, CardBody, Slider, Button, Image, CircularProgress} from "@nextui-org/react";
 import {PencilIcon} from "@/components/shared/icons/PencilIcon";
 
-export default function ManagePetProfile({petId}: { petId: number }) {
+export default function ManagePetProfile({slug}: { slug: string }) {
     const [petProfileDetails, setPetProfileDetails] = useState<PetProfileResponse>({} as PetProfileResponse);
     const [isLoadingPetDetails, setIsLoadingPetDetails] = useState(true);
 
-    const fetchPetProfileInfo = async (petId: number) => {
+    const fetchPetProfileInfo = async (petSlug: string) => {
         setIsLoadingPetDetails(true);
         try {
-            const response = await getPetProfileDetails(petId);
+            const response = await getPetProfileDetails(petSlug);
             if (response.statusCode === 200) {
                 const petProfiles = response.data;
                 console.log("petmngt profile", petProfiles)
@@ -28,8 +28,8 @@ export default function ManagePetProfile({petId}: { petId: number }) {
     };
 
     useEffect(() => {
-        fetchPetProfileInfo(petId);
-    }, [petId]);
+        fetchPetProfileInfo(slug);
+    }, [slug]);
 
 
     return (

@@ -5,16 +5,21 @@ import {petJournalApiBaseUrl} from "@/boundary/constants/appConstants";
 const petJournalApiClient = axios.create({
     baseURL: `${petJournalApiBaseUrl}`,
     timeout: 30000,
-    // headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json',
-    // },
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    },
     httpsAgent: new https.Agent({ rejectUnauthorized: false })
 });
 
 petJournalApiClient.interceptors.request.use(
-    function (config) {
-
+    function (config:any) {
+        if (config.url.includes("journal-entry/create")){
+            if(config.headers["Content-Type"] == "application/json" || config.headers["Accept"] == "application/json"){
+                delete config.headers["Content-Type"];
+                delete config.headers["Accept"];
+            }
+        }
         return config;
     },
     function (error) {

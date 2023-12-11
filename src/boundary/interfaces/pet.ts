@@ -1,5 +1,6 @@
 export interface PetProfileResponse {
     id: number;
+    slug: string;
     userId: number;
     name: string;
     nickname: string;
