@@ -16,7 +16,6 @@ export default function RenderEntryPdfImages({imageBuffers, itemsPerRow = 2}: {
                 <View key={index} style={{width: `${100 / itemsPerRow}%`,paddingLeft:5}}>
                     <Image
                         src={`data:image/${image.imageType};base64,${image.imageBuffer}`}
-
                     />
                 </View>
             ))}

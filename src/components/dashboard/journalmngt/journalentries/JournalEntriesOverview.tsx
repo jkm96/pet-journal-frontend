@@ -9,7 +9,7 @@ import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import {Button} from "@nextui-org/button";
 import {PlusIcon} from "@/components/shared/icons/PlusIcon";
 import SearchComponent from "@/components/common/filter/SearchComponent";
-import CreateJournalEntryModal from "@/components/journalmngt/journalentries/CreateJournalEntryModal";
+import CreateJournalEntryModal from "@/components/dashboard/journalmngt/journalentries/Modals/CreateJournalEntryModal";
 import {formatDate} from "@/helpers/dateHelpers";
 import {getMoodColorClass} from "@/helpers/stylingHelpers";
 

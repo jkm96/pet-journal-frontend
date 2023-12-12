@@ -1,3 +1,15 @@
+export interface CreatePetRequest {
+    name: string;
+    nickname: string;
+    species: string;
+    breed: string;
+    description: string;
+    dateOfBirth?: string | "";
+    profilePicture: FileList | null;
+    petTraits?: string[] | null;
+}
+
+
 export interface PetProfileResponse {
     id: number;
     slug: string;

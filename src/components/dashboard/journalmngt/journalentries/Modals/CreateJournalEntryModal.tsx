@@ -16,14 +16,15 @@ import {journalTags, moodTags} from "@/boundary/constants/petConstants";
 import {CustomCheckbox} from "@/components/shared/formelements/CustomCheckbox";
 import {Textarea} from "@nextui-org/input";
 import {createJournalEntry} from "@/lib/services/journal-entries/journalEntryService";
+import {areFilesValid, validateCreateJournalFormInputErrors, validateCreatePetFormInputErrors} from "@/helpers/validationHelpers";
 
 
 const initialFormState: CreateJournalEntryRequest = {
     content: "", event: "", location: "", mood: "", petIds: [], attachments: null, tags: "", title: ""
 };
 
-function resetForm(setCreateJournalFormData:any,
-                   setSelectedUserPets:any,
+function resetForm(setCreateJournalFormData: any,
+                   setSelectedUserPets: any,
                    setSelectedJournalTags: any,
                    setSelectedMoodTags: any,
                    setIsSubmitting: any) {
@@ -42,9 +43,7 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [pets, setPets] = useState<PetProfileResponse[]>([]);
     const [createJournalFormData, setCreateJournalFormData] = useState<CreateJournalEntryRequest>(initialFormState);
-    const [inputErrors, setInputErrors] = useState({
-        content: "", event: "", location: "", mood: "", petIds: [], profilePictures: [], tags: "", title: ""
-    });
+    const [inputErrors, setInputErrors] = useState(initialFormState);
     const [selectedUserPets, setSelectedUserPets] = useState([]);
     const [selectedMoodTags, setSelectedMoodTags] = useState([]);
     const [selectedJournalTags, setSelectedJournalTags] = useState([]);
@@ -80,20 +79,63 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
         const files = e.target.files;
         console.log('FileList:', files);
 
-        setCreateJournalFormData({
-            ...createJournalFormData,
-            attachments: files !== null ? files : null,
-        });
+        if (!areFilesValid(files)) {
+            toast.error('Please select only PNG or JPG files.');
+            e.target.files = null;
+        } else {
+            setCreateJournalFormData({
+                ...createJournalFormData,
+                attachments: files,
+            });
+        }
     };
 
     const handleJournalCreation = async (e: any) => {
         e.preventDefault();
         setIsSubmitting(true)
+
+        const inputErrors = validateCreateJournalFormInputErrors(createJournalFormData);
+        console.log("input errors", inputErrors)
+        if (inputErrors && Object.keys(inputErrors).length > 0) {
+            setInputErrors(inputErrors);
+            setIsSubmitting(false);
+            return;
+        }
         createJournalFormData.petIds = selectedUserPets
         createJournalFormData.tags = selectedJournalTags.join(', ')
         createJournalFormData.mood = selectedMoodTags.join(', ')
 
-        console.log("createJournalFormData", createJournalFormData)
+        if (createJournalFormData.petIds.length === 0) {
+            setIsSubmitting(false);
+            toast.error("Please select at least one pet")
+            return;
+        }
+
+        if (!areFilesValid(createJournalFormData.attachments)) {
+            setIsSubmitting(false);
+            toast.error('Please select only PNG or JPG files.');
+            return;
+        }
+
+        if (
+            createJournalFormData.title.trim() === "" ||
+            createJournalFormData.content.trim() === "" ||
+            createJournalFormData.tags.trim() === "" ||
+            createJournalFormData.mood.trim() === ""
+        ) {
+            setIsSubmitting(false);
+            return;
+        }
+
+        if (selectedMoodTags.length === 0 || selectedJournalTags.length === 0) {
+            setInputErrors({
+                ...inputErrors,
+                mood: "Select at least one mood", attachments: null, content: "", event: "", location: "", petIds: [], title: "",
+                tags: "Select at least one tag"
+            });
+            setIsSubmitting(false);
+            return;
+        }
 
         const response = await createJournalEntry(createJournalFormData);
         if (response.statusCode === 200) {
@@ -172,10 +214,12 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
                                             <div className="flex flex-col gap-1 w-full">
                                                 <CheckboxGroup
                                                     className="gap-1"
+                                                    name={"petIds"}
                                                     label="Select pets"
                                                     orientation="horizontal"
                                                     value={selectedUserPets}
                                                     onChange={(keys: any) => setSelectedUserPets(keys)}
+                                                    errorMessage={inputErrors.petIds}
                                                 >
                                                     {pets.map((pet) => (
                                                         <CustomCheckbox key={pet.id} value={pet.id}>
@@ -224,7 +268,11 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
                                                     label="Select mood"
                                                     orientation="horizontal"
                                                     value={selectedMoodTags}
-                                                    onChange={(keys: any) => setSelectedMoodTags(keys)}
+                                                    onChange={(keys: any) => {
+                                                        setInputErrors({...inputErrors, mood: ""});
+                                                        setSelectedMoodTags(keys);
+                                                    }}
+                                                    errorMessage={inputErrors.mood}
                                                 >
                                                     {moodTags.map((tag) => (
                                                         <CustomCheckbox key={tag.key} value={tag.key}>
@@ -240,7 +288,11 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
                                                     label="Select tags"
                                                     orientation="horizontal"
                                                     value={selectedJournalTags}
-                                                    onChange={(keys: any) => setSelectedJournalTags(keys)}
+                                                    onChange={(keys: any) => {
+                                                        setInputErrors({...inputErrors, tags: ""});
+                                                        setSelectedJournalTags(keys);
+                                                    }}
+                                                    errorMessage={inputErrors.tags}
                                                 >
                                                     {journalTags.map((tag) => (
                                                         <CustomCheckbox key={tag.key} value={tag.key}>

@@ -1,4 +1,6 @@
 import {PetProfileResponse} from "@/boundary/interfaces/pet";
+import UploadJournalImagesModal
+    from "@/components/dashboard/journalmngt/journalentries/Modals/UploadJournalImagesModal";
 
 export interface JournalEntryResponse {
     id: number;
@@ -53,4 +55,9 @@ export interface PrintJournalEntryRequest {
 export interface JournalImageBuffer{
     imageBuffer:string;
     imageType:string;
+}
+
+export interface UploadJournalImageRequest{
+    journalId: number
+    attachments: FileList | null;
 }

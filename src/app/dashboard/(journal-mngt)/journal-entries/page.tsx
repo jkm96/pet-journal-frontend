@@ -2,8 +2,8 @@
 
 import AuthorizeComponent from "@/components/common/auth/AuthorizeComponent";
 import PetJournalPermission, {MapPermission} from "@/boundary/enums/permissions";
-import PetProfilesOverview from "@/components/petmngt/pets/profile/PetProfilesOverviewSection";
-import JournalEntriesOverview from "@/components/journalmngt/journalentries/JournalEntriesOverview";
+import PetProfilesOverview from "@/components/dashboard/petmngt/pets/profile/PetProfilesOverviewSection";
+import JournalEntriesOverview from "@/components/dashboard/journalmngt/journalentries/JournalEntriesOverview";
 
 function JournalEntriesPage() {
     return (

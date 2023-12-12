@@ -2,7 +2,7 @@
 
 import AuthorizeComponent from "@/components/common/auth/AuthorizeComponent";
 import PetJournalPermission, {MapPermission} from "@/boundary/enums/permissions";
-import DashboardSection from "@/components/petmngt/dashboard/DashboardSection";
+import DashboardSection from "@/components/dashboard/DashboardSection";
 
 function DashboardPage() {
     return (

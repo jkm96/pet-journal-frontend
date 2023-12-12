@@ -14,7 +14,11 @@ const petJournalApiClient = axios.create({
 
 petJournalApiClient.interceptors.request.use(
     function (config:any) {
-        if (config.url.includes("journal-entry/create")){
+        if (
+            config.url.includes("journal-entry/create")||
+            config.url.includes("attachment/create")||
+            config.url.includes("pet/create")
+        ){
             if(config.headers["Content-Type"] == "application/json" || config.headers["Accept"] == "application/json"){
                 delete config.headers["Content-Type"];
                 delete config.headers["Accept"];
@@ -23,7 +27,6 @@ petJournalApiClient.interceptors.request.use(
         return config;
     },
     function (error) {
-        // Do something with request error
         return Promise.reject(error)
     }
 );

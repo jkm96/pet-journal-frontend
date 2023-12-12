@@ -112,9 +112,9 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                         {/* <!-- Menu Item My Pets Mngt --> */}
                         <li>
                             <Link
-                                href={NAVIGATION_LINKS.PET_PROFILE}
+                                href={NAVIGATION_LINKS.PET_PROFILES}
                                 className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
-                                                        text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === NAVIGATION_LINKS.PET_PROFILE &&
+                                                        text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === NAVIGATION_LINKS.PET_PROFILES &&
                                 "text-white"
                                 }`}
                             >

@@ -45,8 +45,13 @@ const PdfColorMap:PdfColorMap=  {
 
 const getMoodColorClass = (mood: string): ColorName => {
     const moodArray = mood.split(',');
-    const firstMood:string = moodArray.length > 0 ? moodArray[0].toLowerCase().trim() : "default";
-    return moodColorMap[firstMood] || "primary";
+    if (moodArray.length > 0) {
+        const randomIndex = Math.floor(Math.random() * moodArray.length);
+        const randomMood = moodArray[randomIndex].toLowerCase().trim();
+        return moodColorMap[randomMood] || "primary";
+    }
+
+    return "default";
 };
 
 const getMoodColorClassList = (moods: string[]): ColorName[] => {

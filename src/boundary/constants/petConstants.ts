@@ -59,3 +59,8 @@ export const journalTags = [
         label: "#grooming",
     }
 ];
+
+export const species = [
+    {label: "Cat", value: "cat", description: "The second most popular pet in the world"},
+    {label: "Dog", value: "dog", description: "The most popular pet in the world"},
+];

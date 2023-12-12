@@ -4,14 +4,28 @@ import {getPetProfileDetails} from "@/lib/services/pet/petProfileService";
 import {toast} from "react-toastify";
 import {Card, CardBody, Slider, Button, Image, CircularProgress} from "@nextui-org/react";
 import {PencilIcon} from "@/components/shared/icons/PencilIcon";
+import SearchComponent from "@/components/common/filter/SearchComponent";
+import {PlusIcon} from "@/components/shared/icons/PlusIcon";
+import PreviewAndPrintJournalEntryModal
+    from "@/components/dashboard/journalmngt/journalentries/Modals/PreviewAndPrintJournalEntryModal";
+import CreateNewPetModal from "@/components/dashboard/petmngt/pets/Modals/CreateNewPetModal";
 
 export default function ManagePetProfile({slug}: { slug: string }) {
     const [petProfileDetails, setPetProfileDetails] = useState<PetProfileResponse>({} as PetProfileResponse);
     const [isLoadingPetDetails, setIsLoadingPetDetails] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
     const fetchPetProfileInfo = async (petSlug: string) => {
         setIsLoadingPetDetails(true);
         try {
+            console.log("slug",petSlug)
             const response = await getPetProfileDetails(petSlug);
             if (response.statusCode === 200) {
                 const petProfiles = response.data;
@@ -40,6 +54,26 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                 </div>
             ) : (
                 <>
+                    <div className="flex flex-col gap-4 mb-2">
+                        <div className="flex justify-between gap-3 items-end">
+                            <SearchComponent placeholder="Search for pet profiles"/>
+                            <div className="flex gap-3">
+                                <Button onPress={handleOpenModal}
+                                        startContent={<PlusIcon/>}
+                                        color="primary"
+                                        variant="shadow">
+                                    Add Pet
+                                </Button>
+                                {isModalOpen && (
+                                    <CreateNewPetModal
+                                        isOpen={isModalOpen}
+                                        onClose={handleCloseModal}
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
                     <Card
                         isBlurred
                         radius={"none"}

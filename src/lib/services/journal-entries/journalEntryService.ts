@@ -1,5 +1,5 @@
 import {apiKey, internalBaseUrl} from "@/boundary/constants/appConstants";
-import {CreateJournalEntryRequest} from "@/boundary/interfaces/journal";
+import {CreateJournalEntryRequest, UploadJournalImageRequest} from "@/boundary/interfaces/journal";
 import axios from "axios";
 import {handleApiException, handleAxiosResponse} from "@/helpers/responseHelpers";
 
@@ -22,6 +22,31 @@ export async function createJournalEntry(createRequest: CreateJournalEntryReques
         }
 
         const response = await axios.post(`${internalBaseUrl}/journal-entry/create`, formData, {
+            headers: {
+                'x-api-key': `${apiKey}`,
+                "Content-Type": "multipart/form-data",
+            }
+        });
+
+        return response.data;
+    } catch (error: any) {
+        return handleApiException(error);
+    }
+}
+
+export async function uploadJournalAttachments(uploadRequest: UploadJournalImageRequest) {
+    try {
+        const formData = new FormData();
+        formData.append('journalId', `${uploadRequest.journalId}`);
+
+        if (uploadRequest.attachments) {
+            for (let i = 0; i < uploadRequest.attachments.length; i++) {
+                const file = uploadRequest.attachments[i];
+                formData.append(`attachment${i}`, file, file.name);
+            }
+        }
+
+        const response = await axios.post(`${internalBaseUrl}/journal-entry/attachments/create`, formData, {
             headers: {
                 'x-api-key': `${apiKey}`,
                 "Content-Type": "multipart/form-data",

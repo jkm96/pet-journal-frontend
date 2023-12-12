@@ -1,4 +1,6 @@
 import {LoginUserRequest, RegisterUserRequest} from "@/boundary/interfaces/auth";
+import {CreatePetRequest} from "@/boundary/interfaces/pet";
+import {CreateJournalEntryRequest} from "@/boundary/interfaces/journal";
 
 export function isEmailValid(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -72,3 +74,77 @@ export function validateLoginFormInputErrors(formData: LoginUserRequest) {
 
     return null;
 }
+
+export function validateCreatePetFormInputErrors(formData: CreatePetRequest) {
+    const errors: CreatePetRequest = {
+        breed: "", dateOfBirth: "", description: "", name: "", nickname: "", petTraits: null, profilePicture: null, species: ""
+    }
+
+    if (formData.name.trim() === "") {
+        errors.name = "name cannot be empty";
+    } else if (formData.name.trim().length < 3) {
+        errors.name = "name must be at least 3 characters long";
+    }
+
+    if (formData.species.trim() === "") {
+        errors.species = "species cannot be empty";
+    }
+
+    if (formData.description.trim() === "") {
+        errors.description = "description cannot be empty";
+    } else if (formData.description.trim().length < 20) {
+        errors.description = "description must be at least 20 characters long";
+    }
+
+    if (formData.nickname !== null && formData.nickname?.trim().length < 3) {
+        errors.nickname = "Nick name must be at least 3 characters long";
+    }
+
+    if (formData.breed !== null && formData.breed?.trim().length < 3) {
+        errors.breed = "breed must be at least 3 characters long";
+    }
+
+    // Check if there are any errors and return null if all input is valid
+    for (const key in errors) {
+        if (key !== 'petTraits' && key !== 'profilePicture' && errors[key as keyof CreatePetRequest] !== "") {
+            return errors;
+        }
+    }
+
+    return null;
+}
+
+export function validateCreateJournalFormInputErrors(formData: CreateJournalEntryRequest) {
+    const errors: CreateJournalEntryRequest = {
+        attachments: null, content: "", event: "", location: "", mood: "", petIds: [], tags: "", title: ""
+    }
+
+    if (formData.title.trim() === "") {
+        errors.title = "title cannot be empty";
+    } else if (formData.title.trim().length < 8) {
+        errors.title = "title must be at least 8 characters long";
+    }
+
+    if (formData.content.trim() === "") {
+        errors.content = "description cannot be empty";
+    } else if (formData.content.trim().length < 20) {
+        errors.content = "description must be at least 20 characters long";
+    }
+
+    // Check if there are any errors and return null if all input is valid
+    for (const key in errors) {
+        if (key !== 'petIds' && key !== 'attachments' && errors[key as keyof CreateJournalEntryRequest] !== "") {
+            return errors;
+        }
+    }
+
+    return null;
+}
+
+export function areFilesValid(files: FileList | null) {
+    const allowedFileTypes = ['image/png', 'image/jpeg'];
+    if (files && files.length > 0) {
+        const invalidFiles = Array.from(files).filter((file) => !allowedFileTypes.includes(file.type));
+        return invalidFiles.length <= 0;
+    }
+};

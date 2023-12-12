@@ -4,9 +4,9 @@ import Spinner from "@/components/shared/icons/Spinner";
 import React, {useEffect, useState} from "react";
 import {JournalImageBuffer, PrintJournalEntryRequest} from "@/boundary/interfaces/journal";
 import {useAuth} from "@/hooks/useAuth";
-import RenderMoodTagsWithColors from "@/components/journalmngt/journalentries/RenderMoodTagsWithColors";
+import RenderMoodTagsWithColors from "@/components/dashboard/journalmngt/journalentries/RenderMoodTagsWithColors";
 import {formatDate} from "@/helpers/dateHelpers";
-import RenderEntryPdfImages from "@/components/journalmngt/journalentries/RenderEntryPdfImages";
+import RenderEntryPdfImages from "@/components/dashboard/journalmngt/journalentries/RenderEntryPdfImages";
 import {toast} from "react-toastify";
 import {getJournalEntryAttachmentBuffers} from "@/lib/services/journal-entries/journalEntryService";
 import {PdfPreviewStyle, toTitleCase} from "@/lib/utils/pdfUtils";
@@ -42,8 +42,10 @@ export default function PreviewAndPrintJournalEntryModal({printJournalRequest, i
     }
 
     useEffect(() => {
-        fetchJournalImageBuffers();
-    }, [printJournalRequest.journalAttachments]);
+        if (isOpen) {
+            fetchJournalImageBuffers();
+        }
+    }, [isOpen]);
 
 
     const handleJournalPrint = async (e: any) => {
