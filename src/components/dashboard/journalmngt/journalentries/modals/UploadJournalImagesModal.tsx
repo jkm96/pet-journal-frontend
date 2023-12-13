@@ -94,8 +94,6 @@ export default function UploadJournalImagesModal({journalId,isOpen, onClose}: {
                         <ModalHeader className="flex flex-col gap-1">Upload Journal Entry Attachments</ModalHeader>
                         <ModalBody>
                             <form onSubmit={handleImageUpload}>
-
-
                                     <div className="mt-2">
                                         <label
                                             className="block text-sm font-medium text-gray-900 dark:text-white"
@@ -109,7 +107,6 @@ export default function UploadJournalImagesModal({journalId,isOpen, onClose}: {
                                             id="multiple_files" type="file" multiple>
                                         </input>
                                     </div>
-
                             </form>
                         </ModalBody>
                         <ModalFooter>

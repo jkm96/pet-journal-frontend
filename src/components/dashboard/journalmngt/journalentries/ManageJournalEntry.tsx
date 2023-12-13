@@ -8,10 +8,10 @@ import SearchComponent from "@/components/common/filter/SearchComponent";
 import {Button} from "@nextui-org/button";
 import {PlusIcon} from "@/components/shared/icons/PlusIcon";
 import PreviewAndPrintJournalEntryModal
-    from "@/components/dashboard/journalmngt/journalentries/Modals/PreviewAndPrintJournalEntryModal";
+    from "@/components/dashboard/journalmngt/journalentries/modals/PreviewAndPrintJournalEntryModal";
 import {SearchIcon} from "@/components/shared/icons/SearchIcon";
 import UploadJournalImagesModal
-    from "@/components/dashboard/journalmngt/journalentries/Modals/UploadJournalImagesModal";
+    from "@/components/dashboard/journalmngt/journalentries/modals/UploadJournalImagesModal";
 
 export default function ManageJournalEntry({slug}: { slug: string }) {
     const [journalEntryDetails, setJournalEntryDetails] = useState<JournalEntryResponse>({} as JournalEntryResponse);

@@ -9,7 +9,6 @@ export interface CreatePetRequest {
     petTraits?: string[] | null;
 }
 
-
 export interface PetProfileResponse {
     id: number;
     slug: string;
@@ -33,4 +32,14 @@ export interface PetTraitModel {
     type: string;
     createdAt: string;
     updatedAt: string;
+}
+
+export interface Trait {
+    trait: string;
+    type: string;
+}
+
+export interface AddPetTraitRequest {
+    petId: number;
+    traits: Trait[];
 }

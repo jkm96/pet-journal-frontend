@@ -1,5 +1,5 @@
 import {apiKey, internalBaseUrl} from "@/boundary/constants/appConstants";
-import {CreatePetRequest} from "@/boundary/interfaces/pet";
+import {AddPetTraitRequest, CreatePetRequest} from "@/boundary/interfaces/pet";
 import axios from "axios";
 
 export async function getPetProfiles() {
@@ -59,6 +59,23 @@ export async function getPetProfileDetails(petSlug:string) {
                 'Content-type': 'application/json',
             },
             body: null,
+        });
+
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function addPetTraits(addRequest:AddPetTraitRequest) {
+    try {
+        const response = await fetch(`${internalBaseUrl}/pet/trait/create`, {
+            method: 'POST',
+            headers: {
+                'x-api-key':`${apiKey}`,
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(addRequest),
         });
 
         return response.json();

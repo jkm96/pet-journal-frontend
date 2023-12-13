@@ -9,7 +9,7 @@ import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import SearchComponent from "@/components/common/filter/SearchComponent";
 import {PlusIcon} from "@/components/shared/icons/PlusIcon";
-import CreateNewPetModal from "@/components/dashboard/petmngt/pets/Modals/CreateNewPetModal";
+import CreateNewPetModal from "@/components/dashboard/petmngt/pets/modals/CreateNewPetModal";
 
 export default function PetProfilesOverviewSection() {
     const [petProfiles, setPetProfiles] = useState<PetProfileResponse[]>([]);
