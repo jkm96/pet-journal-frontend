@@ -8,7 +8,7 @@ const moodColorMap:MoodColorMap=  {
     "happy": "success",
     "playful": "secondary",
     "content": "default",
-    "relaxed": "success",
+    "relaxed": "primary",
     "excited": "success",
     "curious": "secondary",
     "sleepy": "secondary",

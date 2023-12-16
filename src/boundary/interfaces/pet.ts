@@ -22,7 +22,7 @@ export interface PetProfileResponse {
     profileUrl: string;
     createdAt: string;
     updatedAt: string;
-    petTraits: PetTraitModel | null;
+    petTraits: PetTraitModel[] | null;
 }
 
 export interface PetTraitModel {

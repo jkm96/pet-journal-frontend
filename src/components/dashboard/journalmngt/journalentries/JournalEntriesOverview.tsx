@@ -12,6 +12,7 @@ import SearchComponent from "@/components/common/filter/SearchComponent";
 import CreateJournalEntryModal from "@/components/dashboard/journalmngt/journalentries/modals/CreateJournalEntryModal";
 import {formatDate} from "@/helpers/dateHelpers";
 import {getMoodColorClass} from "@/helpers/stylingHelpers";
+import {JournalQueryParameters} from "@/boundary/parameters/JournalQueryParameters";
 
 export default function JournalEntriesOverview() {
     const [journalEntries, setJournalEntries] = useState<JournalEntryResponse[]>([]);
@@ -24,12 +25,13 @@ export default function JournalEntriesOverview() {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        fetchJournalEntries();
+        const queryParams: JournalQueryParameters = new JournalQueryParameters();
+        fetchJournalEntries(queryParams);
     };
 
-    const fetchJournalEntries = async () => {
+    const fetchJournalEntries = async (queryParams:JournalQueryParameters) => {
         setIsLoadingJournalEntries(true)
-        await getJournalEntries()
+        await getJournalEntries(queryParams)
             .then((response) => {
                 if (response.statusCode === 200) {
                     const entries = response.data;
@@ -45,7 +47,8 @@ export default function JournalEntriesOverview() {
     };
 
     useEffect(() => {
-        fetchJournalEntries();
+        const queryParams: JournalQueryParameters = new JournalQueryParameters();
+        fetchJournalEntries(queryParams);
     }, []);
 
     return (
@@ -91,7 +94,7 @@ export default function JournalEntriesOverview() {
                                     >
                                         <CardBody>
                                             <div
-                                                className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
+                                                className="grid grid-cols-6 md:grid-cols-12 sm:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
                                                 <div className="relative col-span-1 md:col-span-1">
                                                     <Avatar
                                                         name={journal.title}

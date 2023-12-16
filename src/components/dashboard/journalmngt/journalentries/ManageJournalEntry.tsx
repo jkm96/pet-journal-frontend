@@ -1,6 +1,6 @@
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
-import {JournalEntryResponse, PrintJournalEntryRequest} from "@/boundary/interfaces/journal";
+import {JournalEntryResponse, PrintJournalEntryRequest, UpdateJournalEntryRequest} from "@/boundary/interfaces/journal";
 import {getJournalEntryDetails} from "@/lib/services/journal-entries/journalEntryService";
 import {Card, CardBody, CardHeader, CircularProgress, Image} from "@nextui-org/react";
 import RenderJournalHeader from "@/components/dashboard/journalmngt/journalentries/RenderJournalHeader";
@@ -12,6 +12,8 @@ import PreviewAndPrintJournalEntryModal
 import {SearchIcon} from "@/components/shared/icons/SearchIcon";
 import UploadJournalImagesModal
     from "@/components/dashboard/journalmngt/journalentries/modals/UploadJournalImagesModal";
+import UpdateJournalEntryModal from "@/components/dashboard/journalmngt/journalentries/modals/UpdateJournalEntryModal";
+import {EditIcon} from "@nextui-org/shared-icons";
 
 export default function ManageJournalEntry({slug}: { slug: string }) {
     const [journalEntryDetails, setJournalEntryDetails] = useState<JournalEntryResponse>({} as JournalEntryResponse);
@@ -19,7 +21,9 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
     const [pets, setPets] = useState<string[]>([]);
     const [journalImages, setJournalImages] = useState<string[]>([]);
     const [printJournalRequest, setPrintJournalRequest] = useState<PrintJournalEntryRequest>({} as PrintJournalEntryRequest);
+    const [editJournalRequest, setEditJournalRequest] = useState<UpdateJournalEntryRequest>({} as UpdateJournalEntryRequest);
     const [modals, setModals] = useState({
+        editJournal: false,
         uploadAttachments: false,
         previewAndPrintEntry: false,
     });
@@ -78,8 +82,20 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
             tags: tags,
         };
 
+        const editJournal:UpdateJournalEntryRequest = {
+            journalId: journals.id,
+            content: journals.content,
+            event: journals.event,
+            location: journals.location,
+            mood: journals.mood,
+            tags: journals.tags,
+            title: journals.title,
+            petIds:journals.pets.map((item)=>item.id)
+        }
+
         setPets(petNames);
         setPrintJournalRequest(printJournalRequest);
+        setEditJournalRequest(editJournal)
     };
 
     return (
@@ -95,6 +111,23 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                         <div className="flex justify-between gap-3 items-end">
                             <div className="w-full sm:max-w-[44%]">
                                 <div className="relative flex flex-1 flex-shrink-0">
+                                    <Button onPress={() => openModal("editJournal")}
+                                            startContent={<EditIcon/>}
+                                            color="primary"
+                                            className={"mr-2"}
+                                            variant="shadow">
+                                        Edit Journal
+                                    </Button>
+
+                                    {modals.editJournal && (
+                                        <UpdateJournalEntryModal
+                                            editJournalRequest={editJournalRequest}
+                                            userPets={journalEntryDetails.pets}
+                                            isOpen={modals.editJournal}
+                                            onClose={() => closeModal("editJournal")}
+                                        />
+                                    )}
+
                                     <Button onPress={() => openModal("uploadAttachments")}
                                             startContent={<PlusIcon/>}
                                             color="primary"
@@ -143,7 +176,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                                 {journalEntryDetails.content}
                             </div>
 
-                            <div className="-m-1 flex flex-wrap md:-m-2 mt-3">
+                            <div className="flex flex-wrap md:-m-2 mt-3">
                                 <div className={`flex ${journalImages.length <= 3 ? 'w-full' : 'w-1/2'} flex-wrap`}>
                                     {journalImages.slice(0, 3).map((image, index) => (
                                         <div key={index} className={`w-${index === 2 ? 'full' : '1/2'} p-1 md:p-2`}>

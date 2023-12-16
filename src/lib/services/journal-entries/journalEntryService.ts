@@ -1,7 +1,12 @@
 import {apiKey, internalBaseUrl} from "@/boundary/constants/appConstants";
-import {CreateJournalEntryRequest, UploadJournalImageRequest} from "@/boundary/interfaces/journal";
+import {
+    CreateJournalEntryRequest,
+    UpdateJournalEntryRequest,
+    UploadJournalImageRequest
+} from "@/boundary/interfaces/journal";
 import axios from "axios";
 import {handleApiException, handleAxiosResponse} from "@/helpers/responseHelpers";
+import {JournalQueryParameters} from "@/boundary/parameters/JournalQueryParameters";
 
 export async function createJournalEntry(createRequest: CreateJournalEntryRequest) {
     try {
@@ -59,15 +64,34 @@ export async function uploadJournalAttachments(uploadRequest: UploadJournalImage
     }
 }
 
-export async function getJournalEntries() {
+export async function getJournalEntries(queryParams: JournalQueryParameters) {
     try {
-        const response = await fetch(`${internalBaseUrl}/journal-entry/list`, {
+        const queryString = new URLSearchParams(queryParams as Record<string, any>).toString();
+        const apiUrl = `${internalBaseUrl}/journal-entry/list?${queryString}`;
+        const response = await fetch(apiUrl, {
             method: 'GET',
             headers: {
                 'x-api-key':`${apiKey}`,
                 'Content-type': 'application/json',
             },
             body: null,
+        });
+
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function updateJournalEntry(updateRequest:UpdateJournalEntryRequest) {
+    try {
+        const response = await fetch(`${internalBaseUrl}/journal-entry/edit`, {
+            method: 'POST',
+            headers: {
+                'x-api-key':`${apiKey}`,
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(updateRequest),
         });
 
         return response.json();

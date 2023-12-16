@@ -4,6 +4,7 @@ export const NAVIGATION_LINKS = {
     DASHBOARD: '/dashboard',
     PET_PROFILES: '/dashboard/pet-profiles',
     JOURNAL_ENTRIES: '/dashboard/journal-entries',
+    MY_JOURNAL: '/dashboard/my-journal',
     TIMELINE_VIEW: '/dashboard/timeline-view',
     SETTINGS: '/dashboard/settings',
 };

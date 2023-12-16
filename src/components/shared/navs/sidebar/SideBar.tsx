@@ -1,13 +1,9 @@
 import React, {useEffect, useRef, useState} from "react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import SidebarLinkGroup from "./SidebarLinkGroup";
 import SettingsIcon from "@/components/shared/icons/SettingsIcon";
 import SidebarOpenIcon from "@/components/shared/icons/SidebarOpenIcon";
 import DashboardIcon from "@/components/shared/icons/DashboardIcon";
-import ProfileIcon from "@/components/shared/icons/ProfileIcon";
-import FormIcon from "@/components/shared/icons/FormIcon";
-import ShowMenuList from "@/components/common/dashboard/ShowMenuList";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 
 interface SidebarProps {
@@ -124,29 +120,43 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                         </li>
                         {/* <!-- Menu Item My Pets Mngt --> */}
 
-                        {/* <!-- Menu Item My Journal Entries Mngt --> */}
+                        {/* <!-- Menu Item Journal Entries Mngt --> */}
                         <li>
                             <Link
                                 href={NAVIGATION_LINKS.JOURNAL_ENTRIES}
-                                className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
-                                                        text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === NAVIGATION_LINKS.JOURNAL_ENTRIES &&
-                                "text-white"
+                                className={`first-letter:group relative flex 
+                                items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
+                                 hover:text-white  ${pathname === NAVIGATION_LINKS.JOURNAL_ENTRIES && "text-white"
                                 }`}
                             >
                                 <SettingsIcon/>
                                 Journal Entries
                             </Link>
                         </li>
-                        {/* <!-- Menu Item My Pets Mngt --> */}
+                        {/* <!-- Menu Item Journal Entries Mngt --> */}
+
+                        {/* <!-- Menu Item My Journal Mngt --> */}
+                        <li>
+                            <Link
+                                href={NAVIGATION_LINKS.MY_JOURNAL}
+                                className={`first-letter:group relative flex 
+                                items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
+                                 hover:text-white  ${pathname === NAVIGATION_LINKS.MY_JOURNAL && "text-white"
+                                }`}
+                            >
+                                <SettingsIcon/>
+                                My Journal
+                            </Link>
+                        </li>
+                        {/* <!-- Menu Item My Journal Mngt --> */}
 
                         {/* <!-- Menu Item Settings --> */}
                         <li>
                             <Link
                                 href={NAVIGATION_LINKS.SETTINGS}
-                                className={`group relative flex items-center gap-2.5 rounded-sm px-4 font-medium text-bodydark1 
-                                duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                                    pathname.includes("settings") &&
-                                    "bg-graydark dark:bg-meta-4"
+                                className={`first-letter:group relative flex 
+                                items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
+                                 hover:text-white  ${pathname === NAVIGATION_LINKS.SETTINGS && "text-white"
                                 }`}
                             >
                                 <SettingsIcon/>

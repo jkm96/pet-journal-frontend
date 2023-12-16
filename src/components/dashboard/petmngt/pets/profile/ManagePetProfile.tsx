@@ -2,13 +2,25 @@ import {useEffect, useState} from "react";
 import {AddPetTraitRequest, PetProfileResponse, Trait} from "@/boundary/interfaces/pet";
 import {addPetTraits, createPetProfile, getPetProfileDetails} from "@/lib/services/pet/petProfileService";
 import {toast} from "react-toastify";
-import {Card, CardBody, Slider, Button, Image, CircularProgress, Input, Select, SelectItem} from "@nextui-org/react";
+import {
+    Card,
+    CardBody,
+    Slider,
+    Button,
+    Image,
+    CircularProgress,
+    Input,
+    Select,
+    SelectItem,
+    Chip
+} from "@nextui-org/react";
 import CreateNewPetModal from "@/components/dashboard/petmngt/pets/modals/CreateNewPetModal";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import {toTitleCase} from "@/lib/utils/pdfUtils";
 import {EditIcon} from "@nextui-org/shared-icons";
 import {PetProfileCard} from "@/components/dashboard/petmngt/pets/profile/PetProfileCard";
 import Spinner from "@/components/shared/icons/Spinner";
+import PetTraits from "@/components/dashboard/petmngt/pets/profile/PetTraits";
 
 export default function ManagePetProfile({slug}: { slug: string }) {
     const [petProfileDetails, setPetProfileDetails] = useState<PetProfileResponse>({} as PetProfileResponse);
@@ -81,6 +93,7 @@ export default function ManagePetProfile({slug}: { slug: string }) {
             toast.success(response.message ?? "Pet traits added successfully")
             setIsSubmitting(false);
             setTraits([]);
+            fetchPetProfileInfo(slug);
         } else {
             setIsSubmitting(false);
             toast.error(response.message ?? "Unknown error occurred")
@@ -117,6 +130,8 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                     </div>
 
                     <PetProfileCard petProfileDetails={petProfileDetails}/>
+
+                    <PetTraits petTraits={petProfileDetails?.petTraits}/>
 
                     <div>
                         <div className="grid md:grid-cols-3 md:gap-6">
@@ -165,7 +180,7 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                                 <Button type="button"
                                         onPress={() => removeTrait(index)}
                                         color={"danger"}>
-                                  Remove
+                                    Remove
                                 </Button>
                             </div>
                         ))}

@@ -14,10 +14,10 @@ export async function POST(request: NextRequest) {
                 Authorization: `Bearer ${tokenData.token.token}`,
             }
         };
-
-        const requestBody = await request.text();
+        const requestBody = await request.json();
+        const { petId } = requestBody;
         const response = await petJournalApiClient
-            .post('pet/add-traits', requestBody,config);
+            .post(`pet-trait/${petId}/create`, requestBody,config);
         console.log("add pet traits response", response.data)
         return handleAxiosResponse(response);
     } catch (error: unknown) {

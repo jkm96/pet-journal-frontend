@@ -1,26 +1,25 @@
 import {handleAxiosResponse, handleApiException} from "@/helpers/responseHelpers";
 import petJournalApiClient from "@/lib/axios/axiosClient";
 import {NextRequest} from "next/server";
-import {AxiosRequestConfig} from "axios";
 import {cookieName} from "@/boundary/constants/appConstants";
 import {AccessTokenModel} from "@/boundary/interfaces/token";
-import {getJournalQueryParams} from "@/helpers/urlHelpers";
+import {AxiosRequestConfig} from "axios";
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
     try {
         const tokenCookie = request.cookies.get(`${cookieName}`)?.value as string;
         const tokenData: AccessTokenModel = JSON.parse(tokenCookie);
-        const queryParams = getJournalQueryParams(request);
         const config: AxiosRequestConfig = {
             headers: {
-                Authorization: `Bearer ${tokenData.token.token}`
-            },
-            params: queryParams
+                Authorization: `Bearer ${tokenData.token.token}`,
+            }
         };
 
-        const response = await petJournalApiClient.get('journal-entry', config);
-        console.log("journal entry api response", response.data)
-
+        const requestBody = await request.json();
+        const {journalId} = requestBody;
+        const response = await petJournalApiClient
+            .put(`journal-entry/${journalId}/edit`, requestBody,config);
+        console.log("create journal response", response.data)
         return handleAxiosResponse(response);
     } catch (error: unknown) {
         return handleApiException(error);

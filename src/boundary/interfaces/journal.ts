@@ -29,6 +29,17 @@ export interface CreateJournalEntryRequest {
     attachments: FileList | null;
 }
 
+export interface UpdateJournalEntryRequest {
+    journalId: number;
+    title: string;
+    event: string;
+    content: string;
+    location: string;
+    mood: string;
+    tags: string;
+    petIds: number[]
+}
+
 export interface JournalAttachment {
     id: number;
     type: string;

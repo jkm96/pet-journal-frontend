@@ -1,6 +1,6 @@
 import {LoginUserRequest, RegisterUserRequest} from "@/boundary/interfaces/auth";
 import {CreatePetRequest} from "@/boundary/interfaces/pet";
-import {CreateJournalEntryRequest} from "@/boundary/interfaces/journal";
+import {CreateJournalEntryRequest, UpdateJournalEntryRequest} from "@/boundary/interfaces/journal";
 
 export function isEmailValid(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -134,6 +134,34 @@ export function validateCreateJournalFormInputErrors(formData: CreateJournalEntr
     // Check if there are any errors and return null if all input is valid
     for (const key in errors) {
         if (key !== 'petIds' && key !== 'attachments' && errors[key as keyof CreateJournalEntryRequest] !== "") {
+            return errors;
+        }
+    }
+
+    return null;
+}
+
+
+export function validateEditJournalFormInputErrors(formData: UpdateJournalEntryRequest) {
+    const errors: UpdateJournalEntryRequest = {
+       content: "", event: "", location: "", mood: "", tags: "", title: ""
+    }
+
+    if (formData.title.trim() === "") {
+        errors.title = "Title cannot be empty";
+    } else if (formData.title.trim().length < 8) {
+        errors.title = "Title must be at least 8 characters long";
+    }
+
+    if (formData.content.trim() === "") {
+        errors.content = "description cannot be empty";
+    } else if (formData.content.trim().length < 20) {
+        errors.content = "description must be at least 20 characters long";
+    }
+
+    // Check if there are any errors and return null if all input is valid
+    for (const key in errors) {
+        if (errors[key as keyof UpdateJournalEntryRequest] !== "") {
             return errors;
         }
     }
