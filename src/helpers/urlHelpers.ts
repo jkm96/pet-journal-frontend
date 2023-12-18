@@ -6,9 +6,10 @@ export function getJournalQueryParams(request: NextRequest) {
     const pageSize = searchParams.get('pageSize');
     const pageNumber = searchParams.get('pageNumber');
     const orderBy = searchParams.get('orderBy');
-    const searchTerm = searchParams.get('searchTerm');
-    const periodFrom = searchParams.get('periodFrom');
-    const periodTo = searchParams.get('periodTo');
+    const searchTerm = searchParams.get('searchTerm') ?? '';
+    const periodFrom = searchParams.get('periodFrom') ?? '';
+    const periodTo = searchParams.get('periodTo') ?? '';
+    const fetch = searchParams.get('fetch') ?? '';
 
-    return {pageSize, pageNumber, orderBy, searchTerm,periodFrom, periodTo};
+    return {pageSize, pageNumber, orderBy, searchTerm,periodFrom, periodTo,fetch};
 }

@@ -6,7 +6,7 @@ import PetProfilesOverview from "@/components/dashboard/petmngt/pets/profile/Pet
 import JournalEntriesOverview from "@/components/dashboard/journalmngt/journalentries/JournalEntriesOverview";
 import MyJournalOverview from "@/components/dashboard/journalmngt/myjournal/MyJournalOverview";
 
-function MyJournalPage({ searchParams }: { searchParams?: { query?: string; periodFrom?: string; periodTo?: string; }; }) {
+function MyJournalPage({ searchParams }: { searchParams?: { searchTerm?: string; periodFrom?: string; periodTo?: string; }; }) {
     return (
         <>
             <MyJournalOverview searchParams={searchParams} />

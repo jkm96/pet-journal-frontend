@@ -11,6 +11,7 @@ export async function GET(request: NextRequest) {
         const tokenCookie = request.cookies.get(`${cookieName}`)?.value as string;
         const tokenData: AccessTokenModel = JSON.parse(tokenCookie);
         const queryParams = getJournalQueryParams(request);
+        console.log("query Params",queryParams)
         const config: AxiosRequestConfig = {
             headers: {
                 Authorization: `Bearer ${tokenData.token.token}`

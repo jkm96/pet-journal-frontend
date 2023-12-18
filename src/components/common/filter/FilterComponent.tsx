@@ -9,16 +9,16 @@ export default function FilterComponent({placeholder}: { placeholder: string }) 
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const {replace} = useRouter();
-    const [term, setTerm] = useState<string>(searchParams.get('query')?.toString() || '');
-    const [periodFrom, setPeriodFrom] = useState<string>('');
-    const [periodTo, setPeriodTo] = useState<string>('');
+    const [searchTerm, setSearchTerm] = useState<string>(searchParams.get('searchTerm')?.toString() || '');
+    const [periodFrom, setPeriodFrom] = useState<string>(searchParams.get('periodFrom')?.toString() || '');
+    const [periodTo, setPeriodTo] = useState<string>(searchParams.get('periodTo')?.toString() || '');
 
     function handleSearch() {
         const params = new URLSearchParams(searchParams);
-        if (term && term.length > 3) {
-            params.set('query', term);
+        if (searchTerm && searchTerm.length > 3) {
+            params.set('searchTerm', searchTerm);
         } else {
-            params.delete('query');
+            params.delete('searchTerm');
         }
 
         if (periodFrom) {
@@ -36,8 +36,6 @@ export default function FilterComponent({placeholder}: { placeholder: string }) 
         replace(`${pathname}?${params.toString()}`);
     }
 
-    const isFilterApplied = term.length > 3 || (periodFrom && periodTo);
-
     return (
         <div className="w-full sm:max-w-[64%]">
             <div className="grid grid-cols-5 gap-4">
@@ -45,9 +43,9 @@ export default function FilterComponent({placeholder}: { placeholder: string }) 
                     <Input
                         placeholder={placeholder}
                         onChange={(e) => {
-                            setTerm(e.target.value);
+                            setSearchTerm(e.target.value);
                         }}
-                        value={term}
+                        value={searchTerm}
                         size="sm"
                         variant="bordered"
                         startContent={<SearchIcon/>}
@@ -80,16 +78,15 @@ export default function FilterComponent({placeholder}: { placeholder: string }) 
                     />
                 </div>
 
-                {isFilterApplied && (
-                    <div className="relative flex flex-1 flex-shrink-0">
-                        <Button
-                            className="mt-1"
-                            color={"primary"}
-                            onClick={handleSearch}>
-                            Filter
-                        </Button>
-                    </div>
-                )}
+                <div className="relative flex flex-1 flex-shrink-0">
+                    <Button
+                        className="mt-1"
+                        color={"primary"}
+                        onClick={handleSearch}>
+                        Filter
+                    </Button>
+                </div>
+
             </div>
         </div>
     );

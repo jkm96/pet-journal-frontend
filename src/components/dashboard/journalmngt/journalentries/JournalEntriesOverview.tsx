@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import {getJournalEntries} from "@/lib/services/journal-entries/journalEntryService";
-import {JournalEntryResponse} from "@/boundary/interfaces/journal";
+import {JournalEntryResponse, MyJournalOverviewProps} from "@/boundary/interfaces/journal";
 import {Avatar, Card, CardBody, CardHeader, CircularProgress, Image} from "@nextui-org/react";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import Link from "next/link";
@@ -12,9 +12,9 @@ import SearchComponent from "@/components/common/filter/SearchComponent";
 import CreateJournalEntryModal from "@/components/dashboard/journalmngt/journalentries/modals/CreateJournalEntryModal";
 import {formatDate} from "@/helpers/dateHelpers";
 import {getMoodColorClass} from "@/helpers/stylingHelpers";
-import {JournalQueryParameters} from "@/boundary/parameters/JournalQueryParameters";
+import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
 
-export default function JournalEntriesOverview() {
+export default function JournalEntriesOverview({searchParams}: MyJournalOverviewProps) {
     const [journalEntries, setJournalEntries] = useState<JournalEntryResponse[]>([]);
     const [isLoadingJournalEntries, setIsLoadingJournalEntries] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +25,7 @@ export default function JournalEntriesOverview() {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        const queryParams: JournalQueryParameters = new JournalQueryParameters();
+        const queryParams = getQueryParams();
         fetchJournalEntries(queryParams);
     };
 
@@ -46,10 +46,16 @@ export default function JournalEntriesOverview() {
             });
     };
 
-    useEffect(() => {
+    function getQueryParams() {
         const queryParams: JournalQueryParameters = new JournalQueryParameters();
+        queryParams.searchTerm = searchParams?.searchTerm ?? '';
+        return queryParams;
+    }
+
+    useEffect(() => {
+        const queryParams = getQueryParams();
         fetchJournalEntries(queryParams);
-    }, []);
+    }, [searchParams?.searchTerm]);
 
     return (
         <>

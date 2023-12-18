@@ -1,11 +1,15 @@
 import {RequestParameters} from "@/boundary/parameters/requestParameters";
 export class JournalQueryParameters extends RequestParameters {
-    public searchTerm: string | undefined;
-    public periodFrom?: Date | undefined;
-    public periodTo?: Date | undefined;
+    public searchTerm: string;
+    public periodFrom: string;
+    public periodTo: string;
+    public fetch: string;
 
     constructor() {
         super(10, 1, "createdOn desc");
         this.searchTerm = "";
+        this.periodFrom = "";
+        this.periodTo = "";
+        this.fetch = "";
     }
 }

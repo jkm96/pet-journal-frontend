@@ -72,3 +72,7 @@ export interface UploadJournalImageRequest{
     journalId: number
     attachments: FileList | null;
 }
+
+export interface MyJournalOverviewProps {
+    searchParams?: { searchTerm?: string; periodFrom?: string; periodTo?: string; };
+}

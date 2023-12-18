@@ -6,7 +6,7 @@ import {
 } from "@/boundary/interfaces/journal";
 import axios from "axios";
 import {handleApiException, handleAxiosResponse} from "@/helpers/responseHelpers";
-import {JournalQueryParameters} from "@/boundary/parameters/JournalQueryParameters";
+import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
 
 export async function createJournalEntry(createRequest: CreateJournalEntryRequest) {
     try {
