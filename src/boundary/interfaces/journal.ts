@@ -47,6 +47,7 @@ export interface JournalAttachment {
     createdAt: string;
     updatedAt: string;
     journalEntryId: number;
+    buffer: JournalImageBuffer;
 }
 
 export interface PrintJournalEntryRequest {

@@ -14,6 +14,7 @@ import UploadJournalImagesModal
     from "@/components/dashboard/journalmngt/journalentries/modals/UploadJournalImagesModal";
 import UpdateJournalEntryModal from "@/components/dashboard/journalmngt/journalentries/modals/UpdateJournalEntryModal";
 import {EditIcon} from "@nextui-org/shared-icons";
+import DeleteJournalEntryModal from "@/components/dashboard/journalmngt/journalentries/modals/DeleteJournalEntryModal";
 
 export default function ManageJournalEntry({slug}: { slug: string }) {
     const [journalEntryDetails, setJournalEntryDetails] = useState<JournalEntryResponse>({} as JournalEntryResponse);
@@ -24,6 +25,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
     const [editJournalRequest, setEditJournalRequest] = useState<UpdateJournalEntryRequest>({} as UpdateJournalEntryRequest);
     const [modals, setModals] = useState({
         editJournal: false,
+        deleteJournal: false,
         uploadAttachments: false,
         previewAndPrintEntry: false,
     });
@@ -82,7 +84,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
             tags: tags,
         };
 
-        const editJournal:UpdateJournalEntryRequest = {
+        const editJournal: UpdateJournalEntryRequest = {
             journalId: journals.id,
             content: journals.content,
             event: journals.event,
@@ -90,7 +92,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
             mood: journals.mood,
             tags: journals.tags,
             title: journals.title,
-            petIds:journals.pets.map((item)=>item.id)
+            petIds: journals.pets.map((item) => item.id)
         }
 
         setPets(petNames);
@@ -143,6 +145,20 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                                         />
                                     )}
 
+                                    <Button onPress={() => openModal("deleteJournal")}
+                                            startContent={<PlusIcon/>}
+                                            color="danger"
+                                            className="ml-2"
+                                            variant="shadow">
+                                        Delete Journal
+                                    </Button>
+                                    {modals.deleteJournal && (
+                                        <DeleteJournalEntryModal
+                                            journalId={editJournalRequest.journalId}
+                                            isOpen={modals.deleteJournal}
+                                            onClose={() => closeModal("deleteJournal")}
+                                        />
+                                    )}
                                 </div>
                             </div>
                             <div className="flex gap-3">
@@ -153,7 +169,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                                     Preview and Print
                                 </Button>
 
-                                {modals.previewAndPrintEntry &&(
+                                {modals.previewAndPrintEntry && (
                                     <PreviewAndPrintJournalEntryModal
                                         printJournalRequest={printJournalRequest}
                                         isOpen={modals.previewAndPrintEntry}
@@ -179,7 +195,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                             <div className="flex flex-wrap md:-m-2 mt-3">
                                 <div className={`flex ${journalImages.length <= 3 ? 'w-full' : 'w-1/2'} flex-wrap`}>
                                     {journalImages.slice(0, 3).map((image, index) => (
-                                        <div key={index} className={`w-${index === 2 ? 'full' : '1/2'} p-1 md:p-2`}>
+                                        <div key={index} className={`w-${index === 2 || journalImages.length <=1 ? 'full' : '1/2'} p-1 md:p-2`}>
                                             <img
                                                 alt={`gallery-${index + 1}`}
                                                 className="block h-full w-full rounded-lg object-cover object-center"

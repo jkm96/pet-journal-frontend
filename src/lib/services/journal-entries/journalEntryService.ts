@@ -99,6 +99,24 @@ export async function updateJournalEntry(updateRequest:UpdateJournalEntryRequest
         throw error;
     }
 }
+export async function deleteJournal(journalId:number) {
+    try {
+        const response = await fetch(`${internalBaseUrl}/journal-entry/delete`, {
+            method: 'POST',
+            headers: {
+                'x-api-key':`${apiKey}`,
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                journalId: journalId
+            }),
+        });
+
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
+}
 
 export async function getJournalEntryDetails(journalSlug:string) {
     try {

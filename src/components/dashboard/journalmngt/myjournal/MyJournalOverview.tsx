@@ -1,16 +1,29 @@
 import {getJournalEntries} from "@/lib/services/journal-entries/journalEntryService";
 import {toast} from "react-toastify";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {JournalEntryResponse, MyJournalOverviewProps} from "@/boundary/interfaces/journal";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
-import {Avatar, Card, CardBody, CircularProgress} from "@nextui-org/react";
-import RenderJournalHeader from "@/components/dashboard/journalmngt/journalentries/RenderJournalHeader";
+import {CircularProgress, Input} from "@nextui-org/react";
 import FilterComponent from "@/components/common/filter/FilterComponent";
 import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
+import {Button} from "@nextui-org/button";
+import {PlusFilledIcon} from "@nextui-org/shared-icons";
+import JournalEntriesGrid from "@/components/dashboard/journalmngt/journalentries/JournalEntriesGrid";
+import PreviewMyJournal, {getDocument} from "@/components/dashboard/journalmngt/journalentries/PreviewMyJournal";
+import {PDFDownloadLink} from "@react-pdf/renderer";
+import {useAuth} from "@/hooks/useAuth";
+import Spinner from "@/components/shared/icons/Spinner";
 
 export default function MyJournalOverview({searchParams}: MyJournalOverviewProps) {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const {user} = useAuth();
     const [journalEntries, setJournalEntries] = useState<JournalEntryResponse[]>([]);
     const [isLoadingEntries, setIsLoadingEntries] = useState(true);
+    const [showPreview, setShowPreview] = useState(false);
+    const [journalTitle, setJournalTitle] = useState('');
+    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setJournalTitle(e.target.value);
+    };
     const fetchAllJournalEntries = async (queryParams: JournalQueryParameters) => {
         setIsLoadingEntries(true)
         await getJournalEntries(queryParams)
@@ -35,8 +48,26 @@ export default function MyJournalOverview({searchParams}: MyJournalOverviewProps
         queryParams.periodTo = searchParams?.periodTo ?? '';
         queryParams.fetch = 'all';
         fetchAllJournalEntries(queryParams);
-        console.log("queryParams",queryParams)
     }, [searchParams?.periodFrom, searchParams?.periodTo, searchParams?.searchTerm]);
+
+    const handlePreviewClick = () => {
+        setShowPreview(true);
+    };
+
+    const handleGoBackClick = () => {
+        setShowPreview(false);
+    };
+
+    const DownloadButton = () => {
+        return (
+            <Button color="primary"
+                    type="submit"
+                    isLoading={isSubmitting}
+                    spinner={<Spinner/>}>
+                Download Entry
+            </Button>
+        )
+    }
 
     return (
         <>
@@ -50,16 +81,46 @@ export default function MyJournalOverview({searchParams}: MyJournalOverviewProps
                 <>
                     <div className="flex flex-col gap-4 mb-2">
                         <div className="flex justify-between gap-3 items-end">
-                            <FilterComponent placeholder="Search for journal entries"/>
-                            {/*<div className="flex gap-3">*/}
-                            {/*    <Button onPress={handleOpenModal}*/}
-                            {/*            startContent={<PlusIcon/>}*/}
-                            {/*            color="primary"*/}
-                            {/*            variant="shadow">*/}
-                            {/*        Add New*/}
-                            {/*    </Button>*/}
-                            {/*    <CreateJournalEntryModal isOpen={isModalOpen} onClose={handleCloseModal}/>*/}
-                            {/*</div>*/}
+                            {showPreview ? (
+                                <div className="w-1/2 sm:max-w-[44%]">
+                                    <Input
+                                        type="text"
+                                        variant={"bordered"}
+                                        size="sm"
+                                        value={journalTitle}
+                                        onChange={handleTitleChange}
+                                        placeholder="Enter your journal title here"
+                                    />
+                                </div>
+                            ) : (
+                                <FilterComponent placeholder="Search for journal entries"/>
+                            )}
+                            <div className="flex gap-3">
+                                {showPreview ? (
+                                    <>
+                                        <PDFDownloadLink document={getDocument(journalTitle ?? user?.username,user,journalEntries)}
+                                                         fileName={`${journalTitle.toLowerCase()}.pdf`}>
+                                            {({blob, url, loading, error}) =>
+                                                loading ? 'Loading document...' : <DownloadButton/>
+                                            }
+                                        </PDFDownloadLink>
+
+                                        <Button onPress={handleGoBackClick}
+                                                startContent={<PlusFilledIcon/>}
+                                                color="default"
+                                                variant="shadow">
+                                            End Preview
+                                        </Button>
+                                    </>
+                                ) : (
+                                    <Button onPress={handlePreviewClick}
+                                            startContent={<PlusFilledIcon/>}
+                                            color="primary"
+                                            variant="shadow">
+                                        Preview And Print
+                                    </Button>
+                                )}
+                            </div>
                         </div>
                     </div>
                     {journalEntries.length < 1 ? (
@@ -69,52 +130,13 @@ export default function MyJournalOverview({searchParams}: MyJournalOverviewProps
                             </div>
                         </>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-
-                            {journalEntries.map((journal) => (
-                                <Card key={journal.id} className="py-4">
-                                    <RenderJournalHeader title={journal.title}
-                                                         createdAt={journal.createdAt}
-                                                         mood={journal.mood}
-                                                         tags={journal.tags}
-                                                         pets={journal.pets.map((pet) => pet.name)}/>
-                                    <CardBody className="overflow-visible py-2">
-                                        <div className="mt-1 mb-1">
-                                            {journal.content}
-                                        </div>
-
-                                        <div className="flex flex-wrap md:-m-2 mt-3">
-                                            <div
-                                                className={`flex ${journal.journalAttachments.length <= 3 ? 'w-full' : 'w-1/2'} flex-wrap`}>
-                                                {journal.journalAttachments.slice(0, 3).map((image, index) => (
-                                                    <div key={index}
-                                                         className={`w-${index === 2 ? 'full' : '1/2'} p-1 md:p-2`}>
-                                                        <img
-                                                            alt={`gallery-${index + 1}`}
-                                                            className="block h-full w-full rounded-lg object-cover object-center"
-                                                            src={image.sourceUrl}
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </div>
-
-                                            <div className="flex w-1/2 flex-wrap">
-                                                {journal.journalAttachments.slice(3).map((image, index) => (
-                                                    <div key={index}
-                                                         className={`w-${index === 0 ? 'full' : '1/2'} p-1 md:p-2`}>
-                                                        <img
-                                                            alt={`gallery-${index + 4}`}
-                                                            className="block h-full w-full rounded-lg object-cover object-center"
-                                                            src={image.sourceUrl}
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </CardBody>
-                                </Card>
-                            ))}
-                        </div>
+                        <>
+                            {showPreview ? (
+                                <PreviewMyJournal journalEntries={journalEntries} journalTitle={journalTitle}/>
+                            ) : (
+                                <JournalEntriesGrid journalEntries={journalEntries}/>
+                            )}
+                        </>
                     )}
                 </>
             )}

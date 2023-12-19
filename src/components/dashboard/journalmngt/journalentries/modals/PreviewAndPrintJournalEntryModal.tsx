@@ -47,10 +47,6 @@ export default function PreviewAndPrintJournalEntryModal({printJournalRequest, i
         }
     }, [isOpen]);
 
-
-    const handleJournalPrint = async (e: any) => {
-
-    }
     const handleCloseModal = () => {
 
     };
@@ -86,8 +82,7 @@ export default function PreviewAndPrintJournalEntryModal({printJournalRequest, i
             </Page>
         </Document>;
     }
-
-    function DownloadButton() {
+     const DownloadButton = () => {
         return (
             <Button color="primary"
                     type="submit"

@@ -22,7 +22,7 @@ import {updateJournalEntry} from "@/lib/services/journal-entries/journalEntrySer
 import {PetProfileResponse} from "@/boundary/interfaces/pet";
 import {getPetProfiles} from "@/lib/services/pet/petProfileService";
 const initialFormState: UpdateJournalEntryRequest = {
-    petIds: [],    content: "", event: "", location: "", mood: "",tags: "", title: ""
+    journalId: 0,    petIds: [],    content: "", event: "", location: "", mood: "",tags: "", title: ""
 };
 export default function UpdateJournalEntryModal({editJournalRequest,userPets,isOpen, onClose}: {
     editJournalRequest: UpdateJournalEntryRequest,
@@ -85,7 +85,6 @@ export default function UpdateJournalEntryModal({editJournalRequest,userPets,isO
             setIsSubmitting(false);
             return;
         }
-console.log("pets",selectedUserPets)
 
         const updatedPetIds: number[] = selectedUserPets.map((petName, index) => {
             const pet = pets.find((profile) => profile.name === petName);
@@ -109,7 +108,7 @@ console.log("pets",selectedUserPets)
         if (selectedMoodTags.length === 0 || selectedJournalTags.length === 0) {
             setInputErrors({
                 ...inputErrors,
-                mood: "Select at least one mood",content: "", event: "", location: "",title: "", petIds:[],
+                mood: "Select at least one mood",content: "", event: "", location: "",title: "", petIds:[],journalId: 0,
                 tags: "Select at least one tag"
             });
             setIsSubmitting(false);

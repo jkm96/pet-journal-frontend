@@ -24,9 +24,9 @@ export default function RenderEntryPdfImages({imageBuffers, itemsPerRow = 2}: {
                 ))}
             </View>
 
-            <View debug={true} style={{flex: 1,flexDirection: 'row', width:'50%', flexWrap: 'wrap', marginBottom: 0}}>
+            <View style={{flex: 1,flexDirection: 'row', width:'50%', flexWrap: 'wrap', marginBottom: 0}}>
                 {imageBuffers.slice(3).map((image, index) => (
-                    <View debug={true} key={index} style={{width: index === 0 ? '100%' : '50%',padding: 5,maxHeight: '100%',objectFit:'cover'}}>
+                    <View key={index} style={{width: index === 0 ? '100%' : '50%',padding: 5,maxHeight: '100%',objectFit:'cover'}}>
                         <Image
                             style={{objectFit:'cover'}}
                             src={`data:image/${image.imageType};base64,${image.imageBuffer}`}

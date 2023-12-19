@@ -17,8 +17,19 @@ export function PdfPreviewStyle() {
             paddingHorizontal: 35,
             height: 500,
         },
+        titlePage: {
+            textAlign:'center',
+            fontSize: 25,
+            fontFamily: 'Oswald',
+            paddingTop: 35,
+            paddingBottom: 65,
+            paddingHorizontal: 35,
+            height: 500,
+        },
         title: {
-            fontSize: 24,
+            marginTop:100,
+            textAlign:'center',
+            fontSize: 25,
             fontFamily: 'Oswald'
         },
         author: {
@@ -27,7 +38,6 @@ export function PdfPreviewStyle() {
         },
         subtitle: {
             fontSize: 18,
-            margin: 12,
             fontFamily: 'Oswald'
         },
         moodtags: {
@@ -62,3 +72,4 @@ export function PdfPreviewStyle() {
         },
     });
 }
+

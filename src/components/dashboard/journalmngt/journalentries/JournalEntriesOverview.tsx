@@ -29,7 +29,7 @@ export default function JournalEntriesOverview({searchParams}: MyJournalOverview
         fetchJournalEntries(queryParams);
     };
 
-    const fetchJournalEntries = async (queryParams:JournalQueryParameters) => {
+    const fetchJournalEntries = async (queryParams: JournalQueryParameters) => {
         setIsLoadingJournalEntries(true)
         await getJournalEntries(queryParams)
             .then((response) => {
