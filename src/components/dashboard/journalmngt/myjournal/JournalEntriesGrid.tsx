@@ -32,7 +32,8 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({journalEntries})
                                     <div key={index} className={`w-${index === 2 ||  journal.journalAttachments.length <=1 ? 'full' : '1/2'} p-1 md:p-2`}>
                                         <img
                                             alt={`gallery-${index + 1}`}
-                                            className="block h-full w-full rounded-lg object-cover object-center"
+                                            className="block w-full rounded-lg object-center"
+                                            style={{height: 130, maxHeight: 150}}
                                             src={image.sourceUrl}
                                         />
                                     </div>
@@ -44,7 +45,8 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({journalEntries})
                                     <div key={index} className={`w-${index === 0 ? 'full' : '1/2'} p-1 md:p-2`}>
                                         <img
                                             alt={`gallery-${index + 4}`}
-                                            className="block h-full w-full rounded-lg object-cover object-center"
+                                            className="block w-full rounded-lg object-center"
+                                            style={{height: 130, maxHeight: 150}}
                                             src={image.sourceUrl}
                                         />
                                     </div>

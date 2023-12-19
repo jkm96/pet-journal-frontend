@@ -11,6 +11,7 @@ import {toast} from "react-toastify";
 import {getJournalEntryAttachmentBuffers} from "@/lib/services/journal-entries/journalEntryService";
 import {PdfPreviewStyle, toTitleCase} from "@/lib/utils/pdfUtils";
 import Font = ReactPDF.Font;
+import RenderPdfGridImages from "@/components/dashboard/journalmngt/journalentries/RenderPdfGridImages";
 
 export default function PreviewAndPrintJournalEntryModal({printJournalRequest, isOpen, onClose}: {
     printJournalRequest: PrintJournalEntryRequest,
@@ -64,7 +65,7 @@ export default function PreviewAndPrintJournalEntryModal({printJournalRequest, i
                 <Text style={styles.header} fixed>
                     ~ Made with love from pet lovers for pet lovers ~
                 </Text>
-                <Text style={styles.title}>{toTitleCase(printJournalRequest.title)}</Text>
+                <Text style={styles.subtitle}>{toTitleCase(printJournalRequest.title)}</Text>
                 <Text style={styles.author}>{user?.username}</Text>
                 <Text
                     style={styles.author}>{formatDate(printJournalRequest.createdAt)}</Text>
@@ -77,7 +78,7 @@ export default function PreviewAndPrintJournalEntryModal({printJournalRequest, i
                     <Text style={styles.content}>
                         {printJournalRequest.content}
                     </Text>
-                    <RenderEntryPdfImages imageBuffers={imageBuffers}/>
+                    <RenderPdfGridImages imageBuffers={imageBuffers}/>
                 </View>
             </Page>
         </Document>;

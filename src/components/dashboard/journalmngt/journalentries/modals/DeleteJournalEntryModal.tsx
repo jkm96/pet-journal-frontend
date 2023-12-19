@@ -28,7 +28,6 @@ export default function DeleteJournalEntryModal({journalId,isOpen, onClose}: {
         setIsSubmitting(true);
 
         const response = await deleteJournal(journalId);
-        console.log("journalId", journalId)
         if (response.statusCode === 200) {
             toast.success(response.message ?? "Journal deleted successfully")
             setIsSubmitting(false);

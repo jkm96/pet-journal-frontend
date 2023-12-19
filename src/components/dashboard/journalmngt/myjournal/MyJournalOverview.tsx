@@ -8,8 +8,8 @@ import FilterComponent from "@/components/common/filter/FilterComponent";
 import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
 import {Button} from "@nextui-org/button";
 import {PlusFilledIcon} from "@nextui-org/shared-icons";
-import JournalEntriesGrid from "@/components/dashboard/journalmngt/journalentries/JournalEntriesGrid";
-import PreviewMyJournal, {getDocument} from "@/components/dashboard/journalmngt/journalentries/PreviewMyJournal";
+import JournalEntriesGrid from "@/components/dashboard/journalmngt/myjournal/JournalEntriesGrid";
+import PreviewMyJournal, {getDocument} from "@/components/dashboard/journalmngt/myjournal/PreviewMyJournal";
 import {PDFDownloadLink} from "@react-pdf/renderer";
 import {useAuth} from "@/hooks/useAuth";
 import Spinner from "@/components/shared/icons/Spinner";
@@ -82,24 +82,34 @@ export default function MyJournalOverview({searchParams}: MyJournalOverviewProps
                     <div className="flex flex-col gap-4 mb-2">
                         <div className="flex justify-between gap-3 items-end">
                             {showPreview ? (
-                                <div className="w-1/2 sm:max-w-[44%]">
-                                    <Input
-                                        type="text"
-                                        variant={"bordered"}
-                                        size="sm"
-                                        value={journalTitle}
-                                        onChange={handleTitleChange}
-                                        placeholder="Enter your journal title here"
-                                    />
-                                </div>
+                                <>
+                                    <div className="flex gap-1">
+                                        <Input
+                                            type="text"
+                                            variant={"bordered"}
+                                            size="sm"
+                                            value={journalTitle}
+                                            onChange={handleTitleChange}
+                                            placeholder="Enter your journal title here"
+                                        />
+
+                                        <Button onPress={handleGoBackClick}
+                                                startContent={<PlusFilledIcon/>}
+                                                color="default"
+                                                variant="shadow">
+                                            Title
+                                        </Button>
+                                    </div>
+                                </>
                             ) : (
                                 <FilterComponent placeholder="Search for journal entries"/>
                             )}
                             <div className="flex gap-3">
                                 {showPreview ? (
                                     <>
-                                        <PDFDownloadLink document={getDocument(journalTitle ?? user?.username,user,journalEntries)}
-                                                         fileName={`${journalTitle.toLowerCase()}.pdf`}>
+                                        <PDFDownloadLink
+                                            document={getDocument(journalTitle ?? user?.username, user, journalEntries)}
+                                            fileName={`${journalTitle.toLowerCase()}.pdf`}>
                                             {({blob, url, loading, error}) =>
                                                 loading ? 'Loading document...' : <DownloadButton/>
                                             }
@@ -132,7 +142,9 @@ export default function MyJournalOverview({searchParams}: MyJournalOverviewProps
                     ) : (
                         <>
                             {showPreview ? (
-                                <PreviewMyJournal journalEntries={journalEntries} journalTitle={journalTitle}/>
+                                <PreviewMyJournal
+                                    journalEntries={journalEntries}
+                                    journalTitle={journalTitle}/>
                             ) : (
                                 <JournalEntriesGrid journalEntries={journalEntries}/>
                             )}
