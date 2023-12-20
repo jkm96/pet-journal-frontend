@@ -134,6 +134,7 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                     <PetTraits petTraits={petProfileDetails?.petTraits}/>
 
                     <div>
+                        <h3>Manage Pet Trait</h3>
                         <div className="grid md:grid-cols-3 md:gap-6">
                             <div className={"col-6"}>
                                 <Input

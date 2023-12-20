@@ -208,7 +208,7 @@ export default function LoginForm() {
                     </div>
 
                     <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
-                        <div className="w-3/4 place-items-center p-4 sm:p-12.5 xl:p-17.5">
+                        <div className="w-full sm:w-full place-items-center p-4 sm:p-12.5 xl:p-17.5">
                             <div className="text-center">
                                 <span className="mb-1.5 block font-medium">Start for free</span>
                                 <span className="mb-1.5 block font-medium">or</span>

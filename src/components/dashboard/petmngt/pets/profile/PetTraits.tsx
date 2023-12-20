@@ -8,23 +8,27 @@ export default function PetTraits({petTraits}: { petTraits: PetTraitModel[] | nu
     return (
         <>
             <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/2 m-2 rounded-md shadow-md">
-                    <h3 className={"m-1"}>Likes</h3>
-                    {likesTraits.map((petTrait) => (
-                        <Chip className={"m-1"} key={petTrait.id} color="success">
-                            {petTrait.trait}
-                        </Chip>
-                    ))}
-                </div>
+                {likesTraits.length > 0 && (
+                    <div className="md:w-1/2 m-2 rounded-md">
+                        <h3 className={"m-1"}>Likes</h3>
+                        {likesTraits.map((petTrait) => (
+                            <Chip className={"m-1"} key={petTrait.id} color="success">
+                                {petTrait.trait}
+                            </Chip>
+                        ))}
+                    </div>
+                )}
 
-                <div className="md:w-1/2 m-2 rounded-md shadow-md">
-                    <h3 className={"m-1"}>Dislikes</h3>
-                    {dislikesTraits.map((petTrait) => (
-                        <Chip className={"m-1"} key={petTrait.id} color="secondary">
-                            {petTrait.trait}
-                        </Chip>
-                    ))}
-                </div>
+                {dislikesTraits.length > 0 && (
+                    <div className="md:w-1/2 m-2 rounded-md">
+                        <h3 className={"m-1"}>Dislikes</h3>
+                        {dislikesTraits.map((petTrait) => (
+                            <Chip className={"m-1"} key={petTrait.id} color="secondary">
+                                {petTrait.trait}
+                            </Chip>
+                        ))}
+                    </div>
+                )}
             </div>
         </>
     );

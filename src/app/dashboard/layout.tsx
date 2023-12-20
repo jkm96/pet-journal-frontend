@@ -47,7 +47,7 @@ export default function DashboardLayout({children}: { children: React.ReactNode;
 
                     {/* <!-- ===== Main Content Start ===== --> */}
                     <main>
-                        <div className="mx-auto max-w-screen-2xl md:py-6 2xl:py-10">
+                        <div className="sm:m-1 md:p-10 lg:p-6 2xl:p-6">
                             {children}
                         </div>
                     </main>

@@ -4,6 +4,7 @@ import {deleteAccessToken} from "@/lib/services/token/tokenService";
 import LogoutIcon from "@/components/shared/icons/LogoutIcon";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import {router} from "next/client";
+import {useEffect} from "react";
 
 export default function LogoutForm() {
     const router = useRouter()

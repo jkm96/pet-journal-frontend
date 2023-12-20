@@ -28,21 +28,37 @@ export default function UploadJournalImagesModal({journalId,isOpen, onClose}: {
 }) {
     const [uploadImageFormData, setUploadImageFormData] = useState<UploadJournalImageRequest>(initialFormState);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [previewFile, setPreviewFile] = useState<any[]>([]);
+    const [message, setMessage] = useState("");
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        console.log('FileList:', files);
+    const handleFileChange = (e: any) => {
+        const uploadedFiles = e.target.files;
+        console.log('FileList:', uploadedFiles);
 
-        if (!areFilesValid(files)) {
+        if (!areFilesValid(uploadedFiles)) {
             toast.error('Please select only PNG or JPG files.');
             e.target.files = null;
         } else {
+            // Use a functional update to correctly update state with multiple files
+            setPreviewFile(prevFiles => [...prevFiles, ...uploadedFiles]);
             setUploadImageFormData({
                 ...uploadImageFormData,
-                attachments: files,
+                attachments: uploadedFiles,
             });
         }
     };
+
+    const removeImage = (fileName:any) => {
+        setPreviewFile(prevFiles => prevFiles.filter(file => file.name !== fileName));
+
+        setUploadImageFormData((prevFormData:any) => {
+            const updatedAttachments = Array.from(prevFormData.attachments as File[]).filter((file) => file.name !== fileName);
+            return {
+                ...prevFormData,
+                attachments: updatedAttachments,
+            };
+        });
+    }
 
     const handleImageUpload = async (e: any) => {
         e.preventDefault();
@@ -94,19 +110,40 @@ export default function UploadJournalImagesModal({journalId,isOpen, onClose}: {
                         <ModalHeader className="flex flex-col gap-1">Upload Journal Entry Attachments</ModalHeader>
                         <ModalBody>
                             <form onSubmit={handleImageUpload}>
-                                    <div className="mt-2">
-                                        <label
-                                            className="block text-sm font-medium text-gray-900 dark:text-white"
-                                            htmlFor="multiple_files">Attach profile picture</label>
-                                        <input
-                                            onChange={handleFileChange}
-                                            name={"profilePicture"}
-                                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer
-                                                bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600
-                                                dark:placeholder-gray-400"
-                                            id="multiple_files" type="file" multiple>
-                                        </input>
+                                <div className="flex justify-center items-center bg-gray-900 px-2">
+                                    <div className="p-3 w-full rounded-md">
+                                        <span className="flex justify-center items-center bg-white text-[12px] mb-1 text-red-500">{message}</span>
+                                        <div className="h-32 w-full overflow-hidden relative shadow-md border-2 items-center rounded-md cursor-pointer   border-gray-400 border-dotted">
+                                            <input type="file" onChange={handleFileChange} className="h-full w-full opacity-0 z-10 absolute" name="files[]" multiple/>
+                                            <div className="h-full w-full bg-gray-200 absolute z-1 flex justify-center items-center top-0">
+                                                <div className="flex flex-col">
+                                                    <i className="mdi mdi-folder-open text-[30px] text-gray-400 text-center"></i>
+                                                    <span className="text-[12px]">{`Drag and Drop a file`}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2 mt-2">
+                                            {previewFile.map((file, key) => {
+                                                return (
+
+                                                    <div key={key} className='w-full h-16 flex items-center justify-between rounded p-3 bg-white'>
+                                                        <div className="flex flex-row items-center gap-2">
+                                                            <div className="h-12 w-12 ">
+                                                                <img className="w-full h-full rounded" src={URL.createObjectURL(file)} />
+                                                            </div>
+                                                            <span className="truncate w-44">{file.name}</span>
+                                                        </div>
+                                                        <div onClick={() => { removeImage(file.name) }}
+                                                             className="h-6 w-6 bg-red-400 flex items-center cursor-pointer justify-center rounded-sm">
+                                                            <i className="mdi mdi-trash-can text-white text-[14px]"></i>Delete
+                                                        </div>
+                                                    </div>
+
+                                                )
+                                            })}
+                                        </div>
                                     </div>
+                                </div>
                             </form>
                         </ModalBody>
                         <ModalFooter>

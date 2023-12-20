@@ -109,7 +109,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                 </div>
             ) : (
                 <>
-                    <div className="flex flex-col gap-4 mb-2">
+                    <div className="flex flex-col gap-4 m-2">
                         <div className="flex justify-between gap-3 items-end">
                             <div className="w-full sm:max-w-[44%]">
                                 <div className="relative flex flex-1 flex-shrink-0">
@@ -134,7 +134,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                                             startContent={<PlusIcon/>}
                                             color="primary"
                                             variant="shadow">
-                                        Upload Attachments
+                                        Upload Attachment
                                     </Button>
 
                                     {modals.uploadAttachments && (
@@ -179,6 +179,18 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
 
                             </div>
                         </div>
+                    </div>
+
+                    <div className="fixed bottom-4 right-4 md:hidden">
+                        <Button
+                            onPress={() => openModal("previewAndPrintEntry")}
+                            startContent={<PlusIcon />}
+                            color="primary"
+                            radius="full"
+                            variant="shadow"
+                        >
+                            Preview
+                        </Button>
                     </div>
 
                     <Card className="py-4">

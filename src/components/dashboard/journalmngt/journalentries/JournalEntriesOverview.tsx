@@ -67,7 +67,7 @@ export default function JournalEntriesOverview({searchParams}: MyJournalOverview
                 </div>
             ) : (
                 <>
-                    <div className="flex flex-col gap-4 mb-2">
+                    <div className="flex flex-col gap-4 m-2">
                         <div className="flex justify-between gap-3 items-end">
                             <SearchComponent placeholder="Search for journal entries"/>
                             <div className="flex gap-3">
@@ -99,9 +99,8 @@ export default function JournalEntriesOverview({searchParams}: MyJournalOverview
                                         shadow="sm"
                                     >
                                         <CardBody>
-                                            <div
-                                                className="grid grid-cols-6 md:grid-cols-12 sm:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
-                                                <div className="relative col-span-1 md:col-span-1">
+                                            <div className="grid grid-cols-6 md:grid-cols-12 sm:grid-cols-12 lg:gap-6 md:gap-4 items-center justify-center">
+                                                <div className="relative col-span-1 md:col-span-1 sm:col-span-6 mb-2 md:mb-0">
                                                     <Avatar
                                                         name={journal.title}
                                                         radius={"sm"}
@@ -110,12 +109,12 @@ export default function JournalEntriesOverview({searchParams}: MyJournalOverview
                                                     />
                                                 </div>
 
-                                                <div className="flex flex-col col-span-11 md:col-span-11 ml-2">
-                                                    <div className="flex justify-between items-start">
-                                                        <div className="flex flex-col gap-0">
-                                                            <h3 className="font-semibold text-foreground/90">{journal.title}</h3>
-                                                            <p className="text-small text-foreground/80">{formatDate(journal.createdAt)} | {journal.event}</p>
-                                                        </div>
+                                                <div className="flex flex-col col-span-5 md:col-span-11 md:ml-3 sm:col-span-6">
+                                                    <div className="flex flex-col gap-0">
+                                                        <h3 className="font-semibold text-foreground/90">{journal.title}</h3>
+                                                        <p className="text-small text-foreground/80">
+                                                            {formatDate(journal.createdAt)} | {journal.event}
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>

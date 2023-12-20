@@ -71,7 +71,7 @@ export interface JournalImageBuffer{
 
 export interface UploadJournalImageRequest{
     journalId: number
-    attachments: FileList | null;
+    attachments: FileList|null;
 }
 
 export interface MyJournalOverviewProps {
