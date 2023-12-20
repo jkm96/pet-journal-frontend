@@ -77,7 +77,14 @@ export function validateLoginFormInputErrors(formData: LoginUserRequest) {
 
 export function validateCreatePetFormInputErrors(formData: CreatePetRequest) {
     const errors: CreatePetRequest = {
-        breed: "", dateOfBirth: "", description: "", name: "", nickname: "", petTraits: null, profilePicture: null, species: ""
+        breed: "",
+        dateOfBirth: "",
+        description: "",
+        name: "",
+        nickname: "",
+        petTraits: null,
+        profilePicture: null,
+        species: ""
     }
 
     if (formData.name.trim() === "") {
@@ -144,7 +151,7 @@ export function validateCreateJournalFormInputErrors(formData: CreateJournalEntr
 
 export function validateEditJournalFormInputErrors(formData: UpdateJournalEntryRequest) {
     const errors: UpdateJournalEntryRequest = {
-       content: "", event: "", location: "", mood: "", tags: "", title: ""
+        journalId: 0, petIds: [], content: "", event: "", location: "", mood: "", tags: "", title: ""
     }
 
     if (formData.title.trim() === "") {

@@ -37,6 +37,43 @@ function resetForm(setCreateJournalFormData: any,
     setIsSubmitting(false)
 }
 
+export function DragDropSection(handleFileChange: (e: any) => void, previewFile: any[], removeImage: (fileName: any) => void) {
+    return <>
+        <div
+            className="h-32 w-full overflow-hidden relative shadow-md border-2 items-center rounded-md cursor-pointer border-gray-400 border-dotted">
+            <input type="file" onChange={handleFileChange} className="h-full w-full opacity-0 z-10 absolute"
+                   name="files[]" multiple/>
+            <div className="h-full w-full bg-gray-200 absolute z-1 flex justify-center items-center top-0">
+                <div className="flex flex-col">
+                    <i className="mdi mdi-folder-open text-[30px] text-gray-400 text-center"></i>
+                    <span className="text-[12px]">{`Drag and Drop a file`}</span>
+                </div>
+            </div>
+        </div>
+        <div className="flex flex-wrap gap-2 mt-2">
+            {previewFile.map((file, key) => {
+                return (
+
+                    <div key={key} className='w-full h-16 flex items-center justify-between rounded p-3 bg-white'>
+                        <div className="flex flex-row items-center gap-2">
+                            <div className="h-12 w-12 ">
+                                <img className="w-full h-full rounded" src={URL.createObjectURL(file)}/>
+                            </div>
+                            <span className="truncate w-44">{file.name}</span>
+                        </div>
+                        <div onClick={() => {
+                            removeImage(file.name)
+                        }}>
+                            <TrashIcon/>
+                        </div>
+                    </div>
+
+                )
+            })}
+        </div>
+    </>;
+}
+
 export default function CreateJournalEntryModal({isOpen, onClose}: {
     isOpen: boolean,
     onClose: () => void
@@ -251,34 +288,7 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
 
                                         <div className="w-full rounded-md">
                                             <label className="mt-1 mb-1">Upload images</label>
-                                            <div className="h-32 w-full overflow-hidden relative shadow-md border-2 items-center rounded-md cursor-pointer border-gray-400 border-dotted">
-                                                <input type="file" onChange={handleFileChange} className="h-full w-full opacity-0 z-10 absolute" name="files[]" multiple/>
-                                                <div className="h-full w-full bg-gray-200 absolute z-1 flex justify-center items-center top-0">
-                                                    <div className="flex flex-col">
-                                                        <i className="mdi mdi-folder-open text-[30px] text-gray-400 text-center"></i>
-                                                        <span className="text-[12px]">{`Drag and Drop a file`}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="flex flex-wrap gap-2 mt-2">
-                                                {previewFile.map((file, key) => {
-                                                    return (
-
-                                                        <div key={key} className='w-full h-16 flex items-center justify-between rounded p-3 bg-white'>
-                                                            <div className="flex flex-row items-center gap-2">
-                                                                <div className="h-12 w-12 ">
-                                                                    <img className="w-full h-full rounded" src={URL.createObjectURL(file)} />
-                                                                </div>
-                                                                <span className="truncate w-44">{file.name}</span>
-                                                            </div>
-                                                            <div onClick={() => { removeImage(file.name) }}>
-                                                                <TrashIcon/>
-                                                            </div>
-                                                        </div>
-
-                                                    )
-                                                })}
-                                            </div>
+                                            {DragDropSection(handleFileChange, previewFile, removeImage)}
                                         </div>
 
                                         <div className="grid md:grid-cols-2 md:gap-6">

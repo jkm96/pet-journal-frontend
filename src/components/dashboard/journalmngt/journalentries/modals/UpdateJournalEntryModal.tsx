@@ -21,10 +21,12 @@ import {toast} from "react-toastify";
 import {updateJournalEntry} from "@/lib/services/journal-entries/journalEntryService";
 import {PetProfileResponse} from "@/boundary/interfaces/pet";
 import {getPetProfiles} from "@/lib/services/pet/petProfileService";
+import {getUserPets} from "@/lib/utils/petUtils";
+
 const initialFormState: UpdateJournalEntryRequest = {
-    journalId: 0,    petIds: [],    content: "", event: "", location: "", mood: "",tags: "", title: ""
+    journalId: 0, petIds: [], content: "", event: "", location: "", mood: "", tags: "", title: ""
 };
-export default function UpdateJournalEntryModal({editJournalRequest,userPets,isOpen, onClose}: {
+export default function UpdateJournalEntryModal({editJournalRequest, userPets, isOpen, onClose}: {
     editJournalRequest: UpdateJournalEntryRequest,
     userPets: PetProfileResponse[],
     isOpen: boolean,
@@ -36,25 +38,10 @@ export default function UpdateJournalEntryModal({editJournalRequest,userPets,isO
     const [inputErrors, setInputErrors] = useState(initialFormState);
     const [selectedMoodTags, setSelectedMoodTags] = useState<string[]>([]);
     const [selectedJournalTags, setSelectedJournalTags] = useState<string[]>([]);
-    const [selectedUserPets, setSelectedUserPets] = useState<string[]>(userPets.map((pet)=>pet.name));
+    const [selectedUserPets, setSelectedUserPets] = useState<string[]>(userPets.map((pet) => pet.name));
     const [pets, setPets] = useState<PetProfileResponse[]>([]);
 
-    const fetchUserPets = async () => {
-        setIsLoading(true);
-        await getPetProfiles()
-            .then((response) => {
-                if (response.statusCode === 200) {
-                    const pets: PetProfileResponse[] = response.data;
-                    setPets(pets)
-                }
-            })
-            .catch((error) => {
-                toast.error(`Error fetching your pets: ${error}`)
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
-    }
+    const fetchUserPets = getUserPets(setIsLoading, setPets);
 
     useEffect(() => {
         if (isOpen) {
@@ -90,11 +77,11 @@ export default function UpdateJournalEntryModal({editJournalRequest,userPets,isO
             const pet = pets.find((profile) => profile.name === petName);
             return pet ? pet.id : editJournalRequest.petIds[index];
         });
-        console.log("updatedPetIds",updatedPetIds)
+        console.log("updatedPetIds", updatedPetIds)
         updateJournalEntryRequest.petIds = updatedPetIds;
         updateJournalEntryRequest.tags = selectedJournalTags.join(', ')
         updateJournalEntryRequest.mood = selectedMoodTags.join(', ')
-        console.log("updateJournalEntryRequest",updateJournalEntryRequest)
+        console.log("updateJournalEntryRequest", updateJournalEntryRequest)
         if (
             updateJournalEntryRequest.title.trim() === "" ||
             updateJournalEntryRequest.content.trim() === "" ||
@@ -108,7 +95,13 @@ export default function UpdateJournalEntryModal({editJournalRequest,userPets,isO
         if (selectedMoodTags.length === 0 || selectedJournalTags.length === 0) {
             setInputErrors({
                 ...inputErrors,
-                mood: "Select at least one mood",content: "", event: "", location: "",title: "", petIds:[],journalId: 0,
+                mood: "Select at least one mood",
+                content: "",
+                event: "",
+                location: "",
+                title: "",
+                petIds: [],
+                journalId: 0,
                 tags: "Select at least one tag"
             });
             setIsSubmitting(false);
