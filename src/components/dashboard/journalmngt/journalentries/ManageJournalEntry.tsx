@@ -15,6 +15,9 @@ import UploadJournalImagesModal
 import UpdateJournalEntryModal from "@/components/dashboard/journalmngt/journalentries/modals/UpdateJournalEntryModal";
 import {EditIcon} from "@nextui-org/shared-icons";
 import DeleteJournalEntryModal from "@/components/dashboard/journalmngt/journalentries/modals/DeleteJournalEntryModal";
+import UploadIcon from "@/components/shared/icons/UploadIcon";
+import TrashIcon from "@/components/shared/icons/TrashIcon";
+import FileEyeIcon from "@/components/shared/icons/FileEyeIcon";
 
 export default function ManageJournalEntry({slug}: { slug: string }) {
     const [journalEntryDetails, setJournalEntryDetails] = useState<JournalEntryResponse>({} as JournalEntryResponse);
@@ -131,7 +134,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                                     )}
 
                                     <Button onPress={() => openModal("uploadAttachments")}
-                                            startContent={<PlusIcon/>}
+                                            startContent={<UploadIcon color='#ffffff'/>}
                                             color="primary"
                                             variant="shadow">
                                         Upload Attachment
@@ -146,7 +149,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                                     )}
 
                                     <Button onPress={() => openModal("deleteJournal")}
-                                            startContent={<PlusIcon/>}
+                                            startContent={<TrashIcon color='#ffffff'/>}
                                             color="danger"
                                             className="ml-2"
                                             variant="shadow">
@@ -163,7 +166,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                             </div>
                             <div className="flex gap-3">
                                 <Button onPress={() => openModal("previewAndPrintEntry")}
-                                        startContent={<PlusIcon/>}
+                                        startContent={<FileEyeIcon color='#ffffff'/>}
                                         color="primary"
                                         variant="shadow">
                                     Preview and Print
@@ -179,18 +182,6 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
 
                             </div>
                         </div>
-                    </div>
-
-                    <div className="fixed bottom-4 right-4 md:hidden">
-                        <Button
-                            onPress={() => openModal("previewAndPrintEntry")}
-                            startContent={<PlusIcon />}
-                            color="primary"
-                            radius="full"
-                            variant="shadow"
-                        >
-                            Preview
-                        </Button>
                     </div>
 
                     <Card className="py-4">
@@ -231,6 +222,18 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                             </div>
                         </CardBody>
                     </Card>
+
+                    <div className="fixed bottom-4 right-4 md:hidden">
+                        <Button
+                            onPress={() => openModal("previewAndPrintEntry")}
+                            startContent={<PlusIcon />}
+                            color="primary"
+                            radius="full"
+                            variant="shadow"
+                        >
+                            Preview
+                        </Button>
+                    </div>
                 </>
             )}
         </>

@@ -17,6 +17,8 @@ import {CustomCheckbox} from "@/components/shared/formelements/CustomCheckbox";
 import {Textarea} from "@nextui-org/input";
 import {createJournalEntry} from "@/lib/services/journal-entries/journalEntryService";
 import {areFilesValid, validateCreateJournalFormInputErrors, validateCreatePetFormInputErrors} from "@/helpers/validationHelpers";
+import {getUserPets} from "@/lib/utils/petUtils";
+import TrashIcon from "@/components/shared/icons/TrashIcon";
 
 
 const initialFormState: CreateJournalEntryRequest = {
@@ -47,22 +49,9 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
     const [selectedUserPets, setSelectedUserPets] = useState([]);
     const [selectedMoodTags, setSelectedMoodTags] = useState([]);
     const [selectedJournalTags, setSelectedJournalTags] = useState([]);
-    const fetchUserPets = async () => {
-        setIsLoading(true);
-        await getPetProfiles()
-            .then((response) => {
-                if (response.statusCode === 200) {
-                    const pets: PetProfileResponse[] = response.data;
-                    setPets(pets)
-                }
-            })
-            .catch((error) => {
-                toast.error(`Error fetching your pets: ${error}`)
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
-    }
+    const [previewFile, setPreviewFile] = useState<any[]>([]);
+
+    const fetchUserPets = getUserPets(setIsLoading, setPets);
 
     useEffect(() => {
         if (isOpen) {
@@ -75,27 +64,38 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
         setCreateJournalFormData({...createJournalFormData, [name]: value});
     }
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        console.log('FileList:', files);
+    const handleFileChange = (e: any) => {
+        const uploadedFiles = e.target.files;
 
-        if (!areFilesValid(files)) {
+        if (!areFilesValid(uploadedFiles)) {
             toast.error('Please select only PNG or JPG files.');
             e.target.files = null;
         } else {
+            setPreviewFile(prevFiles => [...prevFiles, ...uploadedFiles]);
             setCreateJournalFormData({
                 ...createJournalFormData,
-                attachments: files,
+                attachments: uploadedFiles,
             });
         }
     };
+
+    const removeImage = (fileName:any) => {
+        setPreviewFile(prevFiles => prevFiles.filter(file => file.name !== fileName));
+
+        setCreateJournalFormData((prevFormData:any) => {
+            const updatedAttachments = Array.from(prevFormData.attachments as File[]).filter((file) => file.name !== fileName);
+            return {
+                ...prevFormData,
+                attachments: updatedAttachments,
+            };
+        });
+    }
 
     const handleJournalCreation = async (e: any) => {
         e.preventDefault();
         setIsSubmitting(true)
 
         const inputErrors = validateCreateJournalFormInputErrors(createJournalFormData);
-        console.log("input errors", inputErrors)
         if (inputErrors && Object.keys(inputErrors).length > 0) {
             setInputErrors(inputErrors);
             setIsSubmitting(false);
@@ -249,16 +249,36 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
                                                       errorMessage={inputErrors.content}/>
                                         </div>
 
-                                        <div className="grid md:grid-cols-1 md:gap-6">
-                                            <label
-                                                className="block text-sm font-medium text-gray-900 dark:text-white"
-                                                htmlFor="multiple_files">Attach files</label>
-                                            <input
-                                                onChange={handleFileChange}
-                                                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer
-                                                bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                                id="multiple_files" type="file" multiple>
-                                            </input>
+                                        <div className="w-full rounded-md">
+                                            <label className="mt-1 mb-1">Upload images</label>
+                                            <div className="h-32 w-full overflow-hidden relative shadow-md border-2 items-center rounded-md cursor-pointer border-gray-400 border-dotted">
+                                                <input type="file" onChange={handleFileChange} className="h-full w-full opacity-0 z-10 absolute" name="files[]" multiple/>
+                                                <div className="h-full w-full bg-gray-200 absolute z-1 flex justify-center items-center top-0">
+                                                    <div className="flex flex-col">
+                                                        <i className="mdi mdi-folder-open text-[30px] text-gray-400 text-center"></i>
+                                                        <span className="text-[12px]">{`Drag and Drop a file`}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="flex flex-wrap gap-2 mt-2">
+                                                {previewFile.map((file, key) => {
+                                                    return (
+
+                                                        <div key={key} className='w-full h-16 flex items-center justify-between rounded p-3 bg-white'>
+                                                            <div className="flex flex-row items-center gap-2">
+                                                                <div className="h-12 w-12 ">
+                                                                    <img className="w-full h-full rounded" src={URL.createObjectURL(file)} />
+                                                                </div>
+                                                                <span className="truncate w-44">{file.name}</span>
+                                                            </div>
+                                                            <div onClick={() => { removeImage(file.name) }}>
+                                                                <TrashIcon/>
+                                                            </div>
+                                                        </div>
+
+                                                    )
+                                                })}
+                                            </div>
                                         </div>
 
                                         <div className="grid md:grid-cols-2 md:gap-6">

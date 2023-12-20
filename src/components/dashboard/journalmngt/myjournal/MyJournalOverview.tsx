@@ -108,8 +108,8 @@ export default function MyJournalOverview({searchParams}: MyJournalOverviewProps
                                 {showPreview ? (
                                     <>
                                         <PDFDownloadLink
-                                            document={getDocument(journalTitle ?? user?.username, user, journalEntries)}
-                                            fileName={`${journalTitle.toLowerCase()}.pdf`}>
+                                            document={getDocument(journalTitle, user, journalEntries)}
+                                            fileName={`${journalTitle.toLowerCase() ?? user?.username}.pdf`}>
                                             {({blob, url, loading, error}) =>
                                                 loading ? 'Loading document...' : <DownloadButton/>
                                             }

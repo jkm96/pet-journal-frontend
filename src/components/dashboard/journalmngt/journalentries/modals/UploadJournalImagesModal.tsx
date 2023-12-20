@@ -17,6 +17,8 @@ import {toast} from "react-toastify";
 import {CreateJournalEntryRequest, UploadJournalImageRequest} from "@/boundary/interfaces/journal";
 import {areFilesValid} from "@/helpers/validationHelpers";
 import {createJournalEntry, uploadJournalAttachments} from "@/lib/services/journal-entries/journalEntryService";
+import UploadIcon from "@/components/shared/icons/UploadIcon";
+import TrashIcon from "@/components/shared/icons/TrashIcon";
 
 const initialFormState : UploadJournalImageRequest ={
     attachments: null, journalId: 0
@@ -39,7 +41,6 @@ export default function UploadJournalImagesModal({journalId,isOpen, onClose}: {
             toast.error('Please select only PNG or JPG files.');
             e.target.files = null;
         } else {
-            // Use a functional update to correctly update state with multiple files
             setPreviewFile(prevFiles => [...prevFiles, ...uploadedFiles]);
             setUploadImageFormData({
                 ...uploadImageFormData,
@@ -133,9 +134,8 @@ export default function UploadJournalImagesModal({journalId,isOpen, onClose}: {
                                                             </div>
                                                             <span className="truncate w-44">{file.name}</span>
                                                         </div>
-                                                        <div onClick={() => { removeImage(file.name) }}
-                                                             className="h-6 w-6 bg-red-400 flex items-center cursor-pointer justify-center rounded-sm">
-                                                            <i className="mdi mdi-trash-can text-white text-[14px]"></i>Delete
+                                                        <div onClick={() => { removeImage(file.name) }}>
+                                                            <TrashIcon/>
                                                         </div>
                                                     </div>
 

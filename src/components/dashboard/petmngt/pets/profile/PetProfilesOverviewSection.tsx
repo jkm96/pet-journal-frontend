@@ -10,10 +10,11 @@ import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import SearchComponent from "@/components/common/filter/SearchComponent";
 import {PlusIcon} from "@/components/shared/icons/PlusIcon";
 import CreateNewPetModal from "@/components/dashboard/petmngt/pets/modals/CreateNewPetModal";
+import {getUserPets} from "@/lib/utils/petUtils";
 
 export default function PetProfilesOverviewSection() {
     const [petProfiles, setPetProfiles] = useState<PetProfileResponse[]>([]);
-    const [isLoadingPetProfiles, setIsLoadingPetProfiles] = useState(true);
+    const [isLoadingPetProfiles, setIsLoadingPetProfiles] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleOpenModal = () => {
@@ -25,26 +26,11 @@ export default function PetProfilesOverviewSection() {
         fetchPetProfiles();
     };
 
-    const fetchPetProfiles = async () => {
-        setIsLoadingPetProfiles(true);
-        try {
-            const response = await getPetProfiles();
-            if (response.statusCode === 200) {
-                const petProfiles = response.data;
-                setPetProfiles(petProfiles)
-            } else {
-                toast.error(`Error fetching pet profiles ${response.message}`)
-            }
-        } catch (error) {
-            toast.error(`Error fetching pet profiles: ${error}`);
-        } finally {
-            setIsLoadingPetProfiles(false);
-        }
-    };
+    const fetchPetProfiles = getUserPets(setIsLoadingPetProfiles, setPetProfiles);
 
     useEffect(() => {
         fetchPetProfiles();
-    }, []);
+    }, [isModalOpen]);
 
     return (
         <>

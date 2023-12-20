@@ -5,6 +5,9 @@ import SettingsIcon from "@/components/shared/icons/SettingsIcon";
 import SidebarOpenIcon from "@/components/shared/icons/SidebarOpenIcon";
 import DashboardIcon from "@/components/shared/icons/DashboardIcon";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
+import JournalEntriesIcon from "@/components/shared/icons/JournalEntriesIcon";
+import JournalHeartIcon from "@/components/shared/icons/JournalHeartIcon";
+import PetProfileIcon from "@/components/shared/icons/PetProfleIcon";
 
 interface SidebarProps {
     sidebarOpen: boolean;
@@ -115,7 +118,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                 "text-white"
                                 }`}
                             >
-                                <SettingsIcon/>
+                                <PetProfileIcon color={pathname === NAVIGATION_LINKS.PET_PROFILES ? '#ffffff' : '#8A99AF'}/>
                                 Pet Profiles
                             </Link>
                         </li>
@@ -130,7 +133,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                  hover:text-white  ${pathname === NAVIGATION_LINKS.JOURNAL_ENTRIES && "text-white"
                                 }`}
                             >
-                                <SettingsIcon/>
+                                <JournalEntriesIcon color={pathname === NAVIGATION_LINKS.JOURNAL_ENTRIES ? '#ffffff' : '#8A99AF'} />
                                 Journal Entries
                             </Link>
                         </li>
@@ -145,7 +148,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                  hover:text-white  ${pathname === NAVIGATION_LINKS.MY_JOURNAL && "text-white"
                                 }`}
                             >
-                                <SettingsIcon/>
+                                <JournalHeartIcon color={pathname === NAVIGATION_LINKS.MY_JOURNAL ? '#ffffff' : '#8A99AF'}/>
                                 My Journal
                             </Link>
                         </li>
