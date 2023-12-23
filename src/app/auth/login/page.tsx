@@ -2,20 +2,22 @@
 import React, {useState} from "react";
 import LoginForm from "@/components/user/auth/LoginForm";
 import {useAuth} from "@/hooks/useAuth";
-import {RedirectUser} from "@/components/common/auth/RedirectUser";
+import {RedirectUserToDashboard} from "@/components/common/auth/RedirectUserToDashboard";
 import Loader from "@/components/common/dashboard/Loader";
+import {redirect} from "next/navigation";
+import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 
 export default function LoginPage() {
-    const {user,loading: authLoading } = useAuth();
+    const {user, loading: authLoading} = useAuth();
     const [loading, setLoading] = useState(true);
 
-    RedirectUser(user,setLoading)
+    RedirectUserToDashboard(user, setLoading)
 
     if (loading || authLoading) {
         return <Loader/>;
     } else if (!user) {
         return <LoginForm/>;
-    } else {
-        return null;
+    } else if (user && !user.isSubscribed) {
+        redirect(NAVIGATION_LINKS.PAYMENTS)
     }
 };

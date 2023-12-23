@@ -20,6 +20,18 @@ export async function hasRequiredPermissions(requiredPermissions: string[]): Pro
     return false;
 }
 
+export async function checkEmailVerificationStatus() {
+    const response = await getAccessToken();
+    if (response.statusCode === 200) {
+        const tokenResponse:AccessTokenModel = JSON.parse(response.data);
+        if (tokenResponse.user.isEmailVerified){
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function getEnumNamesFromValues(values: number[]): string[] {
     return values.map((value) => PetJournalPermission[value]);
 }

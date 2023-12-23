@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
         const requestBody = await request.text();
         const response = await petJournalApiClient
             .post('user/login', `${requestBody}`);
-
+        console.log("login response", response)
         return handleAxiosResponse(response);
     } catch (error: unknown) {
         return handleApiException(error);

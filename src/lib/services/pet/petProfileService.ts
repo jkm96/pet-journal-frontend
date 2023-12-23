@@ -29,7 +29,8 @@ export async function createPetProfile(createRequest:CreatePetRequest) {
         formData.append('description', createRequest.description);
         formData.append('dateOfBirth', createRequest.dateOfBirth ?? '');
         formData.append('petTraits', JSON.stringify(createRequest.petTraits));
-
+        
+        console.log("createRequest",createRequest.petTraits)
         if (createRequest.profilePicture) {
             for (let i = 0; i < createRequest.profilePicture.length; i++) {
                 const file = createRequest.profilePicture[i];

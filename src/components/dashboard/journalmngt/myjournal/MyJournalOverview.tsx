@@ -79,60 +79,6 @@ export default function MyJournalOverview({searchParams}: MyJournalOverviewProps
                 </div>
             ) : (
                 <>
-                    <div className="flex flex-col gap-4 mb-2">
-                        <div className="flex justify-between gap-3 items-end">
-                            {showPreview ? (
-                                <>
-                                    <div className="flex gap-1">
-                                        <Input
-                                            type="text"
-                                            variant={"bordered"}
-                                            size="sm"
-                                            value={journalTitle}
-                                            onChange={handleTitleChange}
-                                            placeholder="Enter your journal title here"
-                                        />
-
-                                        <Button onPress={handleGoBackClick}
-                                                startContent={<PlusFilledIcon/>}
-                                                color="default"
-                                                variant="shadow">
-                                            Title
-                                        </Button>
-                                    </div>
-                                </>
-                            ) : (
-                                <FilterComponent placeholder="Search for journal entries"/>
-                            )}
-                            <div className="flex gap-3">
-                                {showPreview ? (
-                                    <>
-                                        <PDFDownloadLink
-                                            document={getDocument(journalTitle, user, journalEntries)}
-                                            fileName={`${journalTitle.toLowerCase() ?? user?.username}.pdf`}>
-                                            {({blob, url, loading, error}) =>
-                                                loading ? 'Loading document...' : <DownloadButton/>
-                                            }
-                                        </PDFDownloadLink>
-
-                                        <Button onPress={handleGoBackClick}
-                                                startContent={<PlusFilledIcon/>}
-                                                color="default"
-                                                variant="shadow">
-                                            End Preview
-                                        </Button>
-                                    </>
-                                ) : (
-                                    <Button onPress={handlePreviewClick}
-                                            startContent={<PlusFilledIcon/>}
-                                            color="primary"
-                                            variant="shadow">
-                                        Preview And Print
-                                    </Button>
-                                )}
-                            </div>
-                        </div>
-                    </div>
                     {journalEntries.length < 1 ? (
                         <>
                             <div className="text-center">
@@ -141,6 +87,61 @@ export default function MyJournalOverview({searchParams}: MyJournalOverviewProps
                         </>
                     ) : (
                         <>
+                            <div className="flex flex-col gap-4 mb-2">
+                                <div className="flex justify-between gap-3 items-end">
+                                    {showPreview ? (
+                                        <>
+                                            <div className="flex gap-1">
+                                                <Input
+                                                    type="text"
+                                                    variant={"bordered"}
+                                                    size="sm"
+                                                    value={journalTitle}
+                                                    onChange={handleTitleChange}
+                                                    placeholder="Enter your journal title here"
+                                                />
+
+                                                <Button onPress={handleGoBackClick}
+                                                        startContent={<PlusFilledIcon/>}
+                                                        color="default"
+                                                        variant="shadow">
+                                                    Title
+                                                </Button>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <FilterComponent placeholder="Search for journal entries"/>
+                                    )}
+                                    <div className="flex gap-3">
+                                        {showPreview ? (
+                                            <>
+                                                <PDFDownloadLink
+                                                    document={getDocument(journalTitle, user, journalEntries)}
+                                                    fileName={`${journalTitle.toLowerCase() ?? user?.username}.pdf`}>
+                                                    {({blob, url, loading, error}) =>
+                                                        loading ? 'Loading document...' : <DownloadButton/>
+                                                    }
+                                                </PDFDownloadLink>
+
+                                                <Button onPress={handleGoBackClick}
+                                                        startContent={<PlusFilledIcon/>}
+                                                        color="default"
+                                                        variant="shadow">
+                                                    End Preview
+                                                </Button>
+                                            </>
+                                        ) : (
+                                            <Button onPress={handlePreviewClick}
+                                                    startContent={<PlusFilledIcon/>}
+                                                    color="primary"
+                                                    variant="shadow">
+                                                Preview And Print
+                                            </Button>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
                             {showPreview ? (
                                 <PreviewMyJournal
                                     journalEntries={journalEntries}

@@ -1,11 +1,13 @@
 "use client";
 import {useEffect, useState} from 'react';
-import {hasRequiredPermissions} from "@/helpers/permissionsHelper";
+import {checkEmailVerificationStatus, hasRequiredPermissions} from "@/helpers/authHelper";
 import Authorizing from "@/components/common/auth/Authorizing";
 import PermissionDeniedMessage from "@/components/common/auth/PermissionDeniedMessage";
+import UnVerifiedEmail from "@/components/common/auth/UnVerifiedEmail";
 
 const AuthorizeComponent = (requiredPermissions: any) => (WrappedComponent: any) => {
     const AuthComponent = (props: any) => {
+        const [isEmailVerified, setIsEmailVerified] = useState(false);
         const [hasPermission, setHasPermission] = useState(false);
         const [loading, setLoading] = useState(true);
 
@@ -14,8 +16,11 @@ const AuthorizeComponent = (requiredPermissions: any) => (WrappedComponent: any)
                 try {
                     const permissionStatus = await hasRequiredPermissions(requiredPermissions);
                     setHasPermission(permissionStatus);
+                    const emailVerificationStatus = await checkEmailVerificationStatus();
+                    setIsEmailVerified(emailVerificationStatus);
                 } catch (error) {
                     setHasPermission(false)
+                    setIsEmailVerified(false)
                 } finally {
                     setLoading(false);
                 }
@@ -30,6 +35,10 @@ const AuthorizeComponent = (requiredPermissions: any) => (WrappedComponent: any)
 
         if (!hasPermission) {
             return <PermissionDeniedMessage/>;
+        }
+
+        if (!isEmailVerified) {
+            return <UnVerifiedEmail/>;
         }
 
         return <WrappedComponent {...props} />;

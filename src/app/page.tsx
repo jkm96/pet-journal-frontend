@@ -4,13 +4,13 @@ import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import {useAuth} from "@/hooks/useAuth";
 import Loader from "@/components/common/dashboard/Loader";
 import React, {useState} from "react";
-import {RedirectUser} from "@/components/common/auth/RedirectUser";
+import {RedirectUserToDashboard} from "@/components/common/auth/RedirectUserToDashboard";
 
 export default function Home() {
     const {user, loading: authLoading} = useAuth();
     const [loading, setLoading] = useState(true);
 
-    RedirectUser(user,setLoading)
+    RedirectUserToDashboard(user,setLoading)
 
     if (loading || authLoading) {
         return <Loader/>;

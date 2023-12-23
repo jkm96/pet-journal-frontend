@@ -3,6 +3,8 @@ export interface User{
     username: string;
     email: string;
     profileUrl: string;
+    isEmailVerified: boolean;
+    isSubscribed: boolean;
 }
 
 export interface UserResponse{
@@ -11,6 +13,7 @@ export interface UserResponse{
     email: string;
     profileUrl: string | null;
     isEmailVerified: boolean;
+    isSubscribed: boolean;
     emailVerifiedAt: null;
     createdAt: Date;
     updatedAt: Date;

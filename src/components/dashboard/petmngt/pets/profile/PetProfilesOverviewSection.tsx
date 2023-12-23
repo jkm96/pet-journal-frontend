@@ -41,6 +41,30 @@ export default function PetProfilesOverviewSection() {
             ) : (
                 <>
                     <Breadcrumb pageName="Pet Profiles"/>
+
+                    <div className="flex flex-col gap-4 m-2">
+                        <div className="flex justify-between gap-3 items-end">
+                            {petProfiles.length > 1 ? (
+                                <SearchComponent placeholder="Search for pet profiles"/>
+                            ):(
+                                <div className="w-full sm:max-w-[44%]"></div>
+                            )}
+                            <div className="flex gap-3">
+                                <Button onPress={handleOpenModal}
+                                        startContent={<PlusIcon/>}
+                                        color="primary"
+                                        variant="shadow">
+                                    Add Pet
+                                </Button>
+                                {isModalOpen && (
+                                    <CreateNewPetModal
+                                        isOpen={isModalOpen}
+                                        onClose={handleCloseModal}
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    </div>
                     {petProfiles.length < 1 ? (
                         <>
                             <div className="text-center">
@@ -49,26 +73,6 @@ export default function PetProfilesOverviewSection() {
                         </>
                     ) : (
                         <>
-                            <div className="flex flex-col gap-4 mb-2">
-                                <div className="flex justify-between gap-3 items-end">
-                                    <SearchComponent placeholder="Search for pet profiles"/>
-                                    <div className="flex gap-3">
-                                        <Button onPress={handleOpenModal}
-                                                startContent={<PlusIcon/>}
-                                                color="primary"
-                                                variant="shadow">
-                                            Add Pet
-                                        </Button>
-                                        {isModalOpen && (
-                                            <CreateNewPetModal
-                                                isOpen={isModalOpen}
-                                                onClose={handleCloseModal}
-                                            />
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 pl-0">
                                 {petProfiles.map((profile) => (
                                     <Link key={profile.id} href={`${NAVIGATION_LINKS.PET_PROFILES}/${profile.slug}`}>

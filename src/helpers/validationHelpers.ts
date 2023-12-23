@@ -168,7 +168,7 @@ export function validateEditJournalFormInputErrors(formData: UpdateJournalEntryR
 
     // Check if there are any errors and return null if all input is valid
     for (const key in errors) {
-        if (errors[key as keyof UpdateJournalEntryRequest] !== "") {
+        if (key !== 'petIds' && key !== 'journalId' && errors[key as keyof UpdateJournalEntryRequest] !== "") {
             return errors;
         }
     }

@@ -10,15 +10,17 @@ import {Button} from "@nextui-org/button";
 import {toast} from "react-toastify";
 import Spinner from "@/components/shared/icons/Spinner";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
+import {AccessTokenModel} from "@/boundary/interfaces/token";
+import {useAuth} from "@/hooks/useAuth";
 
 const initialFormState: RegisterUserRequest = {
     email: "", username: "", password: "", confirmPassword: ""
 };
 export default function RegisterForm() {
     const router = useRouter()
+    const {storeAuthToken} = useAuth();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
-    const [backendError, setBackendError] = useState("");
     const toggleVisibility = () => setIsVisible(!isVisible);
     const [registerFormData, setRegisterFormData] = useState(initialFormState);
     const [inputErrors, setInputErrors] = useState({
@@ -32,7 +34,6 @@ export default function RegisterForm() {
 
     const handleRegisterSubmit = async (e: any) => {
         e.preventDefault();
-        setBackendError("");
         setIsSubmitting(true)
 
         const inputErrors = validateRegisterFormInputErrors(registerFormData);
@@ -56,10 +57,12 @@ export default function RegisterForm() {
         let response = await registerUser(registerFormData);
         console.log("register response", response)
         if (response.statusCode === 200) {
+            let responseData: AccessTokenModel = response.data;
+            storeAuthToken(responseData);
             setIsSubmitting(false)
             setRegisterFormData(initialFormState)
-            toast.success("Registered in successfully")
-            router.push(NAVIGATION_LINKS.LOGIN)
+            toast.success("Registered successfully")
+            router.push(NAVIGATION_LINKS.PAYMENTS)
         } else {
             setIsSubmitting(false)
             toast.error(response.message ?? "Unknown error occurred")

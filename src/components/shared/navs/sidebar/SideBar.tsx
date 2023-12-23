@@ -114,11 +114,12 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                             <Link
                                 href={NAVIGATION_LINKS.PET_PROFILES}
                                 className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
-                                                        text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === NAVIGATION_LINKS.PET_PROFILES &&
+                                                        text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname.includes(NAVIGATION_LINKS.PET_PROFILES) &&
                                 "text-white"
                                 }`}
                             >
-                                <PetProfileIcon color={pathname === NAVIGATION_LINKS.PET_PROFILES ? '#ffffff' : '#8A99AF'}/>
+                                <PetProfileIcon
+                                    color={pathname.includes(NAVIGATION_LINKS.PET_PROFILES) ? '#ffffff' : '#8A99AF'}/>
                                 Pet Profiles
                             </Link>
                         </li>
@@ -130,10 +131,11 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                 href={NAVIGATION_LINKS.JOURNAL_ENTRIES}
                                 className={`first-letter:group relative flex 
                                 items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
-                                 hover:text-white  ${pathname === NAVIGATION_LINKS.JOURNAL_ENTRIES && "text-white"
+                                 hover:text-white  ${pathname.includes(NAVIGATION_LINKS.JOURNAL_ENTRIES) && "text-white"
                                 }`}
                             >
-                                <JournalEntriesIcon color={pathname === NAVIGATION_LINKS.JOURNAL_ENTRIES ? '#ffffff' : '#8A99AF'} />
+                                <JournalEntriesIcon
+                                    color={pathname.includes(NAVIGATION_LINKS.JOURNAL_ENTRIES) ? '#ffffff' : '#8A99AF'}/>
                                 Journal Entries
                             </Link>
                         </li>
@@ -145,10 +147,11 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                 href={NAVIGATION_LINKS.MY_JOURNAL}
                                 className={`first-letter:group relative flex 
                                 items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
-                                 hover:text-white  ${pathname === NAVIGATION_LINKS.MY_JOURNAL && "text-white"
+                                 hover:text-white  ${pathname.includes(NAVIGATION_LINKS.MY_JOURNAL)  && "text-white"
                                 }`}
                             >
-                                <JournalHeartIcon color={pathname === NAVIGATION_LINKS.MY_JOURNAL ? '#ffffff' : '#8A99AF'}/>
+                                <JournalHeartIcon
+                                    color={pathname.includes(NAVIGATION_LINKS.MY_JOURNAL) ? '#ffffff' : '#8A99AF'}/>
                                 My Journal
                             </Link>
                         </li>
@@ -160,7 +163,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                 href={NAVIGATION_LINKS.SETTINGS}
                                 className={`first-letter:group relative flex 
                                 items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
-                                 hover:text-white  ${pathname === NAVIGATION_LINKS.SETTINGS && "text-white"
+                                 hover:text-white  ${pathname.includes(NAVIGATION_LINKS.SETTINGS) && "text-white"
                                 }`}
                             >
                                 <SettingsIcon/>
