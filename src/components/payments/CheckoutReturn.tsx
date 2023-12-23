@@ -28,7 +28,7 @@ export default function CheckoutReturn() {
                     clearAuthToken();
                     let responseData: AccessTokenModel = response.data.cookieRequest;
                     storeAuthToken(responseData);
-                    console.log("clear auth token", "store auth token")
+
                     setCustomerEmail(session.customerEmail)
                     setStatus(session.sessionStatus)
                 }
@@ -72,9 +72,9 @@ export default function CheckoutReturn() {
                     {status === 'open' && (
                         <section id="success">
                             <p>
-                                The payment failed or was canceled. Please <Link className="text-primary"
-                                                                                 href={NAVIGATION_LINKS.PAYMENTS}>Try
-                                Again</Link> or contact customer support.
+                                The payment failed or was canceled. Please
+                                <Link className="text-primary" href={NAVIGATION_LINKS.PAYMENTS}>Try Again</Link>
+                                or contact customer support.
                             </p>
                         </section>
                     )}
@@ -86,6 +86,7 @@ export default function CheckoutReturn() {
                                 If you have any questions, please email{" "}
                                 <a href="mailto:orders@example.com">orders@example.com</a>.
                             </p>
+                            <p>Redirecting to dashboard...</p>
                         </section>
                     )}
                 </>
