@@ -24,10 +24,11 @@ export default function CheckoutReturn() {
                 if (response.statusCode === 200) {
                     const session: CheckoutSessionModel = response.data.sessionData;
 
-                    clearAuthToken();
-                    let responseData: AccessTokenModel = response.data.cookieRequest;
-                    storeAuthToken(responseData);
-
+                    if (session.sessionStatus === 'complete'){
+                        clearAuthToken();
+                        let responseData: AccessTokenModel = response.data.cookieRequest;
+                        storeAuthToken(responseData);
+                    }
                     setCustomerEmail(session.customerEmail)
                     setStatus(session.sessionStatus)
                 }
