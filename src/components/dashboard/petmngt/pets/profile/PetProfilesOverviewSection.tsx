@@ -1,6 +1,4 @@
 import {useEffect, useState} from "react";
-import {getPetProfiles} from "@/lib/services/pet/petProfileService";
-import {toast} from "react-toastify";
 import {PetProfileResponse} from "@/boundary/interfaces/pet";
 import {Avatar, Card, CardBody, CardHeader, CircularProgress, Image} from "@nextui-org/react";
 import {Button} from "@nextui-org/button";

@@ -21,7 +21,6 @@ export default function CheckoutReturn() {
         setIsLoading(true);
         await fetchCheckoutSession(sessionId)
             .then((response) => {
-                console.log("checkout response", response)
                 if (response.statusCode === 200) {
                     const session: CheckoutSessionModel = response.data.sessionData;
 
@@ -46,7 +45,6 @@ export default function CheckoutReturn() {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const sessionId = urlParams?.get('session_id') ?? '';
-        console.log("sessionId", sessionId)
         getCheckoutSession(sessionId);
     }, []);
 
@@ -60,7 +58,7 @@ export default function CheckoutReturn() {
     }, [status]);
 
     return (
-        <div className={"grid place-items-center"}>
+        <div className="grid place-items-center">
             {isLoading ? (
                 <CircularProgress
                     color={"primary"}
@@ -69,25 +67,25 @@ export default function CheckoutReturn() {
                 />
             ) : (
                 <>
-                    {status === 'open' && (
-                        <section id="success">
+                    {status === 'complete' ? (
+                        <>
                             <p>
-                                The payment failed or was canceled. Please
-                                <Link className="text-primary" href={NAVIGATION_LINKS.PAYMENTS}>Try Again</Link>
-                                or contact customer support.
+                                Thank you for choosing our services! A confirmation email will be promptly dispatched to
+                                the email address you provided ({customerEmail}). If you have any inquiries or require
+                                further assistance, please do not hesitate to contact our dedicated support team at{" "}
+                                <a href="mailto:support@example.com">support@example.com</a>. We value your business and
+                                are here to ensure your experience is seamless.
                             </p>
-                        </section>
-                    )}
-
-                    {status === 'complete' && (
-                        <section id="success">
                             <p>
-                                We appreciate your business! A confirmation email will be sent to {customerEmail}.
-                                If you have any questions, please email{" "}
-                                <a href="mailto:orders@example.com">orders@example.com</a>.
+                                Thank you for being a valued member of our community.
                             </p>
-                            <p>Redirecting to dashboard...</p>
-                        </section>
+                        </>
+                    ) : (
+                        <p>
+                            The payment failed or was canceled. Please
+                            <Link className="text-primary" href={NAVIGATION_LINKS.PAYMENTS}>Try Again</Link>
+                            or contact customer support.
+                        </p>
                     )}
                 </>
             )}

@@ -53,7 +53,6 @@ export function DragDropSection(handleFileChange: (e: any) => void, previewFile:
         <div className="flex flex-wrap gap-2 mt-2">
             {previewFile.map((file, key) => {
                 return (
-
                     <div key={key} className='w-full h-16 flex items-center justify-between rounded p-3 bg-white'>
                         <div className="flex flex-row items-center gap-2">
                             <div className="h-12 w-12 ">
@@ -67,7 +66,6 @@ export function DragDropSection(handleFileChange: (e: any) => void, previewFile:
                             <TrashIcon/>
                         </div>
                     </div>
-
                 )
             })}
         </div>

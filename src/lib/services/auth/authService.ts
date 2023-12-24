@@ -18,6 +18,23 @@ export async function loginUser(loginRequest: LoginUserRequest) {
     }
 }
 
+export async function verifyUserEmailAsync(token: String) {
+    try {
+        const response = await fetch(`${internalBaseUrl}/user/auth/verify-user`, {
+            method: 'POST',
+            headers: {
+                'x-api-key': `${apiKey}`,
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({"token":token}),
+        });
+
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
 export async function registerUser(registerRequest: RegisterUserRequest) {
     try {
         const response = await fetch(`${internalBaseUrl}/user/auth/register`, {

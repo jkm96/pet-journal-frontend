@@ -67,6 +67,21 @@ export default function JournalEntriesOverview({searchParams}: MyJournalOverview
                 </div>
             ) : (
                 <>
+                    <div className="flex flex-col gap-4 m-2">
+                        <div className="flex justify-between gap-3 items-end">
+                            <SearchComponent placeholder="Search for journal entries"/>
+                            <div className="flex gap-3">
+                                <Button onPress={handleOpenModal}
+                                        startContent={<PlusIcon/>}
+                                        color="primary"
+                                        variant="shadow">
+                                    Add Journal
+                                </Button>
+                                <CreateJournalEntryModal isOpen={isModalOpen} onClose={handleCloseModal}/>
+                            </div>
+                        </div>
+                    </div>
+
                     {journalEntries.length < 1 ? (
                         <>
                             <div className="text-center">
@@ -75,21 +90,6 @@ export default function JournalEntriesOverview({searchParams}: MyJournalOverview
                         </>
                     ) : (
                         <>
-                            <div className="flex flex-col gap-4 m-2">
-                                <div className="flex justify-between gap-3 items-end">
-                                    <SearchComponent placeholder="Search for journal entries"/>
-                                    <div className="flex gap-3">
-                                        <Button onPress={handleOpenModal}
-                                                startContent={<PlusIcon/>}
-                                                color="primary"
-                                                variant="shadow">
-                                            Add New
-                                        </Button>
-                                        <CreateJournalEntryModal isOpen={isModalOpen} onClose={handleCloseModal}/>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
 
                                 {journalEntries.map((journal) => (
