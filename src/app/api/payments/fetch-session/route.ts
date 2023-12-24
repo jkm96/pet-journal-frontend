@@ -19,7 +19,6 @@ export async function GET(request: NextRequest) {
             sessionStatus: session.status
         }
 
-        console.log("fetch session", session)
         if (session.status === 'complete') {
             const config = getAxiosConfigs(request);
 
@@ -37,7 +36,6 @@ export async function GET(request: NextRequest) {
                 .post('payment/create', JSON.stringify(sessionDetails), config);
 
             const tokenResponse = response.data.data;
-            console.log("tokenResponse", tokenResponse)
             const cookieRequest: AccessTokenModel = {
                 token: tokenResponse.token,
                 user: tokenResponse.user
