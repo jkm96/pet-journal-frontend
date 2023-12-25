@@ -1,17 +1,16 @@
 import {Button, CircularProgress, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/react";
-import ReactPDF, {Document, Page, PDFDownloadLink, PDFViewer, StyleSheet, Text, View} from '@react-pdf/renderer';
+import ReactPDF, {Document, Page, PDFDownloadLink, PDFViewer, Text, View} from '@react-pdf/renderer';
 import Spinner from "@/components/shared/icons/Spinner";
 import React, {useEffect, useState} from "react";
 import {JournalImageBuffer, PrintJournalEntryRequest} from "@/boundary/interfaces/journal";
 import {useAuth} from "@/hooks/useAuth";
 import RenderMoodTagsWithColors from "@/components/dashboard/journalmngt/journalentries/RenderMoodTagsWithColors";
 import {formatDate} from "@/helpers/dateHelpers";
-import RenderEntryPdfImages from "@/components/dashboard/journalmngt/journalentries/RenderEntryPdfImages";
 import {toast} from "react-toastify";
 import {getJournalEntryAttachmentBuffers} from "@/lib/services/journal-entries/journalEntryService";
 import {PdfPreviewStyle, toTitleCase} from "@/lib/utils/pdfUtils";
-import Font = ReactPDF.Font;
 import RenderPdfGridImages from "@/components/dashboard/journalmngt/journalentries/RenderPdfGridImages";
+import Font = ReactPDF.Font;
 
 export default function PreviewAndPrintJournalEntryModal({printJournalRequest, isOpen, onClose}: {
     printJournalRequest: PrintJournalEntryRequest,

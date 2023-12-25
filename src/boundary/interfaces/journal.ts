@@ -1,6 +1,4 @@
 import {PetProfileResponse} from "@/boundary/interfaces/pet";
-import UploadJournalImagesModal
-    from "@/components/dashboard/journalmngt/journalentries/modals/UploadJournalImagesModal";
 
 export interface JournalEntryResponse {
     id: number;

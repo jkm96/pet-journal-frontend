@@ -1,19 +1,8 @@
 import {useEffect, useState} from "react";
 import {AddPetTraitRequest, PetProfileResponse, Trait} from "@/boundary/interfaces/pet";
-import {addPetTraits, createPetProfile, getPetProfileDetails} from "@/lib/services/pet/petProfileService";
+import {addPetTraits, getPetProfileDetails} from "@/lib/services/pet/petProfileService";
 import {toast} from "react-toastify";
-import {
-    Card,
-    CardBody,
-    Slider,
-    Button,
-    Image,
-    CircularProgress,
-    Input,
-    Select,
-    SelectItem,
-    Chip
-} from "@nextui-org/react";
+import {Button, CircularProgress, Input, Select, SelectItem} from "@nextui-org/react";
 import CreateNewPetModal from "@/components/dashboard/petmngt/pets/modals/CreateNewPetModal";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import {toTitleCase} from "@/lib/utils/pdfUtils";

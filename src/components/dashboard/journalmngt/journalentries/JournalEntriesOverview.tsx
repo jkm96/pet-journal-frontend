@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import {getJournalEntries} from "@/lib/services/journal-entries/journalEntryService";
 import {JournalEntryResponse, MyJournalOverviewProps} from "@/boundary/interfaces/journal";
-import {Avatar, Card, CardBody, CardHeader, CircularProgress, Image} from "@nextui-org/react";
+import {Avatar, Card, CardBody, CircularProgress} from "@nextui-org/react";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import Link from "next/link";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";

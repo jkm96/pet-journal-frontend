@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {Avatar} from "@nextui-org/react";
 
 const DropdownMessage = () => {

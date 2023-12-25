@@ -1,4 +1,5 @@
 import {RequestParameters} from "@/boundary/parameters/requestParameters";
+
 export class JournalQueryParameters extends RequestParameters {
     public searchTerm: string;
     public periodFrom: string;

@@ -1,7 +1,7 @@
 import React from 'react';
-import {CardHeader, Chip} from "@nextui-org/react";
+import {Chip} from "@nextui-org/react";
 import {formatDate} from "@/helpers/dateHelpers";
-import {ColorName, getMoodColorClass, getMoodColorClassList} from "@/helpers/stylingHelpers";
+import {getMoodColorClassList} from "@/helpers/stylingHelpers";
 
 interface RenderJournalHeaderProps {
     title: string;

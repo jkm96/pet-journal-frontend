@@ -1,6 +1,5 @@
 import {useEffect, useRef, useState} from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {useAuth} from "@/hooks/useAuth";
 import LogoutForm from "@/components/user/auth/LogoutForm";
 import {Avatar} from "@nextui-org/react";

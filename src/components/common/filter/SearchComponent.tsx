@@ -1,7 +1,6 @@
 'use client';
 import {SearchIcon} from "@/components/shared/icons/SearchIcon";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {useState} from "react";
 
 export default function SearchComponent({ placeholder }: { placeholder: string }) {
     const searchParams = useSearchParams();

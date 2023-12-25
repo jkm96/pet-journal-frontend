@@ -2,14 +2,12 @@ import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
 import {JournalEntryResponse, PrintJournalEntryRequest, UpdateJournalEntryRequest} from "@/boundary/interfaces/journal";
 import {getJournalEntryDetails} from "@/lib/services/journal-entries/journalEntryService";
-import {Card, CardBody, CardHeader, CircularProgress, Image} from "@nextui-org/react";
+import {Card, CardBody, CircularProgress} from "@nextui-org/react";
 import RenderJournalHeader from "@/components/dashboard/journalmngt/journalentries/RenderJournalHeader";
-import SearchComponent from "@/components/common/filter/SearchComponent";
 import {Button} from "@nextui-org/button";
 import {PlusIcon} from "@/components/shared/icons/PlusIcon";
 import PreviewAndPrintJournalEntryModal
     from "@/components/dashboard/journalmngt/journalentries/modals/PreviewAndPrintJournalEntryModal";
-import {SearchIcon} from "@/components/shared/icons/SearchIcon";
 import UploadJournalImagesModal
     from "@/components/dashboard/journalmngt/journalentries/modals/UploadJournalImagesModal";
 import UpdateJournalEntryModal from "@/components/dashboard/journalmngt/journalentries/modals/UpdateJournalEntryModal";

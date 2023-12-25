@@ -1,4 +1,4 @@
-import {View, Image} from "@react-pdf/renderer";
+import {Image, View} from "@react-pdf/renderer";
 import React from "react";
 import {JournalImageBuffer} from "@/boundary/interfaces/journal";
 

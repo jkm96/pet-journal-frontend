@@ -1,14 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {JournalEntryResponse} from '@/boundary/interfaces/journal';
-import ReactPDF, {PDFViewer, Page, Document, Text, View, PDFDownloadLink} from "@react-pdf/renderer";
+import ReactPDF, {Document, Page, PDFViewer, Text, View} from "@react-pdf/renderer";
 import {PdfPreviewStyle, toTitleCase} from "@/lib/utils/pdfUtils";
 import {formatDate} from "@/helpers/dateHelpers";
 import RenderMoodTagsWithColors from "@/components/dashboard/journalmngt/journalentries/RenderMoodTagsWithColors";
 import {useAuth} from "@/hooks/useAuth";
-import Font = ReactPDF.Font;
-import RenderEntryPdfImages from "@/components/dashboard/journalmngt/journalentries/RenderEntryPdfImages";
 import {User} from "@/boundary/interfaces/user";
 import RenderPdfGridImages from "@/components/dashboard/journalmngt/journalentries/RenderPdfGridImages";
+import Font = ReactPDF.Font;
 
 Font.register({
     family: 'Oswald',

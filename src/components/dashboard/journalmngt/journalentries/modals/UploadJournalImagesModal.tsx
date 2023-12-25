@@ -1,20 +1,10 @@
-import {
-    Button,
-    Input,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    Select,
-    SelectItem
-} from "@nextui-org/react";
+import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/react";
 import Spinner from "@/components/shared/icons/Spinner";
 import React, {useState} from "react";
 import {toast} from "react-toastify";
-import {CreateJournalEntryRequest, UploadJournalImageRequest} from "@/boundary/interfaces/journal";
+import {UploadJournalImageRequest} from "@/boundary/interfaces/journal";
 import {areFilesValid} from "@/helpers/validationHelpers";
-import {createJournalEntry, uploadJournalAttachments} from "@/lib/services/journal-entries/journalEntryService";
+import {uploadJournalAttachments} from "@/lib/services/journal-entries/journalEntryService";
 import {DragDropSection} from "@/components/dashboard/journalmngt/journalentries/modals/CreateJournalEntryModal";
 
 const initialFormState: UploadJournalImageRequest = {

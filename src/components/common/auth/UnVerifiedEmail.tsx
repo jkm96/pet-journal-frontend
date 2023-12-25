@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function UnVerifiedEmail() {
     return(
         <div className="grid m-4 place-items-center">

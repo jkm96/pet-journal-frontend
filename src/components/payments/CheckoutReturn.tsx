@@ -1,14 +1,13 @@
 import {useEffect, useState} from "react";
-import {createCheckoutSession, fetchCheckoutSession} from "@/lib/services/payments/paymentsService";
+import {fetchCheckoutSession} from "@/lib/services/payments/paymentsService";
 import {CheckoutSessionModel} from "@/boundary/interfaces/payment";
 import {toast} from "react-toastify";
-import {redirect, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {CircularProgress} from "@nextui-org/react";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import Link from "next/link";
 import {AccessTokenModel} from "@/boundary/interfaces/token";
 import {useAuth} from "@/hooks/useAuth";
-import {deleteAccessToken} from "@/lib/services/token/tokenService";
 
 export default function CheckoutReturn() {
     const {clearAuthToken, storeAuthToken} = useAuth();

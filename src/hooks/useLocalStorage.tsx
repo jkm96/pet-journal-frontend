@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 type SetValue<T> = T | ((val: T) => T);
 

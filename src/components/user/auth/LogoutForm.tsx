@@ -1,9 +1,8 @@
 import {useAuth} from "@/hooks/useAuth";
-import {redirect, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {deleteAccessToken} from "@/lib/services/token/tokenService";
 import LogoutIcon from "@/components/shared/icons/LogoutIcon";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
-import {router} from "next/client";
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 

@@ -14,13 +14,10 @@ import {journalTags, moodTags} from "@/boundary/constants/petConstants";
 import Spinner from "@/components/shared/icons/Spinner";
 import React, {useEffect, useState} from "react";
 import {UpdateJournalEntryRequest} from "@/boundary/interfaces/journal";
-import {
-    validateEditJournalFormInputErrors
-} from "@/helpers/validationHelpers";
+import {validateEditJournalFormInputErrors} from "@/helpers/validationHelpers";
 import {toast} from "react-toastify";
 import {updateJournalEntry} from "@/lib/services/journal-entries/journalEntryService";
 import {PetProfileResponse} from "@/boundary/interfaces/pet";
-import {getPetProfiles} from "@/lib/services/pet/petProfileService";
 import {getUserPets} from "@/lib/utils/petUtils";
 
 const initialFormState: UpdateJournalEntryRequest = {

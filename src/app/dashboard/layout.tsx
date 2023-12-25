@@ -1,6 +1,6 @@
 "use client";
 import "../globals.css";
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Loader from "@/components/common/dashboard/Loader";
 import {useAuth} from "@/hooks/useAuth";
 import Sidebar from "@/components/shared/navs/sidebar/SideBar";

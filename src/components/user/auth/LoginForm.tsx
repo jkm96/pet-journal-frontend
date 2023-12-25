@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, {useState} from "react";
 import {validateLoginFormInputErrors} from "@/helpers/validationHelpers";
 import {useAuth} from "@/hooks/useAuth";
-import {redirect, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {LoginUserRequest} from "@/boundary/interfaces/auth";
 import {AccessTokenModel} from "@/boundary/interfaces/token";
 import {loginUser} from "@/lib/services/auth/authService";

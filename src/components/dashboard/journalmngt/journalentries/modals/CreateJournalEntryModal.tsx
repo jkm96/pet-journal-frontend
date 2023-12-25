@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {getPetProfiles} from "@/lib/services/pet/petProfileService";
 import {toast} from "react-toastify";
 import {PetProfileResponse} from "@/boundary/interfaces/pet";
 import {CreateJournalEntryRequest} from "@/boundary/interfaces/journal";
 import {
-    Button, CheckboxGroup, Input,
+    Button,
+    CheckboxGroup,
+    Input,
     Modal,
     ModalBody,
     ModalContent,
@@ -16,7 +17,7 @@ import {journalTags, moodTags} from "@/boundary/constants/petConstants";
 import {CustomCheckbox} from "@/components/shared/formelements/CustomCheckbox";
 import {Textarea} from "@nextui-org/input";
 import {createJournalEntry} from "@/lib/services/journal-entries/journalEntryService";
-import {areFilesValid, validateCreateJournalFormInputErrors, validateCreatePetFormInputErrors} from "@/helpers/validationHelpers";
+import {areFilesValid, validateCreateJournalFormInputErrors} from "@/helpers/validationHelpers";
 import {getUserPets} from "@/lib/utils/petUtils";
 import TrashIcon from "@/components/shared/icons/TrashIcon";
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, {useState} from "react";
-import {redirect, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {RegisterUserRequest} from "@/boundary/interfaces/auth";
 import {validateRegisterFormInputErrors} from "@/helpers/validationHelpers";
 import {Input} from "@nextui-org/react";
