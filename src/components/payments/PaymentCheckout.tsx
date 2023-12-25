@@ -22,7 +22,6 @@ export default function PaymentCheckout() {
                 }
             })
             .catch((error) => {
-                console.error("Error redirecting to checkout", error);
                 toast.error(`Error redirecting to checkout: ${error}`)
             })
             .finally(() => {
