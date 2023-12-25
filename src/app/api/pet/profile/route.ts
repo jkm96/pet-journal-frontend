@@ -5,7 +5,7 @@ import {AxiosRequestConfig} from "axios";
 import {cookieName} from "@/boundary/constants/appConstants";
 import {AccessTokenModel} from "@/boundary/interfaces/token";
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
     try {
         console.log("request",request.cookies.getAll())
         const tokenCookie = request.cookies.get(`${cookieName}`)?.value as string;

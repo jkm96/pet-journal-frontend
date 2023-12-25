@@ -5,7 +5,7 @@ import axios from "axios";
 export async function getPetProfiles() {
     try {
         const response = await fetch(`${internalBaseUrl}/pet/profile`, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'x-api-key':`${apiKey}`,
                 'Content-type': 'application/json',
