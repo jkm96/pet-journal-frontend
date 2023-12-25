@@ -50,7 +50,6 @@ export default function CreateNewPetModal({isOpen, onClose}: {
         setIsSubmitting(true);
 
         const inputErrors = validateCreatePetFormInputErrors(createPetFormData);
-        console.log("input errors", inputErrors)
         if (inputErrors && Object.keys(inputErrors).length > 0) {
             setInputErrors(inputErrors);
             setIsSubmitting(false);
@@ -71,7 +70,7 @@ export default function CreateNewPetModal({isOpen, onClose}: {
             setIsSubmitting(false);
             return;
         }
-        console.log("createPetFormData",createPetFormData)
+
         let response = await createPetProfile(createPetFormData);
         if (response.statusCode === 200) {
             toast.success(response.message ?? "Pet profile created successfully")
