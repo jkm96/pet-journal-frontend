@@ -12,7 +12,7 @@ const petJournalApiClient = axios.create({
         'Content-Type': 'application/json',
         'Accept': 'application/json',
     },
-    httpsAgent: new https.Agent({ rejectUnauthorized: false })
+    // httpsAgent: new https.Agent({ rejectUnauthorized: false })
 });
 
 petJournalApiClient.interceptors.request.use(

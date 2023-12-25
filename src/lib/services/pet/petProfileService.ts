@@ -10,6 +10,7 @@ export async function getPetProfiles() {
                 'x-api-key':`${apiKey}`,
                 'Content-type': 'application/json',
             },
+            credentials: 'include',
             body: null,
         });
 

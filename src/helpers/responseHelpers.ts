@@ -6,7 +6,6 @@ import {ApiErrorResponse} from "@/boundary/interfaces/shared";
 export function handleAxiosResponse(response: AxiosResponse<any>) {
     const axiosResponse = response.data;
     if (axiosResponse.statusCode === 200) {
-        console.log("api response", axiosResponse)
         return createNextResponse(200, axiosResponse.message, axiosResponse.data)
     } else {
         return createNextResponse(axiosResponse.statusCode, axiosResponse.message)
@@ -34,6 +33,7 @@ export function handleApiException(error: any) {
                 return createNextResponse(503, "Unable to connect to the server. Please try again later.")
         }
     }
+    console.log("error", error)
     return createNextResponse(500, "An unhandled error occurred. Please try again later.")
 }
 
