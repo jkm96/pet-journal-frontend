@@ -72,6 +72,6 @@ export interface UploadJournalImageRequest{
     attachments: FileList|null;
 }
 
-export interface MyJournalOverviewProps {
+export interface FilterProps {
     searchParams?: { searchTerm?: string; periodFrom?: string; periodTo?: string; };
 }

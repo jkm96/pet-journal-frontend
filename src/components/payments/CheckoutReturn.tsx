@@ -52,7 +52,7 @@ export default function CheckoutReturn() {
         if (status === 'complete') {
             toast.success("Payment completed successfully. Redirecting to dashboard...");
             setTimeout(() => {
-                router.push(NAVIGATION_LINKS.DASHBOARD)
+                router.push(NAVIGATION_LINKS.USER_DASHBOARD)
             }, 5000);
         }
     }, [status]);

@@ -3,14 +3,13 @@
 import AuthorizeComponent from "@/components/common/auth/AuthorizeComponent";
 import PetJournalPermission, {MapPermission} from "@/boundary/enums/permissions";
 import UserDashboardSection from "@/components/dashboard/user/UserDashboardSection";
+import AdminDashboardSection from "@/components/dashboard/admin/AdminDashboardSection";
 
-function UserDashboardPage() {
+function AdminDashboardPage() {
     return (
         <>
-            <UserDashboardSection/>
+            <AdminDashboardSection/>
         </>
     )
 }
-
-const viewPermission = MapPermission(PetJournalPermission.PermissionsUsersView)
-export default AuthorizeComponent([viewPermission])(UserDashboardPage)
+export default AdminDashboardPage

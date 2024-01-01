@@ -8,6 +8,7 @@ import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import JournalEntriesIcon from "@/components/shared/icons/JournalEntriesIcon";
 import JournalHeartIcon from "@/components/shared/icons/JournalHeartIcon";
 import PetProfileIcon from "@/components/shared/icons/PetProfleIcon";
+import {useAuth} from "@/hooks/useAuth";
 
 interface SidebarProps {
     sidebarOpen: boolean;
@@ -16,6 +17,7 @@ interface SidebarProps {
 
 const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
     const pathname = usePathname();
+    const {user} = useAuth();
 
     const trigger = useRef<any>(null);
     const sidebar = useRef<any>(null);
@@ -70,7 +72,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
         >
             {/* <!-- SIDEBAR HEADER --> */}
             <div className="flex items-center gap-2 px-6 mb-0 py-2 lg:py-4">
-                <Link href={NAVIGATION_LINKS.DASHBOARD}>
+                <Link href={user?.isAdmin ? NAVIGATION_LINKS.ADMIN_DASHBOARD : NAVIGATION_LINKS.USER_DASHBOARD}>
                     Pet Journal
                 </Link>
 
@@ -89,90 +91,115 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                 {/* <!-- Sidebar Menu --> */}
                 <nav className=" py-2 px-2 lg:px-4">
                     {/* <!-- Menu Group --> */}
-                    {/*<div className="mt-0.5 bg-danger-100">*/}
+
                     <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
                         MENU
                     </h3>
 
                     <ul className="mb-6 flex flex-col gap-4">
-                        {/* <!-- Menu Item Dashboard --> */}
-                        <li>
-                            <Link
-                                href={NAVIGATION_LINKS.DASHBOARD}
-                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
+                        {user?.isAdmin ? (
+                            <>
+                                <li>
+                                    <Link
+                                        href={NAVIGATION_LINKS.ADMIN_DASHBOARD}
+                                        className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
                                                             text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                    pathname === NAVIGATION_LINKS.DASHBOARD && "text-white"
-                                } `}>
-                                <DashboardIcon/>
-                                Dashboard
-                            </Link>
-                        </li>
-                        {/* <!-- Menu Item Dashboard --> */}
+                                            pathname === NAVIGATION_LINKS.ADMIN_DASHBOARD && "text-white"
+                                        } `}>
+                                        <DashboardIcon/>
+                                        Dashboard
+                                    </Link>
+                                </li>
 
-                        {/* <!-- Menu Item My Pets Mngt --> */}
-                        <li>
-                            <Link
-                                href={NAVIGATION_LINKS.PET_PROFILES}
-                                className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
+                                <li>
+                                    <Link
+                                        href={NAVIGATION_LINKS.MANAGE_USERS}
+                                        className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
+                                                            text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                            pathname === NAVIGATION_LINKS.MANAGE_USERS && "text-white"
+                                        } `}>
+                                        <DashboardIcon/>
+                                        Users
+                                    </Link>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                {/* <!-- Menu Item Dashboard --> */}
+                                <li>
+                                    <Link
+                                        href={NAVIGATION_LINKS.USER_DASHBOARD}
+                                        className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
+                                                            text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                            pathname === NAVIGATION_LINKS.USER_DASHBOARD && "text-white"
+                                        } `}>
+                                        <DashboardIcon/>
+                                        Dashboard
+                                    </Link>
+                                </li>
+                                {/* <!-- Menu Item Dashboard --> */}
+                                {/* <!-- Menu Item My Pets Mngt --> */}
+                                <li>
+                                    <Link
+                                        href={NAVIGATION_LINKS.PET_PROFILES}
+                                        className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
                                                         text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname.includes(NAVIGATION_LINKS.PET_PROFILES) &&
-                                "text-white"
-                                }`}
-                            >
-                                <PetProfileIcon
-                                    color={pathname.includes(NAVIGATION_LINKS.PET_PROFILES) ? '#ffffff' : '#8A99AF'}/>
-                                Pet Profiles
-                            </Link>
-                        </li>
-                        {/* <!-- Menu Item My Pets Mngt --> */}
-
-                        {/* <!-- Menu Item Journal Entries Mngt --> */}
-                        <li>
-                            <Link
-                                href={NAVIGATION_LINKS.JOURNAL_ENTRIES}
-                                className={`first-letter:group relative flex 
+                                        "text-white"
+                                        }`}
+                                    >
+                                        <PetProfileIcon
+                                            color={pathname.includes(NAVIGATION_LINKS.PET_PROFILES) ? '#ffffff' : '#8A99AF'}/>
+                                        Pet Profiles
+                                    </Link>
+                                </li>
+                                {/* <!-- Menu Item My Pets Mngt --> */}
+                                {/* <!-- Menu Item Journal Entries Mngt --> */}
+                                <li>
+                                    <Link
+                                        href={NAVIGATION_LINKS.JOURNAL_ENTRIES}
+                                        className={`first-letter:group relative flex 
                                 items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
                                  hover:text-white  ${pathname.includes(NAVIGATION_LINKS.JOURNAL_ENTRIES) && "text-white"
-                                }`}
-                            >
-                                <JournalEntriesIcon
-                                    color={pathname.includes(NAVIGATION_LINKS.JOURNAL_ENTRIES) ? '#ffffff' : '#8A99AF'}/>
-                                Journal Entries
-                            </Link>
-                        </li>
-                        {/* <!-- Menu Item Journal Entries Mngt --> */}
-
-                        {/* <!-- Menu Item My Journal Mngt --> */}
-                        <li>
-                            <Link
-                                href={NAVIGATION_LINKS.MY_JOURNAL}
-                                className={`first-letter:group relative flex 
+                                        }`}
+                                    >
+                                        <JournalEntriesIcon
+                                            color={pathname.includes(NAVIGATION_LINKS.JOURNAL_ENTRIES) ? '#ffffff' : '#8A99AF'}/>
+                                        Journal Entries
+                                    </Link>
+                                </li>
+                                {/* <!-- Menu Item Journal Entries Mngt --> */}
+                                {/* <!-- Menu Item My Journal Mngt --> */}
+                                <li>
+                                    <Link
+                                        href={NAVIGATION_LINKS.MY_JOURNAL}
+                                        className={`first-letter:group relative flex 
                                 items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
-                                 hover:text-white  ${pathname.includes(NAVIGATION_LINKS.MY_JOURNAL)  && "text-white"
-                                }`}
-                            >
-                                <JournalHeartIcon
-                                    color={pathname.includes(NAVIGATION_LINKS.MY_JOURNAL) ? '#ffffff' : '#8A99AF'}/>
-                                My Journal
-                            </Link>
-                        </li>
-                        {/* <!-- Menu Item My Journal Mngt --> */}
-
-                        {/* <!-- Menu Item Settings --> */}
-                        <li>
-                            <Link
-                                href={NAVIGATION_LINKS.SETTINGS}
-                                className={`first-letter:group relative flex 
+                                 hover:text-white  ${pathname.includes(NAVIGATION_LINKS.MY_JOURNAL) && "text-white"
+                                        }`}
+                                    >
+                                        <JournalHeartIcon
+                                            color={pathname.includes(NAVIGATION_LINKS.MY_JOURNAL) ? '#ffffff' : '#8A99AF'}/>
+                                        My Journal
+                                    </Link>
+                                </li>
+                                {/* <!-- Menu Item My Journal Mngt --> */}
+                                {/* <!-- Menu Item Settings --> */}
+                                <li>
+                                    <Link
+                                        href={NAVIGATION_LINKS.SETTINGS}
+                                        className={`first-letter:group relative flex 
                                 items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
                                  hover:text-white  ${pathname.includes(NAVIGATION_LINKS.SETTINGS) && "text-white"
-                                }`}
-                            >
-                                <SettingsIcon/>
-                                Settings
-                            </Link>
-                        </li>
-                        {/* <!-- Menu Item Settings --> */}
+                                        }`}
+                                    >
+                                        <SettingsIcon/>
+                                        Settings
+                                    </Link>
+                                </li>
+                                {/* <!-- Menu Item Settings --> */}
+                            </>
+                        )}
                     </ul>
-                    {/*</div>*/}
 
                 </nav>
                 {/* <!-- Sidebar Menu --> */}

@@ -1,5 +1,4 @@
 import axios, {AxiosRequestConfig} from "axios";
-import * as https from "https";
 import {cookieName, petJournalApiBaseUrl} from "@/boundary/constants/appConstants";
 import {NextRequest} from "next/server";
 import {AccessTokenModel} from "@/boundary/interfaces/token";

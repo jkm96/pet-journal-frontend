@@ -5,6 +5,7 @@ export interface User{
     profileUrl: string;
     isEmailVerified: boolean;
     isSubscribed: boolean;
+    isAdmin: boolean;
 }
 
 export interface UserResponse{
@@ -14,6 +15,7 @@ export interface UserResponse{
     profileUrl: string | null;
     isEmailVerified: boolean;
     isSubscribed: boolean;
+    isAdmin: boolean;
     emailVerifiedAt: null;
     createdAt: Date;
     updatedAt: Date;

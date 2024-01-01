@@ -7,8 +7,14 @@ export function RedirectUserToDashboard(user:User|null, setLoading:any) {
     const router = useRouter()
     useEffect(() => {
         const redirectTimer = setTimeout(() => {
-            if (user && user.isSubscribed) {
-                router.push(NAVIGATION_LINKS.DASHBOARD);
+            if (user) {
+                if (user.isAdmin) {
+                    router.push(NAVIGATION_LINKS.ADMIN_DASHBOARD);
+                } else if (user.isSubscribed) {
+                    router.push(NAVIGATION_LINKS.USER_DASHBOARD);
+                } else {
+                    setLoading(false);
+                }
             } else {
                 setLoading(false);
             }
@@ -17,5 +23,5 @@ export function RedirectUserToDashboard(user:User|null, setLoading:any) {
         return () => {
             clearTimeout(redirectTimer);
         };
-    }, [user, router, setLoading]);
+    }, [user, setLoading]);
 }

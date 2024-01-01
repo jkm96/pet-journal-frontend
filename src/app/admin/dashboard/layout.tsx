@@ -1,5 +1,5 @@
 "use client";
-import "../globals.css";
+import "../../globals.css";
 import React, {useEffect, useState} from "react";
 import Loader from "@/components/common/dashboard/Loader";
 import {useAuth} from "@/hooks/useAuth";
@@ -8,7 +8,7 @@ import Header from "@/components/shared/navs/header/Header";
 import {redirect} from "next/navigation";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 
-export default function UserDashboardLayout({children}: { children: React.ReactNode; }) {
+export default function AdminDashboardLayout({children}: { children: React.ReactNode; }) {
     const {user, loading: authLoading} = useAuth();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [loading, setLoading] = useState<boolean>(true);
@@ -20,10 +20,8 @@ export default function UserDashboardLayout({children}: { children: React.ReactN
     if (loading || authLoading) {
         return <Loader/>;
     } else if (!user) {
-        redirect(NAVIGATION_LINKS.LOGIN)
-    } else if (user && !user.isSubscribed) {
-        redirect(NAVIGATION_LINKS.PAYMENTS)
-    } else if(user && user.isSubscribed){
+        redirect(NAVIGATION_LINKS.ADMIN_LOGIN)
+    }else if(user && user.isAdmin){
         return (
             <div className="dark:bg-boxdark-2 dark:text-bodydark">
                 <div className="flex h-screen overflow-hidden">

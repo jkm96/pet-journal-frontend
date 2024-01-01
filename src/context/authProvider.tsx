@@ -26,6 +26,7 @@ export function AuthProvider({children}: AuthContextProps) {
             email: tokenData.user.email,
             isEmailVerified: tokenData.user.isEmailVerified,
             isSubscribed: tokenData.user.isSubscribed,
+            isAdmin: tokenData.user.isAdmin,
             profileUrl: tokenData.user.profileUrl ?? ""
         }
         setUser(userObject);

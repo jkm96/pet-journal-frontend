@@ -3,14 +3,13 @@
 import AuthorizeComponent from "@/components/common/auth/AuthorizeComponent";
 import PetJournalPermission, {MapPermission} from "@/boundary/enums/permissions";
 import JournalEntriesOverview from "@/components/dashboard/user/journalmngt/journalentries/JournalEntriesOverview";
+import ManageUsersSection from "@/components/dashboard/admin/manageusers/ManageUsersSection";
 
-function JournalEntriesPage({ searchParams }: { searchParams?: { searchTerm?: string;}}) {
+function ManageUsersPage({ searchParams }: { searchParams?: { searchTerm?: string;}}) {
     return (
         <>
-            <JournalEntriesOverview searchParams={searchParams}/>
+            <ManageUsersSection searchParams={searchParams}/>
         </>
     )
 }
-
-const viewPermission = MapPermission(PetJournalPermission.PermissionsUsersView)
-export default AuthorizeComponent([viewPermission])(JournalEntriesPage)
+export default ManageUsersPage

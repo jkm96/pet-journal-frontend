@@ -1,6 +1,6 @@
 "use client";
 import React, {useState} from "react";
-import LoginForm from "@/components/user/auth/LoginForm";
+import LoginForm from "@/components/auth/user/LoginForm";
 import {useAuth} from "@/hooks/useAuth";
 import {RedirectUserToDashboard} from "@/components/common/auth/RedirectUserToDashboard";
 import Loader from "@/components/common/dashboard/Loader";
