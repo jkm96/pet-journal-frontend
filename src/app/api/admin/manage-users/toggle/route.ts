@@ -1,21 +1,21 @@
-import {handleApiException, handleAxiosResponse} from "@/helpers/responseHelpers";
-import petJournalApiClient from "@/lib/axios/axiosClient";
 import {NextRequest} from "next/server";
-import {AxiosRequestConfig} from "axios";
+import {handleAxiosResponse, handleApiException} from "@/helpers/responseHelpers";
+import adminApiClient from "@/lib/axios/axiosClient";
 import {cookieName} from "@/boundary/constants/appConstants";
-import {AccessTokenModel} from "@/boundary/interfaces/token";
+import {AxiosRequestConfig} from "axios";
 
 export async function POST(request: NextRequest) {
     try {
         const tokenCookie = request.cookies.get(`${cookieName}`)?.value as string;
-        const tokenData: AccessTokenModel = JSON.parse(tokenCookie);
-
+        const {accessToken} = JSON.parse(tokenCookie);
         const config: AxiosRequestConfig = {
             headers: {
-                Authorization: `Bearer ${tokenData.token.token}`
+                Authorization: `Bearer ${accessToken}`
             }
         };
-        const response = await petJournalApiClient.get('pet/profiles', config);
+        const requestBody = await request.text();
+        const response = await adminApiClient
+            .post('identity/user/toggle-status', `${requestBody}`,config);
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {

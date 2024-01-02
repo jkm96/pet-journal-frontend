@@ -54,18 +54,13 @@ export function validateLoginFormInputErrors(formData: LoginUserRequest) {
     }
 
     if (formData.username.trim() === "") {
-        errors.username = "Email cannot be empty";
-    } else if (!isEmailValid(formData.username.trim())) {
-        errors.username = "Invalid email address";
+        errors.username = "Username cannot be empty";
     }
 
     if (formData.password.trim() === "") {
         errors.password = "Password cannot be empty";
-    } else if (formData.password.trim().length < 6) {
-        errors.password = "Password must be at least 6 characters long";
     }
 
-    // Check if there are any errors and return null if all input is valid
     for (const key in errors) {
         if (errors[key as keyof LoginUserRequest] !== "") {
             return errors;

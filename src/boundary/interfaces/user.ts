@@ -16,6 +16,7 @@ export interface UserResponse{
     isEmailVerified: boolean;
     isSubscribed: boolean;
     isAdmin: boolean;
+    isActive: boolean;
     emailVerifiedAt: null;
     createdAt: Date;
     updatedAt: Date;

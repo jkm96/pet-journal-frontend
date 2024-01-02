@@ -2,6 +2,7 @@ import {NextRequest, NextResponse} from "next/server";
 import {CheckoutSessionModel, CreatePaymentRequest} from "@/boundary/interfaces/payment";
 import {AccessTokenModel} from "@/boundary/interfaces/token";
 import petJournalApiClient, {getAxiosConfigs} from "@/lib/axios/axiosClient";
+import {getJournalQueryParams} from "@/helpers/urlHelpers";
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -18,7 +19,8 @@ export async function GET(request: NextRequest) {
         }
 
         if (session.status === 'complete') {
-            const config = getAxiosConfigs(request);
+            const queryParams = getJournalQueryParams(request);
+            const config = getAxiosConfigs(request,queryParams);
 
             const sessionDetails: CreatePaymentRequest = {
                 created: session.created,

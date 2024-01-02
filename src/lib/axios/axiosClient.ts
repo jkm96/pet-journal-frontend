@@ -34,10 +34,9 @@ petJournalApiClient.interceptors.request.use(
 );
 export default petJournalApiClient;
 
-export function getAxiosConfigs(request: NextRequest) {
+export function getAxiosConfigs(request: NextRequest, queryParams:any) {
     const tokenCookie = request.cookies.get(`${cookieName}`)?.value as string;
     const tokenData: AccessTokenModel = JSON.parse(tokenCookie);
-    const queryParams = getJournalQueryParams(request);
     const config: AxiosRequestConfig = {
         headers: {
             Authorization: `Bearer ${tokenData.token.token}`,

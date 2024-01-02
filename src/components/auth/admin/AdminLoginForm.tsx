@@ -70,7 +70,7 @@ export default function AdminLoginForm() {
             <div
                 className="rounded-sm bg-white dark:border-strokedark dark:bg-boxdark">
                 <div className="grid m-4 place-items-center">
-                    <div className="w-full xl:w-1/2">
+                    <div className="sm:w-full xl:w-1/3">
                         <div className="w-full sm:w-full place-items-center p-4 sm:p-12.5 xl:p-17.5">
                             <div className="text-center">
                                 <span className="mb-1.5 block font-medium">Start for free</span>

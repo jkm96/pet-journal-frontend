@@ -3,8 +3,9 @@ export interface PagingMetaData {
     totalPages: number;
     pageSize: number;
     totalCount: number;
-    hasPrevious: boolean;
-    hasNext: boolean;
+    lastPage: number;
+    from: number;
+    to: number;
 }
 
 export  interface PagedResponse {
