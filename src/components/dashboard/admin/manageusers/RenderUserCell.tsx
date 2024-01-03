@@ -1,7 +1,7 @@
 import {UserResponse} from "@/boundary/interfaces/user";
-import {Button, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User} from "@nextui-org/react";
+import {Chip, User} from "@nextui-org/react";
 import Link from "next/link";
-import {VerticalDotsIcon} from "@/components/shared/icons/VerticalDotsIcon";
+import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 
 export default function RenderUserCell(user: UserResponse, columnKey: string | number | bigint, statusColorMap: Record<string, "default" | "primary" | "secondary" | "success" | "warning" | "danger" | undefined>) {
     // @ts-ignore
@@ -41,20 +41,9 @@ export default function RenderUserCell(user: UserResponse, columnKey: string | n
         case "actions":
             return (
                 <div className="relative flex justify-center items-center gap-2">
-                    <Dropdown>
-                        <DropdownTrigger>
-                            <Button isIconOnly size="sm" variant="light">
-                                <VerticalDotsIcon className="text-default-300"/>
-                            </Button>
-                        </DropdownTrigger>
-                        <DropdownMenu>
-                            <DropdownItem>
-                                <Link href={`/dashboard/users/${user.id}`}>View</Link>
-                            </DropdownItem>
-                            <DropdownItem>Edit</DropdownItem>
-                            <DropdownItem>Delete</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
+                    <Link href={`${NAVIGATION_LINKS.MANAGE_USERS}/${user.id}`}>
+                        <Chip color='success'>View</Chip>
+                    </Link>
                 </div>
             );
         default:

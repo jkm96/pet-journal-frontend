@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {
-    Table,
-    TableHeader,
-    TableColumn,
-    TableBody,
-    TableRow,
-    TableCell,
-    Spinner,
-    SortDescriptor,
+    ChipProps,
     Selection,
-    ChipProps, Button,
+    SortDescriptor,
+    Spinner,
+    Table,
+    TableBody,
+    TableCell,
+    TableColumn,
+    TableHeader,
+    TableRow,
 } from "@nextui-org/react";
 import {toast} from "react-toastify";
 import {getUsers} from "@/lib/services/admin/manageUserService";
@@ -24,7 +24,7 @@ import {FilterProps} from "@/boundary/interfaces/journal";
 
 const INITIAL_VISIBLE_COLUMNS = ["username", "email", "isActive","isSubscribed", "actions"];
 
-export default function ManageUsersSection({searchParams}: FilterProps) {
+export default function UsersOvervewSection({searchParams}: FilterProps) {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [totalPages, setTotalPages] = useState(0);
@@ -65,7 +65,6 @@ export default function ManageUsersSection({searchParams}: FilterProps) {
         await getUsers(queryParams)
             .then((response) => {
                 if (response.statusCode === 200) {
-                    console.log("users response", response)
                     const parsedData = response.data;
                     const {data, pagingMetaData} = parsedData;
                     setCurrentPage(pagingMetaData.currentPage);

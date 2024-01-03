@@ -1,7 +1,7 @@
 import {getJournalEntries} from "@/lib/services/journal-entries/journalEntryService";
 import {toast} from "react-toastify";
 import React, {useEffect, useState} from "react";
-import {JournalEntryResponse, FilterProps} from "@/boundary/interfaces/journal";
+import {FilterProps, JournalEntryResponse} from "@/boundary/interfaces/journal";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import {CircularProgress, Input} from "@nextui-org/react";
 import FilterComponent from "@/components/common/filter/FilterComponent";

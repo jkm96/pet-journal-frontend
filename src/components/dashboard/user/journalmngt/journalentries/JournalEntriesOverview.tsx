@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import {getJournalEntries} from "@/lib/services/journal-entries/journalEntryService";
-import {JournalEntryResponse, FilterProps} from "@/boundary/interfaces/journal";
+import {FilterProps, JournalEntryResponse} from "@/boundary/interfaces/journal";
 import {Avatar, Card, CardBody, CircularProgress} from "@nextui-org/react";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import Link from "next/link";
@@ -9,7 +9,8 @@ import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import {Button} from "@nextui-org/button";
 import {PlusIcon} from "@/components/shared/icons/PlusIcon";
 import SearchComponent from "@/components/common/filter/SearchComponent";
-import CreateJournalEntryModal from "@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal";
+import CreateJournalEntryModal
+    from "@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal";
 import {formatDate} from "@/helpers/dateHelpers";
 import {getMoodColorClass} from "@/helpers/stylingHelpers";
 import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
