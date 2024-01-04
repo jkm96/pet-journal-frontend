@@ -2,7 +2,6 @@ import axios, {AxiosRequestConfig} from "axios";
 import {cookieName, petJournalApiBaseUrl} from "@/boundary/constants/appConstants";
 import {NextRequest} from "next/server";
 import {AccessTokenModel} from "@/boundary/interfaces/token";
-import {getJournalQueryParams} from "@/helpers/urlHelpers";
 
 const petJournalApiClient = axios.create({
     baseURL: `${petJournalApiBaseUrl}`,
@@ -34,14 +33,14 @@ petJournalApiClient.interceptors.request.use(
 );
 export default petJournalApiClient;
 
-export function getAxiosConfigs(request: NextRequest, queryParams:any) {
+export function getAxiosConfigs(request: NextRequest, queryParams?: any) {
     const tokenCookie = request.cookies.get(`${cookieName}`)?.value as string;
     const tokenData: AccessTokenModel = JSON.parse(tokenCookie);
     const config: AxiosRequestConfig = {
         headers: {
             Authorization: `Bearer ${tokenData.token.token}`,
         },
-        params: queryParams
+        params: queryParams || {}
     };
 
     return config;

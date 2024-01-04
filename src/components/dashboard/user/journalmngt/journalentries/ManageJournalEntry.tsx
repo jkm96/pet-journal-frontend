@@ -10,9 +10,11 @@ import PreviewAndPrintJournalEntryModal
     from "@/components/dashboard/user/journalmngt/journalentries/modals/PreviewAndPrintJournalEntryModal";
 import UploadJournalImagesModal
     from "@/components/dashboard/user/journalmngt/journalentries/modals/UploadJournalImagesModal";
-import UpdateJournalEntryModal from "@/components/dashboard/user/journalmngt/journalentries/modals/UpdateJournalEntryModal";
+import UpdateJournalEntryModal
+    from "@/components/dashboard/user/journalmngt/journalentries/modals/UpdateJournalEntryModal";
 import {EditIcon} from "@nextui-org/shared-icons";
-import DeleteJournalEntryModal from "@/components/dashboard/user/journalmngt/journalentries/modals/DeleteJournalEntryModal";
+import DeleteJournalEntryModal
+    from "@/components/dashboard/user/journalmngt/journalentries/modals/DeleteJournalEntryModal";
 import UploadIcon from "@/components/shared/icons/UploadIcon";
 import TrashIcon from "@/components/shared/icons/TrashIcon";
 import FileEyeIcon from "@/components/shared/icons/FileEyeIcon";

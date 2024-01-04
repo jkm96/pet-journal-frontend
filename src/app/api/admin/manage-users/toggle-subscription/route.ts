@@ -1,14 +1,14 @@
-import {handleApiException, handleAxiosResponse} from "@/helpers/responseHelpers";
-import petJournalApiClient, {getAxiosConfigs} from "@/lib/axios/axiosClient";
 import {NextRequest} from "next/server";
+import {handleApiException, handleAxiosResponse} from "@/helpers/responseHelpers";
+import adminApiClient, {getAxiosConfigs} from "@/lib/axios/axiosClient";
 
 export async function POST(request: NextRequest) {
     try {
         const config = getAxiosConfigs(request);
         const requestBody = await request.json();
-        const {journalId} = requestBody;
-        const response = await petJournalApiClient
-            .put(`journal-entry/${journalId}/edit`, requestBody,config);
+        const {userId} = requestBody;
+        const response = await adminApiClient
+            .put(`admin/user/${userId}/toggle-subscription`,requestBody, config);
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {
