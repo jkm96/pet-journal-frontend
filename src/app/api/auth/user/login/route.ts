@@ -4,10 +4,10 @@ import {NextRequest} from "next/server";
 
 export async function POST(request: NextRequest) {
     try {
-        const requestBody = await request.text();
+        const requestBody = await request.json();
         const response = await petJournalApiClient
-            .post('user/login', `${requestBody}`);
-        console.log("login response", response)
+            .post('user/login', requestBody);
+
         return handleAxiosResponse(response);
     } catch (error: unknown) {
         return handleApiException(error);

@@ -4,9 +4,9 @@ import petJournalApiClient from "@/lib/axios/axiosClient";
 
 export async function POST(request: NextRequest) {
     try {
-        const requestBody = await request.text();
+        const requestBody = await request.json();
         const response = await petJournalApiClient
-            .post('user/register', `${requestBody}`);
+            .post('user/register', requestBody);
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {
