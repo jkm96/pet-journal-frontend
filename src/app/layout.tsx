@@ -6,7 +6,7 @@ import ToastContainerWrapper from "@/components/common/notifications/ToastCompon
 import React from "react";
 
 export const metadata: Metadata = {
-    title: 'Pet Journal App',
+    title: 'Pet Diaries',
     description: 'Keep Your Pet Memories Together',
 }
 
