@@ -1,10 +1,6 @@
 import pino from 'pino'
 import { logflarePinoVercel } from 'pino-logflare'
 
-// create pino-logflare console stream for serverless functions and send function for browser logs
-// Browser logs are going to: https://logflare.app/sources/13989
-// Vercel log drain was setup to send logs here: https://logflare.app/sources/13830
-
 const { stream, send } = logflarePinoVercel({
     apiKey: "ylhOwHUV8soG",
     sourceToken: "a7b5a798-3015-4883-ac08-f599cc7226ea"

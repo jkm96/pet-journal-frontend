@@ -1,8 +1,7 @@
 import {NextRequest} from "next/server";
 
 export function getJournalQueryParams(request: NextRequest) {
-    const url = new URL(request.url)
-    const searchParams = new URLSearchParams(url.search);
+    const searchParams = request.nextUrl.searchParams
     const pageSize = searchParams.get('pageSize');
     const pageNumber = searchParams.get('pageNumber');
     const orderBy = searchParams.get('orderBy');

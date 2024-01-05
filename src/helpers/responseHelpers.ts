@@ -6,7 +6,7 @@ import {ApiErrorResponse} from "@/boundary/interfaces/shared";
 export function handleAxiosResponse(response: AxiosResponse<any>) {
     const axiosResponse = response.data;
     if (axiosResponse.statusCode === 200) {
-        console.log("api response", axiosResponse)
+        // console.log("api response", axiosResponse)
         return createNextResponse(200, axiosResponse.message, axiosResponse.data)
     } else {
         return createNextResponse(axiosResponse.statusCode, axiosResponse.message)
