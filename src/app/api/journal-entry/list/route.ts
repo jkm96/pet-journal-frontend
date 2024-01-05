@@ -5,11 +5,11 @@ import {getJournalQueryParams} from "@/helpers/urlHelpers";
 
 export async function GET(request: NextRequest) {
     try {
+        const onlyPino = require('pino')()
         const queryParams = getJournalQueryParams(request);
+        onlyPino.info(queryParams,"query params")
         const config = getAxiosConfigs(request, queryParams);
         const response = await petJournalApiClient.get('journal-entry', config);
-        const onlyPino = require('pino')()
-
         onlyPino.info(response,"fetch journal entries response")
         return handleAxiosResponse(response);
     } catch (error: unknown) {
