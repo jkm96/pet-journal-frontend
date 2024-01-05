@@ -14,6 +14,7 @@ import CreateJournalEntryModal
 import {formatDate} from "@/helpers/dateHelpers";
 import {getMoodColorClass} from "@/helpers/stylingHelpers";
 import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
+export const dynamic = 'force-dynamic'
 
 export default function JournalEntriesOverview({searchParams}: FilterProps) {
     const [journalEntries, setJournalEntries] = useState<JournalEntryResponse[]>([]);

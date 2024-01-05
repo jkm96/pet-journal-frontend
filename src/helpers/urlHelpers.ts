@@ -1,14 +1,13 @@
 import {NextRequest} from "next/server";
 
-export function getJournalQueryParams(request: NextRequest) {
-    const searchParams = request.nextUrl.searchParams
-    const pageSize = searchParams.get('pageSize');
-    const pageNumber = searchParams.get('pageNumber');
-    const orderBy = searchParams.get('orderBy');
-    const searchTerm = searchParams.get('searchTerm') ?? '';
-    const periodFrom = searchParams.get('periodFrom') ?? '';
-    const periodTo = searchParams.get('periodTo') ?? '';
-    const fetch = searchParams.get('fetch') ?? '';
+export function getJournalQueryParams(searchParams: any) {
+    const pageSize = searchParams.pageSize;
+    const pageNumber = searchParams.pageNumber;
+    const orderBy = searchParams.orderBy;
+    const searchTerm = searchParams.searchTerm ?? '';
+    const periodFrom = searchParams.periodFrom ?? '';
+    const periodTo = searchParams.periodTo ?? '';
+    const fetch = searchParams.fetch ?? '';
 
     return {pageSize, pageNumber, orderBy, searchTerm, periodFrom, periodTo, fetch};
 }
