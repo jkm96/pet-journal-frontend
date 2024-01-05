@@ -42,9 +42,9 @@ export default function PetProfilesOverviewSection() {
 
                     <div className="flex flex-col gap-4 m-2">
                         <div className="flex justify-between gap-3 items-end">
-                            {petProfiles.length > 1 ? (
+                            {petProfiles.length >= 1 ? (
                                 <SearchComponent placeholder="Search for pet profiles"/>
-                            ):(
+                            ) : (
                                 <div className="w-full sm:max-w-[44%]"></div>
                             )}
                             <div className="flex gap-3">
@@ -92,13 +92,13 @@ export default function PetProfilesOverviewSection() {
                                                     </div>
                                                 </div>
 
-                                                    <Button
-                                                        variant="bordered"
-                                                        color={profile.species == "dog" ? "success" : "secondary"}
-                                                        radius="sm"
-                                                        size="sm">
-                                                        Profile
-                                                    </Button>
+                                                <Button
+                                                    variant="bordered"
+                                                    color={profile.species == "dog" ? "success" : "secondary"}
+                                                    radius="sm"
+                                                    size="sm">
+                                                    Profile
+                                                </Button>
 
                                             </CardHeader>
                                             <CardBody className="overflow-visible py-2 h-[300px] mb-3">

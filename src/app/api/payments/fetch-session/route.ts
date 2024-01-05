@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
 
         if (session.status === 'complete') {
             const queryParams = getJournalQueryParams(request);
-            const config = getAxiosConfigs(request,queryParams);
+            const config = getAxiosConfigs(request, queryParams);
 
             const sessionDetails: CreatePaymentRequest = {
                 created: session.created,

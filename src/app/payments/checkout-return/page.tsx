@@ -8,16 +8,16 @@ import {redirect} from "next/navigation";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 
 export default function CheckoutReturnPage() {
-    const {user,loading: authLoading } = useAuth();
+    const {user, loading: authLoading} = useAuth();
     const [isLoading, setIsLoading] = useState(true);
 
-    RedirectUserToDashboard(user,setIsLoading)
+    RedirectUserToDashboard(user, setIsLoading)
 
     if (isLoading || authLoading) {
         return <Loader/>;
     } else if (user) {
         return <CheckoutReturn/>;
-    } else if(!user){
+    } else if (!user) {
         redirect(NAVIGATION_LINKS.LOGIN)
     }
 };

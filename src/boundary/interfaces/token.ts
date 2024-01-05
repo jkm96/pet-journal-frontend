@@ -10,7 +10,8 @@ export interface Token {
     expiresAt: Date;
     createdAt: Date;
 }
+
 export interface AccessTokenModel {
     token: Token;
-    user : UserResponse;
+    user: UserResponse;
 }

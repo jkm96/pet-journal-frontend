@@ -20,7 +20,7 @@ export function AuthProvider({children}: AuthContextProps) {
         };
 
         await storeAccessTokenInCookie(cookieRequest);
-        const userObject:User = {
+        const userObject: User = {
             id: tokenData.user.id,
             username: tokenData.user.username,
             email: tokenData.user.email,
@@ -39,10 +39,10 @@ export function AuthProvider({children}: AuthContextProps) {
     useEffect(() => {
         const fetchAccessToken = async () => {
             const response = await getAccessToken();
-            if (response.statusCode === 200){
+            if (response.statusCode === 200) {
                 const tokenResponse = JSON.parse(response.data);
                 setUser(tokenResponse.user);
-            }else{
+            } else {
                 setUser(null)
             }
             setLoading(false)
@@ -54,7 +54,7 @@ export function AuthProvider({children}: AuthContextProps) {
     }, []);
 
     return (
-        <AuthContext.Provider value={{user, loading,storeAuthToken, clearAuthToken}}>
+        <AuthContext.Provider value={{user, loading, storeAuthToken, clearAuthToken}}>
             {children}
         </AuthContext.Provider>
     );

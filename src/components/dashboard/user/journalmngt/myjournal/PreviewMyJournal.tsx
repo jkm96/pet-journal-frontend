@@ -51,7 +51,10 @@ export function getDocument(journalTitle: string, user: User | null, journalEntr
     </Document>;
 }
 
-export default function PreviewMyJournal({journalEntries,journalTitle}: { journalEntries: JournalEntryResponse[],journalTitle:string }) {
+export default function PreviewMyJournal({journalEntries, journalTitle}: {
+    journalEntries: JournalEntryResponse[],
+    journalTitle: string
+}) {
     const {user} = useAuth();
 
     return (

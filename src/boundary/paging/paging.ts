@@ -8,7 +8,7 @@ export interface PagingMetaData {
     to: number;
 }
 
-export  interface PagedResponse {
+export interface PagedResponse {
     data: any;
     pagingMetaData: PagingMetaData;
     statusCode: number;

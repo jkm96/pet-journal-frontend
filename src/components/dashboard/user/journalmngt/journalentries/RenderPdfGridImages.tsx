@@ -20,9 +20,13 @@ export default function RenderPdfGridImages({imageBuffers}: {
                     marginBottom: 0
                 }}>
                     {imageBuffers.map((image, index) => (
-                        <View key={index} style={{width: imageBuffers.length === 1 ? '100%':'50%', marginTop: 2, padding: 5}}>
+                        <View key={index}
+                              style={{width: imageBuffers.length === 1 ? '100%' : '50%', marginTop: 2, padding: 5}}>
                             <Image
-                                style={{height: imageBuffers.length === 1 ? 200: 130, maxHeight: imageBuffers.length === 1 ? 200: 150}}
+                                style={{
+                                    height: imageBuffers.length === 1 ? 200 : 130,
+                                    maxHeight: imageBuffers.length === 1 ? 200 : 150
+                                }}
                                 src={`data:image/${image.imageType};base64,${image.imageBuffer}`}
                             />
                         </View>

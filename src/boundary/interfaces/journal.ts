@@ -12,7 +12,7 @@ export interface JournalEntryResponse {
     tags: string;
     createdAt: string;
     updatedAt: string;
-    pets:PetProfileResponse[];
+    pets: PetProfileResponse[];
     journalAttachments: JournalAttachment[];
 }
 
@@ -49,7 +49,7 @@ export interface JournalAttachment {
 }
 
 export interface PrintJournalEntryRequest {
-    id:number;
+    id: number;
     title: string;
     slug: string;
     event: string;
@@ -58,18 +58,18 @@ export interface PrintJournalEntryRequest {
     moods: string[];
     tags: string[];
     createdAt: string;
-    pets:string[];
+    pets: string[];
     journalAttachments: string[];
 }
 
-export interface JournalImageBuffer{
-    imageBuffer:string;
-    imageType:string;
+export interface JournalImageBuffer {
+    imageBuffer: string;
+    imageType: string;
 }
 
-export interface UploadJournalImageRequest{
+export interface UploadJournalImageRequest {
     journalId: number
-    attachments: FileList|null;
+    attachments: FileList | null;
 }
 
 export interface FilterProps {

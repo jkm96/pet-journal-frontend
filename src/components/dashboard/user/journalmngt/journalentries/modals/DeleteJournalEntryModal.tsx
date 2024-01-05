@@ -6,7 +6,7 @@ import {deleteJournal} from "@/lib/services/journal-entries/journalEntryService"
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import {useRouter} from "next/navigation";
 
-export default function DeleteJournalEntryModal({journalId,isOpen, onClose}: {
+export default function DeleteJournalEntryModal({journalId, isOpen, onClose}: {
     journalId: number,
     isOpen: boolean,
     onClose: () => void

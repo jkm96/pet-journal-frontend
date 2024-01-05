@@ -23,7 +23,7 @@ export default function UserDashboardLayout({children}: { children: React.ReactN
         redirect(NAVIGATION_LINKS.LOGIN)
     } else if (user && !user.isSubscribed) {
         redirect(NAVIGATION_LINKS.PAYMENTS)
-    } else if(user && user.isSubscribed){
+    } else if (user && user.isSubscribed) {
         return (
             <div className="dark:bg-boxdark-2 dark:text-bodydark">
                 <div className="flex h-screen overflow-hidden">

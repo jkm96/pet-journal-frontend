@@ -7,7 +7,7 @@ export async function getPetProfiles() {
         const response = await fetch(`${internalBaseUrl}/pet/profile`, {
             method: 'POST',
             headers: {
-                'x-api-key':`${apiKey}`,
+                'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
             credentials: 'include',
@@ -20,7 +20,7 @@ export async function getPetProfiles() {
     }
 }
 
-export async function createPetProfile(createRequest:CreatePetRequest) {
+export async function createPetProfile(createRequest: CreatePetRequest) {
     try {
         const formData = new FormData();
         formData.append('name', createRequest.name);
@@ -30,8 +30,8 @@ export async function createPetProfile(createRequest:CreatePetRequest) {
         formData.append('description', createRequest.description);
         formData.append('dateOfBirth', createRequest.dateOfBirth ?? '');
         formData.append('petTraits', JSON.stringify(createRequest.petTraits));
-        
-        console.log("createRequest",createRequest.petTraits)
+
+        console.log("createRequest", createRequest.petTraits)
         if (createRequest.profilePicture) {
             for (let i = 0; i < createRequest.profilePicture.length; i++) {
                 const file = createRequest.profilePicture[i];
@@ -52,12 +52,12 @@ export async function createPetProfile(createRequest:CreatePetRequest) {
     }
 }
 
-export async function getPetProfileDetails(petSlug:string) {
+export async function getPetProfileDetails(petSlug: string) {
     try {
         const response = await fetch(`${internalBaseUrl}/pet/${petSlug}`, {
             method: 'GET',
             headers: {
-                'x-api-key':`${apiKey}`,
+                'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
             body: null,
@@ -69,12 +69,12 @@ export async function getPetProfileDetails(petSlug:string) {
     }
 }
 
-export async function addPetTraits(addRequest:AddPetTraitRequest) {
+export async function addPetTraits(addRequest: AddPetTraitRequest) {
     try {
         const response = await fetch(`${internalBaseUrl}/pet/trait/create`, {
             method: 'POST',
             headers: {
-                'x-api-key':`${apiKey}`,
+                'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
             body: JSON.stringify(addRequest),

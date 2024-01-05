@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
         const nextResponse = NextResponse.json(
             {
                 "message": "cleared access cookies",
-                "statusCode":200
+                "statusCode": 200
             },
             {status: 200});
         nextResponse.cookies.set({
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
             httpOnly: true,
             secure: process.env.NODE_ENV !== "development",
             maxAge: 0,
-            expires:new Date(Date.now()),
+            expires: new Date(Date.now()),
             sameSite: "strict",
             path: "/",
         });

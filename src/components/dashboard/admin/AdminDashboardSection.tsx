@@ -1,4 +1,3 @@
-
 function AdminDashboardSection() {
 
     return (
@@ -7,4 +6,5 @@ function AdminDashboardSection() {
         </>
     )
 }
+
 export default AdminDashboardSection;

@@ -11,7 +11,7 @@ export function getJournalQueryParams(request: NextRequest) {
     const periodTo = searchParams.get('periodTo') ?? '';
     const fetch = searchParams.get('fetch') ?? '';
 
-    return {pageSize, pageNumber, orderBy, searchTerm,periodFrom, periodTo,fetch};
+    return {pageSize, pageNumber, orderBy, searchTerm, periodFrom, periodTo, fetch};
 }
 
 export function getUserQueryParams(request: NextRequest) {

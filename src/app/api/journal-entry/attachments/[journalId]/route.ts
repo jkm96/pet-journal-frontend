@@ -2,7 +2,7 @@ import {handleApiException, handleAxiosResponse} from "@/helpers/responseHelpers
 import petJournalApiClient, {getAxiosConfigs} from "@/lib/axios/axiosClient";
 import {NextRequest} from "next/server";
 
-export async function GET(request: NextRequest,{params}: { params: { journalId: string } }) {
+export async function GET(request: NextRequest, {params}: { params: { journalId: string } }) {
     try {
         const journalId = params.journalId;
         const config = getAxiosConfigs(request);

@@ -11,7 +11,7 @@ interface RenderJournalHeaderProps {
     pets: string[];
 }
 
-const renderListWithColors = (data: string)=> {
+const renderListWithColors = (data: string) => {
     const dataArray = data.split(',').map((item) => item.trim());
     const colorArray = getMoodColorClassList(dataArray);
 
@@ -33,7 +33,7 @@ const renderListWithColors = (data: string)=> {
     );
 };
 
-const RenderJournalHeader: React.FC<RenderJournalHeaderProps> = ({title, createdAt, mood, tags,pets}) => {
+const RenderJournalHeader: React.FC<RenderJournalHeaderProps> = ({title, createdAt, mood, tags, pets}) => {
     return (
         <div className="pb-0 pt-2 px-4 flex-col items-start">
             <p className="text-tiny uppercase font-bold">{title}</p>

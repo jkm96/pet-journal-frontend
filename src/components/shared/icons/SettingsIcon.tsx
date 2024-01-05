@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function SettingsIcon(){
-    return(
+export default function SettingsIcon() {
+    return (
         <svg
             className="fill-current"
             width="18"

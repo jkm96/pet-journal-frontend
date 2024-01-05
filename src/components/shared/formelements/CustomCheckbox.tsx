@@ -22,7 +22,7 @@ const checkbox = tv({
     }
 })
 
-export const CustomCheckbox = (props:any) => {
+export const CustomCheckbox = (props: any) => {
     const {
         children,
         isSelected,
@@ -34,7 +34,7 @@ export const CustomCheckbox = (props:any) => {
         ...props
     })
 
-    const styles = checkbox({ isSelected, isFocusVisible })
+    const styles = checkbox({isSelected, isFocusVisible})
 
     return (
         <label {...getBaseProps()}>
@@ -47,7 +47,7 @@ export const CustomCheckbox = (props:any) => {
                     content: styles.content(),
                 }}
                 color="primary"
-                startContent={isSelected ? <CustomCheckIcon className="ml-1" /> : null}
+                startContent={isSelected ? <CustomCheckIcon className="ml-1"/> : null}
                 variant="faded"
                 {...getLabelProps()}
             >

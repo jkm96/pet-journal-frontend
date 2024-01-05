@@ -115,10 +115,10 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
         }
     };
 
-    const removeImage = (fileName:any) => {
+    const removeImage = (fileName: any) => {
         setPreviewFile(prevFiles => prevFiles.filter(file => file.name !== fileName));
 
-        setCreateJournalFormData((prevFormData:any) => {
+        setCreateJournalFormData((prevFormData: any) => {
             const updatedAttachments = Array.from(prevFormData.attachments as File[]).filter((file) => file.name !== fileName);
             return {
                 ...prevFormData,
@@ -166,7 +166,13 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
         if (selectedMoodTags.length === 0 || selectedJournalTags.length === 0) {
             setInputErrors({
                 ...inputErrors,
-                mood: "Select at least one mood", attachments: null, content: "", event: "", location: "", petIds: [], title: "",
+                mood: "Select at least one mood",
+                attachments: null,
+                content: "",
+                event: "",
+                location: "",
+                petIds: [],
+                title: "",
                 tags: "Select at least one tag"
             });
             setIsSubmitting(false);

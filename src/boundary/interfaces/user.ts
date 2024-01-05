@@ -1,4 +1,4 @@
-export interface User{
+export interface User {
     id: number;
     username: string;
     email: string;
@@ -8,7 +8,7 @@ export interface User{
     isAdmin: boolean;
 }
 
-export interface UserResponse{
+export interface UserResponse {
     id: number;
     username: string;
     email: string;
@@ -20,5 +20,5 @@ export interface UserResponse{
     emailVerifiedAt: null;
     createdAt: Date;
     updatedAt: Date;
-    permissions : number[];
+    permissions: number[];
 }

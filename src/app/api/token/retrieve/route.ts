@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
             return createNextResponse(404, "Cookie was empty")
         }
 
-        const tokenData:AccessTokenModel = JSON.parse(tokenCookie)
+        const tokenData: AccessTokenModel = JSON.parse(tokenCookie)
         const expirationDate = new Date(tokenData.token.expiresAt);
         const currentDate = new Date();
         if (expirationDate > currentDate) {

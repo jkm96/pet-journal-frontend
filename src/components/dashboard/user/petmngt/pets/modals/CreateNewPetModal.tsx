@@ -19,7 +19,14 @@ import {createPetProfile} from "@/lib/services/pet/petProfileService";
 import {species} from "@/boundary/constants/petConstants";
 
 const initialFormState: CreatePetRequest = {
-    breed: "", dateOfBirth: "", description: "", name: "", nickname: "", petTraits: null, profilePicture: null, species: ""
+    breed: "",
+    dateOfBirth: "",
+    description: "",
+    name: "",
+    nickname: "",
+    petTraits: null,
+    profilePicture: null,
+    species: ""
 };
 
 export default function CreateNewPetModal({isOpen, onClose}: {

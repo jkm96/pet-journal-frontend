@@ -23,7 +23,7 @@ export default function CheckoutReturn() {
                 if (response.statusCode === 200) {
                     const session: CheckoutSessionModel = response.data.sessionData;
 
-                    if (session.sessionStatus === 'complete'){
+                    if (session.sessionStatus === 'complete') {
                         clearAuthToken();
                         let responseData: AccessTokenModel = response.data.cookieRequest;
                         storeAuthToken(responseData);

@@ -198,7 +198,8 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                             <div className="flex flex-wrap md:-m-2 mt-3">
                                 <div className={`flex ${journalImages.length <= 3 ? 'w-full' : 'w-1/2'} flex-wrap`}>
                                     {journalImages.slice(0, 3).map((image, index) => (
-                                        <div key={index} className={`w-${index === 2 || journalImages.length <=1 ? 'full' : '1/2'} p-1 md:p-2`}>
+                                        <div key={index}
+                                             className={`w-${index === 2 || journalImages.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}>
                                             <img
                                                 alt={`gallery-${index + 1}`}
                                                 className="block h-full w-full rounded-lg object-cover object-center"
@@ -226,7 +227,7 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                     <div className="fixed bottom-4 right-4 md:hidden">
                         <Button
                             onPress={() => openModal("previewAndPrintEntry")}
-                            startContent={<PlusIcon />}
+                            startContent={<PlusIcon/>}
                             color="primary"
                             radius="full"
                             variant="shadow"

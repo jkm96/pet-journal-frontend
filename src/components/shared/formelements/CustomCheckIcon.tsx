@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CustomCheckIcon = (props:any) =>
+export const CustomCheckIcon = (props: any) =>
     (
         <svg
             aria-hidden="true"
@@ -15,6 +15,6 @@ export const CustomCheckIcon = (props:any) =>
             width="1em"
             {...props}
         >
-            <polyline points="20 6 9 17 4 12" />
+            <polyline points="20 6 9 17 4 12"/>
         </svg>
     );

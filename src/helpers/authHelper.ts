@@ -5,7 +5,7 @@ import {AccessTokenModel} from "@/boundary/interfaces/token";
 export async function hasRequiredPermissions(requiredPermissions: string[]): Promise<boolean> {
     const response = await getAccessToken();
     if (response.statusCode === 200) {
-        const tokenResponse:AccessTokenModel = JSON.parse(response.data);
+        const tokenResponse: AccessTokenModel = JSON.parse(response.data);
         const userPermissions = getEnumNamesFromValues(tokenResponse.user.permissions);
         const alwaysTruePermission = MapPermission(PetJournalPermission.PermissionsAccessAll)
         if (requiredPermissions.includes(alwaysTruePermission)) {
@@ -23,8 +23,8 @@ export async function hasRequiredPermissions(requiredPermissions: string[]): Pro
 export async function checkEmailVerificationStatus() {
     const response = await getAccessToken();
     if (response.statusCode === 200) {
-        const tokenResponse:AccessTokenModel = JSON.parse(response.data);
-        if (tokenResponse.user.isEmailVerified){
+        const tokenResponse: AccessTokenModel = JSON.parse(response.data);
+        if (tokenResponse.user.isEmailVerified) {
             return true;
         }
     }

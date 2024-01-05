@@ -9,4 +9,5 @@ function ManageUserPage({params}: { params: { userId: number } }) {
         </>
     )
 }
+
 export default ManageUserPage

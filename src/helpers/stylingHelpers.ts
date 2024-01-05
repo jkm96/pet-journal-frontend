@@ -4,7 +4,7 @@ type MoodColorMap = {
     [key: string]: ColorName;
 };
 
-const moodColorMap:MoodColorMap=  {
+const moodColorMap: MoodColorMap = {
     "happy": "success",
     "playful": "secondary",
     "content": "default",
@@ -26,7 +26,7 @@ type PdfColorMap = {
     [key: string]: PdfColorName;
 };
 export type PdfColorName = "#219653" | "#7722cb" | "#259AE6" | "#FFA70B" | "#da1028";
-const PdfColorMap:PdfColorMap=  {
+const PdfColorMap: PdfColorMap = {
     "happy": "#219653",
     "playful": "#7722cb",
     "content": "#259AE6",
@@ -68,4 +68,4 @@ const getPdfMoodColorClassList = (moods: string[]): PdfColorName[] => {
     });
 };
 
-export {getMoodColorClass,getMoodColorClassList, getPdfMoodColorClassList}
+export {getMoodColorClass, getMoodColorClassList, getPdfMoodColorClassList}

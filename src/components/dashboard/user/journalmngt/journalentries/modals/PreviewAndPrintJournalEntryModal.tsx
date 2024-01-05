@@ -82,7 +82,8 @@ export default function PreviewAndPrintJournalEntryModal({printJournalRequest, i
             </Page>
         </Document>;
     }
-     const DownloadButton = () => {
+
+    const DownloadButton = () => {
         return (
             <Button color="primary"
                     type="submit"

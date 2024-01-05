@@ -6,7 +6,7 @@ export async function storeAccessTokenInCookie(storeTokenRequest: AccessTokenMod
         const response = await fetch(`${internalBaseUrl}/token/store`, {
             method: 'POST',
             headers: {
-                'x-api-key':`${apiKey}`,
+                'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
             body: JSON.stringify(storeTokenRequest),
@@ -24,7 +24,7 @@ export async function getAccessToken() {
         const response = await fetch(`${internalBaseUrl}/token/retrieve`, {
             method: 'POST',
             headers: {
-                'x-api-key':`${apiKey}`,
+                'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
             body: null,
@@ -41,7 +41,7 @@ export async function deleteAccessToken() {
         const response = await fetch(`${internalBaseUrl}/token/delete`, {
             method: 'POST',
             headers: {
-                'x-api-key':`${apiKey}`,
+                'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
             body: null,

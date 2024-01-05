@@ -72,7 +72,7 @@ export default function ManageUserSection({userId}: { userId: number }) {
                                     {modals.toggleUser && (
                                         <ToggleUserStatusModal
                                             userId={userId}
-                                            currentStatus={userDetails.isActive  ? "Deactivate" : "Activate"}
+                                            currentStatus={userDetails.isActive ? "Deactivate" : "Activate"}
                                             isOpen={modals.toggleUser}
                                             onClose={() => closeModal("toggleUser")}
                                         />
@@ -83,13 +83,13 @@ export default function ManageUserSection({userId}: { userId: number }) {
                                             color={userDetails.isSubscribed ? "danger" : "success"}
                                             className="ml-2"
                                             variant="shadow">
-                                        {userDetails.isSubscribed  ? "Unsubscribe" : "Subscribe"}
+                                        {userDetails.isSubscribed ? "Unsubscribe" : "Subscribe"}
                                     </Button>
 
                                     {modals.toggleSubscription && (
                                         <ToggleUserSubscriptionModal
                                             userId={userId}
-                                            currentStatus={userDetails.isSubscribed  ? "Unsubscribe" : "Subscribe"}
+                                            currentStatus={userDetails.isSubscribed ? "Unsubscribe" : "Subscribe"}
                                             isOpen={modals.toggleSubscription}
                                             onClose={() => closeModal("toggleSubscription")}
                                         />

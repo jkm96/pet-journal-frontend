@@ -18,7 +18,7 @@ export function PdfPreviewStyle() {
             height: 500,
         },
         titlePage: {
-            textAlign:'center',
+            textAlign: 'center',
             fontSize: 25,
             fontFamily: 'Oswald',
             paddingTop: 35,
@@ -27,8 +27,8 @@ export function PdfPreviewStyle() {
             height: 500,
         },
         title: {
-            marginTop:100,
-            textAlign:'center',
+            marginTop: 100,
+            textAlign: 'center',
             fontSize: 25,
             fontFamily: 'Oswald'
         },

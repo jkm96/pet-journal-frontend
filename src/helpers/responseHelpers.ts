@@ -18,11 +18,11 @@ export function handleApiException(error: any) {
         // Handle Axios errors
         const axiosError = error as AxiosError;
         if (axiosError.response !== undefined) {
-            console.log("error response data", axiosError.response?.data);
-            console.log("error response status", axiosError.response?.status);
+            console.error("error response data", axiosError.response?.data);
+            console.error("error response status", axiosError.response?.status);
             const errorData: any = axiosError.response?.data;
             const errorResponse = camelcaseKeys(errorData, {deep: true}) as ApiErrorResponse;
-            if (axiosError.response?.data){
+            if (axiosError.response?.data) {
                 const errData = axiosError.response?.data as ApiErrorResponse;
                 return createNextResponse(errData.statusCode, errData.message)
             }
@@ -34,7 +34,7 @@ export function handleApiException(error: any) {
                 return createNextResponse(503, "Unable to connect to the server. Please try again later.")
         }
     }
-    console.log("error", error)
+    console.error("error", error)
     return createNextResponse(500, "An unhandled error occurred. Please try again later.")
 }
 

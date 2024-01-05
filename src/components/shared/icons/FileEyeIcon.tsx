@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FileEyeIcon = ({ width = 24, height = 24, color = '#da1028' }) => {
+const FileEyeIcon = ({width = 24, height = 24, color = '#da1028'}) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
             <path fill={color} d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1s-1-.44-1-1s.44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4c.94

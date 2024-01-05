@@ -22,7 +22,7 @@ import SearchComponent from "@/components/common/filter/SearchComponent";
 import RenderUserCell from "@/components/dashboard/admin/manageusers/RenderUserCell";
 import {FilterProps} from "@/boundary/interfaces/journal";
 
-const INITIAL_VISIBLE_COLUMNS = ["username", "email", "isActive","isSubscribed", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["username", "email", "isActive", "isSubscribed", "actions"];
 
 export default function UsersOvervewSection({searchParams}: FilterProps) {
     const [currentPage, setCurrentPage] = useState(1);

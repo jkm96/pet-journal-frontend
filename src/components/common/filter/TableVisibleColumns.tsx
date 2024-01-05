@@ -4,11 +4,11 @@ import {ChevronDownIcon} from "@/components/shared/icons/ChevronDownIcon";
 import {capitalize} from "@/lib/utils/tableUtils";
 
 
-export function TableVisibleColumns({ visibleColumns, setVisibleColumns, tableColumns }:any) {
+export function TableVisibleColumns({visibleColumns, setVisibleColumns, tableColumns}: any) {
     return (
         <Dropdown>
             <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                <Button endContent={<ChevronDownIcon className="text-small"/>} variant="flat">
                     Columns
                 </Button>
             </DropdownTrigger>
@@ -20,7 +20,7 @@ export function TableVisibleColumns({ visibleColumns, setVisibleColumns, tableCo
                 selectionMode="multiple"
                 onSelectionChange={setVisibleColumns}
             >
-                {tableColumns.map((column:any) => (
+                {tableColumns.map((column: any) => (
                     <DropdownItem key={column.uid} className="capitalize">
                         {capitalize(column.name)}
                     </DropdownItem>

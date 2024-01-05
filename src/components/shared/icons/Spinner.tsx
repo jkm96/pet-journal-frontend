@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Spinner() {
-    return(
+    return (
         <svg
             className="animate-spin h-5 w-5 text-current"
             fill="none"

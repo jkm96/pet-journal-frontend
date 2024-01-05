@@ -29,7 +29,8 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({journalEntries})
                                 } flex-wrap`}
                             >
                                 {journal.journalAttachments.slice(0, 3).map((image, index) => (
-                                    <div key={index} className={`w-${index === 2 ||  journal.journalAttachments.length <=1 ? 'full' : '1/2'} p-1 md:p-2`}>
+                                    <div key={index}
+                                         className={`w-${index === 2 || journal.journalAttachments.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}>
                                         <img
                                             alt={`gallery-${index + 1}`}
                                             className="block w-full rounded-lg object-center"

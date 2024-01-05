@@ -1,6 +1,6 @@
 import React from 'react';
 
-const JournalHeartIcon = ({ width = 24, height = 24, color = '#ffffff' }) => {
+const JournalHeartIcon = ({width = 24, height = 24, color = '#ffffff'}) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
             <path fill={color} d="m19 23.3l-.6-.5c-2-1.9-3.4-3.1-3.4-4.6c0-1.2 1-2.2 2.2-2.2c.7 0 1.4.3

@@ -14,13 +14,13 @@ const petJournalApiClient = axios.create({
 });
 
 petJournalApiClient.interceptors.request.use(
-    function (config:any) {
+    function (config: any) {
         if (
-            config.url.includes("journal-entry/create")||
-            config.url.includes("attachment/create")||
+            config.url.includes("journal-entry/create") ||
+            config.url.includes("attachment/create") ||
             config.url.includes("pet/create")
-        ){
-            if(config.headers["Content-Type"] == "application/json" || config.headers["Accept"] == "application/json"){
+        ) {
+            if (config.headers["Content-Type"] == "application/json" || config.headers["Accept"] == "application/json") {
                 delete config.headers["Content-Type"];
                 delete config.headers["Accept"];
             }

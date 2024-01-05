@@ -10,7 +10,7 @@ export default function Home() {
     const {user, loading: authLoading} = useAuth();
     const [loading, setLoading] = useState(true);
 
-    RedirectUserToDashboard(user,setLoading)
+    RedirectUserToDashboard(user, setLoading)
 
     if (loading || authLoading) {
         return <Loader/>;

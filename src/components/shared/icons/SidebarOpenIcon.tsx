@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function SidebarOpenIcon() {
-    return(
+    return (
         <svg
             className="fill-current"
             width="20"

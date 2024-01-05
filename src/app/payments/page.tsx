@@ -8,16 +8,16 @@ import {redirect} from "next/navigation";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 
 export default function PaymentsPage() {
-    const {user,loading: authLoading } = useAuth();
+    const {user, loading: authLoading} = useAuth();
     const [loading, setLoading] = useState(true);
 
-    RedirectUserToDashboard(user,setLoading)
+    RedirectUserToDashboard(user, setLoading)
 
     if (loading || authLoading) {
         return <Loader/>;
     } else if (user && !user.isSubscribed) {
         return <PaymentCheckout/>;
-    } else if(!user){
+    } else if (!user) {
         redirect(NAVIGATION_LINKS.LOGIN)
     }
 };

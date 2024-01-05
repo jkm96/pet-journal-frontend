@@ -26,7 +26,7 @@ export async function verifyUserEmailAsync(token: String) {
                 'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify({"token":token}),
+            body: JSON.stringify({"token": token}),
         });
 
         return response.json();

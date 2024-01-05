@@ -21,7 +21,7 @@ export default function AdminDashboardLayout({children}: { children: React.React
         return <Loader/>;
     } else if (!user) {
         redirect(NAVIGATION_LINKS.ADMIN_LOGIN)
-    }else if(user && user.isAdmin){
+    } else if (user && user.isAdmin) {
         return (
             <div className="dark:bg-boxdark-2 dark:text-bodydark">
                 <div className="flex h-screen overflow-hidden">

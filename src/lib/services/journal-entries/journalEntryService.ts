@@ -71,7 +71,7 @@ export async function getJournalEntries(queryParams: JournalQueryParameters) {
         const response = await fetch(apiUrl, {
             method: 'GET',
             headers: {
-                'x-api-key':`${apiKey}`,
+                'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
             body: null,
@@ -83,12 +83,12 @@ export async function getJournalEntries(queryParams: JournalQueryParameters) {
     }
 }
 
-export async function updateJournalEntry(updateRequest:UpdateJournalEntryRequest) {
+export async function updateJournalEntry(updateRequest: UpdateJournalEntryRequest) {
     try {
         const response = await fetch(`${internalBaseUrl}/journal-entry/edit`, {
             method: 'POST',
             headers: {
-                'x-api-key':`${apiKey}`,
+                'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
             body: JSON.stringify(updateRequest),
@@ -99,12 +99,13 @@ export async function updateJournalEntry(updateRequest:UpdateJournalEntryRequest
         throw error;
     }
 }
-export async function deleteJournal(journalId:number) {
+
+export async function deleteJournal(journalId: number) {
     try {
         const response = await fetch(`${internalBaseUrl}/journal-entry/delete`, {
             method: 'POST',
             headers: {
-                'x-api-key':`${apiKey}`,
+                'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
@@ -118,12 +119,12 @@ export async function deleteJournal(journalId:number) {
     }
 }
 
-export async function getJournalEntryDetails(journalSlug:string) {
+export async function getJournalEntryDetails(journalSlug: string) {
     try {
         const response = await fetch(`${internalBaseUrl}/journal-entry/${journalSlug}`, {
             method: 'GET',
             headers: {
-                'x-api-key':`${apiKey}`,
+                'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
             body: null,
@@ -135,12 +136,12 @@ export async function getJournalEntryDetails(journalSlug:string) {
     }
 }
 
-export async function getJournalEntryAttachmentBuffers(journalId:number) {
+export async function getJournalEntryAttachmentBuffers(journalId: number) {
     try {
         const response = await fetch(`${internalBaseUrl}/journal-entry/attachments/${journalId}`, {
             method: 'GET',
             headers: {
-                'x-api-key':`${apiKey}`,
+                'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
             body: null,

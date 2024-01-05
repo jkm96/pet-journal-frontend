@@ -28,7 +28,7 @@ export async function toggleUser(userId: number) {
                 'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify({"userId":userId}),
+            body: JSON.stringify({"userId": userId}),
         });
 
         return response.json();
@@ -45,7 +45,7 @@ export async function toggleUserSubscription(userId: number) {
                 'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify({"userId":userId}),
+            body: JSON.stringify({"userId": userId}),
         });
 
         return response.json();

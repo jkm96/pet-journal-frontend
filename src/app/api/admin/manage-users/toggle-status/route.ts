@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
         const requestBody = await request.json();
         const {userId} = requestBody;
         const response = await adminApiClient
-            .put(`admin/user/${userId}/toggle-status`,requestBody, config);
+            .put(`admin/user/${userId}/toggle-status`, requestBody, config);
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {

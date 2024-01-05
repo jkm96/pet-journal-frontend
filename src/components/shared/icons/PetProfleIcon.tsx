@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PetProfileIcon = ({ width = 24, height = 24, color = '#ffffff' }) => {
+const PetProfileIcon = ({width = 24, height = 24, color = '#ffffff'}) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
             <path fill={color} d="M8.35 3c1.18-.17 2.43 1.12 2.79 2.9c.36 1.77-.29 3.35-1.47

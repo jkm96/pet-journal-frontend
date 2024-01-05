@@ -22,19 +22,22 @@ export default function RenderUserCell(user: UserResponse, columnKey: string | n
             );
         case "isActive":
             return (
-                <Chip className="capitalize" color={statusColorMap[user.isActive ? 'active' : 'inactive']} size="sm" variant="flat">
+                <Chip className="capitalize" color={statusColorMap[user.isActive ? 'active' : 'inactive']} size="sm"
+                      variant="flat">
                     {user.isActive ? 'active' : 'inactive'}
                 </Chip>
             );
         case "isEmailVerified":
             return (
-                <Chip className="capitalize" color={statusColorMap[user.isEmailVerified ? 'verified' : 'unverified']} size="sm" variant="flat">
+                <Chip className="capitalize" color={statusColorMap[user.isEmailVerified ? 'verified' : 'unverified']}
+                      size="sm" variant="flat">
                     {user.isEmailVerified ? 'verified' : 'unverified'}
                 </Chip>
             );
         case "isSubscribed":
             return (
-                <Chip className="capitalize" color={statusColorMap[user.isSubscribed ? 'yes' : 'no']} size="sm" variant="flat">
+                <Chip className="capitalize" color={statusColorMap[user.isSubscribed ? 'yes' : 'no']} size="sm"
+                      variant="flat">
                     {user.isSubscribed ? 'yes' : 'no'}
                 </Chip>
             );

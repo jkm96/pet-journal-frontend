@@ -57,12 +57,12 @@ const DropdownUser = () => {
                         name={user?.username}
                         size={"md"}
                     />
-          {/*<Image*/}
-          {/*    width={112}*/}
-          {/*    height={112}*/}
-          {/*    src=""*/}
-          {/*    alt="User"*/}
-          {/*/>*/}
+                    {/*<Image*/}
+                    {/*    width={112}*/}
+                    {/*    height={112}*/}
+                    {/*    src=""*/}
+                    {/*    alt="User"*/}
+                    {/*/>*/}
         </span>
 
                 <svg

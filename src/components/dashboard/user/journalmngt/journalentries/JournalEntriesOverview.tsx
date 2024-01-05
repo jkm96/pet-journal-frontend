@@ -50,6 +50,7 @@ export default function JournalEntriesOverview({searchParams}: FilterProps) {
     function getQueryParams() {
         const queryParams: JournalQueryParameters = new JournalQueryParameters();
         queryParams.searchTerm = searchParams?.searchTerm ?? '';
+        queryParams.fetch = '';
         return queryParams;
     }
 
@@ -70,7 +71,13 @@ export default function JournalEntriesOverview({searchParams}: FilterProps) {
                 <>
                     <div className="flex flex-col gap-4 m-2">
                         <div className="flex justify-between gap-3 items-end">
-                            <SearchComponent placeholder="Search for journal entries"/>
+
+                            {journalEntries.length >= 1 ? (
+                                <SearchComponent placeholder="Search for journal entries"/>
+                            ) : (
+                                <div className="w-full sm:max-w-[44%]"></div>
+                            )}
+
                             <div className="flex gap-3">
                                 <Button onPress={handleOpenModal}
                                         startContent={<PlusIcon/>}

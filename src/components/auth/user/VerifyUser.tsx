@@ -5,7 +5,7 @@ import {useRouter} from "next/navigation";
 import {CircularProgress} from "@nextui-org/react";
 import {verifyUserEmailAsync} from "@/lib/services/auth/userAuthService";
 
-export default function VerifyUser(){
+export default function VerifyUser() {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(true);
     const [status, setStatus] = useState<any>(null);
@@ -59,7 +59,7 @@ export default function VerifyUser(){
                             {message}
                             Redirecting you shortly...
                         </p>
-                    ):(
+                    ) : (
                         <p>
                             {message}
                         </p>
