@@ -6,6 +6,7 @@ import logger from "@/logger/logger";
 
 export async function POST(request: NextRequest) {
     try {
+        logger.info(`reached api endpoint with ${JSON.stringify(request.nextUrl)}`)
         const queryParams = getJournalQueryParams(await request.json());
         logger.info(`reached api endpoint with ${JSON.stringify(queryParams)}`)
         const config = getAxiosConfigs(request, queryParams);
