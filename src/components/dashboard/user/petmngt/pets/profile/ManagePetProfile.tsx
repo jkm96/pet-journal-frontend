@@ -10,6 +10,7 @@ import {EditIcon} from "@nextui-org/shared-icons";
 import {PetProfileCard} from "@/components/dashboard/user/petmngt/pets/profile/PetProfileCard";
 import Spinner from "@/components/shared/icons/Spinner";
 import PetTraits from "@/components/dashboard/user/petmngt/pets/profile/PetTraits";
+import TrashIcon from "@/components/shared/icons/TrashIcon";
 
 export default function ManagePetProfile({slug}: { slug: string }) {
     const [petProfileDetails, setPetProfileDetails] = useState<PetProfileResponse>({} as PetProfileResponse);
@@ -122,28 +123,28 @@ export default function ManagePetProfile({slug}: { slug: string }) {
 
                     <PetTraits petTraits={petProfileDetails?.petTraits}/>
 
-                    <div>
-                        <h3>Manage Pet Trait</h3>
+                    <div className="py-4 m-4">
+                        <h3>Add Pet Trait(s)</h3>
                         <div className="grid md:grid-cols-3 md:gap-6">
-                            <div className={"col-6"}>
+                            <div className="col-6 mt-2">
                                 <Input
-                                    aria-label={"Trait"}
+                                    aria-label="Trait"
                                     type="text"
-                                    size={"sm"}
+                                    size="sm"
                                     variant="bordered"
-                                    radius={"sm"}
+                                    radius="sm"
                                     placeholder="Enter trait"
                                     value={currentTrait.trait}
                                     onChange={(e) => handleInputChange('trait', e.target.value)}
                                 />
                             </div>
 
-                            <div className={"col-5"}>
+                            <div className="col-5 mt-2">
                                 <Select
-                                    aria-label={"Type"}
+                                    aria-label="Type"
                                     variant="bordered"
                                     name="type"
-                                    size={"sm"}
+                                    size="sm"
                                     placeholder="Select type"
                                     value={currentTrait.type}
                                     onChange={(e) => handleInputChange('type', e.target.value)}
@@ -153,7 +154,7 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                                 </Select>
                             </div>
 
-                            <div className={"col-1"}>
+                            <div className="col-1 mt-2">
                                 <Button type="button"
                                         onPress={addTrait}
                                         color="primary"
@@ -166,11 +167,17 @@ export default function ManagePetProfile({slug}: { slug: string }) {
 
                         {traits.map((trait, index) => (
                             <div key={index} className="m-2">
-                                {trait.trait} - {trait.type}
-                                <Button type="button"
+                                <span className="">
+                                    {trait.trait} - {trait.type}
+                                </span>
+                                <Button
                                         onPress={() => removeTrait(index)}
-                                        color={"danger"}>
-                                    Remove
+                                        className="p-0"
+                                        size="sm"
+                                        isIconOnly
+                                        style={{ padding: 0,fontSize:"larger"}}
+                                        color="danger">
+                                    x
                                 </Button>
                             </div>
                         ))}

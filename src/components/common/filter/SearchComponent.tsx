@@ -24,12 +24,10 @@ export default function SearchComponent({onSearchChange,placeholder}: SearchComp
 
         replace(`${pathname}?${params.toString()}`);
 
-        // Clear existing timeout
         if (debounceTimeout) {
             clearTimeout(debounceTimeout);
         }
 
-        // Set a new timeout to trigger onSearchChange after a delay (e.g., 500 milliseconds)
         const newTimeout = setTimeout(() => {
             if (onSearchChange && (newSearchTerm.length >= 4 || newSearchTerm === '')) {
                 onSearchChange(newSearchTerm);

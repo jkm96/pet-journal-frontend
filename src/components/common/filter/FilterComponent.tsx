@@ -5,17 +5,23 @@ import React, {useState} from "react";
 import {Button} from "@nextui-org/button";
 import {Input} from "@nextui-org/react";
 
-export default function FilterComponent({placeholder}: { placeholder: string }) {
+interface FilterComponentProps {
+    onFilterChange?: (searchTerm: string, periodFrom: string, periodTo: string) => void;
+    placeholder: string;
+}
+
+export default function FilterComponent({ onFilterChange,placeholder }: FilterComponentProps) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const {replace} = useRouter();
-    const [searchTerm, setSearchTerm] = useState<string>(searchParams.get('searchTerm')?.toString() || '');
-    const [periodFrom, setPeriodFrom] = useState<string>(searchParams.get('periodFrom')?.toString() || '');
-    const [periodTo, setPeriodTo] = useState<string>(searchParams.get('periodTo')?.toString() || '');
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [periodFrom, setPeriodFrom] = useState<string>('');
+    const [periodTo, setPeriodTo] = useState<string>('');
+    const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(null);
 
-    function handleSearch() {
+    function handleFilterSearch() {
         const params = new URLSearchParams(searchParams);
-        if (searchTerm && searchTerm.length > 3) {
+        if (searchTerm) {
             params.set('searchTerm', searchTerm);
         } else {
             params.delete('searchTerm');
@@ -34,10 +40,22 @@ export default function FilterComponent({placeholder}: { placeholder: string }) 
         }
 
         replace(`${pathname}?${params.toString()}`);
+
+        if (debounceTimeout) {
+            clearTimeout(debounceTimeout);
+        }
+
+        const newTimeout = setTimeout(() => {
+            if (onFilterChange) {
+                onFilterChange(searchTerm, periodFrom, periodTo);
+            }
+        }, 500);
+
+        setDebounceTimeout(newTimeout);
     }
 
     return (
-        <div className="w-full sm:max-w-[64%]">
+        <div className="w-full">
             <div className="grid grid-cols-5 gap-4">
                 <div className="relative flex flex-1 flex-shrink-0">
                     <Input
@@ -81,8 +99,12 @@ export default function FilterComponent({placeholder}: { placeholder: string }) 
                 <div className="relative flex flex-1 flex-shrink-0">
                     <Button
                         className="mt-1"
-                        color={"primary"}
-                        onClick={handleSearch}>
+                        color="primary"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleFilterSearch();
+                        }}
+                    >
                         Filter
                     </Button>
                 </div>

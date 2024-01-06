@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import {getJournalEntries} from "@/lib/services/journal-entries/journalEntryService";
-import {FilterProps, JournalEntryResponse} from "@/boundary/interfaces/journal";
+import {JournalEntryResponse} from "@/boundary/interfaces/journal";
 import {Avatar, Card, CardBody, CircularProgress} from "@nextui-org/react";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import Link from "next/link";
@@ -50,21 +50,33 @@ export default function JournalEntriesOverview() {
     useEffect(() => {
         const {search} = window.location;
         const searchParams = new URLSearchParams(search);
-        const searchTerm = searchParams.get('searchTerm') ?? '';
-        console.log('window params', searchTerm)
-        queryParams.searchTerm = searchTerm
+        queryParams.searchTerm = searchParams.get('searchTerm') ?? ''
         fetchJournalEntries(queryParams);
     }, [queryParams]);
 
     const handleSearchChange = (newSearchTerm: string) => {
-        console.log("search term",newSearchTerm)
         setQueryParams((prevParams) => ({ ...prevParams, searchTerm: newSearchTerm }));
-        fetchJournalEntries(queryParams);
+        // fetchJournalEntries(queryParams);
     };
 
     return (
         <>
             <Breadcrumb pageName="Journal Entries"/>
+
+            <div className="flex flex-col gap-4 m-2">
+                <div className="flex justify-between gap-3 items-end">
+                    <SearchComponent onSearchChange={handleSearchChange} placeholder="Search for journal entries"/>
+                    <div className="flex gap-3">
+                        <Button onPress={handleOpenModal}
+                                startContent={<PlusIcon/>}
+                                color="primary"
+                                variant="shadow">
+                            Add Journal
+                        </Button>
+                        <CreateJournalEntryModal isOpen={isModalOpen} onClose={handleCloseModal}/>
+                    </div>
+                </div>
+            </div>
 
             {isLoadingJournalEntries ? (
                 <div className={"grid place-items-center"}>
@@ -72,21 +84,6 @@ export default function JournalEntriesOverview() {
                 </div>
             ) : (
                 <>
-                    <div className="flex flex-col gap-4 m-2">
-                        <div className="flex justify-between gap-3 items-end">
-                            <SearchComponent onSearchChange={handleSearchChange} placeholder="Search for journal entries"/>
-                            <div className="flex gap-3">
-                                <Button onPress={handleOpenModal}
-                                        startContent={<PlusIcon/>}
-                                        color="primary"
-                                        variant="shadow">
-                                    Add Journal
-                                </Button>
-                                <CreateJournalEntryModal isOpen={isModalOpen} onClose={handleCloseModal}/>
-                            </div>
-                        </div>
-                    </div>
-
                     {journalEntries.length < 1 ? (
                         <>
                             <div className="text-center">

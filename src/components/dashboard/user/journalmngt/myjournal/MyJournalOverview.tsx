@@ -14,13 +14,15 @@ import {PDFDownloadLink} from "@react-pdf/renderer";
 import {useAuth} from "@/hooks/useAuth";
 import Spinner from "@/components/shared/icons/Spinner";
 
-export default function MyJournalOverview({searchParams}: FilterProps) {
+export default function MyJournalOverview() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const {user} = useAuth();
     const [journalEntries, setJournalEntries] = useState<JournalEntryResponse[]>([]);
     const [isLoadingEntries, setIsLoadingEntries] = useState(true);
     const [showPreview, setShowPreview] = useState(false);
     const [journalTitle, setJournalTitle] = useState('');
+    const [queryParams, setQueryParams] = useState<JournalQueryParameters>(new JournalQueryParameters());
+
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setJournalTitle(e.target.value);
     };
@@ -42,13 +44,28 @@ export default function MyJournalOverview({searchParams}: FilterProps) {
     };
 
     useEffect(() => {
-        const queryParams: JournalQueryParameters = new JournalQueryParameters();
-        queryParams.searchTerm = searchParams?.searchTerm ?? '';
-        queryParams.periodFrom = searchParams?.periodFrom ?? '';
-        queryParams.periodTo = searchParams?.periodTo ?? '';
+        const {search} = window.location;
+        const searchParams = new URLSearchParams(search);
+        queryParams.searchTerm = searchParams.get('searchTerm') ?? ''
+        queryParams.periodFrom = searchParams.get('periodFrom') ?? '';
+        queryParams.periodTo = searchParams.get('periodTo') ?? '';
         queryParams.fetch = 'all';
         fetchAllJournalEntries(queryParams);
-    }, [searchParams?.periodFrom, searchParams?.periodTo, searchParams?.searchTerm]);
+    }, [queryParams]);
+
+    const handleFilterChange = (searchTerm: string, periodFrom: string, periodTo: string) => {
+        console.log("searchTerm", searchTerm)
+        console.log("periodFrom", periodFrom)
+        console.log("periodTo", periodTo)
+        setQueryParams((prevParams) => ({
+            ...prevParams,
+            searchTerm: searchTerm,
+            periodFrom: periodFrom,
+            periodTo: periodTo,
+        }));
+        queryParams.fetch = 'all';
+        // fetchAllJournalEntries(queryParams);
+    };
 
     const handlePreviewClick = () => {
         setShowPreview(true);
@@ -73,6 +90,61 @@ export default function MyJournalOverview({searchParams}: FilterProps) {
         <>
             <Breadcrumb pageName="My Journal"/>
 
+            <div className="flex flex-col gap-4 mb-2">
+                <div className="flex justify-between gap-3 items-end">
+                    {showPreview && journalEntries.length >= 1 ? (
+                        <>
+                            <div className="flex gap-1">
+                                <Input
+                                    type="text"
+                                    variant={"bordered"}
+                                    size="sm"
+                                    value={journalTitle}
+                                    onChange={handleTitleChange}
+                                    placeholder="Enter your journal title here"
+                                />
+
+                                <Button onPress={handleGoBackClick}
+                                        startContent={<PlusFilledIcon/>}
+                                        color="default"
+                                        variant="shadow">
+                                    Title
+                                </Button>
+                            </div>
+                        </>
+                    ) : (
+                        <FilterComponent onFilterChange={handleFilterChange} placeholder="Search for journal entries"/>
+                    )}
+
+                    <div className="flex gap-3">
+                        {showPreview ? (
+                            <>
+                                <PDFDownloadLink
+                                    document={getDocument(journalTitle, user, journalEntries)}
+                                    fileName={`${journalTitle.toLowerCase() ?? user?.username}.pdf`}>
+                                    {({blob, url, loading, error}) =>
+                                        loading ? 'Loading document...' : <DownloadButton/>
+                                    }
+                                </PDFDownloadLink>
+
+                                <Button onPress={handleGoBackClick}
+                                        startContent={<PlusFilledIcon/>}
+                                        color="default"
+                                        variant="shadow">
+                                    End Preview
+                                </Button>
+                            </>
+                        ) : (
+                            <Button onPress={handlePreviewClick}
+                                    startContent={<PlusFilledIcon/>}
+                                    color="primary"
+                                    variant="shadow">
+                                Preview And Print
+                            </Button>
+                        )}
+                    </div>
+                </div>
+            </div>
             {isLoadingEntries ? (
                 <div className={"grid place-items-center"}>
                     <CircularProgress color={"primary"} className={"p-4"} label="Loading your journal entries...."/>
@@ -87,60 +159,6 @@ export default function MyJournalOverview({searchParams}: FilterProps) {
                         </>
                     ) : (
                         <>
-                            <div className="flex flex-col gap-4 mb-2">
-                                <div className="flex justify-between gap-3 items-end">
-                                    {showPreview ? (
-                                        <>
-                                            <div className="flex gap-1">
-                                                <Input
-                                                    type="text"
-                                                    variant={"bordered"}
-                                                    size="sm"
-                                                    value={journalTitle}
-                                                    onChange={handleTitleChange}
-                                                    placeholder="Enter your journal title here"
-                                                />
-
-                                                <Button onPress={handleGoBackClick}
-                                                        startContent={<PlusFilledIcon/>}
-                                                        color="default"
-                                                        variant="shadow">
-                                                    Title
-                                                </Button>
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <FilterComponent placeholder="Search for journal entries"/>
-                                    )}
-                                    <div className="flex gap-3">
-                                        {showPreview ? (
-                                            <>
-                                                <PDFDownloadLink
-                                                    document={getDocument(journalTitle, user, journalEntries)}
-                                                    fileName={`${journalTitle.toLowerCase() ?? user?.username}.pdf`}>
-                                                    {({blob, url, loading, error}) =>
-                                                        loading ? 'Loading document...' : <DownloadButton/>
-                                                    }
-                                                </PDFDownloadLink>
-
-                                                <Button onPress={handleGoBackClick}
-                                                        startContent={<PlusFilledIcon/>}
-                                                        color="default"
-                                                        variant="shadow">
-                                                    End Preview
-                                                </Button>
-                                            </>
-                                        ) : (
-                                            <Button onPress={handlePreviewClick}
-                                                    startContent={<PlusFilledIcon/>}
-                                                    color="primary"
-                                                    variant="shadow">
-                                                Preview And Print
-                                            </Button>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
 
                             {showPreview ? (
                                 <PreviewMyJournal
