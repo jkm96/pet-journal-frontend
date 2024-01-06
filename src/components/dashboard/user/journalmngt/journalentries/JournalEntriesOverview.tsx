@@ -72,13 +72,7 @@ export default function JournalEntriesOverview({searchParams}: FilterProps) {
                 <>
                     <div className="flex flex-col gap-4 m-2">
                         <div className="flex justify-between gap-3 items-end">
-
-                            {journalEntries.length >= 1 ? (
-                                <SearchComponent placeholder="Search for journal entries"/>
-                            ) : (
-                                <div className="w-full sm:max-w-[44%]"></div>
-                            )}
-
+                            <SearchComponent placeholder="Search for journal entries"/>
                             <div className="flex gap-3">
                                 <Button onPress={handleOpenModal}
                                         startContent={<PlusIcon/>}

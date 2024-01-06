@@ -69,7 +69,6 @@ export async function getJournalEntries(queryParams: JournalQueryParameters) {
         const apiUrl = `${internalBaseUrl}/journal-entry/list`;
         const response = await fetch(apiUrl, {
             method: 'POST',
-            cache: 'no-store',
             headers: {
                 'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
