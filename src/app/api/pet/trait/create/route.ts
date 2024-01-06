@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
         const requestBody = await request.json();
         const {petId} = requestBody;
         const response = await petJournalApiClient
-            .post(`pet-trait/${petId}/create`, requestBody, config);
+            .post(`api/v1/pet-trait/${petId}/create`, requestBody, config);
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {

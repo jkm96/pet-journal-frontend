@@ -3,7 +3,7 @@ import {LoginUserRequest} from "@/boundary/interfaces/auth";
 
 export async function loginAdmin(loginRequest: LoginUserRequest) {
     try {
-        const response = await fetch(`${internalBaseUrl}/auth/admin/login`, {
+        const response = await fetch(`${internalBaseUrl}/api/auth/admin/login`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,

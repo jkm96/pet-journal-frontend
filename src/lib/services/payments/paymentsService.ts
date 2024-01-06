@@ -2,7 +2,7 @@ import {apiKey, internalBaseUrl} from "@/boundary/constants/appConstants";
 
 export async function createCheckoutSession() {
     try {
-        const response = await fetch(`${internalBaseUrl}/payments/checkout-session`, {
+        const response = await fetch(`${internalBaseUrl}/api/payments/checkout-session`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -19,7 +19,7 @@ export async function createCheckoutSession() {
 
 export async function fetchCheckoutSession(sessionId: string) {
     try {
-        const response = await fetch(`${internalBaseUrl}/payments/fetch-session/${sessionId}`, {
+        const response = await fetch(`${internalBaseUrl}/api/payments/fetch-session/${sessionId}`, {
             method: 'GET',
             headers: {
                 'x-api-key': `${apiKey}`,

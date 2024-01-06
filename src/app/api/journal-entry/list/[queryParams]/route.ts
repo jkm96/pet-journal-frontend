@@ -9,7 +9,7 @@ export async function GET(request: NextRequest, {params}: { params: { queryParam
         const queryParams = getJournalQueryParams(params.queryParams);
         logger.error(`reached api endpoint with ${JSON.stringify(queryParams)}`)
         const config = getAxiosConfigs(request,queryParams);
-        const response = await petJournalApiClient.get('journal-entry', config);
+        const response = await petJournalApiClient.get('api/v1/journal-entry', config);
         // logger.info(response,"fetch journal entries response")
         return handleAxiosResponse(response);
     } catch (error: unknown) {

@@ -3,7 +3,7 @@ import {apiKey, internalBaseUrl} from "@/boundary/constants/appConstants";
 
 export async function storeAccessTokenInCookie(storeTokenRequest: AccessTokenModel) {
     try {
-        const response = await fetch(`${internalBaseUrl}/token/store`, {
+        const response = await fetch(`${internalBaseUrl}/api/token/store`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -21,7 +21,7 @@ export async function storeAccessTokenInCookie(storeTokenRequest: AccessTokenMod
 
 export async function getAccessToken() {
     try {
-        const response = await fetch(`${internalBaseUrl}/token/retrieve`, {
+        const response = await fetch(`${internalBaseUrl}/api/token/retrieve`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -38,7 +38,7 @@ export async function getAccessToken() {
 
 export async function deleteAccessToken() {
     try {
-        const response = await fetch(`${internalBaseUrl}/token/delete`, {
+        const response = await fetch(`${internalBaseUrl}/api/token/delete`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,

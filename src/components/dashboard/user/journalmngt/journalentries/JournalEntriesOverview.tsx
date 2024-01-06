@@ -15,9 +15,8 @@ import {formatDate} from "@/helpers/dateHelpers";
 import {getMoodColorClass} from "@/helpers/stylingHelpers";
 import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
 
-export const dynamic = 'force-dynamic'
-
-export default function JournalEntriesOverview({searchParams}: FilterProps) {
+export default function JournalEntriesOverview() {
+    const [queryParams, setQueryParams] = useState<JournalQueryParameters>(new JournalQueryParameters());
     const [journalEntries, setJournalEntries] = useState<JournalEntryResponse[]>([]);
     const [isLoadingJournalEntries, setIsLoadingJournalEntries] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +27,6 @@ export default function JournalEntriesOverview({searchParams}: FilterProps) {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        const queryParams = getQueryParams();
         fetchJournalEntries(queryParams);
     };
 
@@ -49,17 +47,15 @@ export default function JournalEntriesOverview({searchParams}: FilterProps) {
             });
     };
 
-    function getQueryParams() {
-        const queryParams: JournalQueryParameters = new JournalQueryParameters();
-        queryParams.searchTerm = searchParams?.searchTerm ?? '';
-        queryParams.fetch = '';
-        return queryParams;
-    }
-
     useEffect(() => {
-        const queryParams = getQueryParams();
         fetchJournalEntries(queryParams);
-    }, [searchParams?.searchTerm]);
+    }, [queryParams]);
+
+    const handleSearchChange = (newSearchTerm: string) => {
+        console.log("search term",newSearchTerm)
+        setQueryParams((prevParams) => ({ ...prevParams, searchTerm: newSearchTerm }));
+        fetchJournalEntries(queryParams);
+    };
 
     return (
         <>
@@ -73,7 +69,7 @@ export default function JournalEntriesOverview({searchParams}: FilterProps) {
                 <>
                     <div className="flex flex-col gap-4 m-2">
                         <div className="flex justify-between gap-3 items-end">
-                            <SearchComponent placeholder="Search for journal entries"/>
+                            <SearchComponent onSearchChange={handleSearchChange} placeholder="Search for journal entries"/>
                             <div className="flex gap-3">
                                 <Button onPress={handleOpenModal}
                                         startContent={<PlusIcon/>}

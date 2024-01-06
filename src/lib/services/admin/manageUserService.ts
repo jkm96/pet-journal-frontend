@@ -3,7 +3,7 @@ import {UserQueryParameters} from "@/boundary/parameters/userQueryParameters";
 
 export async function getUsers(queryParams: UserQueryParameters) {
     try {
-        const apiUrl = `${internalBaseUrl}/admin/manage-users/list?${JSON.stringify(queryParams)}`;
+        const apiUrl = `${internalBaseUrl}/api/admin/manage-users/list?${JSON.stringify(queryParams)}`;
         const response = await fetch(apiUrl, {
             method: 'GET',
             headers: {
@@ -21,7 +21,7 @@ export async function getUsers(queryParams: UserQueryParameters) {
 
 export async function toggleUser(userId: number) {
     try {
-        const response = await fetch(`${internalBaseUrl}/admin/manage-users/toggle`, {
+        const response = await fetch(`${internalBaseUrl}/api/admin/manage-users/toggle`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -38,7 +38,7 @@ export async function toggleUser(userId: number) {
 
 export async function toggleUserSubscription(userId: number) {
     try {
-        const response = await fetch(`${internalBaseUrl}/admin/manage-users/toggle-subscription`, {
+        const response = await fetch(`${internalBaseUrl}/api/admin/manage-users/toggle-subscription`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -55,7 +55,7 @@ export async function toggleUserSubscription(userId: number) {
 
 export async function getUserById(userId: string) {
     try {
-        const apiUrl = `${internalBaseUrl}/admin/manage-users/${userId}`;
+        const apiUrl = `${internalBaseUrl}/api/admin/manage-users/${userId}`;
         const response = await fetch(apiUrl, {
             method: 'GET',
             headers: {

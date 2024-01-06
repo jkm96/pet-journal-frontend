@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         const {journalId} = body;
         const response = await petJournalApiClient
-            .delete(`journal-entry/${journalId}/delete`, config);
+            .delete(`api/v1/journal-entry/${journalId}/delete`, config);
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {

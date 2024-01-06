@@ -6,8 +6,8 @@ import logger from "@/logger/logger";
 export async function POST(request: NextRequest) {
     try {
         const config = getAxiosConfigs(request);
-        const response = await petJournalApiClient.get('pet/profiles', config);
-        logger.info(response,"pet profiles response")
+        const response = await petJournalApiClient.get('api/v1/pet/profiles', config);
+
         return handleAxiosResponse(response);
     } catch (error: unknown) {
         return handleApiException(error);

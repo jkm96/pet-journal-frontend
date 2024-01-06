@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     try {
         const requestBody = await request.json();
         const response = await petJournalApiClient
-            .post('user/login', requestBody);
+            .post('api/v1/user/login', requestBody);
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {

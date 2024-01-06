@@ -6,7 +6,7 @@ export async function GET(request: NextRequest, {params}: { params: { journalSlu
     try {
         const journalSlug = params.journalSlug;
         const config = getAxiosConfigs(request);
-        const response = await petJournalApiClient.get(`journal-entry/${journalSlug}`, config);
+        const response = await petJournalApiClient.get(`api/v1/journal-entry/${journalSlug}`, config);
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {

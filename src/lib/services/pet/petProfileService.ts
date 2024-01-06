@@ -4,7 +4,7 @@ import axios from "axios";
 
 export async function getPetProfiles() {
     try {
-        const response = await fetch(`${internalBaseUrl}/pet/profile`, {
+        const response = await fetch(`${internalBaseUrl}/api/pet/profile`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -39,7 +39,7 @@ export async function createPetProfile(createRequest: CreatePetRequest) {
             }
         }
 
-        const response = await axios.post(`${internalBaseUrl}/pet/create`, formData, {
+        const response = await axios.post(`${internalBaseUrl}/api/pet/create`, formData, {
             headers: {
                 'x-api-key': `${apiKey}`,
                 "Content-Type": "multipart/form-data",
@@ -54,7 +54,7 @@ export async function createPetProfile(createRequest: CreatePetRequest) {
 
 export async function getPetProfileDetails(petSlug: string) {
     try {
-        const response = await fetch(`${internalBaseUrl}/pet/${petSlug}`, {
+        const response = await fetch(`${internalBaseUrl}/api/pet/${petSlug}`, {
             method: 'GET',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -71,7 +71,7 @@ export async function getPetProfileDetails(petSlug: string) {
 
 export async function addPetTraits(addRequest: AddPetTraitRequest) {
     try {
-        const response = await fetch(`${internalBaseUrl}/pet/trait/create`, {
+        const response = await fetch(`${internalBaseUrl}/api/pet/trait/create`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,

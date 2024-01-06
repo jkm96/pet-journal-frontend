@@ -29,7 +29,7 @@ export async function GET(request: NextRequest,{params}: { params: { sessionId: 
             }
 
             const response = await petJournalApiClient
-                .post('payment/create', JSON.stringify(sessionDetails), config);
+                .post('api/v1/payment/create', JSON.stringify(sessionDetails), config);
 
             const tokenResponse = response.data.data;
             const cookieRequest: AccessTokenModel = {

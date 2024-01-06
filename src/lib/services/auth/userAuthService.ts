@@ -3,7 +3,7 @@ import {LoginUserRequest, RegisterUserRequest} from "@/boundary/interfaces/auth"
 
 export async function loginUser(loginRequest: LoginUserRequest) {
     try {
-        const response = await fetch(`${internalBaseUrl}/auth/user/login`, {
+        const response = await fetch(`${internalBaseUrl}/api/auth/user/login`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -20,7 +20,7 @@ export async function loginUser(loginRequest: LoginUserRequest) {
 
 export async function verifyUserEmailAsync(token: String) {
     try {
-        const response = await fetch(`${internalBaseUrl}/auth/user/verify-user`, {
+        const response = await fetch(`${internalBaseUrl}/api/auth/user/verify-user`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -37,7 +37,7 @@ export async function verifyUserEmailAsync(token: String) {
 
 export async function registerUser(registerRequest: RegisterUserRequest) {
     try {
-        const response = await fetch(`${internalBaseUrl}/auth/user/register`, {
+        const response = await fetch(`${internalBaseUrl}/api/auth/user/register`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,

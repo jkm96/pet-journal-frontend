@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
         const requestBody = await request.json();
         const {journalId} = requestBody;
         const response = await petJournalApiClient
-            .put(`journal-entry/${journalId}/edit`, requestBody, config);
+            .put(`api/v1/journal-entry/${journalId}/edit`, requestBody, config);
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {

@@ -26,7 +26,7 @@ export async function createJournalEntry(createRequest: CreateJournalEntryReques
             }
         }
 
-        const response = await axios.post(`${internalBaseUrl}/journal-entry/create`, formData, {
+        const response = await axios.post(`${internalBaseUrl}/api/journal-entry/create`, formData, {
             headers: {
                 'x-api-key': `${apiKey}`,
                 "Content-Type": "multipart/form-data",
@@ -51,7 +51,7 @@ export async function uploadJournalAttachments(uploadRequest: UploadJournalImage
             }
         }
 
-        const response = await axios.post(`${internalBaseUrl}/journal-entry/attachments/create`, formData, {
+        const response = await axios.post(`${internalBaseUrl}/api/journal-entry/attachments/create`, formData, {
             headers: {
                 'x-api-key': `${apiKey}`,
                 "Content-Type": "multipart/form-data",
@@ -66,7 +66,7 @@ export async function uploadJournalAttachments(uploadRequest: UploadJournalImage
 
 export async function getJournalEntries(queryParams: JournalQueryParameters) {
     try {
-        const apiUrl = `${internalBaseUrl}/journal-entry/list/${JSON.stringify(queryParams)}`;
+        const apiUrl = `${internalBaseUrl}/api/journal-entry/list/${JSON.stringify(queryParams)}`;
         const response = await fetch(apiUrl, {
             method: 'GET',
             cache: 'no-store',
@@ -85,7 +85,7 @@ export async function getJournalEntries(queryParams: JournalQueryParameters) {
 
 export async function updateJournalEntry(updateRequest: UpdateJournalEntryRequest) {
     try {
-        const response = await fetch(`${internalBaseUrl}/journal-entry/edit`, {
+        const response = await fetch(`${internalBaseUrl}/api/journal-entry/edit`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -102,7 +102,7 @@ export async function updateJournalEntry(updateRequest: UpdateJournalEntryReques
 
 export async function deleteJournal(journalId: number) {
     try {
-        const response = await fetch(`${internalBaseUrl}/journal-entry/delete`, {
+        const response = await fetch(`${internalBaseUrl}/api/journal-entry/delete`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -121,7 +121,7 @@ export async function deleteJournal(journalId: number) {
 
 export async function getJournalEntryDetails(journalSlug: string) {
     try {
-        const response = await fetch(`${internalBaseUrl}/journal-entry/${journalSlug}`, {
+        const response = await fetch(`${internalBaseUrl}/api/journal-entry/${journalSlug}`, {
             method: 'GET',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -138,7 +138,7 @@ export async function getJournalEntryDetails(journalSlug: string) {
 
 export async function getJournalEntryAttachmentBuffers(journalId: number) {
     try {
-        const response = await fetch(`${internalBaseUrl}/journal-entry/attachments/${journalId}`, {
+        const response = await fetch(`${internalBaseUrl}/api/journal-entry/attachments/${journalId}`, {
             method: 'GET',
             headers: {
                 'x-api-key': `${apiKey}`,
