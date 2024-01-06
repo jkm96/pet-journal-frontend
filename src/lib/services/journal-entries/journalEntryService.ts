@@ -66,15 +66,15 @@ export async function uploadJournalAttachments(uploadRequest: UploadJournalImage
 
 export async function getJournalEntries(queryParams: JournalQueryParameters) {
     try {
-        const apiUrl = `${internalBaseUrl}/journal-entry/list`;
+        const apiUrl = `${internalBaseUrl}/journal-entry/list/${JSON.stringify(queryParams)}`;
         const response = await fetch(apiUrl, {
-            method: 'POST',
+            method: 'GET',
             cache: 'no-store',
             headers: {
                 'x-api-key': `${apiKey}`,
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify(queryParams),
+            body: null,
         });
 
         return response.json();

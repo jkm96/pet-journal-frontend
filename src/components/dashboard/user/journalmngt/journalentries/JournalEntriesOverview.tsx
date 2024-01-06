@@ -50,7 +50,7 @@ export default function JournalEntriesOverview({searchParams}: FilterProps) {
 
     function getQueryParams() {
         const queryParams: JournalQueryParameters = new JournalQueryParameters();
-        queryParams.searchTerm = searchParams?.searchTerm ?? 'beach';
+        queryParams.searchTerm = searchParams?.searchTerm ?? '';
         queryParams.fetch = '';
         return queryParams;
     }

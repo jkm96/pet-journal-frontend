@@ -3,14 +3,14 @@ import petJournalApiClient, {getAxiosConfigs} from "@/lib/axios/axiosClient";
 import {NextRequest} from "next/server";
 import {getJournalQueryParams} from "@/helpers/urlHelpers";
 import logger from "@/logger/logger";
-export async function POST(request: NextRequest) {
+
+export async function GET(request: NextRequest, {params}: { params: { queryParams: string } }) {
     try {
-        logger.info(`reached api endpoint with ${JSON.stringify(request.nextUrl)}`)
-        const queryParams = getJournalQueryParams(await request.json());
+        const queryParams = getJournalQueryParams(params.queryParams);
         logger.error(`reached api endpoint with ${JSON.stringify(queryParams)}`)
-        const config = getAxiosConfigs(request, queryParams);
+        const config = getAxiosConfigs(request,queryParams);
         const response = await petJournalApiClient.get('journal-entry', config);
-        logger.info(response,"fetch journal entries response")
+        // logger.info(response,"fetch journal entries response")
         return handleAxiosResponse(response);
     } catch (error: unknown) {
         logger.error(error,"An error occurred fetching journal entries")
