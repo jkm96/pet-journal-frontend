@@ -2,15 +2,12 @@ import {NextRequest, NextResponse} from "next/server";
 import {CheckoutSessionModel, CreatePaymentRequest} from "@/boundary/interfaces/payment";
 import {AccessTokenModel} from "@/boundary/interfaces/token";
 import petJournalApiClient, {getAxiosConfigs} from "@/lib/axios/axiosClient";
-import {getJournalQueryParams} from "@/helpers/urlHelpers";
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest,{params}: { params: { sessionId: string } }) {
     try {
-        const searchParams = request.nextUrl.searchParams
-
-        const sessionId = searchParams.get('session_id')
+        const sessionId = params.sessionId;
         const session = await stripe.checkout.sessions.retrieve(sessionId);
         const sessionData: CheckoutSessionModel = {
             clientSecret: session.client_secret,
@@ -19,8 +16,7 @@ export async function GET(request: NextRequest) {
         }
 
         if (session.status === 'complete') {
-            const queryParams = getJournalQueryParams(request);
-            const config = getAxiosConfigs(request, queryParams);
+            const config = getAxiosConfigs(request);
 
             const sessionDetails: CreatePaymentRequest = {
                 created: session.created,

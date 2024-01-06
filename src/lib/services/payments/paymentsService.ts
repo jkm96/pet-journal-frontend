@@ -19,7 +19,7 @@ export async function createCheckoutSession() {
 
 export async function fetchCheckoutSession(sessionId: string) {
     try {
-        const response = await fetch(`${internalBaseUrl}/payments/fetch-session?session_id=${sessionId}`, {
+        const response = await fetch(`${internalBaseUrl}/payments/fetch-session/${sessionId}`, {
             method: 'GET',
             headers: {
                 'x-api-key': `${apiKey}`,
