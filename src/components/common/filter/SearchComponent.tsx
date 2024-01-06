@@ -11,11 +11,12 @@ export default function SearchComponent({onSearchChange,placeholder}: SearchComp
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const {replace} = useRouter();
+    const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(null);
 
     const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
         const newSearchTerm = event.target.value;
         const params = new URLSearchParams(searchParams);
-        if (newSearchTerm && newSearchTerm.length > 3) {
+        if (newSearchTerm && newSearchTerm.length >= 4) {
             params.set('searchTerm', newSearchTerm);
         } else {
             params.delete('searchTerm');
@@ -23,9 +24,19 @@ export default function SearchComponent({onSearchChange,placeholder}: SearchComp
 
         replace(`${pathname}?${params.toString()}`);
 
-        if (onSearchChange && (newSearchTerm.length > 3 || newSearchTerm === '')) {
-            onSearchChange(newSearchTerm);
+        // Clear existing timeout
+        if (debounceTimeout) {
+            clearTimeout(debounceTimeout);
         }
+
+        // Set a new timeout to trigger onSearchChange after a delay (e.g., 500 milliseconds)
+        const newTimeout = setTimeout(() => {
+            if (onSearchChange && (newSearchTerm.length >= 4 || newSearchTerm === '')) {
+                onSearchChange(newSearchTerm);
+            }
+        }, 500);
+
+        setDebounceTimeout(newTimeout);
     }
 
     return (

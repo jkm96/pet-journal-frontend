@@ -48,6 +48,11 @@ export default function JournalEntriesOverview() {
     };
 
     useEffect(() => {
+        const {search} = window.location;
+        const searchParams = new URLSearchParams(search);
+        const searchTerm = searchParams.get('searchTerm') ?? '';
+        console.log('window params', searchTerm)
+        queryParams.searchTerm = searchTerm
         fetchJournalEntries(queryParams);
     }, [queryParams]);
 
