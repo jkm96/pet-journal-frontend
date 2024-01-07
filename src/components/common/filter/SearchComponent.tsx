@@ -1,7 +1,7 @@
 'use client';
 import {SearchIcon} from "@/components/shared/icons/SearchIcon";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useCallback, useState} from "react";
 
 interface SearchComponentProps {
     onSearchChange?: (newSearchTerm: string) => void;
@@ -13,29 +13,33 @@ export default function SearchComponent({onSearchChange,placeholder}: SearchComp
     const {replace} = useRouter();
     const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(null);
 
-    const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const newSearchTerm = event.target.value;
-        const params = new URLSearchParams(searchParams);
-        if (newSearchTerm && newSearchTerm.length >= 4) {
-            params.set('searchTerm', newSearchTerm);
-        } else {
-            params.delete('searchTerm');
-        }
+    const handleSearchChange = useCallback(
+        (event: ChangeEvent<HTMLInputElement>) => {
+            const newSearchTerm = event.target.value;
+            const params = new URLSearchParams(searchParams);
 
-        replace(`${pathname}?${params.toString()}`);
-
-        if (debounceTimeout) {
-            clearTimeout(debounceTimeout);
-        }
-
-        const newTimeout = setTimeout(() => {
-            if (onSearchChange && (newSearchTerm.length >= 4 || newSearchTerm === '')) {
-                onSearchChange(newSearchTerm);
+            if (newSearchTerm && newSearchTerm.length >= 4) {
+                params.set('searchTerm', newSearchTerm);
+            } else {
+                params.delete('searchTerm');
             }
-        }, 500);
 
-        setDebounceTimeout(newTimeout);
-    }
+            replace(`${pathname}?${params.toString()}`);
+
+            if (debounceTimeout) {
+                clearTimeout(debounceTimeout);
+            }
+
+            const newTimeout = setTimeout(() => {
+                if (onSearchChange && (newSearchTerm.length >= 4 || newSearchTerm === '')) {
+                    onSearchChange(newSearchTerm);
+                }
+            }, 500);
+
+            setDebounceTimeout(newTimeout);
+        },
+        [searchParams]
+    );
 
     return (
         <div className="w-full sm:max-w-[44%]">

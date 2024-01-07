@@ -1,7 +1,7 @@
 'use client';
 import {SearchIcon} from "@/components/shared/icons/SearchIcon";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Button} from "@nextui-org/button";
 import {Input} from "@nextui-org/react";
 
@@ -20,15 +20,18 @@ export default function FilterComponent({onFilterChange, placeholder}: FilterCom
     const [periodTo, setPeriodTo] = useState<string>('');
     const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(null);
 
-    useEffect(() => {
-        if (searchTerm === '' && periodTo === '' && periodFrom === ''){
-            setDisabled(true)
-        }else{
-            setDisabled(false)
-        }
-    }, [searchTerm,periodFrom,periodTo]);
+    // Wrap the handleFilterChange function with useCallback
+    const handleFilterChange = useCallback(
+        (newSearchTerm: string, newPeriodFrom: string, newPeriodTo: string) => {
+            if (onFilterChange) {
+                onFilterChange(newSearchTerm, newPeriodFrom, newPeriodTo);
+            }
+        },
+        [onFilterChange]
+    );
 
-    function handleFilterSearch() {
+    // Wrap the entire filter logic in a useCallback
+    const handleFilterSearch = useCallback(() => {
         const params = new URLSearchParams(searchParams);
         if (searchTerm) {
             params.set('searchTerm', searchTerm);
@@ -55,13 +58,17 @@ export default function FilterComponent({onFilterChange, placeholder}: FilterCom
         }
 
         const newTimeout = setTimeout(() => {
-            if (onFilterChange) {
-                onFilterChange(searchTerm, periodFrom, periodTo);
-            }
+            // Call the memoized function
+            handleFilterChange(searchTerm, periodFrom, periodTo);
         }, 500);
 
         setDebounceTimeout(newTimeout);
-    }
+    }, [searchTerm, periodFrom, periodTo, searchParams, pathname, replace, debounceTimeout, handleFilterChange]);
+
+    useEffect(() => {
+        // Check if any filter field is filled
+        setDisabled(searchTerm === '' && periodTo === '' && periodFrom === '');
+    }, [searchTerm, periodFrom, periodTo]);
 
     return (
         <div className="md:grid md:grid-cols-5 md:gap-4">
