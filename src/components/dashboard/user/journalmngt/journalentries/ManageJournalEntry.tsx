@@ -5,7 +5,6 @@ import {getJournalEntryDetails} from "@/lib/services/journal-entries/journalEntr
 import {Card, CardBody, CircularProgress} from "@nextui-org/react";
 import RenderJournalHeader from "@/components/dashboard/user/journalmngt/journalentries/RenderJournalHeader";
 import {Button} from "@nextui-org/button";
-import {PlusIcon} from "@/components/shared/icons/PlusIcon";
 import PreviewAndPrintJournalEntryModal
     from "@/components/dashboard/user/journalmngt/journalentries/modals/PreviewAndPrintJournalEntryModal";
 import UploadJournalImagesModal

@@ -78,7 +78,7 @@ export default function PetProfilesOverviewSection() {
                                             isBlurred
                                             key={profile.id}
                                             shadow="sm"
-                                            className="py-4">
+                                            className="md:py-4">
                                             <CardHeader className="justify-between">
                                                 <div className="flex gap-5">
                                                     <Avatar isBordered
@@ -101,7 +101,7 @@ export default function PetProfilesOverviewSection() {
                                                 </Button>
 
                                             </CardHeader>
-                                            <CardBody className="overflow-visible py-2 lg:max-h-[400px] xl:max-h-[450px]">
+                                            <CardBody className="overflow-visible p-2 py-2 lg:max-h-[400px] xl:max-h-[450px]">
                                                 <Image
                                                     alt="Card background"
                                                     className="rounded-xl lg:h-[400px] xl:h-[450px] w-full xl:mb-2 lg:mb-2"

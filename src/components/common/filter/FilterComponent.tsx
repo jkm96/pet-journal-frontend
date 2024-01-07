@@ -100,6 +100,7 @@ export default function FilterComponent({onFilterChange, placeholder}: FilterCom
             <div className="relative flex flex-1 flex-shrink-0">
                 <Button
                     className="mt-1"
+                    disabled={searchTerm !== "" || !periodFrom !== null || !periodTo !== null}
                     color="primary"
                     onClick={(e) => {
                         e.preventDefault();

@@ -10,7 +10,6 @@ export const NAVIGATION_LINKS = {
     TIMELINE_VIEW: '/dashboard/timeline-view',
     SETTINGS: '/dashboard/settings',
 
-
     ADMIN_LOGIN: '/auth/admin/login',
     ADMIN_DASHBOARD: '/admin/dashboard',
     MANAGE_USERS: '/admin/dashboard/users',
