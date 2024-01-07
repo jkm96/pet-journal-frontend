@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Tab, Tabs } from "@nextui-org/react";
+import {Tab, Tabs} from "@nextui-org/react";
 import {useAuth} from "@/hooks/useAuth";
 import ProfileSection from "@/components/dashboard/user/settings/ProfileSection";
 
