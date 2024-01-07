@@ -1,7 +1,6 @@
 import {handleApiException, handleAxiosResponse} from "@/helpers/responseHelpers";
 import petJournalApiClient, {getAxiosConfigs} from "@/lib/axios/axiosClient";
 import {NextRequest} from "next/server";
-import logger from "@/logger/logger";
 
 export async function POST(request: NextRequest) {
     try {

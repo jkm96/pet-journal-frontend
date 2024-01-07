@@ -10,7 +10,6 @@ import {EditIcon} from "@nextui-org/shared-icons";
 import {PetProfileCard} from "@/components/dashboard/user/petmngt/pets/profile/PetProfileCard";
 import Spinner from "@/components/shared/icons/Spinner";
 import PetTraits from "@/components/dashboard/user/petmngt/pets/profile/PetTraits";
-import TrashIcon from "@/components/shared/icons/TrashIcon";
 
 export default function ManagePetProfile({slug}: { slug: string }) {
     const [petProfileDetails, setPetProfileDetails] = useState<PetProfileResponse>({} as PetProfileResponse);
