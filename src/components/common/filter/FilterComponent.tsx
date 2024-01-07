@@ -10,7 +10,7 @@ interface FilterComponentProps {
     placeholder: string;
 }
 
-export default function FilterComponent({ onFilterChange,placeholder }: FilterComponentProps) {
+export default function FilterComponent({onFilterChange, placeholder}: FilterComponentProps) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const {replace} = useRouter();
@@ -55,21 +55,21 @@ export default function FilterComponent({ onFilterChange,placeholder }: FilterCo
     }
 
     return (
-        <div className="w-full">
-            <div className="grid grid-cols-5 gap-4">
-                <div className="relative flex flex-1 flex-shrink-0">
-                    <Input
-                        placeholder={placeholder}
-                        onChange={(e) => {
-                            setSearchTerm(e.target.value);
-                        }}
-                        value={searchTerm}
-                        size="sm"
-                        variant="bordered"
-                        startContent={<SearchIcon/>}
-                    />
-                </div>
+        <div className="md:grid md:grid-cols-5 md:gap-4">
+            <div className="relative flex flex-1 lg:flex-shrink-0">
+                <Input
+                    placeholder={placeholder}
+                    onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                    }}
+                    value={searchTerm}
+                    size="sm"
+                    variant="bordered"
+                    startContent={<SearchIcon/>}
+                />
+            </div>
 
+            <div className="grid grid-cols-2 md:mt-0 mt-2">
                 <div className="relative flex flex-1 flex-shrink-0">
                     <Input
                         type="date"
@@ -83,7 +83,7 @@ export default function FilterComponent({ onFilterChange,placeholder }: FilterCo
                     />
                 </div>
 
-                <div className="relative flex flex-1 flex-shrink-0">
+                <div className="relative flex flex-1 flex-shrink-0 ml-2">
                     <Input
                         type="date"
                         size="sm"
@@ -95,21 +95,21 @@ export default function FilterComponent({ onFilterChange,placeholder }: FilterCo
                         value={periodTo}
                     />
                 </div>
-
-                <div className="relative flex flex-1 flex-shrink-0">
-                    <Button
-                        className="mt-1"
-                        color="primary"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleFilterSearch();
-                        }}
-                    >
-                        Filter
-                    </Button>
-                </div>
-
             </div>
+
+            <div className="relative flex flex-1 flex-shrink-0">
+                <Button
+                    className="mt-1"
+                    color="primary"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        handleFilterSearch();
+                    }}
+                >
+                    Filter
+                </Button>
+            </div>
+
         </div>
     );
 }

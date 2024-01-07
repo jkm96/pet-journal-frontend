@@ -90,11 +90,11 @@ export default function MyJournalOverview() {
         <>
             <Breadcrumb pageName="My Journal"/>
 
-            <div className="flex flex-col gap-4 mb-2">
-                <div className="flex justify-between gap-3 items-end">
+            <div className="flex flex-col gap-4 m-2">
+                <div className="md:flex justify-between gap-3 items-end">
                     {showPreview && journalEntries.length >= 1 ? (
                         <>
-                            <div className="flex gap-1">
+                            <div className="flex gap-1 w-1/5">
                                 <Input
                                     type="text"
                                     variant={"bordered"}
@@ -103,13 +103,6 @@ export default function MyJournalOverview() {
                                     onChange={handleTitleChange}
                                     placeholder="Enter your journal title here"
                                 />
-
-                                <Button onPress={handleGoBackClick}
-                                        startContent={<PlusFilledIcon/>}
-                                        color="default"
-                                        variant="shadow">
-                                    Title
-                                </Button>
                             </div>
                         </>
                     ) : (
@@ -129,18 +122,20 @@ export default function MyJournalOverview() {
 
                                 <Button onPress={handleGoBackClick}
                                         startContent={<PlusFilledIcon/>}
-                                        color="default"
+                                        color="danger"
                                         variant="shadow">
                                     End Preview
                                 </Button>
                             </>
                         ) : (
-                            <Button onPress={handlePreviewClick}
-                                    startContent={<PlusFilledIcon/>}
-                                    color="primary"
-                                    variant="shadow">
-                                Preview And Print
-                            </Button>
+                            <div className="hidden lg:block">
+                                <Button onPress={handlePreviewClick}
+                                        startContent={<PlusFilledIcon/>}
+                                        color="primary"
+                                        variant="shadow">
+                                    Preview And Print
+                                </Button>
+                            </div>
                         )}
                     </div>
                 </div>
@@ -164,7 +159,17 @@ export default function MyJournalOverview() {
                                     journalEntries={journalEntries}
                                     journalTitle={journalTitle}/>
                             ) : (
-                                <JournalEntriesGrid journalEntries={journalEntries}/>
+                                <>
+                                    <JournalEntriesGrid journalEntries={journalEntries}/>
+                                    <div className="fixed bottom-4 right-4 md:hidden">
+                                        <Button onPress={handlePreviewClick}
+                                                startContent={<PlusFilledIcon/>}
+                                                color="primary"
+                                                variant="shadow">
+                                            Preview
+                                        </Button>
+                                    </div>
+                                </>
                             )}
                         </>
                     )}

@@ -227,7 +227,6 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                     <div className="fixed bottom-4 right-4 md:hidden">
                         <Button
                             onPress={() => openModal("previewAndPrintEntry")}
-                            startContent={<PlusIcon/>}
                             color="primary"
                             radius="full"
                             variant="shadow"

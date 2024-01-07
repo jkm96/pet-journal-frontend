@@ -66,7 +66,7 @@ export default function JournalEntriesOverview() {
             <div className="flex flex-col gap-4 m-2">
                 <div className="flex justify-between gap-3 items-end">
                     <SearchComponent onSearchChange={handleSearchChange} placeholder="Search for journal entries"/>
-                    <div className="flex gap-3">
+                    <div className="gap-3 hidden lg:block">
                         <Button onPress={handleOpenModal}
                                 startContent={<PlusIcon/>}
                                 color="primary"
@@ -134,6 +134,17 @@ export default function JournalEntriesOverview() {
                     )}
                 </>
             )}
+
+            <div className="fixed bottom-4 right-4 md:hidden">
+                <Button onPress={handleOpenModal}
+                        isIconOnly={true}
+                        color="primary"
+                        radius="full"
+                        variant="shadow">
+                    <PlusIcon/>
+                </Button>
+                <CreateJournalEntryModal isOpen={isModalOpen} onClose={handleCloseModal}/>
+            </div>
         </>
     )
 }
