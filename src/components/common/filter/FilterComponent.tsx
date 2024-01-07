@@ -1,7 +1,7 @@
 'use client';
 import {SearchIcon} from "@/components/shared/icons/SearchIcon";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button} from "@nextui-org/button";
 import {Input} from "@nextui-org/react";
 
@@ -14,10 +14,19 @@ export default function FilterComponent({onFilterChange, placeholder}: FilterCom
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const {replace} = useRouter();
+    const [disabled, setDisabled] = useState<boolean>(true);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [periodFrom, setPeriodFrom] = useState<string>('');
     const [periodTo, setPeriodTo] = useState<string>('');
     const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+        if (searchTerm === '' && periodTo === '' && periodFrom === ''){
+            setDisabled(true)
+        }else{
+            setDisabled(false)
+        }
+    }, [searchTerm,periodFrom,periodTo]);
 
     function handleFilterSearch() {
         const params = new URLSearchParams(searchParams);
@@ -100,7 +109,7 @@ export default function FilterComponent({onFilterChange, placeholder}: FilterCom
             <div className="relative flex flex-1 flex-shrink-0">
                 <Button
                     className="mt-1"
-                    disabled={searchTerm !== "" || !periodFrom !== null || !periodTo !== null}
+                    disabled={disabled}
                     color="primary"
                     onClick={(e) => {
                         e.preventDefault();
