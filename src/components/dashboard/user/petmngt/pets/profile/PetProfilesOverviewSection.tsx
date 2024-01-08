@@ -71,14 +71,13 @@ export default function PetProfilesOverviewSection() {
                         </>
                     ) : (
                         <>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:p-4 lg:p-4 pl-0 sm:gap-2 m-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pl-0 sm:gap-2 m-2">
                                 {petProfiles.map((profile) => (
                                     <Link key={profile.id} href={`${NAVIGATION_LINKS.PET_PROFILES}/${profile.slug}`}>
                                         <Card
                                             isBlurred
                                             key={profile.id}
-                                            shadow="sm"
-                                            className="md:py-4">
+                                            shadow="sm">
                                             <CardHeader className="justify-between">
                                                 <div className="flex gap-5">
                                                     <Avatar isBordered
@@ -101,10 +100,10 @@ export default function PetProfilesOverviewSection() {
                                                 </Button>
 
                                             </CardHeader>
-                                            <CardBody className="overflow-visible p-2 py-2 lg:max-h-[400px] xl:max-h-[450px]">
+                                            <CardBody className="overflow-visible p-2 lg:max-h-[400px] xl:max-h-[450px]">
                                                 <Image
                                                     alt="Card background"
-                                                    className="rounded-xl lg:h-[400px] xl:h-[450px] w-full xl:mb-2 lg:mb-2"
+                                                    className="rounded-xl lg:h-[300px] xl:h-[350px] w-full"
                                                     src={profile.profileUrl}
                                                 />
                                             </CardBody>

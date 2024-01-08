@@ -16,7 +16,7 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({journalEntries})
 
     return (
         <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 ml-2 mr-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4 ml-2 mr-2">
                 {journalEntries.map((journal, index) => (
                     <Card key={journal.id} className="py-4">
                         <RenderJournalHeader
@@ -35,25 +35,42 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({journalEntries})
                             </div>
 
                             <div className="flex flex-wrap md:-m-2 mt-3">
-                                <div
-                                    className={`flex ${
-                                        journal.journalAttachments.length <= 3 ? 'w-full' : 'w-1/2'
-                                    } flex-wrap`}
-                                >
-                                    {journal.journalAttachments.slice(0, 3).map((image, imgIndex) => (
-                                        <div
-                                            key={imgIndex}
-                                            className={`w-${imgIndex === 2 || journal.journalAttachments.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}
-                                        >
+                                {journal.journalAttachments.length <= 1 ?
+                                    (
+                                        <div className="p-1">
+                                        {journal.journalAttachments.map((image, imgIndex) => (
                                             <img
-                                                alt={`gallery-${imgIndex + 1}`}
+                                                key={imgIndex}
+                                                alt={`gallery-${imgIndex}`}
                                                 className="block w-full rounded-lg object-center"
-                                                style={{height: 130, maxHeight: 150}}
                                                 src={image.sourceUrl}
                                             />
+                                        ))}
                                         </div>
-                                    ))}
-                                </div>
+                                    ):
+                                    (
+                                    <>
+                                        <div
+                                            className={`flex ${
+                                                journal.journalAttachments.length <= 3 ? 'w-full' : 'w-1/2'
+                                            } flex-wrap`}
+                                        >
+                                            {journal.journalAttachments.slice(0, 3).map((image, imgIndex) => (
+                                                <div
+                                                    key={imgIndex}
+                                                    className={`w-${imgIndex === 2 || journal.journalAttachments.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}
+                                                >
+                                                    <img
+                                                        alt={`gallery-${imgIndex + 1}`}
+                                                        className="block w-full rounded-lg object-center"
+                                                        style={{height: 100, maxHeight: 150}}
+                                                        src={image.sourceUrl}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </>
+                                )}
 
                                 <div className="flex w-1/2 flex-wrap">
                                     {journal.journalAttachments.slice(3).map((image, imgIndex) => (
@@ -62,7 +79,7 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({journalEntries})
                                             <img
                                                 alt={`gallery-${imgIndex + 4}`}
                                                 className="block w-full rounded-lg object-center"
-                                                style={{height: 130, maxHeight: 150}}
+                                                style={{height: 100, maxHeight: 150}}
                                                 src={image.sourceUrl}
                                             />
                                         </div>
