@@ -2,9 +2,7 @@ import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "
 import Spinner from "@/components/shared/icons/Spinner";
 import React, {useState} from "react";
 import {toast} from "react-toastify";
-import {UploadJournalImageRequest} from "@/boundary/interfaces/journal";
 import {areFilesValid} from "@/helpers/validationHelpers";
-import {uploadJournalAttachments} from "@/lib/services/journal-entries/journalEntryService";
 import {DragDropSection} from "@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal";
 import {UpdatePetProfileImageRequest} from "@/boundary/interfaces/pet";
 import {updateProfileImage} from "@/lib/services/pet/petProfileService";
