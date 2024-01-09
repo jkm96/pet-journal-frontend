@@ -28,7 +28,7 @@ export default function PetProfilesOverviewSection() {
 
     useEffect(() => {
         fetchPetProfiles();
-    }, [isModalOpen]);
+    }, []);
 
     return (
         <>
@@ -55,10 +55,7 @@ export default function PetProfilesOverviewSection() {
                                     Add Pet
                                 </Button>
                                 {isModalOpen && (
-                                    <CreateNewPetModal
-                                        isOpen={isModalOpen}
-                                        onClose={handleCloseModal}
-                                    />
+                                    <CreateNewPetModal isOpen={isModalOpen} onClose={handleCloseModal}/>
                                 )}
                             </div>
                         </div>
@@ -100,7 +97,8 @@ export default function PetProfilesOverviewSection() {
                                                 </Button>
 
                                             </CardHeader>
-                                            <CardBody className="overflow-visible p-2 lg:max-h-[400px] xl:max-h-[450px]">
+                                            <CardBody
+                                                className="overflow-visible p-2 lg:max-h-[400px] xl:max-h-[450px]">
                                                 <Image
                                                     alt="Card background"
                                                     className="rounded-xl lg:h-[300px] xl:h-[350px] w-full"

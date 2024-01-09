@@ -10,21 +10,29 @@ import {EditIcon} from "@nextui-org/shared-icons";
 import {PetProfileCard} from "@/components/dashboard/user/petmngt/pets/profile/PetProfileCard";
 import Spinner from "@/components/shared/icons/Spinner";
 import PetTraits from "@/components/dashboard/user/petmngt/pets/profile/PetTraits";
+import UpdateJournalEntryModal
+    from "@/components/dashboard/user/journalmngt/journalentries/modals/UpdateJournalEntryModal";
+import UpdateProfilePictureModal from "@/components/dashboard/user/petmngt/pets/modals/UpdateProfilePictureModal";
 
 export default function ManagePetProfile({slug}: { slug: string }) {
     const [petProfileDetails, setPetProfileDetails] = useState<PetProfileResponse>({} as PetProfileResponse);
     const [isLoadingPetDetails, setIsLoadingPetDetails] = useState(true);
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentTrait, setCurrentTrait] = useState<Trait>({trait: '', type: ''});
     const [traits, setTraits] = useState<Trait[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [modals, setModals] = useState({
+        editPet: false,
+        deletePet: false,
+        updateProfileImage: false,
+    });
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
+    const openModal = (modalName: string) => {
+        setModals({...modals, [modalName]: true});
     };
 
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
+    const closeModal = (modalName: string) => {
+        setModals({...modals, [modalName]: false});
+        fetchPetProfileInfo(slug);
     };
 
     const fetchPetProfileInfo = async (petSlug: string) => {
@@ -72,7 +80,7 @@ export default function ManagePetProfile({slug}: { slug: string }) {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         setIsSubmitting(true);
-        console.log('Submitted Traits:', traits);
+
         const addTrait: AddPetTraitRequest = {
             petId: petProfileDetails.id,
             traits: traits
@@ -102,16 +110,34 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                     <div className="flex flex-col gap-4 m-2">
                         <div className="flex justify-between gap-3 items-end">
                             <div className="flex gap-3">
-                                <Button onPress={handleOpenModal}
+                                <Button onPress={() => openModal("editPet")}
                                         startContent={<EditIcon/>}
                                         color="primary"
+                                        className={"mr-2"}
                                         variant="shadow">
                                     Edit Pet
                                 </Button>
-                                {isModalOpen && (
+
+                                {modals.editPet && (
                                     <CreateNewPetModal
-                                        isOpen={isModalOpen}
-                                        onClose={handleCloseModal}
+                                        isOpen={modals.editPet}
+                                        onClose={() => closeModal("editPet")}
+                                    />
+                                )}
+
+                                <Button onPress={() => openModal("updateProfileImage")}
+                                        startContent={<EditIcon/>}
+                                        color="primary"
+                                        className={"mr-2"}
+                                        variant="shadow">
+                                    Edit Image
+                                </Button>
+
+                                {modals.updateProfileImage && (
+                                    <UpdateProfilePictureModal
+                                        petId={petProfileDetails.id}
+                                        isOpen={modals.updateProfileImage}
+                                        onClose={() => closeModal("updateProfileImage")}
                                     />
                                 )}
                             </div>

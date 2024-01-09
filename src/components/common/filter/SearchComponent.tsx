@@ -38,7 +38,7 @@ export default function SearchComponent({onSearchChange,placeholder}: SearchComp
 
             setDebounceTimeout(newTimeout);
         },
-        [searchParams]
+        [searchParams, debounceTimeout, pathname, onSearchChange]
     );
 
     return (

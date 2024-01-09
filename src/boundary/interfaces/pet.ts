@@ -43,3 +43,8 @@ export interface AddPetTraitRequest {
     petId: number;
     traits: Trait[];
 }
+
+export interface UpdatePetProfileImageRequest {
+    petId: number
+    profilePicture: FileList | null;
+}

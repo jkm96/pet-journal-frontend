@@ -44,7 +44,6 @@ export default function CreateNewPetModal({isOpen, onClose}: {
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
-        console.log('FileList:', files);
 
         setCreatePetFormData({
             ...createPetFormData,

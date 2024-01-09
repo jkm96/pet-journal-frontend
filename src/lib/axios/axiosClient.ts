@@ -18,6 +18,7 @@ petJournalApiClient.interceptors.request.use(
         if (
             config.url.includes("journal-entry/create") ||
             config.url.includes("attachment/create") ||
+            config.url.includes("pet/profile/edit-picture") ||
             config.url.includes("pet/create")
         ) {
             if (config.headers["Content-Type"] == "application/json" || config.headers["Accept"] == "application/json") {

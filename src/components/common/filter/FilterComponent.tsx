@@ -20,7 +20,6 @@ export default function FilterComponent({onFilterChange, placeholder}: FilterCom
     const [periodTo, setPeriodTo] = useState<string>('');
     const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(null);
 
-    // Wrap the handleFilterChange function with useCallback
     const handleFilterChange = useCallback(
         (newSearchTerm: string, newPeriodFrom: string, newPeriodTo: string) => {
             if (onFilterChange) {
@@ -30,7 +29,6 @@ export default function FilterComponent({onFilterChange, placeholder}: FilterCom
         [onFilterChange]
     );
 
-    // Wrap the entire filter logic in a useCallback
     const handleFilterSearch = useCallback(() => {
         const params = new URLSearchParams(searchParams);
         if (searchTerm) {
@@ -58,7 +56,6 @@ export default function FilterComponent({onFilterChange, placeholder}: FilterCom
         }
 
         const newTimeout = setTimeout(() => {
-            // Call the memoized function
             handleFilterChange(searchTerm, periodFrom, periodTo);
         }, 500);
 
@@ -66,7 +63,6 @@ export default function FilterComponent({onFilterChange, placeholder}: FilterCom
     }, [searchTerm, periodFrom, periodTo, searchParams, pathname, replace, debounceTimeout, handleFilterChange]);
 
     useEffect(() => {
-        // Check if any filter field is filled
         setDisabled(searchTerm === '' && periodTo === '' && periodFrom === '');
     }, [searchTerm, periodFrom, periodTo]);
 

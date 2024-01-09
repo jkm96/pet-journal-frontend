@@ -1,10 +1,12 @@
 import {apiKey, internalBaseUrl} from "@/boundary/constants/appConstants";
-import {AddPetTraitRequest, CreatePetRequest} from "@/boundary/interfaces/pet";
+import {AddPetTraitRequest, CreatePetRequest, UpdatePetProfileImageRequest} from "@/boundary/interfaces/pet";
 import axios from "axios";
+import {UploadJournalImageRequest} from "@/boundary/interfaces/journal";
+import {handleApiException} from "@/helpers/responseHelpers";
 
 export async function getPetProfiles() {
     try {
-        const response = await fetch(`${internalBaseUrl}/api/pet/profile`, {
+        const response = await fetch(`${internalBaseUrl}/api/pet/profile/list`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -31,7 +33,6 @@ export async function createPetProfile(createRequest: CreatePetRequest) {
         formData.append('dateOfBirth', createRequest.dateOfBirth ?? '');
         formData.append('petTraits', JSON.stringify(createRequest.petTraits));
 
-        console.log("createRequest", createRequest.petTraits)
         if (createRequest.profilePicture) {
             for (let i = 0; i < createRequest.profilePicture.length; i++) {
                 const file = createRequest.profilePicture[i];
@@ -85,3 +86,29 @@ export async function addPetTraits(addRequest: AddPetTraitRequest) {
         throw error;
     }
 }
+
+export async function updateProfileImage(uploadRequest: UpdatePetProfileImageRequest) {
+    try {
+        const formData = new FormData();
+        formData.append('petId', `${uploadRequest.petId}`);
+
+        if (uploadRequest.profilePicture) {
+            for (let i = 0; i < uploadRequest.profilePicture.length; i++) {
+                const file = uploadRequest.profilePicture[i];
+                formData.append('profilePicture', file, file.name);
+            }
+        }
+        console.log("uploadRequest", uploadRequest)
+        const response = await axios.post(`${internalBaseUrl}/api/pet/profile/update-image`, formData, {
+            headers: {
+                'x-api-key': `${apiKey}`,
+                "Content-Type": "multipart/form-data",
+            }
+        });
+
+        return response.data;
+    } catch (error: any) {
+        return handleApiException(error);
+    }
+}
+

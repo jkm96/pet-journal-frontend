@@ -38,12 +38,24 @@ function resetForm(setCreateJournalFormData: any,
     setIsSubmitting(false)
 }
 
-export function DragDropSection(handleFileChange: (e: any) => void, previewFile: any[], removeImage: (fileName: any) => void) {
+export function DragDropSection(
+    handleFileChange: (e: any) => void,
+    previewFile: any[],
+    removeImage: (fileName: any) => void,
+    numberOfFiles: number
+) {
+
     return <>
         <div
             className="h-32 w-full overflow-hidden relative shadow-md border-2 items-center rounded-md cursor-pointer border-gray-400 border-dotted">
-            <input type="file" onChange={handleFileChange} className="h-full w-full opacity-0 z-10 absolute"
-                   name="files[]" multiple/>
+
+            {numberOfFiles > 1 ? (
+                <input type="file" onChange={handleFileChange} className="h-full w-full opacity-0 z-10 absolute"
+                       name="files[]" multiple/>
+            ):(
+                <input type="file" onChange={handleFileChange} className="h-full w-full opacity-0 z-10 absolute"
+                       name="files"/>
+            )}
             <div className="h-full w-full bg-gray-200 absolute z-1 flex justify-center items-center top-0">
                 <div className="flex flex-col">
                     <i className="mdi mdi-folder-open text-[30px] text-gray-400 text-center"></i>
@@ -293,7 +305,7 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
 
                                         <div className="w-full rounded-md">
                                             <label className="mt-1 mb-1">Upload images</label>
-                                            {DragDropSection(handleFileChange, previewFile, removeImage)}
+                                            {DragDropSection(handleFileChange, previewFile, removeImage,2)}
                                         </div>
 
                                         <div className="grid md:grid-cols-2 md:gap-6">
