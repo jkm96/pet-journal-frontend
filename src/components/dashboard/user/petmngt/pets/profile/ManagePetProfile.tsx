@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {AddPetTraitRequest, PetProfileResponse, Trait} from "@/boundary/interfaces/pet";
+import {AddPetTraitRequest, EditPetRequest, PetProfileResponse, Trait} from "@/boundary/interfaces/pet";
 import {addPetTraits, getPetProfileDetails} from "@/lib/services/pet/petProfileService";
 import {toast} from "react-toastify";
 import {Button, CircularProgress, Input, Select, SelectItem} from "@nextui-org/react";
@@ -11,6 +11,7 @@ import {PetProfileCard} from "@/components/dashboard/user/petmngt/pets/profile/P
 import Spinner from "@/components/shared/icons/Spinner";
 import PetTraits from "@/components/dashboard/user/petmngt/pets/profile/PetTraits";
 import UpdateProfilePictureModal from "@/components/dashboard/user/petmngt/pets/modals/UpdateProfilePictureModal";
+import EditPetModal from "@/components/dashboard/user/petmngt/pets/modals/EditPetModal";
 
 export default function ManagePetProfile({slug}: { slug: string }) {
     const [petProfileDetails, setPetProfileDetails] = useState<PetProfileResponse>({} as PetProfileResponse);
@@ -95,6 +96,15 @@ export default function ManagePetProfile({slug}: { slug: string }) {
         }
     };
 
+    const editPetRequest:EditPetRequest = {
+        petId: petProfileDetails.id,
+        breed: petProfileDetails.breed,
+        description: petProfileDetails.description,
+        name: petProfileDetails.name,
+        nickname: petProfileDetails.nickname,
+        species: petProfileDetails.species
+    }
+
     return (
         <>
             {isLoadingPetDetails ? (
@@ -111,13 +121,14 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                                 <Button onPress={() => openModal("editPet")}
                                         startContent={<EditIcon/>}
                                         color="primary"
-                                        className={"mr-2"}
+                                        className="mr-2"
                                         variant="shadow">
                                     Edit Pet
                                 </Button>
 
                                 {modals.editPet && (
-                                    <CreateNewPetModal
+                                    <EditPetModal
+                                        editPetRequest={editPetRequest}
                                         isOpen={modals.editPet}
                                         onClose={() => closeModal("editPet")}
                                     />

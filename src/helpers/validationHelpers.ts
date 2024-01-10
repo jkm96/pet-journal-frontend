@@ -1,5 +1,5 @@
 import {LoginUserRequest, RegisterUserRequest} from "@/boundary/interfaces/auth";
-import {CreatePetRequest} from "@/boundary/interfaces/pet";
+import {CreatePetRequest, EditPetRequest} from "@/boundary/interfaces/pet";
 import {CreateJournalEntryRequest, UpdateJournalEntryRequest} from "@/boundary/interfaces/journal";
 
 export function isEmailValid(email: string): boolean {
@@ -82,20 +82,33 @@ export function validateCreatePetFormInputErrors(formData: CreatePetRequest) {
         species: ""
     }
 
+    validateCreateEditPetRequests(formData, errors);
+
+    // Check if there are any errors and return null if all input is valid
+    for (const key in errors) {
+        if (key !== 'petTraits' && key !== 'profilePicture' && errors[key as keyof CreatePetRequest] !== "") {
+            return errors;
+        }
+    }
+
+    return null;
+}
+
+function validateCreateEditPetRequests(formData: EditPetRequest|CreatePetRequest, errors: EditPetRequest|CreatePetRequest) {
     if (formData.name.trim() === "") {
-        errors.name = "name cannot be empty";
+        errors.name = "Name cannot be empty";
     } else if (formData.name.trim().length < 3) {
-        errors.name = "name must be at least 3 characters long";
+        errors.name = "Name must be at least 3 characters long";
     }
 
     if (formData.species.trim() === "") {
-        errors.species = "species cannot be empty";
+        errors.species = "Species cannot be empty";
     }
 
     if (formData.description.trim() === "") {
-        errors.description = "description cannot be empty";
+        errors.description = "Description cannot be empty";
     } else if (formData.description.trim().length < 20) {
-        errors.description = "description must be at least 20 characters long";
+        errors.description = "Description must be at least 20 characters long";
     }
 
     if (formData.nickname !== null && formData.nickname?.trim().length < 3) {
@@ -103,12 +116,25 @@ export function validateCreatePetFormInputErrors(formData: CreatePetRequest) {
     }
 
     if (formData.breed !== null && formData.breed?.trim().length < 3) {
-        errors.breed = "breed must be at least 3 characters long";
+        errors.breed = "Breed must be at least 3 characters long";
     }
+}
+
+export function validateEditPetFormInputErrors(formData: EditPetRequest) {
+    const errors: EditPetRequest = {
+        breed: "",
+        dateOfBirth: "",
+        description: "",
+        name: "",
+        nickname: "",
+        species: ""
+    }
+
+    validateCreateEditPetRequests(formData, errors);
 
     // Check if there are any errors and return null if all input is valid
     for (const key in errors) {
-        if (key !== 'petTraits' && key !== 'profilePicture' && errors[key as keyof CreatePetRequest] !== "") {
+        if (errors[key as keyof EditPetRequest] !== "") {
             return errors;
         }
     }

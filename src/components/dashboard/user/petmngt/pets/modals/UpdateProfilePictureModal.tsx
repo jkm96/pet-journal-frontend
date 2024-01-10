@@ -63,7 +63,7 @@ export default function UpdateProfilePictureModal({petId, isOpen, onClose}: {
             toast.error('Please upload only PNG or JPG files.');
             return;
         }
-        console.log("uploadImageFormData", uploadProfileImageFormData)
+
         const response = await updateProfileImage(uploadProfileImageFormData);
         if (response.statusCode === 200) {
             toast.success(response.message ?? "Attachments uploaded successfully")

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {validateCreatePetFormInputErrors} from "@/helpers/validationHelpers";
+import {validateCreatePetFormInputErrors, validateEditPetFormInputErrors} from "@/helpers/validationHelpers";
 import {
     Button,
     Input,
@@ -13,76 +13,61 @@ import {
 } from "@nextui-org/react";
 import {toast} from "react-toastify";
 import Spinner from "@/components/shared/icons/Spinner";
-import {CreatePetRequest} from "@/boundary/interfaces/pet";
+import {CreatePetRequest, EditPetRequest} from "@/boundary/interfaces/pet";
 import {Textarea} from "@nextui-org/input";
-import {createPetProfile} from "@/lib/services/pet/petProfileService";
+import {createPetProfile, editPetProfile} from "@/lib/services/pet/petProfileService";
 import {species} from "@/boundary/constants/petConstants";
 
-const initialFormState: CreatePetRequest = {
+
+const initialFormState: EditPetRequest = {
+    petId: 0,
     breed: "",
     dateOfBirth: "",
     description: "",
     name: "",
     nickname: "",
-    petTraits: null,
-    profilePicture: null,
     species: ""
 };
-
-export default function CreateNewPetModal({isOpen, onClose}: {
+export default function EditPetModal({editPetRequest,isOpen, onClose}: {
+    editPetRequest: EditPetRequest,
     isOpen: boolean,
     onClose: () => void
 }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [createPetFormData, setCreatePetFormData] = useState(initialFormState);
+    const [editPetFormData, setEditPetFormData] = useState(editPetRequest);
     const [inputErrors, setInputErrors] = useState(initialFormState);
 
     const handleChange = (e: any) => {
         const {name, value} = e.target;
-        setCreatePetFormData({...createPetFormData, [name]: value});
+        setEditPetFormData({...editPetFormData, [name]: value});
     }
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-
-        setCreatePetFormData({
-            ...createPetFormData,
-            profilePicture: files !== null ? files : null,
-        });
-    };
-
-    const handlePetCreation = async (e: any) => {
+    const handlePetEdit   = async (e: any) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        const inputErrors = validateCreatePetFormInputErrors(createPetFormData);
+        const inputErrors = validateEditPetFormInputErrors(editPetFormData);
         if (inputErrors && Object.keys(inputErrors).length > 0) {
             setInputErrors(inputErrors);
             setIsSubmitting(false);
             return;
         }
 
-        if (!createPetFormData.profilePicture) {
-            toast.error("Profile picture is required.")
-            setIsSubmitting(false);
-            return;
-        }
-
         if (
-            createPetFormData.name.trim() === "" ||
-            createPetFormData.description.trim() === "" ||
-            createPetFormData.species.trim() === ""
+            editPetFormData.name.trim() === "" ||
+            editPetFormData.description.trim() === "" ||
+            editPetFormData.species.trim() === ""
         ) {
             setIsSubmitting(false);
             return;
         }
-
-        let response = await createPetProfile(createPetFormData);
+        console.log("editPetFormData",editPetFormData)
+        let response = await editPetProfile(editPetFormData);
         if (response.statusCode === 200) {
-            toast.success(response.message ?? "Pet profile created successfully")
+            toast.success(response.message ?? "Pet profile update successfully")
             setIsSubmitting(false);
             setInputErrors(initialFormState);
-            setCreatePetFormData(initialFormState)
+            setEditPetFormData(editPetRequest)
             onClose()
         } else {
             setIsSubmitting(false);
@@ -91,7 +76,7 @@ export default function CreateNewPetModal({isOpen, onClose}: {
     };
 
     const handleCloseModal = () => {
-        setCreatePetFormData(initialFormState)
+        setEditPetFormData(editPetRequest)
     };
 
     return (
@@ -110,14 +95,14 @@ export default function CreateNewPetModal({isOpen, onClose}: {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Create Pet Profile</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1">Edit Pet Profile</ModalHeader>
                             <ModalBody>
-                                <form onSubmit={handlePetCreation}>
+                                <form onSubmit={handlePetEdit}>
                                     <div className="grid md:grid-cols-2 md:gap-6">
                                         <Input type="text"
                                                color="default"
                                                onChange={handleChange}
-                                               value={createPetFormData.name}
+                                               value={editPetFormData.name}
                                                label="Name"
                                                labelPlacement={"outside"}
                                                name="name"
@@ -132,8 +117,8 @@ export default function CreateNewPetModal({isOpen, onClose}: {
                                         <Input type="text"
                                                className="mt-2 mb-1 "
                                                onChange={handleChange}
-                                               value={createPetFormData.nickname || ""}
-                                               label="nickname"
+                                               value={editPetFormData.nickname || ""}
+                                               label="Nickname"
                                                radius={"sm"}
                                                labelPlacement={"outside"}
                                                name="nickname"
@@ -146,13 +131,15 @@ export default function CreateNewPetModal({isOpen, onClose}: {
                                                errorMessage={inputErrors.nickname}/>
                                     </div>
 
-                                    <div className="grid md:grid-cols-2 md:gap-6">
+                                    <div className="grid md:grid-cols-3 md:gap-6">
                                         <Select
                                             items={species}
                                             label="Pet Species"
                                             labelPlacement={"outside"}
                                             variant="bordered"
                                             name="species"
+                                            className="mt-2 mb-1"
+                                            value={editPetFormData.species}
                                             placeholder="Select pet species"
                                             onChange={handleChange}
                                             onSelectionChange={() => {
@@ -162,17 +149,17 @@ export default function CreateNewPetModal({isOpen, onClose}: {
                                             errorMessage={inputErrors.species}
                                         >
                                             {(animal) =>
-                                                <SelectItem key={animal.value}>
+                                                <SelectItem key={animal.value} value={editPetFormData.species}>
                                                     {animal.label}
                                                 </SelectItem>
                                             }
                                         </Select>
 
                                         <Input type="text"
-                                               className="mt-2 mb-1 "
+                                               className="mt-2 mb-1"
                                                onChange={handleChange}
-                                               value={createPetFormData.breed || ""}
-                                               label="breed"
+                                               value={editPetFormData.breed || ""}
+                                               label="Breed"
                                                radius={"sm"}
                                                labelPlacement={"outside"}
                                                name="breed"
@@ -183,15 +170,13 @@ export default function CreateNewPetModal({isOpen, onClose}: {
                                                }}
                                                isInvalid={inputErrors.breed !== ""}
                                                errorMessage={inputErrors.breed}/>
-                                    </div>
 
-                                    <div className="grid md:grid-cols-2 md:gap-6">
                                         <Input type="text"
                                                color="default"
                                                className="mt-2 mb-1 "
                                                onChange={handleChange}
-                                               value={createPetFormData.dateOfBirth || ""}
-                                               label="dateOfBirth"
+                                               value={editPetFormData.dateOfBirth || ""}
+                                               label="DateOfBirth"
                                                labelPlacement={"outside"}
                                                name="dateOfBirth"
                                                variant={"bordered"}
@@ -201,27 +186,13 @@ export default function CreateNewPetModal({isOpen, onClose}: {
                                                }}
                                                isInvalid={inputErrors.dateOfBirth !== ""}
                                                errorMessage={inputErrors.dateOfBirth}/>
-
-                                        <div className="mt-2">
-                                            <label
-                                                className="block text-sm font-medium text-gray-900 dark:text-white"
-                                                htmlFor="multiple_files">Attach profile picture</label>
-                                            <input
-                                                onChange={handleFileChange}
-                                                name={"profilePicture"}
-                                                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer
-                                                bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600
-                                                dark:placeholder-gray-400"
-                                                id="multiple_files" type="file">
-                                            </input>
-                                        </div>
                                     </div>
 
                                     <div className="grid md:grid-cols-1 md:gap-6">
                                         <Textarea type="text"
                                                   className="mt-2 mb-1 "
                                                   onChange={handleChange}
-                                                  value={createPetFormData.description}
+                                                  value={editPetFormData.description}
                                                   label="Description"
                                                   minRows={4}
                                                   radius={"sm"}
@@ -246,8 +217,8 @@ export default function CreateNewPetModal({isOpen, onClose}: {
                                         type="submit"
                                         isLoading={isSubmitting}
                                         spinner={<Spinner/>}
-                                        onClick={handlePetCreation}>
-                                    {isSubmitting ? "Submitting..." : "Create Pet"}
+                                        onClick={handlePetEdit}>
+                                    {isSubmitting ? "Submitting..." : "Update Pet"}
                                 </Button>
                             </ModalFooter>
                         </>

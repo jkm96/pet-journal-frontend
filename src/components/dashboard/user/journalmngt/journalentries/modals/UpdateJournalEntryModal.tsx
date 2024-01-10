@@ -63,22 +63,19 @@ export default function UpdateJournalEntryModal({editJournalRequest, userPets, i
         setIsSubmitting(true)
 
         const inputErrors = validateEditJournalFormInputErrors(updateJournalEntryRequest);
-        console.log("input errors", inputErrors)
         if (inputErrors && Object.keys(inputErrors).length > 0) {
             setInputErrors(inputErrors);
             setIsSubmitting(false);
             return;
         }
 
-        const updatedPetIds: number[] = selectedUserPets.map((petName, index) => {
+        updateJournalEntryRequest.petIds = selectedUserPets.map((petName, index) => {
             const pet = pets.find((profile) => profile.name === petName);
             return pet ? pet.id : editJournalRequest.petIds[index];
         });
-        console.log("updatedPetIds", updatedPetIds)
-        updateJournalEntryRequest.petIds = updatedPetIds;
         updateJournalEntryRequest.tags = selectedJournalTags.join(', ')
         updateJournalEntryRequest.mood = selectedMoodTags.join(', ')
-        console.log("updateJournalEntryRequest", updateJournalEntryRequest)
+
         if (
             updateJournalEntryRequest.title.trim() === "" ||
             updateJournalEntryRequest.content.trim() === "" ||
