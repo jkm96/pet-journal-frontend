@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import {getJournalEntries} from "@/lib/services/journal-entries/journalEntryService";
 import {JournalEntryResponse} from "@/boundary/interfaces/journal";
@@ -14,12 +14,18 @@ import CreateJournalEntryModal
 import {formatDate} from "@/helpers/dateHelpers";
 import {getMoodColorClass} from "@/helpers/stylingHelpers";
 import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
+import {SearchIcon} from "@/components/shared/icons/SearchIcon";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 
 export default function JournalEntriesOverview() {
     const [queryParams, setQueryParams] = useState<JournalQueryParameters>(new JournalQueryParameters());
     const [journalEntries, setJournalEntries] = useState<JournalEntryResponse[]>([]);
     const [isLoadingJournalEntries, setIsLoadingJournalEntries] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isInitialLoad, setIsInitialLoad] = useState(true);
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const {replace} = useRouter();
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -50,13 +56,38 @@ export default function JournalEntriesOverview() {
     useEffect(() => {
         const {search} = window.location;
         const searchParams = new URLSearchParams(search);
-        queryParams.searchTerm = searchParams.get('searchTerm') ?? ''
-        fetchJournalEntries(queryParams);
-    }, [queryParams]);
+        const searchTerm = searchParams.get('searchTerm') ?? ''
+        console.log("Fetch data only mount")
+        setQueryParams((prevParams) => ({...prevParams, searchTerm}));
+        fetchJournalEntries({...queryParams, searchTerm});
+    }, []); // Empty dependency array to ensure it runs only on mount
 
-    const handleSearchChange = (newSearchTerm: string) => {
-        setQueryParams((prevParams) => ({ ...prevParams, searchTerm: newSearchTerm }));
-        // fetchJournalEntries(queryParams);
+    useEffect(() => {
+        // Fetch data only when queryParams change
+        if (!isInitialLoad) {
+            console.log("Fetch data only when queryParams change")
+            fetchJournalEntries(queryParams);
+        } else {
+            setIsInitialLoad(false);
+        }
+    }, [queryParams,isInitialLoad]);
+
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
+        const newSearchTerm = event.target.value;
+        const params = new URLSearchParams(searchParams);
+
+        if (newSearchTerm) {
+            params.set('searchTerm', newSearchTerm);
+        } else {
+            params.delete('searchTerm');
+        }
+
+        replace(`${pathname}?${params.toString()}`);
+
+        if (newSearchTerm.length >= 4 || newSearchTerm === '') {
+            setQueryParams((prevParams) => ({...prevParams, searchTerm: newSearchTerm}));
+        }
     };
 
     return (
@@ -65,7 +96,22 @@ export default function JournalEntriesOverview() {
 
             <div className="flex flex-col gap-4 m-2">
                 <div className="flex justify-between gap-3 items-end">
-                    <SearchComponent onSearchChange={handleSearchChange} placeholder="Search for journal entries"/>
+                    {/*<SearchComponent onSearchChange={handleSearchChange} placeholder="Search for journal entries"/>*/}
+                    <div className="w-full sm:max-w-[44%]">
+                        <div className="relative flex flex-1 flex-shrink-0">
+                            <label htmlFor="search" className="sr-only">
+                                Search
+                            </label>
+                            <input
+                                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                                placeholder="Search"
+                                onChange={handleSearch}
+                                defaultValue={queryParams.searchTerm}
+                            />
+                            <SearchIcon
+                                className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"/>
+                        </div>
+                    </div>
                     <div className="gap-3 hidden lg:block">
                         <Button onPress={handleOpenModal}
                                 startContent={<PlusIcon/>}

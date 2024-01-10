@@ -122,6 +122,7 @@ function validateCreateEditPetRequests(formData: EditPetRequest|CreatePetRequest
 
 export function validateEditPetFormInputErrors(formData: EditPetRequest) {
     const errors: EditPetRequest = {
+        petId: 0,
         breed: "",
         dateOfBirth: "",
         description: "",
