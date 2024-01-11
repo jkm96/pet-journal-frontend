@@ -52,7 +52,7 @@ export function DragDropSection(
             {numberOfFiles > 1 ? (
                 <input type="file" onChange={handleFileChange} className="h-full w-full opacity-0 z-10 absolute"
                        name="files[]" multiple/>
-            ):(
+            ) : (
                 <input type="file" onChange={handleFileChange} className="h-full w-full opacity-0 z-10 absolute"
                        name="files"/>
             )}
@@ -305,7 +305,7 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
 
                                         <div className="w-full rounded-md">
                                             <label className="mt-1 mb-1">Upload images</label>
-                                            {DragDropSection(handleFileChange, previewFile, removeImage,2)}
+                                            {DragDropSection(handleFileChange, previewFile, removeImage, 2)}
                                         </div>
 
                                         <div className="grid md:grid-cols-2 md:gap-6">

@@ -5,7 +5,7 @@ import petJournalApiClient, {getAxiosConfigs} from "@/lib/axios/axiosClient";
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-export async function GET(request: NextRequest,{params}: { params: { sessionId: string } }) {
+export async function GET(request: NextRequest, {params}: { params: { sessionId: string } }) {
     try {
         const sessionId = params.sessionId;
         const session = await stripe.checkout.sessions.retrieve(sessionId);

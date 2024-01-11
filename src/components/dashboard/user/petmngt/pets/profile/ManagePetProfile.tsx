@@ -3,7 +3,6 @@ import {AddPetTraitRequest, EditPetRequest, PetProfileResponse, Trait} from "@/b
 import {addPetTraits, getPetProfileDetails} from "@/lib/services/pet/petProfileService";
 import {toast} from "react-toastify";
 import {Button, CircularProgress, Input, Select, SelectItem} from "@nextui-org/react";
-import CreateNewPetModal from "@/components/dashboard/user/petmngt/pets/modals/CreateNewPetModal";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import {toTitleCase} from "@/lib/utils/pdfUtils";
 import {EditIcon} from "@nextui-org/shared-icons";
@@ -96,7 +95,7 @@ export default function ManagePetProfile({slug}: { slug: string }) {
         }
     };
 
-    const editPetRequest:EditPetRequest = {
+    const editPetRequest: EditPetRequest = {
         petId: petProfileDetails.id,
         breed: petProfileDetails.breed,
         description: petProfileDetails.description,
@@ -205,12 +204,12 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                                     {trait.trait} - {trait.type}
                                 </span>
                                 <Button
-                                        onPress={() => removeTrait(index)}
-                                        className="p-0"
-                                        size="sm"
-                                        isIconOnly
-                                        style={{ padding: 0,fontSize:"larger"}}
-                                        color="danger">
+                                    onPress={() => removeTrait(index)}
+                                    className="p-0"
+                                    size="sm"
+                                    isIconOnly
+                                    style={{padding: 0, fontSize: "larger"}}
+                                    color="danger">
                                     x
                                 </Button>
                             </div>

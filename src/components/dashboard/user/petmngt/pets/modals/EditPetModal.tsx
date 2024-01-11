@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {validateCreatePetFormInputErrors, validateEditPetFormInputErrors} from "@/helpers/validationHelpers";
+import {validateEditPetFormInputErrors} from "@/helpers/validationHelpers";
 import {
     Button,
     Input,
@@ -13,9 +13,9 @@ import {
 } from "@nextui-org/react";
 import {toast} from "react-toastify";
 import Spinner from "@/components/shared/icons/Spinner";
-import {CreatePetRequest, EditPetRequest} from "@/boundary/interfaces/pet";
+import {EditPetRequest} from "@/boundary/interfaces/pet";
 import {Textarea} from "@nextui-org/input";
-import {createPetProfile, editPetProfile} from "@/lib/services/pet/petProfileService";
+import {editPetProfile} from "@/lib/services/pet/petProfileService";
 import {species} from "@/boundary/constants/petConstants";
 
 
@@ -28,7 +28,7 @@ const initialFormState: EditPetRequest = {
     nickname: "",
     species: ""
 };
-export default function EditPetModal({editPetRequest,isOpen, onClose}: {
+export default function EditPetModal({editPetRequest, isOpen, onClose}: {
     editPetRequest: EditPetRequest,
     isOpen: boolean,
     onClose: () => void
@@ -42,7 +42,7 @@ export default function EditPetModal({editPetRequest,isOpen, onClose}: {
         setEditPetFormData({...editPetFormData, [name]: value});
     }
 
-    const handlePetEdit   = async (e: any) => {
+    const handlePetEdit = async (e: any) => {
         e.preventDefault();
         setIsSubmitting(true);
 
@@ -61,7 +61,7 @@ export default function EditPetModal({editPetRequest,isOpen, onClose}: {
             setIsSubmitting(false);
             return;
         }
-        console.log("editPetFormData",editPetFormData)
+        console.log("editPetFormData", editPetFormData)
         let response = await editPetProfile(editPetFormData);
         if (response.statusCode === 200) {
             toast.success(response.message ?? "Pet profile update successfully")

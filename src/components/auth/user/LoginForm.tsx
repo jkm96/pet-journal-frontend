@@ -262,10 +262,6 @@ export default function LoginForm() {
                                     />
                                 </div>
 
-                                <div className="m-2">
-                                    {backendError && <p className="text-danger">{backendError}</p>}
-                                </div>
-
                                 <div className="flex flex-wrap md:flex-nowrap gap-4 m-2">
                                     <Button
                                         type="submit"

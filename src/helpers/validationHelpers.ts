@@ -94,7 +94,7 @@ export function validateCreatePetFormInputErrors(formData: CreatePetRequest) {
     return null;
 }
 
-function validateCreateEditPetRequests(formData: EditPetRequest|CreatePetRequest, errors: EditPetRequest|CreatePetRequest) {
+function validateCreateEditPetRequests(formData: EditPetRequest | CreatePetRequest, errors: EditPetRequest | CreatePetRequest) {
     if (formData.name.trim() === "") {
         errors.name = "Name cannot be empty";
     } else if (formData.name.trim().length < 3) {

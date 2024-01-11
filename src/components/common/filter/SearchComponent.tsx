@@ -7,7 +7,8 @@ interface SearchComponentProps {
     onSearchChange?: (newSearchTerm: string) => void;
     placeholder: string;
 }
-export default function SearchComponent({onSearchChange,placeholder}: SearchComponentProps) {
+
+export default function SearchComponent({onSearchChange, placeholder}: SearchComponentProps) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const {replace} = useRouter();

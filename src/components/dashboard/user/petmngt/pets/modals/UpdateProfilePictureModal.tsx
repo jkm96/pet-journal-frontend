@@ -100,7 +100,7 @@ export default function UpdateProfilePictureModal({petId, isOpen, onClose}: {
                             <form onSubmit={handleImageUpload}>
                                 <div className="flex justify-center items-center bg-gray-900 px-2">
                                     <div className="w-full rounded-md">
-                                        {DragDropSection(handleFileChange, previewFile, removeImage,1)}
+                                        {DragDropSection(handleFileChange, previewFile, removeImage, 1)}
                                     </div>
                                 </div>
                             </form>

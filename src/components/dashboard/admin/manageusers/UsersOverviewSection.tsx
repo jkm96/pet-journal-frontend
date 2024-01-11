@@ -18,19 +18,26 @@ import {UserQueryParameters} from "@/boundary/parameters/userQueryParameters";
 import {UserResponse} from "@/boundary/interfaces/user";
 import PaginationComponent from "@/components/common/pagination/PaginationComponent";
 import {TableVisibleColumns} from "@/components/common/filter/TableVisibleColumns";
-import SearchComponent from "@/components/common/filter/SearchComponent";
 import RenderUserCell from "@/components/dashboard/admin/manageusers/RenderUserCell";
-import {FilterProps} from "@/boundary/interfaces/journal";
+import {SearchIcon} from "@/components/shared/icons/SearchIcon";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 
 const INITIAL_VISIBLE_COLUMNS = ["username", "email", "isActive", "isSubscribed", "actions"];
 
-export default function UsersOvervewSection({searchParams}: FilterProps) {
+export default function UsersOverviewSection() {
+    const [queryParams, setQueryParams] = useState<UserQueryParameters>(new UserQueryParameters());
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [totalPages, setTotalPages] = useState(0);
     const [userList, setUserList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [visibleColumns, setVisibleColumns] = useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [isInitialLoad, setIsInitialLoad] = useState(true);
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const {replace} = useRouter();
+
     const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
         column: "name",
         direction: "ascending",
@@ -62,6 +69,7 @@ export default function UsersOvervewSection({searchParams}: FilterProps) {
      * @param queryParams
      */
     const fetchUsers = async (queryParams: UserQueryParameters) => {
+        setIsLoading(true);
         await getUsers(queryParams)
             .then((response) => {
                 if (response.statusCode === 200) {
@@ -82,14 +90,40 @@ export default function UsersOvervewSection({searchParams}: FilterProps) {
     };
 
     useEffect(() => {
-        setIsLoading(true);
-        const queryParams: UserQueryParameters = new UserQueryParameters();
+        const {search} = window.location;
+        const searchParams = new URLSearchParams(search);
+        const searchTerm = searchParams.get('searchTerm') ?? ''
         queryParams.pageNumber = currentPage;
-        queryParams.searchTerm = searchParams?.searchTerm ?? '';
-        queryParams.periodFrom = searchParams?.periodFrom ?? '';
-        queryParams.periodTo = searchParams?.periodTo ?? '';
+        queryParams.searchTerm = searchTerm
+        setSearchTerm(searchTerm)
         fetchUsers(queryParams);
-    }, [currentPage, searchParams]);
+    }, [currentPage]);
+
+    useEffect(() => {
+        if (!isInitialLoad) {
+            fetchUsers(queryParams);
+        } else {
+            setIsInitialLoad(false);
+        }
+    }, [currentPage, queryParams]); // Fetch data only when queryParams change
+
+    const handleSearchUsers = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
+        const newSearchTerm = event.target.value;
+        const params = new URLSearchParams(searchParams);
+
+        if (newSearchTerm) {
+            params.set('searchTerm', newSearchTerm);
+        } else {
+            params.delete('searchTerm');
+        }
+
+        replace(`${pathname}?${params.toString()}`);
+
+        if (newSearchTerm.length >= 3 || newSearchTerm === '') {
+            setQueryParams((prevParams) => ({...prevParams, searchTerm: newSearchTerm}));
+        }
+    };
 
     /***
      *sorting data
@@ -117,7 +151,6 @@ export default function UsersOvervewSection({searchParams}: FilterProps) {
         />
     }, [visibleColumns]);
 
-
     /**
      * user table pagination
      */
@@ -136,7 +169,21 @@ export default function UsersOvervewSection({searchParams}: FilterProps) {
         <>
             <div className="flex flex-col gap-4 mb-2">
                 <div className="flex justify-between gap-3 items-end">
-                    <SearchComponent placeholder="Search for users"/>
+                    <div className="w-full sm:max-w-[44%]">
+                        <div className="relative flex flex-1 flex-shrink-0">
+                            <label htmlFor="search" className="sr-only">
+                                Search
+                            </label>
+                            <input
+                                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                                placeholder="Search for users"
+                                onChange={handleSearchUsers}
+                                defaultValue={searchTerm}
+                            />
+                            <SearchIcon
+                                className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"/>
+                        </div>
+                    </div>
                     <div className="flex gap-3">
                         {getUserVisibleColumns}
                     </div>

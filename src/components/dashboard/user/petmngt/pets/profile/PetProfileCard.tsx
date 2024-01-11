@@ -3,7 +3,7 @@ import {Image} from "@nextui-org/react";
 import {toTitleCase} from "@/lib/utils/pdfUtils";
 import {formatDate} from "@/helpers/dateHelpers";
 
-export function PetProfileCard({ petProfileDetails }:{petProfileDetails:PetProfileResponse}) {
+export function PetProfileCard({petProfileDetails}: { petProfileDetails: PetProfileResponse }) {
     return (
         <>
             <div className="flex flex-col md:flex-row">

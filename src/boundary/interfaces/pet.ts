@@ -8,6 +8,7 @@ export interface CreatePetRequest {
     profilePicture: FileList | null;
     petTraits?: string[] | null;
 }
+
 export interface EditPetRequest {
     petId: number;
     name: string;

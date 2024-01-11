@@ -4,7 +4,6 @@ import React, {useEffect, useState} from "react";
 import {JournalEntryResponse} from "@/boundary/interfaces/journal";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import {CircularProgress, Input} from "@nextui-org/react";
-import FilterComponent from "@/components/common/filter/FilterComponent";
 import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
 import {Button} from "@nextui-org/button";
 import {PlusFilledIcon} from "@nextui-org/shared-icons";
@@ -13,6 +12,8 @@ import PreviewMyJournal, {getDocument} from "@/components/dashboard/user/journal
 import {PDFDownloadLink} from "@react-pdf/renderer";
 import {useAuth} from "@/hooks/useAuth";
 import Spinner from "@/components/shared/icons/Spinner";
+import {SearchIcon} from "@/components/shared/icons/SearchIcon";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 
 export default function MyJournalOverview() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,6 +23,14 @@ export default function MyJournalOverview() {
     const [showPreview, setShowPreview] = useState(false);
     const [journalTitle, setJournalTitle] = useState('');
     const [queryParams, setQueryParams] = useState<JournalQueryParameters>(new JournalQueryParameters());
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const {replace} = useRouter();
+    const [disabled, setDisabled] = useState<boolean>(true);
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [periodFrom, setPeriodFrom] = useState<string>('');
+    const [periodTo, setPeriodTo] = useState<string>('');
+    const [isInitialLoad, setIsInitialLoad] = useState(true);
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setJournalTitle(e.target.value);
@@ -47,25 +56,58 @@ export default function MyJournalOverview() {
         const {search} = window.location;
         const searchParams = new URLSearchParams(search);
         queryParams.searchTerm = searchParams.get('searchTerm') ?? ''
-        queryParams.periodFrom = searchParams.get('periodFrom') ?? '';
-        queryParams.periodTo = searchParams.get('periodTo') ?? '';
+        queryParams.periodFrom = searchParams.get('periodFrom') ?? ''
+        queryParams.periodTo = searchParams.get('periodTo') ?? ''
         queryParams.fetch = 'all';
+        console.info("Fetch data on mount")
+        setSearchTerm(searchParams.get('searchTerm') ?? '')
+        setPeriodFrom(searchParams.get('periodFrom') ?? '')
+        setPeriodTo(searchParams.get('periodTo') ?? '')
         fetchAllJournalEntries(queryParams);
-    }, [queryParams]);
+    }, []);
 
-    const handleFilterChange = (searchTerm: string, periodFrom: string, periodTo: string) => {
-        console.log("searchTerm", searchTerm)
-        console.log("periodFrom", periodFrom)
-        console.log("periodTo", periodTo)
+    useEffect(() => {
+        setDisabled(searchTerm === '' && periodTo === '' && periodFrom === '');
+    }, [searchTerm, periodFrom, periodTo]);
+
+    const handleFilterSearch = () => {
+        const params = new URLSearchParams(searchParams);
+        if (searchTerm) {
+            params.set('searchTerm', searchTerm);
+        } else {
+            params.delete('searchTerm');
+        }
+
+        if (periodFrom) {
+            params.set('periodFrom', periodFrom);
+        } else {
+            params.delete('periodFrom');
+        }
+
+        if (periodTo) {
+            params.set('periodTo', periodTo);
+        } else {
+            params.delete('periodTo');
+        }
+
+        replace(`${pathname}?${params.toString()}`);
         setQueryParams((prevParams) => ({
             ...prevParams,
             searchTerm: searchTerm,
             periodFrom: periodFrom,
             periodTo: periodTo,
+            fetch: "all",
         }));
-        queryParams.fetch = 'all';
-        // fetchAllJournalEntries(queryParams);
     };
+
+    useEffect(() => {
+        if (!isInitialLoad) {
+            console.info("Fetch data only when queryParams change")
+            fetchAllJournalEntries(queryParams);
+        } else {
+            setIsInitialLoad(false);
+        }
+    }, [queryParams]); // Fetch data only when queryParams change
 
     const handlePreviewClick = () => {
         setShowPreview(true);
@@ -106,7 +148,64 @@ export default function MyJournalOverview() {
                             </div>
                         </>
                     ) : (
-                        <FilterComponent onFilterChange={handleFilterChange} placeholder="Search for journal entries"/>
+                        <>
+                            <div className="md:grid md:grid-cols-5 md:gap-4">
+                                <div className="relative flex flex-1 lg:flex-shrink-0">
+                                    <Input
+                                        placeholder="Search for journal entries"
+                                        onChange={(e) => {
+                                            setSearchTerm(e.target.value);
+                                        }}
+                                        value={searchTerm}
+                                        size="sm"
+                                        variant="bordered"
+                                        startContent={<SearchIcon/>}
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-2 md:mt-0 mt-2">
+                                    <div className="relative flex flex-1 flex-shrink-0">
+                                        <Input
+                                            type="date"
+                                            size="sm"
+                                            placeholder="Period From"
+                                            onChange={(e) => {
+                                                setPeriodFrom(e.target.value);
+                                            }}
+                                            variant="bordered"
+                                            value={periodFrom}
+                                        />
+                                    </div>
+
+                                    <div className="relative flex flex-1 flex-shrink-0 ml-2">
+                                        <Input
+                                            type="date"
+                                            size="sm"
+                                            placeholder="Period To"
+                                            onChange={(e) => {
+                                                setPeriodTo(e.target.value);
+                                            }}
+                                            variant="bordered"
+                                            value={periodTo}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="relative flex flex-1 flex-shrink-0">
+                                    <Button
+                                        className="mt-1"
+                                        disabled={disabled}
+                                        color="primary"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleFilterSearch();
+                                        }}
+                                    >
+                                        Filter
+                                    </Button>
+                                </div>
+                            </div>
+                        </>
                     )}
 
                     <div className="flex gap-3">

@@ -29,7 +29,8 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({journalEntries})
                         <CardBody className="overflow-visible py-2">
                             <div className="mt-1 mb-1">
                                 {showFullContent === index ? `${journal.content}...` : `${journal.content.slice(0, 180)}...`}
-                                <button className="dark:text-meta-8 text-success" onClick={() => toggleShowFullContent(index)}>
+                                <button className="dark:text-meta-8 text-success"
+                                        onClick={() => toggleShowFullContent(index)}>
                                     {showFullContent === index ? 'Read Less' : 'Read More'}
                                 </button>
                             </div>
@@ -38,39 +39,39 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({journalEntries})
                                 {journal.journalAttachments.length <= 1 ?
                                     (
                                         <div className="p-1">
-                                        {journal.journalAttachments.map((image, imgIndex) => (
-                                            <img
-                                                key={imgIndex}
-                                                alt={`gallery-${imgIndex}`}
-                                                className="block w-full rounded-lg object-center"
-                                                src={image.sourceUrl}
-                                            />
-                                        ))}
-                                        </div>
-                                    ):
-                                    (
-                                    <>
-                                        <div
-                                            className={`flex ${
-                                                journal.journalAttachments.length <= 3 ? 'w-full' : 'w-1/2'
-                                            } flex-wrap`}
-                                        >
-                                            {journal.journalAttachments.slice(0, 3).map((image, imgIndex) => (
-                                                <div
+                                            {journal.journalAttachments.map((image, imgIndex) => (
+                                                <img
                                                     key={imgIndex}
-                                                    className={`w-${imgIndex === 2 || journal.journalAttachments.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}
-                                                >
-                                                    <img
-                                                        alt={`gallery-${imgIndex + 1}`}
-                                                        className="block w-full rounded-lg object-center"
-                                                        style={{height: 100, maxHeight: 150}}
-                                                        src={image.sourceUrl}
-                                                    />
-                                                </div>
+                                                    alt={`gallery-${imgIndex}`}
+                                                    className="block w-full rounded-lg object-center"
+                                                    src={image.sourceUrl}
+                                                />
                                             ))}
                                         </div>
-                                    </>
-                                )}
+                                    ) :
+                                    (
+                                        <>
+                                            <div
+                                                className={`flex ${
+                                                    journal.journalAttachments.length <= 3 ? 'w-full' : 'w-1/2'
+                                                } flex-wrap`}
+                                            >
+                                                {journal.journalAttachments.slice(0, 3).map((image, imgIndex) => (
+                                                    <div
+                                                        key={imgIndex}
+                                                        className={`w-${imgIndex === 2 || journal.journalAttachments.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}
+                                                    >
+                                                        <img
+                                                            alt={`gallery-${imgIndex + 1}`}
+                                                            className="block w-full rounded-lg object-center"
+                                                            style={{height: 100, maxHeight: 150}}
+                                                            src={image.sourceUrl}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </>
+                                    )}
 
                                 <div className="flex w-1/2 flex-wrap">
                                     {journal.journalAttachments.slice(3).map((image, imgIndex) => (

@@ -1,7 +1,7 @@
 import pino from 'pino'
 import {logflarePinoVercel} from 'pino-logflare'
 
-const { stream, send } = logflarePinoVercel({
+const {stream, send} = logflarePinoVercel({
     apiKey: "ylhOwHUV8soG",
     sourceToken: "a7b5a798-3015-4883-ac08-f599cc7226ea"
 });

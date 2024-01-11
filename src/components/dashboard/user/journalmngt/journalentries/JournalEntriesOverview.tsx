@@ -8,7 +8,6 @@ import Link from "next/link";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import {Button} from "@nextui-org/button";
 import {PlusIcon} from "@/components/shared/icons/PlusIcon";
-import SearchComponent from "@/components/common/filter/SearchComponent";
 import CreateJournalEntryModal
     from "@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal";
 import {formatDate} from "@/helpers/dateHelpers";
@@ -16,12 +15,14 @@ import {getMoodColorClass} from "@/helpers/stylingHelpers";
 import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
 import {SearchIcon} from "@/components/shared/icons/SearchIcon";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import {AddRecordFab} from "@/components/common/dashboard/AddRecordFab";
 
 export default function JournalEntriesOverview() {
     const [queryParams, setQueryParams] = useState<JournalQueryParameters>(new JournalQueryParameters());
     const [journalEntries, setJournalEntries] = useState<JournalEntryResponse[]>([]);
     const [isLoadingJournalEntries, setIsLoadingJournalEntries] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState<string>('');
     const [isInitialLoad, setIsInitialLoad] = useState(true);
     const searchParams = useSearchParams();
     const pathname = usePathname();
@@ -57,20 +58,18 @@ export default function JournalEntriesOverview() {
         const {search} = window.location;
         const searchParams = new URLSearchParams(search);
         const searchTerm = searchParams.get('searchTerm') ?? ''
-        console.log("Fetch data only mount")
-        setQueryParams((prevParams) => ({...prevParams, searchTerm}));
-        fetchJournalEntries({...queryParams, searchTerm});
+        queryParams.searchTerm = searchTerm
+        setSearchTerm(searchTerm)
+        fetchJournalEntries(queryParams);
     }, []); // Empty dependency array to ensure it runs only on mount
 
     useEffect(() => {
-        // Fetch data only when queryParams change
         if (!isInitialLoad) {
-            console.log("Fetch data only when queryParams change")
             fetchJournalEntries(queryParams);
         } else {
             setIsInitialLoad(false);
         }
-    }, [queryParams,isInitialLoad]);
+    }, [queryParams]); // Fetch data only when queryParams change
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
@@ -85,7 +84,7 @@ export default function JournalEntriesOverview() {
 
         replace(`${pathname}?${params.toString()}`);
 
-        if (newSearchTerm.length >= 4 || newSearchTerm === '') {
+        if (newSearchTerm.length >= 3 || newSearchTerm === '') {
             setQueryParams((prevParams) => ({...prevParams, searchTerm: newSearchTerm}));
         }
     };
@@ -96,7 +95,6 @@ export default function JournalEntriesOverview() {
 
             <div className="flex flex-col gap-4 m-2">
                 <div className="flex justify-between gap-3 items-end">
-                    {/*<SearchComponent onSearchChange={handleSearchChange} placeholder="Search for journal entries"/>*/}
                     <div className="w-full sm:max-w-[44%]">
                         <div className="relative flex flex-1 flex-shrink-0">
                             <label htmlFor="search" className="sr-only">
@@ -104,9 +102,9 @@ export default function JournalEntriesOverview() {
                             </label>
                             <input
                                 className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                                placeholder="Search"
+                                placeholder="Search for journal entries"
                                 onChange={handleSearch}
-                                defaultValue={queryParams.searchTerm}
+                                defaultValue={searchTerm}
                             />
                             <SearchIcon
                                 className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"/>
@@ -181,16 +179,7 @@ export default function JournalEntriesOverview() {
                 </>
             )}
 
-            <div className="fixed bottom-4 right-4 md:hidden">
-                <Button onPress={handleOpenModal}
-                        isIconOnly={true}
-                        color="primary"
-                        radius="full"
-                        variant="shadow">
-                    <PlusIcon/>
-                </Button>
-                <CreateJournalEntryModal isOpen={isModalOpen} onClose={handleCloseModal}/>
-            </div>
+            <AddRecordFab onPress={handleOpenModal}/>
         </>
     )
 }

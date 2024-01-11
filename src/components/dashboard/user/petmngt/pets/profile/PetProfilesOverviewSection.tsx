@@ -1,14 +1,14 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {PetProfileResponse} from "@/boundary/interfaces/pet";
 import {Avatar, Card, CardBody, CardHeader, CircularProgress, Image} from "@nextui-org/react";
 import {Button} from "@nextui-org/button";
 import Link from "next/link";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
-import SearchComponent from "@/components/common/filter/SearchComponent";
 import {PlusIcon} from "@/components/shared/icons/PlusIcon";
 import CreateNewPetModal from "@/components/dashboard/user/petmngt/pets/modals/CreateNewPetModal";
 import {getUserPets} from "@/lib/utils/petUtils";
+import {AddRecordFab} from "@/components/common/dashboard/AddRecordFab";
 
 export default function PetProfilesOverviewSection() {
     const [petProfiles, setPetProfiles] = useState<PetProfileResponse[]>([]);
@@ -42,12 +42,7 @@ export default function PetProfilesOverviewSection() {
 
                     <div className="flex flex-col gap-4 m-2">
                         <div className="flex justify-between gap-3 items-end">
-                            {petProfiles.length >= 1 ? (
-                                <SearchComponent placeholder="Search for pet profiles"/>
-                            ) : (
-                                <div className="w-full sm:max-w-[44%]"></div>
-                            )}
-                            <div className="flex gap-3">
+                            <div className="gap-3 hidden lg:block">
                                 <Button onPress={handleOpenModal}
                                         startContent={<PlusIcon/>}
                                         color="primary"
@@ -95,7 +90,6 @@ export default function PetProfilesOverviewSection() {
                                                     size="sm">
                                                     Profile
                                                 </Button>
-
                                             </CardHeader>
                                             <CardBody
                                                 className="overflow-visible p-2 lg:max-h-[400px] xl:max-h-[450px]">
@@ -113,6 +107,8 @@ export default function PetProfilesOverviewSection() {
                     )}
                 </>
             )}
+
+            <AddRecordFab onPress={handleOpenModal}/>
         </>
     )
 }

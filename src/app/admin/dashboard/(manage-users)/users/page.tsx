@@ -1,11 +1,11 @@
 "use client";
 
-import UsersOvervewSection from "@/components/dashboard/admin/manageusers/UsersOvervewSection";
+import UsersOverviewSection from "@/components/dashboard/admin/manageusers/UsersOverviewSection";
 
-function ManageUsersPage({searchParams}: { searchParams?: { searchTerm?: string; } }) {
+function ManageUsersPage() {
     return (
         <>
-            <UsersOvervewSection searchParams={searchParams}/>
+            <UsersOverviewSection/>
         </>
     )
 }

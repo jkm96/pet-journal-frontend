@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
         const config = getAxiosConfigs(request);
         const requestBody = await request.json();
         const {petId} = requestBody;
-        const response = await petJournalApiClient.put(`api/v1/pet/${petId}/edit`,requestBody, config);
+        const response = await petJournalApiClient.put(`api/v1/pet/${petId}/edit`, requestBody, config);
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {
