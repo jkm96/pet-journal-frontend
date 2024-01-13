@@ -61,12 +61,22 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({journalEntries})
                                                         key={imgIndex}
                                                         className={`w-${imgIndex === 2 || journal.journalAttachments.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}
                                                     >
-                                                        <img
-                                                            alt={`gallery-${imgIndex + 1}`}
-                                                            className="block w-full rounded-lg object-center"
-                                                            style={{height: 100, maxHeight: 150}}
-                                                            src={image.sourceUrl}
-                                                        />
+                                                        {journal.journalAttachments.length === 2 ? (
+                                                            <img
+                                                                alt={`gallery-${imgIndex + 1}`}
+                                                                className="block w-full rounded-lg object-center"
+                                                                style={{height: 250}}
+                                                                src={image.sourceUrl}
+                                                            />
+                                                        ):(
+                                                            <img
+                                                                alt={`gallery-${imgIndex + 1}`}
+                                                                className="block w-full rounded-lg object-center"
+                                                                style={{height: journal.journalAttachments.length === 3 ? 150 : 100}}
+                                                                src={image.sourceUrl}
+                                                            />
+                                                        )}
+
                                                     </div>
                                                 ))}
                                             </div>

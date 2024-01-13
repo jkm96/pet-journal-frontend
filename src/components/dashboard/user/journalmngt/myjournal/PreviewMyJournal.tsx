@@ -19,7 +19,7 @@ export function getDocument(journalTitle: string, user: User | null, journalEntr
     return <Document style={styles.document}>
         <Page size="A4" orientation={"portrait"} style={styles.body} wrap>
             <Text style={styles.header} fixed>
-                ~ Made with love from pet lovers for pet lovers ~
+                ~ Made with love for pet lovers ~
             </Text>
             <Text style={styles.title}>{toTitleCase(journalTitle)}</Text>
             <Text style={{textAlign: 'center'}}>{user?.username}</Text>

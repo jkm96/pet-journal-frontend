@@ -11,14 +11,14 @@ const moodColorMap: MoodColorMap = {
     "relaxed": "primary",
     "excited": "success",
     "curious": "secondary",
-    "sleepy": "secondary",
+    "sleepy": "primary",
     "anxious": "warning",
     "stressed": "warning",
     "scared": "danger",
     "#playtime": "primary",
     "#firstwalk": "success",
     "#mealtime": "secondary",
-    "#grooming": "warning",
+    "#grooming": "success",
 };
 
 
@@ -43,7 +43,7 @@ const PdfColorMap: PdfColorMap = {
     "#grooming": "#FFA70B",
 };
 
-const getMoodColorClass = (mood: string): ColorName => {
+const getRandomColorClass = (mood: string): ColorName => {
     const moodArray = mood.split(',');
     if (moodArray.length > 0) {
         const randomIndex = Math.floor(Math.random() * moodArray.length);
@@ -68,4 +68,4 @@ const getPdfMoodColorClassList = (moods: string[]): PdfColorName[] => {
     });
 };
 
-export {getMoodColorClass, getMoodColorClassList, getPdfMoodColorClassList}
+export {getRandomColorClass, getMoodColorClassList, getPdfMoodColorClassList}

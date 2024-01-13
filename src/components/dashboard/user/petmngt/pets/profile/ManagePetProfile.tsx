@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {AddPetTraitRequest, EditPetRequest, PetProfileResponse, Trait} from "@/boundary/interfaces/pet";
 import {addPetTraits, getPetProfileDetails} from "@/lib/services/pet/petProfileService";
 import {toast} from "react-toastify";
-import {Button, CircularProgress, Input, Select, SelectItem} from "@nextui-org/react";
+import {Button, CircularProgress, Image, Input, Select, SelectItem} from "@nextui-org/react";
 import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
 import {toTitleCase} from "@/lib/utils/pdfUtils";
 import {EditIcon} from "@nextui-org/shared-icons";
@@ -11,6 +11,9 @@ import Spinner from "@/components/shared/icons/Spinner";
 import PetTraits from "@/components/dashboard/user/petmngt/pets/profile/PetTraits";
 import UpdateProfilePictureModal from "@/components/dashboard/user/petmngt/pets/modals/UpdateProfilePictureModal";
 import EditPetModal from "@/components/dashboard/user/petmngt/pets/modals/EditPetModal";
+import CameraIcon from "@/components/shared/icons/CameraIcon";
+import TrashIcon from "@/components/shared/icons/TrashIcon";
+import DeletePetModal from "@/components/dashboard/user/petmngt/pets/modals/DeletePetModal";
 
 export default function ManagePetProfile({slug}: { slug: string }) {
     const [petProfileDetails, setPetProfileDetails] = useState<PetProfileResponse>({} as PetProfileResponse);
@@ -133,13 +136,21 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                                     />
                                 )}
 
-                                <Button onPress={() => openModal("updateProfileImage")}
-                                        startContent={<EditIcon/>}
-                                        color="primary"
-                                        className={"mr-2"}
+                               <Button onPress={() => openModal("deletePet")}
+                                        startContent={<TrashIcon color="#ffffff"/>}
+                                        color="danger"
+                                        className="mr-2"
                                         variant="shadow">
-                                    Edit Image
+                                    Delete Pet
                                 </Button>
+
+                                {modals.deletePet && (
+                                    <DeletePetModal
+                                        petId={petProfileDetails.id}
+                                        isOpen={modals.deletePet}
+                                        onClose={() => closeModal("deletePet")}
+                                    />
+                                )}
 
                                 {modals.updateProfileImage && (
                                     <UpdateProfilePictureModal
@@ -152,7 +163,25 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                         </div>
                     </div>
 
+                    <div className="flex flex-col md:flex-row">
+                        <div className="md:w-1/2 m-2 bg-white rounded-md">
+                            <div className="relative">
+                                <img
+                                    className="w-full"
+                                    src={petProfileDetails.profileUrl}
+                                    alt={petProfileDetails.slug}/>
+                                <Button onPress={() => openModal("updateProfileImage")}
+                                        startContent={<CameraIcon/>}
+                                        color="primary"
+                                        size="sm"
+                                        className="absolute top-5 right-5"
+                                        variant="shadow">
+                                    Edit
+                                </Button>
+                            </div>
+                        </div>
                     <PetProfileCard petProfileDetails={petProfileDetails}/>
+                    </div>
 
                     <PetTraits petTraits={petProfileDetails?.petTraits}/>
 

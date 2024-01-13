@@ -14,6 +14,8 @@ import {useAuth} from "@/hooks/useAuth";
 import Spinner from "@/components/shared/icons/Spinner";
 import {SearchIcon} from "@/components/shared/icons/SearchIcon";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import PrintJournalModal from "@/components/dashboard/user/journalmngt/myjournal/modals/PrintJournalModal";
+import DownloadIcon from "@/components/shared/icons/DownloadIcon";
 
 export default function MyJournalOverview() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,6 +33,15 @@ export default function MyJournalOverview() {
     const [periodFrom, setPeriodFrom] = useState<string>('');
     const [periodTo, setPeriodTo] = useState<string>('');
     const [isInitialLoad, setIsInitialLoad] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setJournalTitle(e.target.value);
@@ -59,7 +70,6 @@ export default function MyJournalOverview() {
         queryParams.periodFrom = searchParams.get('periodFrom') ?? ''
         queryParams.periodTo = searchParams.get('periodTo') ?? ''
         queryParams.fetch = 'all';
-        console.info("Fetch data on mount")
         setSearchTerm(searchParams.get('searchTerm') ?? '')
         setPeriodFrom(searchParams.get('periodFrom') ?? '')
         setPeriodTo(searchParams.get('periodTo') ?? '')
@@ -102,7 +112,6 @@ export default function MyJournalOverview() {
 
     useEffect(() => {
         if (!isInitialLoad) {
-            console.info("Fetch data only when queryParams change")
             fetchAllJournalEntries(queryParams);
         } else {
             setIsInitialLoad(false);
@@ -116,17 +125,6 @@ export default function MyJournalOverview() {
     const handleGoBackClick = () => {
         setShowPreview(false);
     };
-
-    const DownloadButton = () => {
-        return (
-            <Button color="primary"
-                    type="submit"
-                    isLoading={isSubmitting}
-                    spinner={<Spinner/>}>
-                Download Entry
-            </Button>
-        )
-    }
 
     return (
         <>
@@ -215,7 +213,12 @@ export default function MyJournalOverview() {
                                     document={getDocument(journalTitle, user, journalEntries)}
                                     fileName={`${journalTitle.toLowerCase() ?? user?.username}.pdf`}>
                                     {({blob, url, loading, error}) =>
-                                        loading ? 'Loading document...' : <DownloadButton/>
+                                        loading ? 'Loading document...' : <Button color="primary"
+                                                                                  type="submit"
+                                                                                  isLoading={isSubmitting}
+                                                                                  spinner={<Spinner/>}>
+                                            Download Journal
+                                        </Button>
                                     }
                                 </PDFDownloadLink>
 
@@ -232,7 +235,7 @@ export default function MyJournalOverview() {
                                         startContent={<PlusFilledIcon/>}
                                         color="primary"
                                         variant="shadow">
-                                    Preview And Print
+                                    Preview
                                 </Button>
                             </div>
                         )}
@@ -261,12 +264,17 @@ export default function MyJournalOverview() {
                                 <>
                                     <JournalEntriesGrid journalEntries={journalEntries}/>
                                     <div className="fixed bottom-4 right-4 md:hidden">
-                                        <Button onPress={handlePreviewClick}
-                                                startContent={<PlusFilledIcon/>}
+                                        <Button onPress={handleOpenModal}
+                                                isIconOnly
+                                                radius="full"
                                                 color="primary"
                                                 variant="shadow">
-                                            Preview
+                                            <DownloadIcon/>
                                         </Button>
+                                        <PrintJournalModal
+                                            journalEntries={journalEntries}
+                                                           isOpen={isModalOpen}
+                                                           onClose={handleCloseModal}/>
                                     </div>
                                 </>
                             )}

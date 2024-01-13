@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {validateCreatePetFormInputErrors} from "@/helpers/validationHelpers";
 import {
     Button,
@@ -52,6 +52,7 @@ export default function CreateNewPetModal({isOpen, onClose}: {
     };
 
     const handlePetCreation = async (e: any) => {
+        console.log("handling pet creation")
         e.preventDefault();
         setIsSubmitting(true);
 
@@ -246,7 +247,16 @@ export default function CreateNewPetModal({isOpen, onClose}: {
                                         type="submit"
                                         isLoading={isSubmitting}
                                         spinner={<Spinner/>}
-                                        onClick={handlePetCreation}>
+                                        onClick={handlePetCreation}
+                                        disabled={
+                                            !isOpen ||
+                                            !(
+                                                createPetFormData.name.trim() !== "" &&
+                                                createPetFormData.description.trim() !== "" &&
+                                                createPetFormData.species.trim() !== ""
+                                            )
+                                        }
+                                    >
                                     {isSubmitting ? "Submitting..." : "Create Pet"}
                                 </Button>
                             </ModalFooter>

@@ -11,7 +11,7 @@ import {PlusIcon} from "@/components/shared/icons/PlusIcon";
 import CreateJournalEntryModal
     from "@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal";
 import {formatDate} from "@/helpers/dateHelpers";
-import {getMoodColorClass} from "@/helpers/stylingHelpers";
+import {getRandomColorClass} from "@/helpers/stylingHelpers";
 import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
 import {SearchIcon} from "@/components/shared/icons/SearchIcon";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
@@ -71,21 +71,21 @@ export default function JournalEntriesOverview() {
         }
     }, [queryParams]); // Fetch data only when queryParams change
 
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-        event.preventDefault()
-        const newSearchTerm = event.target.value;
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        const searchTerm = e.target.value;
         const params = new URLSearchParams(searchParams);
 
-        if (newSearchTerm) {
-            params.set('searchTerm', newSearchTerm);
+        if (searchTerm) {
+            params.set('searchTerm', searchTerm);
         } else {
             params.delete('searchTerm');
         }
 
         replace(`${pathname}?${params.toString()}`);
 
-        if (newSearchTerm.length >= 3 || newSearchTerm === '') {
-            setQueryParams((prevParams) => ({...prevParams, searchTerm: newSearchTerm}));
+        if (searchTerm.length >= 3 || searchTerm === '') {
+            setQueryParams((prevParams) => ({...prevParams, searchTerm: searchTerm}));
         }
     };
 
@@ -155,7 +155,7 @@ export default function JournalEntriesOverview() {
                                                             name={journal.title}
                                                             radius={"sm"}
                                                             isBordered
-                                                            color={getMoodColorClass(journal.mood)}
+                                                            color={getRandomColorClass(journal.mood)}
                                                         />
                                                     </div>
 

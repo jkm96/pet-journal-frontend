@@ -5,19 +5,7 @@ import {formatDate} from "@/helpers/dateHelpers";
 
 export function PetProfileCard({petProfileDetails}: { petProfileDetails: PetProfileResponse }) {
     return (
-        <>
-            <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/2 m-2 bg-white rounded-md">
-                    <Image
-                        alt="Album cover"
-                        className="object-cover"
-                        radius={"sm"}
-                        shadow="md"
-                        isZoomed
-                        src={petProfileDetails.profileUrl}
-                        width="100%"
-                    />
-                </div>
+
 
                 <div className="md:w-1/2 m-2 bg-white rounded-md">
                     <div className={"p-2"}>
@@ -51,7 +39,6 @@ export function PetProfileCard({petProfileDetails}: { petProfileDetails: PetProf
                         </div>
                     </div>
                 </div>
-            </div>
-        </>
+
     );
 }

@@ -354,7 +354,7 @@ export default function CreateJournalEntryModal({isOpen, onClose}: {
                                 )}
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="danger" onPress={onClose}>
+                                <Button color="danger" onPress={() => onClose()}>
                                     Close
                                 </Button>
                                 <Button color="primary"

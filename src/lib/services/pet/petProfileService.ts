@@ -91,6 +91,23 @@ export async function editPetProfile(editRequest: EditPetRequest) {
     }
 }
 
+export async function deletePetProfile(petId: number) {
+    try {
+        const response = await fetch(`${internalBaseUrl}/api/pet/profile/delete`, {
+            method: 'POST',
+            headers: {
+                'x-api-key': `${apiKey}`,
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({"petId":petId}),
+        });
+
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
 export async function addPetTraits(addRequest: AddPetTraitRequest) {
     try {
         const response = await fetch(`${internalBaseUrl}/api/pet/trait/create`, {
