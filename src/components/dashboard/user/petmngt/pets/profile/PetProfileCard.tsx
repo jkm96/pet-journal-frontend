@@ -1,5 +1,4 @@
 import {PetProfileResponse} from "@/boundary/interfaces/pet";
-import {Image} from "@nextui-org/react";
 import {toTitleCase} from "@/lib/utils/pdfUtils";
 import {formatDate} from "@/helpers/dateHelpers";
 

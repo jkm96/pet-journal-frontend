@@ -2,7 +2,6 @@ import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "
 import Spinner from "@/components/shared/icons/Spinner";
 import React, {useState} from "react";
 import {toast} from "react-toastify";
-import {deleteJournal} from "@/lib/services/journal-entries/journalEntryService";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import {useRouter} from "next/navigation";
 import {deletePetProfile} from "@/lib/services/pet/petProfileService";

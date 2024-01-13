@@ -27,7 +27,7 @@ export function getDocument(journalTitle: string, user: User | null, journalEntr
         {journalEntries.map((journalEntry) => (
             <Page key={journalEntry.id} size="A4" orientation={"portrait"} style={styles.body} wrap>
                 <Text style={styles.header} fixed>
-                    ~ Made with love from pet lovers for pet lovers ~
+                    ~ Made with love for pet lovers ~
                 </Text>
                 <Text style={styles.subtitle}>{toTitleCase(journalEntry.title)}</Text>
                 <Text

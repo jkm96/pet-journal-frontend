@@ -1,12 +1,17 @@
 import {StyleSheet} from "@react-pdf/renderer";
-import {Button} from "@nextui-org/button";
-import Spinner from "@/components/shared/icons/Spinner";
-import React from "react";
 
 export function toTitleCase(input: string): string {
     return input.replace(/\w\S*/g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
+}
+
+export function toSlug(inputString: string): string {
+    return inputString
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
 }
 
 export function PdfPreviewStyle() {

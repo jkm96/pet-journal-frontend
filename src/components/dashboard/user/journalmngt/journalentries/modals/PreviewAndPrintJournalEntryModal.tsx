@@ -12,6 +12,33 @@ import {PdfPreviewStyle, toTitleCase} from "@/lib/utils/pdfUtils";
 import RenderPdfGridImages from "@/components/dashboard/user/journalmngt/journalentries/RenderPdfGridImages";
 import Font = ReactPDF.Font;
 
+export function getJournalEntryPdfDocument(printJournalRequest: PrintJournalEntryRequest, imageBuffers: JournalImageBuffer[], styles: any, username: string | undefined) {
+    return(
+        <Document style={styles.document}>
+            <Page size="A4" orientation={"portrait"} style={styles.body} wrap>
+                <Text style={styles.header} fixed>
+                    ~ Made with love for pet lovers ~
+                </Text>
+                <Text style={styles.subtitle}>{toTitleCase(printJournalRequest.title)}</Text>
+                <Text style={styles.author}>{username}</Text>
+                <Text
+                    style={styles.author}>{formatDate(printJournalRequest.createdAt)}</Text>
+
+                <Text style={styles.moodtags}>
+                    {RenderMoodTagsWithColors(printJournalRequest.moods)}
+                    {RenderMoodTagsWithColors(printJournalRequest.tags)}
+                </Text>
+                <View>
+                    <Text style={styles.content}>
+                        {printJournalRequest.content}
+                    </Text>
+                    <RenderPdfGridImages imageBuffers={imageBuffers}/>
+                </View>
+            </Page>
+        </Document>
+    )
+}
+
 export default function PreviewAndPrintJournalEntryModal({printJournalRequest, isOpen, onClose}: {
     printJournalRequest: PrintJournalEntryRequest,
     isOpen: boolean,
@@ -27,13 +54,11 @@ export default function PreviewAndPrintJournalEntryModal({printJournalRequest, i
         await getJournalEntryAttachmentBuffers(printJournalRequest.id)
             .then((response) => {
                 if (response.statusCode === 200) {
-                    console.log("journal image buffers", response.data)
                     const journalBuffers: JournalImageBuffer[] = response.data;
                     setImageBuffers(journalBuffers);
                 }
             })
             .catch((error) => {
-                console.error("Error fetching your journal entry image buffers:", error);
                 toast.error(`Error fetching your journal entry image buffers: ${error}`)
             })
             .finally(() => {
@@ -57,32 +82,6 @@ export default function PreviewAndPrintJournalEntryModal({printJournalRequest, i
     });
 
     const styles = PdfPreviewStyle();
-
-    function getDocument() {
-        return <Document style={styles.document}>
-            <Page size="A4" orientation={"portrait"} style={styles.body} wrap>
-                <Text style={styles.header} fixed>
-                    ~ Made with love from pet lovers for pet lovers ~
-                </Text>
-                <Text style={styles.subtitle}>{toTitleCase(printJournalRequest.title)}</Text>
-                <Text style={styles.author}>{user?.username}</Text>
-                <Text
-                    style={styles.author}>{formatDate(printJournalRequest.createdAt)}</Text>
-
-                <Text style={styles.moodtags}>
-                    {RenderMoodTagsWithColors(printJournalRequest.moods)}
-                    {RenderMoodTagsWithColors(printJournalRequest.tags)}
-                </Text>
-                <View>
-                    <Text style={styles.content}>
-                        {printJournalRequest.content}
-                    </Text>
-                    <RenderPdfGridImages imageBuffers={imageBuffers}/>
-                </View>
-            </Page>
-        </Document>;
-    }
-
     const DownloadButton = () => {
         return (
             <Button color="primary"
@@ -119,7 +118,7 @@ export default function PreviewAndPrintJournalEntryModal({printJournalRequest, i
                                     </div>
                                 ) : (
                                     <PDFViewer style={{width: "100%", height: "60vh"}}>
-                                        {getDocument()}
+                                        {getJournalEntryPdfDocument(printJournalRequest,imageBuffers,styles,user?.username)}
                                     </PDFViewer>
                                 )}
                             </ModalBody>
@@ -130,7 +129,7 @@ export default function PreviewAndPrintJournalEntryModal({printJournalRequest, i
 
                                 <div>
                                     {!isLoadingBuffers && (
-                                        <PDFDownloadLink document={getDocument()}
+                                        <PDFDownloadLink document={getJournalEntryPdfDocument(printJournalRequest,imageBuffers,styles,user?.username)}
                                                          fileName={`${printJournalRequest.slug}.pdf`}>
                                             {({blob, url, loading, error}) =>
                                                 loading ? 'Loading document...' : <DownloadButton/>

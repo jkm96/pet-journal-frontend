@@ -1,12 +1,21 @@
 import {toast} from "react-toastify";
-import {useEffect, useState} from "react";
-import {JournalEntryResponse, PrintJournalEntryRequest, UpdateJournalEntryRequest} from "@/boundary/interfaces/journal";
-import {getJournalEntryDetails} from "@/lib/services/journal-entries/journalEntryService";
+import React, {useEffect, useState} from "react";
+import {
+    JournalEntryResponse,
+    JournalImageBuffer,
+    PrintJournalEntryRequest,
+    UpdateJournalEntryRequest
+} from "@/boundary/interfaces/journal";
+import {
+    getJournalEntryAttachmentBuffers,
+    getJournalEntryDetails
+} from "@/lib/services/journal-entries/journalEntryService";
 import {Card, CardBody, CircularProgress} from "@nextui-org/react";
 import RenderJournalHeader from "@/components/dashboard/user/journalmngt/journalentries/RenderJournalHeader";
 import {Button} from "@nextui-org/button";
-import PreviewAndPrintJournalEntryModal
-    from "@/components/dashboard/user/journalmngt/journalentries/modals/PreviewAndPrintJournalEntryModal";
+import PreviewAndPrintJournalEntryModal, {
+    getJournalEntryPdfDocument
+} from "@/components/dashboard/user/journalmngt/journalentries/modals/PreviewAndPrintJournalEntryModal";
 import UploadJournalImagesModal
     from "@/components/dashboard/user/journalmngt/journalentries/modals/UploadJournalImagesModal";
 import UpdateJournalEntryModal
@@ -17,14 +26,28 @@ import DeleteJournalEntryModal
 import UploadIcon from "@/components/shared/icons/UploadIcon";
 import TrashIcon from "@/components/shared/icons/TrashIcon";
 import FileEyeIcon from "@/components/shared/icons/FileEyeIcon";
+import ReactPDF, {PDFDownloadLink} from "@react-pdf/renderer";
+import DownloadIcon from "@/components/shared/icons/DownloadIcon";
+import {useAuth} from "@/hooks/useAuth";
+import {PdfPreviewStyle} from "@/lib/utils/pdfUtils";
+import Font = ReactPDF.Font;
+
+Font.register({
+    family: 'Oswald',
+    src: 'https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf'
+});
+
+const styles = PdfPreviewStyle();
 
 export default function ManageJournalEntry({slug}: { slug: string }) {
+    const {user} = useAuth();
     const [journalEntryDetails, setJournalEntryDetails] = useState<JournalEntryResponse>({} as JournalEntryResponse);
     const [isLoadingDetails, setIsLoadingDetails] = useState(true);
     const [pets, setPets] = useState<string[]>([]);
     const [journalImages, setJournalImages] = useState<string[]>([]);
     const [printJournalRequest, setPrintJournalRequest] = useState<PrintJournalEntryRequest>({} as PrintJournalEntryRequest);
     const [editJournalRequest, setEditJournalRequest] = useState<UpdateJournalEntryRequest>({} as UpdateJournalEntryRequest);
+    const [imageBuffers, setImageBuffers] = useState<JournalImageBuffer[]>([]);
     const [modals, setModals] = useState({
         editJournal: false,
         deleteJournal: false,
@@ -55,7 +78,6 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                 }
             })
             .catch((error) => {
-                console.error("Error fetching your journal entry details:", error);
                 toast.error(`Error fetching your journal entry details: ${error}`)
             })
             .finally(() => {
@@ -66,6 +88,24 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
     useEffect(() => {
         fetchJournalEntryDetails(slug);
     }, [slug]);
+
+    const getImageBuffers = async (journalId:number) => {
+        await getJournalEntryAttachmentBuffers(journalId)
+            .then((response) => {
+                if (response.statusCode === 200) {
+                    const journalBuffers: JournalImageBuffer[] = response.data;
+                    console.info("journalBuffers",journalBuffers)
+                    setImageBuffers(journalBuffers);
+                }
+            })
+            .catch((error) => {
+                toast.error(`Error fetching your journal entry image buffers: ${error}`)
+            })
+    }
+
+    useEffect(() => {
+        getImageBuffers(journalEntryDetails.id)
+    }, [journalEntryDetails.id]);
 
     const createRecords = (journals: JournalEntryResponse) => {
         const petNames = journals.pets ? journals.pets.map((pet) => pet.name) : [];
@@ -224,14 +264,20 @@ export default function ManageJournalEntry({slug}: { slug: string }) {
                     </Card>
 
                     <div className="fixed bottom-4 right-4 md:hidden">
-                        <Button
-                            onPress={() => openModal("previewAndPrintEntry")}
-                            color="primary"
-                            radius="full"
-                            variant="shadow"
-                        >
-                            Preview
-                        </Button>
+                        {imageBuffers && (
+                            <PDFDownloadLink
+                                document={getJournalEntryPdfDocument(printJournalRequest,imageBuffers,styles,user?.username)}
+                                fileName={`${journalEntryDetails.slug.toLowerCase()}.pdf`}>
+                                {({blob, url, loading, error}) =>
+                                    <Button color="primary"
+                                            type="submit"
+                                            radius="full"
+                                            isIconOnly>
+                                        <DownloadIcon/>
+                                    </Button>
+                                }
+                            </PDFDownloadLink>
+                        )}
                     </div>
                 </>
             )}

@@ -1,14 +1,11 @@
 import {Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/react";
 import Spinner from "@/components/shared/icons/Spinner";
 import React, {useState} from "react";
-import {toast} from "react-toastify";
-import {deleteJournal} from "@/lib/services/journal-entries/journalEntryService";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
-import {useRouter} from "next/navigation";
 import {getDocument} from "@/components/dashboard/user/journalmngt/myjournal/PreviewMyJournal";
 import {PDFDownloadLink} from "@react-pdf/renderer";
 import {JournalEntryResponse} from "@/boundary/interfaces/journal";
 import {useAuth} from "@/hooks/useAuth";
+import {toSlug} from "@/lib/utils/pdfUtils";
 
 export default function PrintJournalModal({journalEntries, isOpen, onClose}: {
     journalEntries: JournalEntryResponse[],
@@ -57,16 +54,15 @@ export default function PrintJournalModal({journalEntries, isOpen, onClose}: {
                                 </Button>
                                 <PDFDownloadLink
                                     document={getDocument(journalTitle, user, journalEntries)}
-                                    fileName={`${journalTitle.toLowerCase() ?? user?.username}.pdf`}>
+                                    fileName={`${toSlug(journalTitle) ?? user?.username}.pdf`}>
                                     {({blob, url, loading, error}) =>
-                                        loading ? 'Loading...' :
-                                            <Button color="primary"
-                                                    type="submit"
-                                                    disabled={journalTitle === ''}
-                                                    isLoading={isSubmitting}
-                                                    spinner={<Spinner/>}>
-                                                Download
-                                            </Button>
+                                        <Button color="primary"
+                                                type="submit"
+                                                disabled={journalTitle === ''}
+                                                isLoading={isSubmitting}
+                                                spinner={<Spinner/>}>
+                                            Download
+                                        </Button>
                                     }
                                 </PDFDownloadLink>
                             </ModalFooter>
