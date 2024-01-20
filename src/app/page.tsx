@@ -5,8 +5,10 @@ import {useAuth} from "@/hooks/useAuth";
 import Loader from "@/components/common/dashboard/Loader";
 import React, {useState} from "react";
 import {RedirectUserToDashboard} from "@/components/common/auth/RedirectUserToDashboard";
+import {useRouter} from "next/navigation";
 
 export default function Home() {
+    const router = useRouter()
     const {user, loading: authLoading} = useAuth();
     const [loading, setLoading] = useState(true);
 
@@ -21,7 +23,6 @@ export default function Home() {
             </main>
         )
     } else {
-        return null;
+        router.push(NAVIGATION_LINKS.USER_DASHBOARD);
     }
-
 }
