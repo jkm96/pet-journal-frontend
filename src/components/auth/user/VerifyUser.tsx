@@ -18,6 +18,9 @@ export default function VerifyUser() {
                 if (response.statusCode === 200) {
                     setStatus('verified')
                     setMessage(response.message)
+                }else{
+                    setStatus('unverified')
+                    setMessage(response.message)
                 }
             })
             .catch((error) => {
@@ -61,7 +64,7 @@ export default function VerifyUser() {
                         </p>
                     ) : (
                         <p>
-                            {message}
+                            {message} Please contact support.
                         </p>
                     )}
                 </>

@@ -16,6 +16,7 @@ import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParamete
 import {SearchIcon} from "@/components/shared/icons/SearchIcon";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {AddRecordFab} from "@/components/common/dashboard/AddRecordFab";
+import {groupEntriesByMonth} from "@/lib/utils/journalUtils";
 
 export default function JournalEntriesOverview() {
     const [queryParams, setQueryParams] = useState<JournalQueryParameters>(new JournalQueryParameters());
@@ -136,44 +137,49 @@ export default function JournalEntriesOverview() {
                         </>
                     ) : (
                         <>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                            {Object.keys(groupEntriesByMonth(journalEntries)).map((monthYear) => (
+                                <div key={monthYear}>
+                                    <h2 className="text-2xl mt-4">{monthYear}</h2>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                                        {groupEntriesByMonth(journalEntries)[monthYear].map((journal) => (
+                                            <Link key={journal.id}
+                                                  href={`${NAVIGATION_LINKS.JOURNAL_ENTRIES}/${journal.slug}`}>
+                                                <Card
+                                                    key={journal.id}
+                                                    isBlurred
+                                                    className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
+                                                    shadow="sm"
+                                                >
+                                                    <CardBody>
+                                                        <div
+                                                            className="grid grid-cols-6 md:grid-cols-12 sm:grid-cols-12 lg:gap-6 md:gap-4 items-center justify-center">
+                                                            <div
+                                                                className="relative col-span-1 md:col-span-1 sm:col-span-6 mb-2 md:mb-0">
+                                                                <Avatar
+                                                                    name={journal.title}
+                                                                    radius={"sm"}
+                                                                    isBordered
+                                                                    color={getRandomColorClass(journal.mood)}
+                                                                />
+                                                            </div>
 
-                                {journalEntries.map((journal) => (
-                                    <Link key={journal.id} href={`${NAVIGATION_LINKS.JOURNAL_ENTRIES}/${journal.slug}`}>
-                                        <Card
-                                            key={journal.id}
-                                            isBlurred
-                                            className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
-                                            shadow="sm"
-                                        >
-                                            <CardBody>
-                                                <div
-                                                    className="grid grid-cols-6 md:grid-cols-12 sm:grid-cols-12 lg:gap-6 md:gap-4 items-center justify-center">
-                                                    <div
-                                                        className="relative col-span-1 md:col-span-1 sm:col-span-6 mb-2 md:mb-0">
-                                                        <Avatar
-                                                            name={journal.title}
-                                                            radius={"sm"}
-                                                            isBordered
-                                                            color={getRandomColorClass(journal.mood)}
-                                                        />
-                                                    </div>
-
-                                                    <div
-                                                        className="flex flex-col col-span-5 md:col-span-11 md:ml-3 sm:col-span-6">
-                                                        <div className="flex flex-col gap-0">
-                                                            <h3 className="font-semibold text-foreground/90">{journal.title}</h3>
-                                                            <p className="text-small text-foreground/80">
-                                                                {formatDate(journal.createdAt)} | {journal.event}
-                                                            </p>
+                                                            <div
+                                                                className="flex flex-col col-span-5 md:col-span-11 md:ml-3 sm:col-span-6">
+                                                                <div className="flex flex-col gap-0">
+                                                                    <h3 className="font-semibold text-foreground/90">{journal.title}</h3>
+                                                                    <p className="text-small text-foreground/80">
+                                                                        {formatDate(journal.createdAt)} | {journal.event}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </CardBody>
-                                        </Card>
-                                    </Link>
-                                ))}
-                            </div>
+                                                    </CardBody>
+                                                </Card>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
                         </>
                     )}
                 </>

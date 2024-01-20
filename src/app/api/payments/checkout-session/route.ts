@@ -1,6 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import {CheckoutSessionModel} from "@/boundary/interfaces/payment";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
+import {createNextResponse} from "@/helpers/responseHelpers";
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -25,17 +26,8 @@ export async function POST(request: NextRequest) {
             customerEmail: "",
             sessionStatus: ""
         }
-
-        return NextResponse.json(
-            {
-                "data": data,
-                "message": "Session successfully generated",
-                "statusCode": 200
-            },
-            {status: 200});
+        return createNextResponse(200, "Session successfully generated",data)
     } catch (e) {
-        return NextResponse.json(
-            {error: `An error occurred storing cookie: ${e}`}, {status: 400}
-        )
+        return createNextResponse(400, `An error occurred storing cookie: ${e}`,{error: `An error occurred storing cookie: ${e}`})
     }
 }
