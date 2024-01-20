@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import {RegisterUserRequest} from "@/boundary/interfaces/auth";
 import {validateRegisterFormInputErrors} from "@/helpers/validationHelpers";
@@ -21,6 +21,7 @@ export default function RegisterForm() {
     const {storeAuthToken} = useAuth();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const [status, setStatus] = useState<any>(null);
     const toggleVisibility = () => setIsVisible(!isVisible);
     const [registerFormData, setRegisterFormData] = useState(initialFormState);
     const [inputErrors, setInputErrors] = useState({
@@ -62,12 +63,21 @@ export default function RegisterForm() {
             setIsSubmitting(false)
             setRegisterFormData(initialFormState)
             toast.success("Registered successfully")
-            router.push(NAVIGATION_LINKS.PAYMENTS)
+            setStatus("registered")
         } else {
             setIsSubmitting(false)
             toast.error(response.message ?? "Unknown error occurred")
         }
     };
+
+    useEffect(() => {
+        if (status === 'registered') {
+            setTimeout(() => {
+                router.push(NAVIGATION_LINKS.PAYMENTS)
+            }, 5000);
+        }
+    }, [status]);
+
     return (
         <>
             <div
