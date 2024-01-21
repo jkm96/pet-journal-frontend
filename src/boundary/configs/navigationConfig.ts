@@ -1,4 +1,5 @@
 export const NAVIGATION_LINKS = {
+    HOME: '/',
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
     PAYMENTS: '/payments',

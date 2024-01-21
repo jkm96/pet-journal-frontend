@@ -1,4 +1,4 @@
-import {NextRequest, NextResponse} from "next/server";
+import {NextRequest} from "next/server";
 import {CheckoutSessionModel} from "@/boundary/interfaces/payment";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import {createNextResponse} from "@/helpers/responseHelpers";

@@ -1,13 +1,13 @@
 "use client";
-import Link from "next/link";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import {useAuth} from "@/hooks/useAuth";
 import Loader from "@/components/common/dashboard/Loader";
 import React, {useState} from "react";
 import {RedirectUserToDashboard} from "@/components/common/auth/RedirectUserToDashboard";
 import {useRouter} from "next/navigation";
+import Home from "@/components/home/Home";
 
-export default function Home() {
+export default function HomePage() {
     const router = useRouter()
     const {user, loading: authLoading} = useAuth();
     const [loading, setLoading] = useState(true);
@@ -17,11 +17,7 @@ export default function Home() {
     if (loading || authLoading) {
         return <Loader/>;
     } else if (!user) {
-        return (
-            <main className="flex min-h-screen flex-col items-center justify-between p-24">
-                <Link href={NAVIGATION_LINKS.LOGIN} className="text-red-600">Sign In</Link>
-            </main>
-        )
+        return <Home/>
     } else {
         router.push(NAVIGATION_LINKS.USER_DASHBOARD);
     }
