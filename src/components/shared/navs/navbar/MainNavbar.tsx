@@ -12,6 +12,7 @@ import {
     NavbarMenuToggle
 } from "@nextui-org/react";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
+import Image from "next/image";
 
 export default function MainNavbar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -30,8 +31,13 @@ export default function MainNavbar() {
                     className="sm:hidden"
                 />
                 <NavbarBrand>
-                    <Link className="font-bold text-inherit" href={NAVIGATION_LINKS.HOME}>
-                        <p className="font-bold text-inherit">Pet Diaries</p>
+                    <Link className="font-bold" href={NAVIGATION_LINKS.HOME}>
+                        <Image
+                            width={200}
+                            height={150}
+                            src={"/images/logo/pet-diaries-logo-black.png"}
+                            alt="Logo"
+                        />
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
