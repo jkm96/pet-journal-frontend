@@ -9,6 +9,7 @@ import JournalEntriesIcon from "@/components/shared/icons/JournalEntriesIcon";
 import JournalHeartIcon from "@/components/shared/icons/JournalHeartIcon";
 import PetProfileIcon from "@/components/shared/icons/PetProfleIcon";
 import {useAuth} from "@/hooks/useAuth";
+import DiaryStudioIcon from "@/components/shared/icons/DiaryStudioIcon";
 
 interface SidebarProps {
     sidebarOpen: boolean;
@@ -73,7 +74,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
             {/* <!-- SIDEBAR HEADER --> */}
             <div className="flex items-center gap-2 px-6 mb-0 py-2 lg:py-4">
                 <Link href={user?.isAdmin ? NAVIGATION_LINKS.ADMIN_DASHBOARD : NAVIGATION_LINKS.USER_DASHBOARD}>
-                    Pet Journal
+                    Pet Diaries
                 </Link>
 
                 <button
@@ -160,35 +161,54 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                                 {/* <!-- Menu Item Journal Entries Mngt --> */}
                                 <li>
                                     <Link
-                                        href={NAVIGATION_LINKS.JOURNAL_ENTRIES}
+                                        href={NAVIGATION_LINKS.DIARY_ENTRIES}
                                         onClick={() => setSidebarOpen(false)}
                                         className={`first-letter:group relative flex 
                                 items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
-                                 hover:text-white  ${pathname.includes(NAVIGATION_LINKS.JOURNAL_ENTRIES) && "text-white"
+                                 hover:text-white  ${pathname.includes(NAVIGATION_LINKS.DIARY_ENTRIES) && "text-white"
                                         }`}
                                     >
                                         <JournalEntriesIcon
-                                            color={pathname.includes(NAVIGATION_LINKS.JOURNAL_ENTRIES) ? '#ffffff' : '#8A99AF'}/>
-                                        Journal Entries
+                                            color={pathname.includes(NAVIGATION_LINKS.DIARY_ENTRIES) ? '#ffffff' : '#8A99AF'}/>
+                                        Diary Entries
                                     </Link>
                                 </li>
                                 {/* <!-- Menu Item Journal Entries Mngt --> */}
+
                                 {/* <!-- Menu Item My Journal Mngt --> */}
                                 <li>
                                     <Link
-                                        href={NAVIGATION_LINKS.MY_JOURNAL}
+                                        href={NAVIGATION_LINKS.MY_DIARY}
                                         onClick={() => setSidebarOpen(false)}
                                         className={`first-letter:group relative flex 
                                 items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
-                                 hover:text-white  ${pathname.includes(NAVIGATION_LINKS.MY_JOURNAL) && "text-white"
+                                 hover:text-white  ${pathname.includes(NAVIGATION_LINKS.MY_DIARY) && "text-white"
                                         }`}
                                     >
                                         <JournalHeartIcon
-                                            color={pathname.includes(NAVIGATION_LINKS.MY_JOURNAL) ? '#ffffff' : '#8A99AF'}/>
-                                        My Journal
+                                            color={pathname.includes(NAVIGATION_LINKS.MY_DIARY) ? '#ffffff' : '#8A99AF'}/>
+                                        My Diary
                                     </Link>
                                 </li>
                                 {/* <!-- Menu Item My Journal Mngt --> */}
+
+                                {/* <!-- Menu Item Diary Studio Mngt --> */}
+                                <li>
+                                    <Link
+                                        href={NAVIGATION_LINKS.MAGIC_STUDIO}
+                                        onClick={() => setSidebarOpen(false)}
+                                        className={`first-letter:group relative flex 
+                                items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out
+                                 hover:text-white  ${pathname.includes(NAVIGATION_LINKS.MAGIC_STUDIO) && "text-white"
+                                        }`}
+                                    >
+                                        <DiaryStudioIcon
+                                            color={pathname.includes(NAVIGATION_LINKS.MAGIC_STUDIO) ? '#ffffff' : '#8A99AF'}/>
+                                        Magic Studio
+                                    </Link>
+                                </li>
+                                {/* <!-- Menu Item Diary Studio Mngt --> */}
+
                                 {/* <!-- Menu Item Settings --> */}
                                 <li>
                                     <Link

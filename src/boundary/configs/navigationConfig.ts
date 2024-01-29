@@ -6,8 +6,9 @@ export const NAVIGATION_LINKS = {
     CHECKOUT_RETURN: '/payments/checkout-return',
     USER_DASHBOARD: '/dashboard',
     PET_PROFILES: '/dashboard/pet-profiles',
-    JOURNAL_ENTRIES: '/dashboard/journal-entries',
-    MY_JOURNAL: '/dashboard/my-journal',
+    DIARY_ENTRIES: '/dashboard/diary-entries',
+    MY_DIARY: '/dashboard/my-diary',
+    MAGIC_STUDIO: '/dashboard/magic-studio',
     TIMELINE_VIEW: '/dashboard/timeline-view',
     SETTINGS: '/dashboard/settings',
 

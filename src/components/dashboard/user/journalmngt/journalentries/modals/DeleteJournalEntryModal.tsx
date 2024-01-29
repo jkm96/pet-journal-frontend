@@ -22,7 +22,7 @@ export default function DeleteJournalEntryModal({journalId, isOpen, onClose}: {
         if (response.statusCode === 200) {
             toast.success(response.message ?? "Journal deleted successfully")
             setIsSubmitting(false);
-            router.push(NAVIGATION_LINKS.JOURNAL_ENTRIES)
+            router.push(NAVIGATION_LINKS.DIARY_ENTRIES)
         } else {
             setIsSubmitting(false);
             toast.error(response.message ?? "Unknown error occurred")

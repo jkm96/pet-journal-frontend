@@ -92,7 +92,7 @@ export default function JournalEntriesOverview() {
 
     return (
         <>
-            <Breadcrumb pageName="Journal Entries"/>
+            <Breadcrumb pageName="Diary Entries"/>
 
             <div className="flex flex-col gap-4 m-2">
                 <div className="flex justify-between gap-3 items-end">
@@ -125,14 +125,14 @@ export default function JournalEntriesOverview() {
 
             {isLoadingJournalEntries ? (
                 <div className={"grid place-items-center"}>
-                    <CircularProgress color={"primary"} className={"p-4"} label="Loading your journal entries...."/>
+                    <CircularProgress color={"primary"} className={"p-4"} label="Loading your diary entries...."/>
                 </div>
             ) : (
                 <>
                     {journalEntries.length < 1 ? (
                         <>
                             <div className="text-center">
-                                <p className="text-danger-400">No journal entries found!</p>
+                                <p className="text-danger-400">No diary entries found!</p>
                             </div>
                         </>
                     ) : (
@@ -143,7 +143,7 @@ export default function JournalEntriesOverview() {
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
                                         {groupEntriesByMonth(journalEntries)[monthYear].map((journal) => (
                                             <Link key={journal.id}
-                                                  href={`${NAVIGATION_LINKS.JOURNAL_ENTRIES}/${journal.slug}`}>
+                                                  href={`${NAVIGATION_LINKS.DIARY_ENTRIES}/${journal.slug}`}>
                                                 <Card
                                                     key={journal.id}
                                                     isBlurred

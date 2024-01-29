@@ -128,7 +128,7 @@ export default function MyJournalOverview() {
 
     return (
         <>
-            <Breadcrumb pageName="My Journal"/>
+            <Breadcrumb pageName="My Diary"/>
 
             <div className="flex flex-col gap-4 m-2">
                 <div className="md:flex justify-between gap-3 items-end">

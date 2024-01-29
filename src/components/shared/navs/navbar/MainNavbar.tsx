@@ -13,6 +13,7 @@ import {
 } from "@nextui-org/react";
 import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
 import Image from "next/image";
+import LightLogo from "@/components/home/icons/LightLogo";
 
 export default function MainNavbar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -35,7 +36,7 @@ export default function MainNavbar() {
                         <Image
                             width={200}
                             height={150}
-                            src={"/images/logo/pet-diaries-logo-black.png"}
+                            src={"/images/logo/petdiaries.png"}
                             alt="Logo"
                         />
                     </Link>
