@@ -1,7 +1,7 @@
-import {NextRequest, NextResponse} from "next/server";
-import {CheckoutSessionModel, CreatePaymentRequest} from "@/boundary/interfaces/payment";
-import {AccessTokenModel} from "@/boundary/interfaces/token";
-import petJournalApiClient, {getAxiosConfigs} from "@/lib/axios/axiosClient";
+import { NextRequest, NextResponse } from 'next/server';
+import { CheckoutSessionModel, CreatePaymentRequest } from '@/boundary/interfaces/payment';
+import { AccessTokenModel } from '@/boundary/interfaces/token';
+import petJournalApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import type { SVGProps } from 'react';
 
 const TextIcon = ({width = 24, height = 24, color = '#1e97ee'}) => {
     return (

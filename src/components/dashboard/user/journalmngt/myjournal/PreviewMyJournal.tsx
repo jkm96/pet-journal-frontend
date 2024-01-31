@@ -1,12 +1,12 @@
 import React from 'react';
-import {JournalEntryResponse} from '@/boundary/interfaces/journal';
-import ReactPDF, {Document, Page, PDFViewer, Text, View} from "@react-pdf/renderer";
-import {PdfPreviewStyle, toTitleCase} from "@/lib/utils/pdfUtils";
-import {formatDate} from "@/helpers/dateHelpers";
-import RenderMoodTagsWithColors from "@/components/dashboard/user/journalmngt/journalentries/RenderMoodTagsWithColors";
-import {useAuth} from "@/hooks/useAuth";
-import {User} from "@/boundary/interfaces/user";
-import RenderPdfGridImages from "@/components/dashboard/user/journalmngt/journalentries/RenderPdfGridImages";
+import { JournalEntryResponse } from '@/boundary/interfaces/journal';
+import ReactPDF, { Document, Page, PDFViewer, Text, View } from '@react-pdf/renderer';
+import { PdfPreviewStyle, toTitleCase } from '@/lib/utils/pdfUtils';
+import { formatDate } from '@/helpers/dateHelpers';
+import RenderMoodTagsWithColors from '@/components/dashboard/user/journalmngt/journalentries/RenderMoodTagsWithColors';
+import { useAuth } from '@/hooks/useAuth';
+import { User } from '@/boundary/interfaces/user';
+import RenderPdfGridImages from '@/components/dashboard/user/journalmngt/journalentries/RenderPdfGridImages';
 import Font = ReactPDF.Font;
 
 Font.register({

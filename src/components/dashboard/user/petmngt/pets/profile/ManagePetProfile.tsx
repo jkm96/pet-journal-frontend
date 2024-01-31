@@ -1,19 +1,19 @@
-import {useEffect, useState} from "react";
-import {AddPetTraitRequest, EditPetRequest, PetProfileResponse, Trait} from "@/boundary/interfaces/pet";
-import {addPetTraits, getPetProfileDetails} from "@/lib/services/pet/petProfileService";
-import {toast} from "react-toastify";
-import {Button, CircularProgress, Input, Select, SelectItem} from "@nextui-org/react";
-import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
-import {toTitleCase} from "@/lib/utils/pdfUtils";
-import {EditIcon} from "@nextui-org/shared-icons";
-import {PetProfileCard} from "@/components/dashboard/user/petmngt/pets/profile/PetProfileCard";
-import Spinner from "@/components/shared/icons/Spinner";
-import PetTraits from "@/components/dashboard/user/petmngt/pets/profile/PetTraits";
-import UpdateProfilePictureModal from "@/components/dashboard/user/petmngt/pets/modals/UpdateProfilePictureModal";
-import EditPetModal from "@/components/dashboard/user/petmngt/pets/modals/EditPetModal";
-import CameraIcon from "@/components/shared/icons/CameraIcon";
-import TrashIcon from "@/components/shared/icons/TrashIcon";
-import DeletePetModal from "@/components/dashboard/user/petmngt/pets/modals/DeletePetModal";
+import { useEffect, useState } from 'react';
+import { AddPetTraitRequest, EditPetRequest, PetProfileResponse, Trait } from '@/boundary/interfaces/pet';
+import { addPetTraits, getPetProfileDetails } from '@/lib/services/pet/petProfileService';
+import { toast } from 'react-toastify';
+import { Button, CircularProgress, Input, Select, SelectItem } from '@nextui-org/react';
+import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
+import { toTitleCase } from '@/lib/utils/pdfUtils';
+import { EditIcon } from '@nextui-org/shared-icons';
+import { PetProfileCard } from '@/components/dashboard/user/petmngt/pets/profile/PetProfileCard';
+import Spinner from '@/components/shared/icons/Spinner';
+import PetTraits from '@/components/dashboard/user/petmngt/pets/profile/PetTraits';
+import UpdateProfilePictureModal from '@/components/dashboard/user/petmngt/pets/modals/UpdateProfilePictureModal';
+import EditPetModal from '@/components/dashboard/user/petmngt/pets/modals/EditPetModal';
+import CameraIcon from '@/components/shared/icons/CameraIcon';
+import TrashIcon from '@/components/shared/icons/TrashIcon';
+import DeletePetModal from '@/components/dashboard/user/petmngt/pets/modals/DeletePetModal';
 
 export default function ManagePetProfile({slug}: { slug: string }) {
     const [petProfileDetails, setPetProfileDetails] = useState<PetProfileResponse>({} as PetProfileResponse);

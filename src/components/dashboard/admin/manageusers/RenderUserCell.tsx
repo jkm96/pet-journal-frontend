@@ -1,7 +1,7 @@
-import {UserResponse} from "@/boundary/interfaces/user";
-import {Chip, User} from "@nextui-org/react";
-import Link from "next/link";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
+import { UserResponse } from '@/boundary/interfaces/user';
+import { Chip, User } from '@nextui-org/react';
+import Link from 'next/link';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 
 export default function RenderUserCell(user: UserResponse, columnKey: string | number | bigint, statusColorMap: Record<string, "default" | "primary" | "secondary" | "success" | "warning" | "danger" | undefined>) {
     // @ts-ignore

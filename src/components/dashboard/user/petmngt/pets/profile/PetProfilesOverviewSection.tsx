@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from "react";
-import {PetProfileResponse} from "@/boundary/interfaces/pet";
-import {Avatar, Card, CardBody, CardHeader, CircularProgress, Image} from "@nextui-org/react";
-import {Button} from "@nextui-org/button";
-import Link from "next/link";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
-import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
-import {PlusIcon} from "@/components/shared/icons/PlusIcon";
-import CreateNewPetModal from "@/components/dashboard/user/petmngt/pets/modals/CreateNewPetModal";
-import {getUserPets} from "@/lib/utils/petUtils";
-import {AddRecordFab} from "@/components/common/dashboard/AddRecordFab";
+import React, { useEffect, useState } from 'react';
+import { PetProfileResponse } from '@/boundary/interfaces/pet';
+import { Avatar, Card, CardBody, CardHeader, CircularProgress, Image } from '@nextui-org/react';
+import { Button } from '@nextui-org/button';
+import Link from 'next/link';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
+import { PlusIcon } from '@/components/shared/icons/PlusIcon';
+import CreateNewPetModal from '@/components/dashboard/user/petmngt/pets/modals/CreateNewPetModal';
+import { getUserPets } from '@/lib/utils/petUtils';
+import { AddRecordFab } from '@/components/common/dashboard/AddRecordFab';
 
 export default function PetProfilesOverviewSection() {
     const [petProfiles, setPetProfiles] = useState<PetProfileResponse[]>([]);

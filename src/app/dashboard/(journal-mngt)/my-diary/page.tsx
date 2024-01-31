@@ -1,8 +1,8 @@
 "use client";
 
-import AuthorizeComponent from "@/components/common/auth/AuthorizeComponent";
-import PetJournalPermission, {MapPermission} from "@/boundary/enums/permissions";
-import MyJournalOverview from "@/components/dashboard/user/journalmngt/myjournal/MyJournalOverview";
+import AuthorizeComponent from '@/components/common/auth/AuthorizeComponent';
+import PetJournalPermission, { MapPermission } from '@/boundary/enums/permissions';
+import MyJournalOverview from '@/components/dashboard/user/journalmngt/myjournal/MyJournalOverview';
 
 function MyJournalPage() {
     return (

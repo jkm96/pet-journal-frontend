@@ -1,6 +1,6 @@
-import {getPdfMoodColorClassList} from "@/helpers/stylingHelpers";
-import React from "react";
-import {Text} from '@react-pdf/renderer';
+import { getPdfMoodColorClassList } from '@/helpers/stylingHelpers';
+import React from 'react';
+import { Text } from '@react-pdf/renderer';
 
 export default function RenderMoodTagsWithColors(dataArray: string[]) {
     const colorArray = getPdfMoodColorClassList(dataArray);

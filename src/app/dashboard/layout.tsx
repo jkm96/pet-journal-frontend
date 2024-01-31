@@ -1,12 +1,12 @@
 "use client";
-import "../globals.css";
-import React, {useEffect, useState} from "react";
-import Loader from "@/components/common/dashboard/Loader";
-import {useAuth} from "@/hooks/useAuth";
-import Sidebar from "@/components/shared/navs/sidebar/SideBar";
-import Header from "@/components/shared/navs/header/Header";
-import {redirect} from "next/navigation";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
+import '../globals.css';
+import React, { useEffect, useState } from 'react';
+import Loader from '@/components/common/dashboard/Loader';
+import { useAuth } from '@/hooks/useAuth';
+import Sidebar from '@/components/shared/navs/sidebar/SideBar';
+import Header from '@/components/shared/navs/header/Header';
+import { redirect } from 'next/navigation';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 
 export default function UserDashboardLayout({children}: { children: React.ReactNode; }) {
     const {user, loading: authLoading} = useAuth();

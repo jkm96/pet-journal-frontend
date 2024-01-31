@@ -1,4 +1,4 @@
-import {StyleSheet} from "@react-pdf/renderer";
+import { StyleSheet } from '@react-pdf/renderer';
 
 export function toTitleCase(input: string): string {
     return input.replace(/\w\S*/g, function (txt) {

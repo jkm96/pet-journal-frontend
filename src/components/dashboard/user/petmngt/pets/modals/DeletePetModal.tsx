@@ -1,10 +1,10 @@
-import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/react";
-import Spinner from "@/components/shared/icons/Spinner";
-import React, {useState} from "react";
-import {toast} from "react-toastify";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
-import {useRouter} from "next/navigation";
-import {deletePetProfile} from "@/lib/services/pet/petProfileService";
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react';
+import Spinner from '@/components/shared/icons/Spinner';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import { useRouter } from 'next/navigation';
+import { deletePetProfile } from '@/lib/services/pet/petProfileService';
 
 export default function DeletePetModal({petId, isOpen, onClose}: {
     petId: number,

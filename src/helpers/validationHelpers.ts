@@ -1,6 +1,7 @@
-import {LoginUserRequest, RegisterUserRequest} from "@/boundary/interfaces/auth";
-import {CreatePetRequest, EditPetRequest} from "@/boundary/interfaces/pet";
-import {CreateJournalEntryRequest, UpdateJournalEntryRequest} from "@/boundary/interfaces/journal";
+import { LoginUserRequest, RegisterUserRequest } from '@/boundary/interfaces/auth';
+import { CreatePetRequest, EditPetRequest } from '@/boundary/interfaces/pet';
+import { CreateJournalEntryRequest, UpdateJournalEntryRequest } from '@/boundary/interfaces/journal';
+import { CreateMagicProjectRequest } from '@/boundary/interfaces/magicStudio';
 
 export function isEmailValid(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -63,6 +64,24 @@ export function validateLoginFormInputErrors(formData: LoginUserRequest) {
 
     for (const key in errors) {
         if (errors[key as keyof LoginUserRequest] !== "") {
+            return errors;
+        }
+    }
+
+    return null;
+}
+
+export function validateCreateProjectFormInputErrors(formData: CreateMagicProjectRequest) {
+    const errors: CreateMagicProjectRequest = {
+        periodFrom: '', periodTo: '', title: ''
+    }
+
+    if (formData.title.trim() === "") {
+        errors.title = "Title cannot be empty";
+    }
+
+    for (const key in errors) {
+        if (key !== "periodFrom" && key !== "periodTo" && errors[key as keyof CreateMagicProjectRequest] !== "") {
             return errors;
         }
     }

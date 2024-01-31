@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {Card, CardBody} from '@nextui-org/react';
+import React, { useState } from 'react';
+import { Card, CardBody } from '@nextui-org/react';
 import RenderJournalHeader from '@/components/dashboard/user/journalmngt/journalentries/RenderJournalHeader';
-import {JournalEntryResponse} from '@/boundary/interfaces/journal';
-import {groupEntriesByMonth} from "@/lib/utils/journalUtils";
+import { JournalEntryResponse } from '@/boundary/interfaces/journal';
+import { groupEntriesByMonth } from '@/lib/utils/journalUtils';
 
 interface JournalEntriesGridProps {
     journalEntries: JournalEntryResponse[];

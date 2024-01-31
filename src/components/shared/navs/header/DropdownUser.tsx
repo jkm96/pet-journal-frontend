@@ -1,8 +1,8 @@
-import {useEffect, useRef, useState} from "react";
-import Link from "next/link";
-import {useAuth} from "@/hooks/useAuth";
-import LogoutForm from "@/components/auth/user/LogoutForm";
-import {Avatar} from "@nextui-org/react";
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useAuth } from '@/hooks/useAuth';
+import LogoutForm from '@/components/auth/user/LogoutForm';
+import { Avatar } from '@nextui-org/react';
 
 const DropdownUser = () => {
     const {user} = useAuth();

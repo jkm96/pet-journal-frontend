@@ -1,12 +1,12 @@
-import {apiKey, internalBaseUrl} from "@/boundary/constants/appConstants";
+import { apiKey, internalBaseUrl } from '@/boundary/constants/appConstants';
 import {
     AddPetTraitRequest,
     CreatePetRequest,
     EditPetRequest,
-    UpdatePetProfileImageRequest
-} from "@/boundary/interfaces/pet";
-import axios from "axios";
-import {handleApiException} from "@/helpers/responseHelpers";
+    UpdatePetProfileImageRequest,
+} from '@/boundary/interfaces/pet';
+import axios from 'axios';
+import { handleApiException } from '@/helpers/responseHelpers';
 
 export async function getPetProfiles() {
     try {

@@ -1,9 +1,9 @@
-import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/react";
-import Spinner from "@/components/shared/icons/Spinner";
-import React, {useState} from "react";
-import {toast} from "react-toastify";
-import {useRouter} from "next/navigation";
-import {toggleUser} from "@/lib/services/admin/manageUserService";
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react';
+import Spinner from '@/components/shared/icons/Spinner';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import { toggleUser } from '@/lib/services/admin/manageUserService';
 
 export default function ToggleUserStatusModal({userId, currentStatus, isOpen, onClose}: {
     userId: number,

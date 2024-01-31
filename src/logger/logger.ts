@@ -1,5 +1,5 @@
-import pino from 'pino'
-import {logflarePinoVercel} from 'pino-logflare'
+import pino from 'pino';
+import { logflarePinoVercel } from 'pino-logflare';
 
 const {stream, send} = logflarePinoVercel({
     apiKey: "ylhOwHUV8soG",

@@ -1,7 +1,7 @@
-import axios, {AxiosRequestConfig} from "axios";
-import {cookieName, petJournalApiBaseUrl} from "@/boundary/constants/appConstants";
-import {NextRequest} from "next/server";
-import {AccessTokenModel} from "@/boundary/interfaces/token";
+import axios, { AxiosRequestConfig } from 'axios';
+import { cookieName, petJournalApiBaseUrl } from '@/boundary/constants/appConstants';
+import { NextRequest } from 'next/server';
+import { AccessTokenModel } from '@/boundary/interfaces/token';
 
 const petJournalApiClient = axios.create({
     baseURL: `${petJournalApiBaseUrl}`,

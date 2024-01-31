@@ -1,6 +1,6 @@
-import PetJournalPermission, {MapPermission} from "@/boundary/enums/permissions";
-import {getAccessToken} from "@/lib/services/token/tokenService";
-import {AccessTokenModel} from "@/boundary/interfaces/token";
+import PetJournalPermission, { MapPermission } from '@/boundary/enums/permissions';
+import { getAccessToken } from '@/lib/services/token/tokenService';
+import { AccessTokenModel } from '@/boundary/interfaces/token';
 
 export async function hasRequiredPermissions(requiredPermissions: string[]): Promise<boolean> {
     const response = await getAccessToken();

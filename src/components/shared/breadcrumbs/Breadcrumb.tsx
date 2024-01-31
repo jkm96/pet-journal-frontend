@@ -1,5 +1,5 @@
-import Link from "next/link";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
+import Link from 'next/link';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 
 interface BreadcrumbProps {
     pageName: string;

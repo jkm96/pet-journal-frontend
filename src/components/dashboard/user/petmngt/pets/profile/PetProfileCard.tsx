@@ -1,6 +1,6 @@
-import {PetProfileResponse} from "@/boundary/interfaces/pet";
-import {toTitleCase} from "@/lib/utils/pdfUtils";
-import {formatDate} from "@/helpers/dateHelpers";
+import { PetProfileResponse } from '@/boundary/interfaces/pet';
+import { toTitleCase } from '@/lib/utils/pdfUtils';
+import { formatDate } from '@/helpers/dateHelpers';
 
 export function PetProfileCard({petProfileDetails}: { petProfileDetails: PetProfileResponse }) {
     return (

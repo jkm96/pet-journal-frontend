@@ -1,7 +1,7 @@
 "use client";
-import {useEffect} from "react";
-import useLocalStorage from "./useLocalStorage";
-import {useAuth} from "@/hooks/useAuth";
+import { useEffect } from 'react';
+import useLocalStorage from './useLocalStorage';
+import { useAuth } from '@/hooks/useAuth';
 
 const useColorMode = () => {
     const { user } = useAuth();

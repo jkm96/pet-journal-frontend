@@ -1,24 +1,24 @@
 import {
-    Button,
-    CheckboxGroup,
-    Input,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader
-} from "@nextui-org/react";
-import {CustomCheckbox} from "@/components/shared/formelements/CustomCheckbox";
-import {Textarea} from "@nextui-org/input";
-import {journalTags, moodTags} from "@/boundary/constants/petConstants";
-import Spinner from "@/components/shared/icons/Spinner";
-import React, {useEffect, useState} from "react";
-import {UpdateJournalEntryRequest} from "@/boundary/interfaces/journal";
-import {validateEditJournalFormInputErrors} from "@/helpers/validationHelpers";
-import {toast} from "react-toastify";
-import {updateJournalEntry} from "@/lib/services/journal-entries/journalEntryService";
-import {PetProfileResponse} from "@/boundary/interfaces/pet";
-import {getUserPets} from "@/lib/utils/petUtils";
+  Button,
+  CheckboxGroup,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from '@nextui-org/react';
+import { CustomCheckbox } from '@/components/shared/formelements/CustomCheckbox';
+import { Textarea } from '@nextui-org/input';
+import { journalTags, moodTags } from '@/boundary/constants/petConstants';
+import Spinner from '@/components/shared/icons/Spinner';
+import React, { useEffect, useState } from 'react';
+import { UpdateJournalEntryRequest } from '@/boundary/interfaces/journal';
+import { validateEditJournalFormInputErrors } from '@/helpers/validationHelpers';
+import { toast } from 'react-toastify';
+import { updateJournalEntry } from '@/lib/services/journal-entries/journalEntryService';
+import { PetProfileResponse } from '@/boundary/interfaces/pet';
+import { getUserPets } from '@/lib/utils/petUtils';
 
 const initialFormState: UpdateJournalEntryRequest = {
     journalId: 0, petIds: [], content: "", event: "", location: "", mood: "", tags: "", title: ""

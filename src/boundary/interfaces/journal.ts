@@ -1,4 +1,4 @@
-import {PetProfileResponse} from "@/boundary/interfaces/pet";
+import { PetProfileResponse } from '@/boundary/interfaces/pet';
 
 export interface JournalEntryResponse {
     id: number;

@@ -1,10 +1,10 @@
-import {toast} from "react-toastify";
-import {useEffect, useState} from "react";
-import {createCheckoutSession} from "@/lib/services/payments/paymentsService";
-import {CheckoutSessionModel} from "@/boundary/interfaces/payment";
-import {EmbeddedCheckout, EmbeddedCheckoutProvider} from "@stripe/react-stripe-js";
-import {loadStripe} from "@stripe/stripe-js";
-import {CircularProgress} from "@nextui-org/react";
+import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
+import { createCheckoutSession } from '@/lib/services/payments/paymentsService';
+import { CheckoutSessionModel } from '@/boundary/interfaces/payment';
+import { EmbeddedCheckout, EmbeddedCheckoutProvider } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { CircularProgress } from '@nextui-org/react';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 

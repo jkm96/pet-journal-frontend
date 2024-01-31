@@ -1,15 +1,15 @@
-import React, {useEffect, useRef, useState} from "react";
-import Link from "next/link";
-import {usePathname} from "next/navigation";
-import SettingsIcon from "@/components/shared/icons/SettingsIcon";
-import SidebarOpenIcon from "@/components/shared/icons/SidebarOpenIcon";
-import DashboardIcon from "@/components/shared/icons/DashboardIcon";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
-import JournalEntriesIcon from "@/components/shared/icons/JournalEntriesIcon";
-import JournalHeartIcon from "@/components/shared/icons/JournalHeartIcon";
-import PetProfileIcon from "@/components/shared/icons/PetProfleIcon";
-import {useAuth} from "@/hooks/useAuth";
-import DiaryStudioIcon from "@/components/shared/icons/DiaryStudioIcon";
+import React, { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import SettingsIcon from '@/components/shared/icons/SettingsIcon';
+import SidebarOpenIcon from '@/components/shared/icons/SidebarOpenIcon';
+import DashboardIcon from '@/components/shared/icons/DashboardIcon';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import JournalEntriesIcon from '@/components/shared/icons/JournalEntriesIcon';
+import JournalHeartIcon from '@/components/shared/icons/JournalHeartIcon';
+import PetProfileIcon from '@/components/shared/icons/PetProfleIcon';
+import { useAuth } from '@/hooks/useAuth';
+import DiaryStudioIcon from '@/components/shared/icons/DiaryStudioIcon';
 
 interface SidebarProps {
     sidebarOpen: boolean;

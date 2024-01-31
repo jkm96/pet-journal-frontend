@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from "react";
-import {toast} from "react-toastify";
-import {getJournalEntries} from "@/lib/services/journal-entries/journalEntryService";
-import {JournalEntryResponse} from "@/boundary/interfaces/journal";
-import {Avatar, Card, CardBody, CircularProgress} from "@nextui-org/react";
-import Breadcrumb from "@/components/shared/breadcrumbs/Breadcrumb";
-import Link from "next/link";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
-import {Button} from "@nextui-org/button";
-import {PlusIcon} from "@/components/shared/icons/PlusIcon";
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { getJournalEntries } from '@/lib/services/journal-entries/journalEntryService';
+import { JournalEntryResponse } from '@/boundary/interfaces/journal';
+import { Avatar, Card, CardBody, CircularProgress } from '@nextui-org/react';
+import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
+import Link from 'next/link';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import { Button } from '@nextui-org/button';
+import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import CreateJournalEntryModal
-    from "@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal";
-import {formatDate} from "@/helpers/dateHelpers";
-import {getRandomColorClass} from "@/helpers/stylingHelpers";
-import {JournalQueryParameters} from "@/boundary/parameters/journalQueryParameters";
-import {SearchIcon} from "@/components/shared/icons/SearchIcon";
-import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {AddRecordFab} from "@/components/common/dashboard/AddRecordFab";
-import {groupEntriesByMonth} from "@/lib/utils/journalUtils";
+    from '@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
+import { formatDate } from '@/helpers/dateHelpers';
+import { getRandomColorClass } from '@/helpers/stylingHelpers';
+import { JournalQueryParameters } from '@/boundary/parameters/journalQueryParameters';
+import { SearchIcon } from '@/components/shared/icons/SearchIcon';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { AddRecordFab } from '@/components/common/dashboard/AddRecordFab';
+import { groupEntriesByMonth } from '@/lib/utils/journalUtils';
 
 export default function JournalEntriesOverview() {
     const [queryParams, setQueryParams] = useState<JournalQueryParameters>(new JournalQueryParameters());

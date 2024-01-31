@@ -1,7 +1,7 @@
-import {handleApiException, handleAxiosResponse} from "@/helpers/responseHelpers";
-import petJournalApiClient, {getAxiosConfigs} from "@/lib/axios/axiosClient";
-import {NextRequest} from "next/server";
-import {getJournalQueryParams} from "@/helpers/urlHelpers";
+import { handleApiException, handleAxiosResponse } from '@/helpers/responseHelpers';
+import petJournalApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
+import { NextRequest } from 'next/server';
+import { getJournalQueryParams } from '@/helpers/urlHelpers';
 
 export async function GET(request: NextRequest, {params}: { params: { queryParams: string } }) {
     try {

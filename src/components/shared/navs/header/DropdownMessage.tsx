@@ -1,6 +1,6 @@
-import {useEffect, useRef, useState} from "react";
-import Link from "next/link";
-import {Avatar} from "@nextui-org/react";
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { Avatar } from '@nextui-org/react';
 
 const DropdownMessage = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);

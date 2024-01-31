@@ -1,6 +1,6 @@
 "use client";
 
-import UsersOverviewSection from "@/components/dashboard/admin/manageusers/UsersOverviewSection";
+import UsersOverviewSection from '@/components/dashboard/admin/manageusers/UsersOverviewSection';
 
 function ManageUsersPage() {
     return (

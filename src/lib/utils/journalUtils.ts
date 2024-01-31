@@ -1,4 +1,4 @@
-import {JournalEntryResponse} from "@/boundary/interfaces/journal";
+import { JournalEntryResponse } from '@/boundary/interfaces/journal';
 
 export  function groupEntriesByMonth(entries: JournalEntryResponse[]) {
     return entries.reduce((grouped, entry) => {

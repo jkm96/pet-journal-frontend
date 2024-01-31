@@ -1,6 +1,6 @@
-import {NextRequest, NextResponse} from "next/server";
-import {apiKey, cookieName, internalBaseUrl} from "@/boundary/constants/appConstants";
-import {getAccessToken} from "@/lib/services/token/tokenService";
+import { NextRequest, NextResponse } from 'next/server';
+import { apiKey, cookieName, internalBaseUrl } from '@/boundary/constants/appConstants';
+import { getAccessToken } from '@/lib/services/token/tokenService';
 
 export async function middleware(request: NextRequest) {
     if (request.url.includes('/api/')) {

@@ -1,6 +1,6 @@
-import {Button} from "@nextui-org/button";
-import {PlusIcon} from "@/components/shared/icons/PlusIcon";
-import React from "react";
+import { Button } from '@nextui-org/button';
+import { PlusIcon } from '@/components/shared/icons/PlusIcon';
+import React from 'react';
 
 export function AddRecordFab(props: { onPress: () => void }) {
     const handleClick = () => {

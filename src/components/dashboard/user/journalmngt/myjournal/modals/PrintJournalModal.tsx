@@ -1,11 +1,11 @@
-import {Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/react";
-import Spinner from "@/components/shared/icons/Spinner";
-import React, {useState} from "react";
-import {getDocument} from "@/components/dashboard/user/journalmngt/myjournal/PreviewMyJournal";
-import {PDFDownloadLink} from "@react-pdf/renderer";
-import {JournalEntryResponse} from "@/boundary/interfaces/journal";
-import {useAuth} from "@/hooks/useAuth";
-import {toSlug} from "@/lib/utils/pdfUtils";
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react';
+import Spinner from '@/components/shared/icons/Spinner';
+import React, { useState } from 'react';
+import { getDocument } from '@/components/dashboard/user/journalmngt/myjournal/PreviewMyJournal';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import { JournalEntryResponse } from '@/boundary/interfaces/journal';
+import { useAuth } from '@/hooks/useAuth';
+import { toSlug } from '@/lib/utils/pdfUtils';
 
 export default function PrintJournalModal({journalEntries, isOpen, onClose}: {
     journalEntries: JournalEntryResponse[],

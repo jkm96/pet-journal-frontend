@@ -1,17 +1,17 @@
-import React, {useState} from "react";
-import {validateLoginFormInputErrors} from "@/helpers/validationHelpers";
-import {useAuth} from "@/hooks/useAuth";
-import {useRouter} from "next/navigation";
-import {LoginUserRequest} from "@/boundary/interfaces/auth";
-import {AccessTokenModel} from "@/boundary/interfaces/token";
-import {Input} from "@nextui-org/react";
-import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
-import {Button} from "@nextui-org/button";
-import {toast} from "react-toastify";
-import Spinner from "@/components/shared/icons/Spinner";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
-import {loginAdmin} from "@/lib/services/auth/adminAuthService";
-import MainNavbar from "@/components/shared/navs/navbar/MainNavbar";
+import React, { useState } from 'react';
+import { validateLoginFormInputErrors } from '@/helpers/validationHelpers';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/navigation';
+import { LoginUserRequest } from '@/boundary/interfaces/auth';
+import { AccessTokenModel } from '@/boundary/interfaces/token';
+import { Input } from '@nextui-org/react';
+import { EyeFilledIcon, EyeSlashFilledIcon } from '@nextui-org/shared-icons';
+import { Button } from '@nextui-org/button';
+import { toast } from 'react-toastify';
+import Spinner from '@/components/shared/icons/Spinner';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import { loginAdmin } from '@/lib/services/auth/adminAuthService';
+import MainNavbar from '@/components/shared/navs/navbar/MainNavbar';
 
 const initialFormState: LoginUserRequest = {
     username: "", password: ""

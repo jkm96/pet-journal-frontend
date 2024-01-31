@@ -1,5 +1,5 @@
-import {apiKey, internalBaseUrl} from "@/boundary/constants/appConstants";
-import {LoginUserRequest, RegisterUserRequest} from "@/boundary/interfaces/auth";
+import { apiKey, internalBaseUrl } from '@/boundary/constants/appConstants';
+import { LoginUserRequest, RegisterUserRequest } from '@/boundary/interfaces/auth';
 
 export async function loginUser(loginRequest: LoginUserRequest) {
     try {

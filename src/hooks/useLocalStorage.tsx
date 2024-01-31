@@ -1,6 +1,6 @@
 "use client";
-import {useEffect, useState} from "react";
-import {useAuth} from "@/hooks/useAuth";
+import { useEffect, useState } from 'react';
+import { useAuth } from '@/hooks/useAuth';
 
 type SetValue<T> = T | ((val: T) => T);
 

@@ -1,19 +1,18 @@
 "use client";
-import React from "react";
+import React from 'react';
 import {
-    Button,
-    Link,
-    Navbar,
-    NavbarBrand,
-    NavbarContent,
-    NavbarItem,
-    NavbarMenu,
-    NavbarMenuItem,
-    NavbarMenuToggle
-} from "@nextui-org/react";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
-import Image from "next/image";
-import LightLogo from "@/components/home/icons/LightLogo";
+  Button,
+  Link,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+} from '@nextui-org/react';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import Image from 'next/image';
 
 export default function MainNavbar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);

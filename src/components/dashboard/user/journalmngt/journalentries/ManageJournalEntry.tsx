@@ -1,35 +1,35 @@
-import {toast} from "react-toastify";
-import React, {useEffect, useState} from "react";
+import { toast } from 'react-toastify';
+import React, { useEffect, useState } from 'react';
 import {
-    JournalEntryResponse,
-    JournalImageBuffer,
-    PrintJournalEntryRequest,
-    UpdateJournalEntryRequest
-} from "@/boundary/interfaces/journal";
+  JournalEntryResponse,
+  JournalImageBuffer,
+  PrintJournalEntryRequest,
+  UpdateJournalEntryRequest,
+} from '@/boundary/interfaces/journal';
 import {
-    getJournalEntryAttachmentBuffers,
-    getJournalEntryDetails
-} from "@/lib/services/journal-entries/journalEntryService";
-import {Card, CardBody, CircularProgress} from "@nextui-org/react";
-import RenderJournalHeader from "@/components/dashboard/user/journalmngt/journalentries/RenderJournalHeader";
-import {Button} from "@nextui-org/button";
+  getJournalEntryAttachmentBuffers,
+  getJournalEntryDetails,
+} from '@/lib/services/journal-entries/journalEntryService';
+import { Card, CardBody, CircularProgress } from '@nextui-org/react';
+import RenderJournalHeader from '@/components/dashboard/user/journalmngt/journalentries/RenderJournalHeader';
+import { Button } from '@nextui-org/button';
 import PreviewAndPrintJournalEntryModal, {
-    getJournalEntryPdfDocument
-} from "@/components/dashboard/user/journalmngt/journalentries/modals/PreviewAndPrintJournalEntryModal";
+  getJournalEntryPdfDocument,
+} from '@/components/dashboard/user/journalmngt/journalentries/modals/PreviewAndPrintJournalEntryModal';
 import UploadJournalImagesModal
-    from "@/components/dashboard/user/journalmngt/journalentries/modals/UploadJournalImagesModal";
+  from '@/components/dashboard/user/journalmngt/journalentries/modals/UploadJournalImagesModal';
 import UpdateJournalEntryModal
-    from "@/components/dashboard/user/journalmngt/journalentries/modals/UpdateJournalEntryModal";
-import {EditIcon} from "@nextui-org/shared-icons";
+  from '@/components/dashboard/user/journalmngt/journalentries/modals/UpdateJournalEntryModal';
+import { EditIcon } from '@nextui-org/shared-icons';
 import DeleteJournalEntryModal
-    from "@/components/dashboard/user/journalmngt/journalentries/modals/DeleteJournalEntryModal";
-import UploadIcon from "@/components/shared/icons/UploadIcon";
-import TrashIcon from "@/components/shared/icons/TrashIcon";
-import FileEyeIcon from "@/components/shared/icons/FileEyeIcon";
-import ReactPDF, {PDFDownloadLink} from "@react-pdf/renderer";
-import DownloadIcon from "@/components/shared/icons/DownloadIcon";
-import {useAuth} from "@/hooks/useAuth";
-import {PdfPreviewStyle} from "@/lib/utils/pdfUtils";
+  from '@/components/dashboard/user/journalmngt/journalentries/modals/DeleteJournalEntryModal';
+import UploadIcon from '@/components/shared/icons/UploadIcon';
+import TrashIcon from '@/components/shared/icons/TrashIcon';
+import FileEyeIcon from '@/components/shared/icons/FileEyeIcon';
+import ReactPDF, { PDFDownloadLink } from '@react-pdf/renderer';
+import DownloadIcon from '@/components/shared/icons/DownloadIcon';
+import { useAuth } from '@/hooks/useAuth';
+import { PdfPreviewStyle } from '@/lib/utils/pdfUtils';
 import Font = ReactPDF.Font;
 
 Font.register({

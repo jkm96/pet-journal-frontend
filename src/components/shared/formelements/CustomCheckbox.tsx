@@ -1,6 +1,6 @@
-import React from "react";
-import {Chip, tv, useCheckbox, VisuallyHidden} from "@nextui-org/react";
-import {CustomCheckIcon} from "@/components/shared/formelements/CustomCheckIcon";
+import React from 'react';
+import { Chip, tv, useCheckbox, VisuallyHidden } from '@nextui-org/react';
+import { CustomCheckIcon } from '@/components/shared/formelements/CustomCheckIcon';
 
 const checkbox = tv({
     slots: {

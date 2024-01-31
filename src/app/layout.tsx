@@ -1,9 +1,9 @@
-import type {Metadata} from 'next'
-import './globals.css'
-import {UIProvider} from "@/context/uiProvider";
-import {AuthProvider} from "@/context/authProvider";
-import ToastContainerWrapper from "@/components/common/notifications/ToastComponent";
-import React from "react";
+import type { Metadata } from 'next';
+import './globals.css';
+import { UIProvider } from '@/context/uiProvider';
+import { AuthProvider } from '@/context/authProvider';
+import ToastContainerWrapper from '@/components/common/notifications/ToastComponent';
+import React from 'react';
 
 export const metadata: Metadata = {
     title: 'Online Diary for Pet Lovers | Pet Diaries',

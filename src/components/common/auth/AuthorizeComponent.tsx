@@ -1,9 +1,9 @@
 "use client";
-import {useEffect, useState} from 'react';
-import {checkEmailVerificationStatus, hasRequiredPermissions} from "@/helpers/authHelper";
-import Authorizing from "@/components/common/auth/Authorizing";
-import PermissionDeniedMessage from "@/components/common/auth/PermissionDeniedMessage";
-import UnVerifiedEmail from "@/components/common/auth/UnVerifiedEmail";
+import { useEffect, useState } from 'react';
+import { checkEmailVerificationStatus, hasRequiredPermissions } from '@/helpers/authHelper';
+import Authorizing from '@/components/common/auth/Authorizing';
+import PermissionDeniedMessage from '@/components/common/auth/PermissionDeniedMessage';
+import UnVerifiedEmail from '@/components/common/auth/UnVerifiedEmail';
 
 const AuthorizeComponent = (requiredPermissions: any) => (WrappedComponent: any) => {
     const AuthComponent = (props: any) => {

@@ -1,5 +1,5 @@
-import {Chip} from "@nextui-org/react";
-import {PetTraitModel} from "@/boundary/interfaces/pet";
+import { Chip } from '@nextui-org/react';
+import { PetTraitModel } from '@/boundary/interfaces/pet';
 
 export default function PetTraits({petTraits}: { petTraits: PetTraitModel[] | null }) {
     const likesTraits = petTraits?.filter(petTrait => petTrait.type === 'like') || [];

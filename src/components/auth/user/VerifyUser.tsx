@@ -1,10 +1,10 @@
-import {toast} from "react-toastify";
-import React, {useEffect, useState} from "react";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
-import {useRouter} from "next/navigation";
-import {CircularProgress} from "@nextui-org/react";
-import {verifyUserEmailAsync} from "@/lib/services/auth/userAuthService";
-import MainNavbar from "@/components/shared/navs/navbar/MainNavbar";
+import { toast } from 'react-toastify';
+import React, { useEffect, useState } from 'react';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import { useRouter } from 'next/navigation';
+import { CircularProgress } from '@nextui-org/react';
+import { verifyUserEmailAsync } from '@/lib/services/auth/userAuthService';
+import MainNavbar from '@/components/shared/navs/navbar/MainNavbar';
 
 export default function VerifyUser() {
     const router = useRouter()

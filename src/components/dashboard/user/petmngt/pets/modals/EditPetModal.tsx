@@ -1,22 +1,22 @@
-import React, {useState} from "react";
-import {validateEditPetFormInputErrors} from "@/helpers/validationHelpers";
+import React, { useState } from 'react';
+import { validateEditPetFormInputErrors } from '@/helpers/validationHelpers';
 import {
-    Button,
-    Input,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    Select,
-    SelectItem
-} from "@nextui-org/react";
-import {toast} from "react-toastify";
-import Spinner from "@/components/shared/icons/Spinner";
-import {EditPetRequest} from "@/boundary/interfaces/pet";
-import {Textarea} from "@nextui-org/input";
-import {editPetProfile} from "@/lib/services/pet/petProfileService";
-import {species} from "@/boundary/constants/petConstants";
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Select,
+  SelectItem,
+} from '@nextui-org/react';
+import { toast } from 'react-toastify';
+import Spinner from '@/components/shared/icons/Spinner';
+import { EditPetRequest } from '@/boundary/interfaces/pet';
+import { Textarea } from '@nextui-org/input';
+import { editPetProfile } from '@/lib/services/pet/petProfileService';
+import { species } from '@/boundary/constants/petConstants';
 
 
 const initialFormState: EditPetRequest = {

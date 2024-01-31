@@ -1,15 +1,15 @@
-import React from "react";
-import MainNavbar from "@/components/shared/navs/navbar/MainNavbar";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
-import {Button} from "@nextui-org/react";
-import ArchiveIcon from "@/components/home/icons/ArchiveIcon";
-import BackupIcon from "@/components/home/icons/BackupIcon";
-import DownloadIcon from "@/components/home/icons/DownloadIcon";
-import CustomizeIcon from "@/components/home/icons/CustomizeIcon";
-import PrintIcon from "@/components/home/icons/PrintIcon";
-import WebAppIcon from "@/components/home/icons/WebAppIcon";
-import SupportIcon from "@/components/home/icons/SupportIcon";
-import MemoriesIcon from "@/components/home/icons/MemoriesIcon";
+import React from 'react';
+import MainNavbar from '@/components/shared/navs/navbar/MainNavbar';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import { Button } from '@nextui-org/react';
+import ArchiveIcon from '@/components/home/icons/ArchiveIcon';
+import BackupIcon from '@/components/home/icons/BackupIcon';
+import DownloadIcon from '@/components/home/icons/DownloadIcon';
+import CustomizeIcon from '@/components/home/icons/CustomizeIcon';
+import PrintIcon from '@/components/home/icons/PrintIcon';
+import WebAppIcon from '@/components/home/icons/WebAppIcon';
+import SupportIcon from '@/components/home/icons/SupportIcon';
+import MemoriesIcon from '@/components/home/icons/MemoriesIcon';
 
 export default function Home() {
     return (

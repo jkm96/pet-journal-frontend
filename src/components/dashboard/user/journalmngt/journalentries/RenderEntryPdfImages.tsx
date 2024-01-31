@@ -1,6 +1,6 @@
-import {Image, View} from "@react-pdf/renderer";
-import React from "react";
-import {JournalImageBuffer} from "@/boundary/interfaces/journal";
+import { Image, View } from '@react-pdf/renderer';
+import React from 'react';
+import { JournalImageBuffer } from '@/boundary/interfaces/journal';
 
 export default function RenderEntryPdfImages({imageBuffers, itemsPerRow = 2}: {
     imageBuffers: JournalImageBuffer[];

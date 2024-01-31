@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {validateCreatePetFormInputErrors} from "@/helpers/validationHelpers";
+import React, { useState } from 'react';
+import { validateCreatePetFormInputErrors } from '@/helpers/validationHelpers';
 import {
     Button,
     Input,
@@ -9,14 +9,14 @@ import {
     ModalFooter,
     ModalHeader,
     Select,
-    SelectItem
-} from "@nextui-org/react";
-import {toast} from "react-toastify";
-import Spinner from "@/components/shared/icons/Spinner";
-import {CreatePetRequest} from "@/boundary/interfaces/pet";
-import {Textarea} from "@nextui-org/input";
-import {createPetProfile} from "@/lib/services/pet/petProfileService";
-import {species} from "@/boundary/constants/petConstants";
+    SelectItem,
+} from '@nextui-org/react';
+import { toast } from 'react-toastify';
+import Spinner from '@/components/shared/icons/Spinner';
+import { CreatePetRequest } from '@/boundary/interfaces/pet';
+import { Textarea } from '@nextui-org/input';
+import { createPetProfile } from '@/lib/services/pet/petProfileService';
+import { species } from '@/boundary/constants/petConstants';
 
 const initialFormState: CreatePetRequest = {
     breed: "",

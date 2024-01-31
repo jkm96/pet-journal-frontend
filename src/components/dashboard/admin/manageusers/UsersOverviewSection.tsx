@@ -1,26 +1,26 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from 'react';
 import {
-    ChipProps,
-    Selection,
-    SortDescriptor,
-    Spinner,
-    Table,
-    TableBody,
-    TableCell,
-    TableColumn,
-    TableHeader,
-    TableRow,
-} from "@nextui-org/react";
-import {toast} from "react-toastify";
-import {getUsers} from "@/lib/services/admin/manageUserService";
-import {userTableColumns} from "@/lib/utils/tableUtils";
-import {UserQueryParameters} from "@/boundary/parameters/userQueryParameters";
-import {UserResponse} from "@/boundary/interfaces/user";
-import PaginationComponent from "@/components/common/pagination/PaginationComponent";
-import {TableVisibleColumns} from "@/components/common/filter/TableVisibleColumns";
-import RenderUserCell from "@/components/dashboard/admin/manageusers/RenderUserCell";
-import {SearchIcon} from "@/components/shared/icons/SearchIcon";
-import {usePathname, useRouter, useSearchParams} from "next/navigation";
+  ChipProps,
+  Selection,
+  SortDescriptor,
+  Spinner,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from '@nextui-org/react';
+import { toast } from 'react-toastify';
+import { getUsers } from '@/lib/services/admin/manageUserService';
+import { userTableColumns } from '@/lib/utils/tableUtils';
+import { UserQueryParameters } from '@/boundary/parameters/userQueryParameters';
+import { UserResponse } from '@/boundary/interfaces/user';
+import PaginationComponent from '@/components/common/pagination/PaginationComponent';
+import { TableVisibleColumns } from '@/components/common/filter/TableVisibleColumns';
+import RenderUserCell from '@/components/dashboard/admin/manageusers/RenderUserCell';
+import { SearchIcon } from '@/components/shared/icons/SearchIcon';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const INITIAL_VISIBLE_COLUMNS = ["username", "email", "isActive", "isSubscribed", "actions"];
 

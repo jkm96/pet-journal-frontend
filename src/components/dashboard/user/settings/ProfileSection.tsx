@@ -1,6 +1,6 @@
-import {User} from "@/boundary/interfaces/user";
-import Image from "next/image";
-import CameraIcon from "@/components/shared/icons/CameraIcon";
+import { User } from '@/boundary/interfaces/user';
+import Image from 'next/image';
+import CameraIcon from '@/components/shared/icons/CameraIcon';
 
 interface ProfileSectionProps {
     user: User | null;

@@ -1,11 +1,11 @@
 "use client";
-import {NAVIGATION_LINKS} from "@/boundary/configs/navigationConfig";
-import {useAuth} from "@/hooks/useAuth";
-import Loader from "@/components/common/dashboard/Loader";
-import React, {useState} from "react";
-import {RedirectUserToDashboard} from "@/components/common/auth/RedirectUserToDashboard";
-import {useRouter} from "next/navigation";
-import Home from "@/components/home/Home";
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import { useAuth } from '@/hooks/useAuth';
+import Loader from '@/components/common/dashboard/Loader';
+import React, { useState } from 'react';
+import { RedirectUserToDashboard } from '@/components/common/auth/RedirectUserToDashboard';
+import { useRouter } from 'next/navigation';
+import Home from '@/components/home/Home';
 
 export default function HomePage() {
     const router = useRouter()
