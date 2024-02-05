@@ -29,6 +29,7 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({journalEntries})
                                     mood={journal.mood}
                                     tags={journal.tags}
                                     pets={journal.pets.map((pet) => pet.name)}
+                                    showChips={true}
                                 />
                                 <CardBody className="overflow-visible py-2">
                                     <div className="mt-1 mb-1">
