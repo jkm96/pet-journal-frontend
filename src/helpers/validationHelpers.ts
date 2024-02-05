@@ -73,6 +73,7 @@ export function validateLoginFormInputErrors(formData: LoginUserRequest) {
 
 export function validateCreateProjectFormInputErrors(formData: CreateMagicProjectRequest) {
     const errors: CreateMagicProjectRequest = {
+        content: '',
         periodFrom: '', periodTo: '', title: ''
     }
 
@@ -81,7 +82,7 @@ export function validateCreateProjectFormInputErrors(formData: CreateMagicProjec
     }
 
     for (const key in errors) {
-        if (key !== "periodFrom" && key !== "periodTo" && errors[key as keyof CreateMagicProjectRequest] !== "") {
+        if (key !== "content" && key !== "periodTo" && key !== "periodTo" && errors[key as keyof CreateMagicProjectRequest] !== "") {
             return errors;
         }
     }

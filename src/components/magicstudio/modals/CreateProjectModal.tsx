@@ -7,7 +7,8 @@ import { CreateMagicProjectRequest } from '@/boundary/interfaces/magicStudio';
 import { createProject } from '@/lib/services/magicstudio/magicStudioService';
 
 const initialFormState: CreateMagicProjectRequest = {
-  periodFrom: '', periodTo: '', title: '',
+  content: 'Text Content',
+  periodFrom: '', periodTo: '', title: ''
 };
 
 export default function CreateProjectModal({ isOpen, onClose }: {

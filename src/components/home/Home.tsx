@@ -16,7 +16,7 @@ export default function Home() {
         <>
             <MainNavbar/>
 
-            <main className="relative pt-10">
+            <main className="relative">
                 <div className="bg-gray-50">
                     <div className="relative overflow-hidden">
                         <div className="relative pt-8 sm:pt-24 pb-16 sm:pb-24">

@@ -1,53 +1,61 @@
 import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
 import TextIcon from '@/components/shared/icons/TextIcon';
-import { Button, Chip, CircularProgress } from '@nextui-org/react';
-import React, { useEffect, useState } from 'react';
+import { Avatar, Button, Card, CardBody, Chip, CircularProgress, Input } from '@nextui-org/react';
+import React, { useEffect, useRef, useState } from 'react';
 import BGColorIcon from '@/components/shared/icons/BGColorIcon';
 import {
   backgroundColorOptions,
   textColorOptions,
   textFontFamilyOptions,
   textFontWeightOptions,
-} from '@/helpers/magicStudioHelper';
+} from '@/lib/utils/magicStudioUtils';
 import { JournalQueryParameters } from '@/boundary/parameters/journalQueryParameters';
 import { getJournalEntries } from '@/lib/services/journal-entries/journalEntryService';
 import { toast } from 'react-toastify';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import CreateProjectModal from '@/components/magicstudio/modals/CreateProjectModal';
-
-type SectionVisibility = {
-  textSection: boolean;
-  backgroundSection: boolean;
-};
+import ReactPDF, { Document, Page, PDFDownloadLink, Text, usePDF, View } from '@react-pdf/renderer';
+import { MagicStudioPdfStyle, PdfPreviewStyle, toTitleCase } from '@/lib/utils/pdfUtils';
+import Font = ReactPDF.Font;
+import { useAuth } from '@/hooks/useAuth';
+import { User } from '@/boundary/interfaces/user';
+import { JournalEntryResponse } from '@/boundary/interfaces/journal';
+import { formatDate } from '@/helpers/dateHelpers';
+import RenderMoodTagsWithColors from '@/components/dashboard/user/journalmngt/journalentries/RenderMoodTagsWithColors';
+import RenderPdfGridImages from '@/components/dashboard/user/journalmngt/journalentries/RenderPdfGridImages';
+import { SearchIcon } from '@/components/shared/icons/SearchIcon';
+import Spinner from '@/components/shared/icons/Spinner';
+import { PlusFilledIcon } from '@nextui-org/shared-icons';
+import { fetchMagicStudioProjects, savePdfDocToDatabase } from '@/lib/services/magicstudio/magicStudioService';
+import { MagicStudioProjectResponse, SavePdfRequest } from '@/boundary/interfaces/magicStudio';
+import { groupEntriesByMonth } from '@/lib/utils/journalUtils';
+import Link from 'next/link';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import { getRandomColorClass } from '@/helpers/stylingHelpers';
+import CreateJournalEntryModal
+  from '@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
 
 export default function MagicStudio() {
   const [isLoadingProjects, setIsLoadingProjects] = useState<boolean>(true);
-  const [magicProjects, setMagicProjects] = useState([]);
-  const [activeSection, setActiveSection] = useState<keyof SectionVisibility>('textSection');
-  const [sectionVisibility, setSectionVisibility] = useState<SectionVisibility>({
-    textSection: true,
-    backgroundSection: false,
-  });
-  const [backgroundColor, setBackgroundColor] = useState<string>('');
-  const [textColor, setTextColor] = useState<string>('');
-  const [textFontFamily, setTextFontFamily] = useState<string>('');
-  const [textFontWeight, setTextFontWeight] = useState<string>('');
+  const [magicProjects, setMagicProjects] = useState<MagicStudioProjectResponse[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    fetchProjects(new JournalQueryParameters());
+    fetchProjects();
   };
-  const fetchProjects = async (queryParams: JournalQueryParameters) => {
+
+  const fetchProjects = async () => {
     setIsLoadingProjects(true);
-    await getJournalEntries(queryParams)
+    await fetchMagicStudioProjects()
       .then((response) => {
         if (response.statusCode === 200) {
-          const entries = response.data;
+          const projects = response.data;
+          console.log("projects", projects)
+          setMagicProjects(projects)
         }
       })
       .catch((error) => {
@@ -59,188 +67,81 @@ export default function MagicStudio() {
   };
 
   useEffect(() => {
-    fetchProjects(new JournalQueryParameters());
+    fetchProjects();
   }, []);
-
-  const handleElementsButtonClick = (sectionName: keyof SectionVisibility) => {
-    setSectionVisibility({
-      textSection: sectionName === 'textSection',
-      backgroundSection: sectionName === 'backgroundSection',
-    });
-    setActiveSection(sectionName);
-  };
-
-  const handleColorButtonClick = (color: string) => {
-    setTextColor(color);
-  };
-
-  const handleFontFamilyButtonClick = (fontFamily: string) => {
-    setTextFontFamily(fontFamily);
-  };
-
-  const handleFontWeightButtonClick = (fontWeight: string) => {
-    setTextFontWeight(fontWeight);
-  };
-
-  const handleBackgroundColorButtonClick = (bgColor: string) => {
-    setBackgroundColor(bgColor);
-  };
 
   return (
     <>
       <Breadcrumb pageName='Magic Studio' />
 
+      <div className="flex flex-col gap-4 m-2">
+        <div className="flex justify-between gap-3 items-end">
+
+          <div className="gap-3 hidden lg:block">
+            <Button
+              onPress={handleOpenModal}
+              startContent={<PlusIcon />}
+              color='primary'
+              variant='shadow'
+            >
+              Create A Project
+            </Button>
+            {isModalOpen && (
+              <CreateProjectModal isOpen={isModalOpen} onClose={handleCloseModal} />
+            )}
+          </div>
+        </div>
+      </div>
+
       {isLoadingProjects ? (
-        <div className="flex h-screen items-center justify-center">
+        <div className='flex h-screen items-center justify-center'>
           <CircularProgress color={'primary'} className={'p-4'} label='Loading your projects...' />
         </div>
       ) : (
         <>
           {magicProjects.length < 1 ? (
-            <div className="flex h-screen items-center justify-center">
+            <div className='flex h-screen items-center justify-center'>
               <p className='text-danger-400'>No projects were found!</p>
-              <Button
-                onPress={handleOpenModal}
-                startContent={<PlusIcon />}
-                color='primary'
-                variant="shadow"
-              >
-                Create A Project
-              </Button>
-                {isModalOpen && (
-                  <CreateProjectModal isOpen={isModalOpen} onClose={handleCloseModal}/>
-                )}
             </div>
           ) : (
-            <div className='grid grid-cols-12 gap-4'>
-              <div className='col-span-1 bg-column-100 p-4'>
-                <h2>Elements</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                {magicProjects.map((project) => (
+                  <Link key={project.id}
+                        href={`${NAVIGATION_LINKS.MAGIC_STUDIO}/${project.slug}`}>
+                    <Card
+                      key={project.id}
+                      isBlurred
+                      className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
+                      shadow="sm"
+                    >
+                      <CardBody>
+                        <div
+                          className="grid grid-cols-6 md:grid-cols-12 sm:grid-cols-12 lg:gap-6 md:gap-4 items-center justify-center">
+                          <div
+                            className="relative col-span-1 md:col-span-1 sm:col-span-6 mb-2 md:mb-0">
+                            <Avatar
+                              name={project.title}
+                              radius="sm"
+                              isBordered
+                              color="primary"
+                            />
+                          </div>
 
-                <div className='text-center'>
-                  <Button isIconOnly
-                          color='primary'
-                          aria-label='Toggle textSection'
-                          onClick={() => handleElementsButtonClick('textSection')}
-                  >
-                    <TextIcon width={30} height={30} color='#fff' />
-                  </Button>
-                  <p>Text</p>
-                </div>
-
-                <div className='text-center mt-4'>
-                  <Button
-                    isIconOnly
-                    aria-label='Toggle backgroundSection'
-                    onClick={() => handleElementsButtonClick('backgroundSection')}
-                  >
-                    <BGColorIcon width={30} height={30} color='#fff' />
-                  </Button>
-                  <p>Background</p>
-                </div>
+                          <div
+                            className="flex flex-col col-span-5 md:col-span-11 md:ml-3 sm:col-span-6">
+                            <div className="flex flex-col gap-0">
+                              <h3 className="font-semibold text-foreground/90">{project.title}</h3>
+                              <p className="text-small text-foreground/80">
+                                {formatDate(project.createdAt)} | <span className="text-small">from {project.periodFrom} to {project.periodTo}</span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </CardBody>
+                    </Card>
+                  </Link>
+                ))}
               </div>
-
-              {/* Second Column */}
-              <div className='col-span-2 p-4'>
-                {activeSection === 'textSection' && (
-                  <div className=''>
-                    <h3>Font Color</h3>
-                    {textColorOptions.map((color, index) => (
-                      <button
-                        key={index}
-                        className='m-1'
-                        onClick={() => handleColorButtonClick(color)}
-                      >
-                        <Chip
-                          radius='sm'
-                          size='lg'
-                          variant='bordered'
-                          style={{ backgroundColor: color }}
-                        />
-                      </button>
-                    ))}
-
-                    <h3>Font Family</h3>
-                    {textFontFamilyOptions.map((font, index) => (
-                      <button
-                        key={index}
-                        className='m-1.5'
-                        onClick={() => handleFontFamilyButtonClick(font)}
-                      >
-                        <Chip
-                          radius='sm'
-                          size='sm'
-                          variant='solid'>
-                          <p style={{ fontFamily: font }}>{font}</p>
-                        </Chip>
-                      </button>
-                    ))}
-
-                    <h3>Font Weight</h3>
-                    {textFontWeightOptions.map((fontWeight, index) => (
-                      <button
-                        key={index}
-                        className='m-1.5'
-                        onClick={() => handleFontWeightButtonClick(fontWeight.value)}
-                      >
-                        <Chip
-                          radius='sm'
-                          size='sm'
-                          variant='solid'>
-                          <p style={{ fontWeight: fontWeight.value }}>{fontWeight.name}</p>
-                        </Chip>
-                      </button>
-                    ))}
-                  </div>
-                )}
-
-                {activeSection === 'backgroundSection' && (
-                  <div>
-                    <h3>Background Color</h3>
-                    {backgroundColorOptions.map((bgColor, index) => (
-                      <button
-                        key={index}
-                        className='m-1'
-                        onClick={() => handleBackgroundColorButtonClick(bgColor)}
-                      >
-                        <Chip
-                          radius='sm'
-                          size='lg'
-                          variant='bordered'
-                          style={{ backgroundColor: bgColor }}
-                        />
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Third Column */}
-              <div className='col-span-9 bg-column-100 p-4'>
-                <div style={{ backgroundColor: backgroundColor, padding: 10 }}>
-                  <p style={{ color: textColor, fontFamily: textFontFamily, fontWeight: textFontWeight }}>
-                    Dog owners enjoy numerous health and social benefits by walking their dog a few times a
-                    week.
-                    Benefits include improved cardiovascular fitness, lower blood pressure, stronger muscles and
-                    bones (built up by walking regularly),
-                    and decreased stress.
-                  </p>
-                  <p style={{ color: textColor, fontFamily: textFontFamily, fontWeight: textFontWeight }}>
-                    A regular walk is vitally important for your pet`s health too. Obesity in pets is associated
-                    with a number
-                    of medical complaints including osteoarthritis, cardiovascular disease, liver disease and
-                    insulin resistance.
-                  </p>
-                  <p style={{ color: textColor, fontFamily: textFontFamily, fontWeight: textFontWeight }}>
-                    Most dogs need to be walked at least once each day, though some dogs, particularly very
-                    active dogs,
-                    may require more. The breed of dog you have, as well as its level of fitness and age, will
-                    also
-                    determine how long and how vigorous your walk should be.
-                  </p>
-
-                </div>
-              </div>
-            </div>
           )}
         </>
       )}

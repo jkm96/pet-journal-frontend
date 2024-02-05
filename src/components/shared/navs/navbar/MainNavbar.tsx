@@ -32,12 +32,7 @@ export default function MainNavbar() {
                 />
                 <NavbarBrand>
                     <Link className="font-bold" href={NAVIGATION_LINKS.HOME}>
-                        <Image
-                            width={200}
-                            height={150}
-                            src={"/images/logo/petdiaries.png"}
-                            alt="Logo"
-                        />
+                        Pet Diaries
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
