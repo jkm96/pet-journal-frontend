@@ -8,7 +8,7 @@ const textFontWeightOptions = [
     {value: 400, name: 'Normal'},
     {value: 500, name: 'Medium'},
     {value: 700, name: 'Bold'},
-    {value: 900, name: 'Bolder'},
+    {value: 800, name: 'Bolder'},
 ];
 
 export {textColorOptions,backgroundColorOptions,textFontFamilyOptions,textFontWeightOptions}

@@ -3,7 +3,7 @@ import { JournalEntryResponse } from '@/boundary/interfaces/journal';
 
 export interface CreateMagicProjectRequest {
   title: string;
-  content: string;
+  pdf_content: string;
   periodFrom: string;
   periodTo: string;
 }

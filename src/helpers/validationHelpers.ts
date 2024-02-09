@@ -73,7 +73,7 @@ export function validateLoginFormInputErrors(formData: LoginUserRequest) {
 
 export function validateCreateProjectFormInputErrors(formData: CreateMagicProjectRequest) {
     const errors: CreateMagicProjectRequest = {
-        content: '',
+        pdf_content: '',
         periodFrom: '', periodTo: '', title: ''
     }
 

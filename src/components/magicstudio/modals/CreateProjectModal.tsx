@@ -7,7 +7,7 @@ import { CreateMagicProjectRequest } from '@/boundary/interfaces/magicStudio';
 import { createProject } from '@/lib/services/magicstudio/magicStudioService';
 
 const initialFormState: CreateMagicProjectRequest = {
-  content: 'Text Content',
+  pdf_content: 'Text Content',
   periodFrom: '', periodTo: '', title: ''
 };
 

@@ -175,6 +175,7 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
         setIsLoadingDetails(false);
       });
   };
+
   const projectPdfDocument = () => {
     if (magicProjectDetails.projectEntries === undefined) {
       return <Document></Document>;
@@ -200,6 +201,9 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
 
               <Text style={styles.moodtags}>
                 {RenderMoodTagsWithColors(journalEntry.mood.split(',').map(item => item.trim()))}
+              </Text>
+
+              <Text style={styles.moodtags}>
                 {RenderMoodTagsWithColors(journalEntry.tags.split(',').map(item => item.trim()))}
               </Text>
 
@@ -361,7 +365,10 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
             {/* Third Column */}
             <div className='col-span-12 md:col-span-9 lg:col-span-9 p-4' style={{ maxHeight: '700px', overflowY: 'auto' }}>
             {magicProjectDetails.projectEntries.map((journalEntry) => (
-                  <Card key={journalEntry.id}>
+                  <Card
+                    key={journalEntry.id}
+                    className="mb-5"
+                    style={{ backgroundColor: backgroundColor}}>
                     <RenderJournalHeader title={journalEntry.title}
                                          createdAt={journalEntry.createdAt}
                                          mood={journalEntry.mood}
@@ -369,7 +376,13 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
                                          pets={journalEntry.pets.map(pet => pet.name)}
                                          showChips={false} />
                     <CardBody className='overflow-visible py-2'>
-                      <div className='mt-1 mb-1'>
+                      <div
+                        style={{
+                          color: textColor,
+                          fontFamily: textFontFamily,
+                          fontWeight: textFontWeight,
+                        }}
+                        className='mt-1 mb-1'>
                         {journalEntry.content}
                       </div>
 

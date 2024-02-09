@@ -121,7 +121,7 @@ export function MagicStudioPdfStyle() {
         content: {
             marginTop: 5,
             marginBottom: 5,
-            fontSize: 15,
+            fontSize: 14,
         },
         header: {
             fontSize: 9,
