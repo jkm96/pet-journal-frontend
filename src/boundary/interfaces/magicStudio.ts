@@ -25,7 +25,7 @@ export interface MagicStudioProjectResponse {
   userId: number;
   slug: string;
   title: string;
-  content: string;
+  pdfContent: string;
   periodFrom: string;
   periodTo: string;
   createdAt: string;
