@@ -35,7 +35,7 @@ export function handleApiException(error: any) {
         }
     }
     console.error("error", error)
-    return createNextResponse(500, "An unhandled error occurred. Please try again later.")
+    return createNextResponse(500, "An unhandled error occurred. Please try again later.",{"error":error})
 }
 
 export function createNextResponse(statusCode: number, message: string, data = {}) {
