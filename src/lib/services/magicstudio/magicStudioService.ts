@@ -1,6 +1,8 @@
 import { apiKey, internalBaseUrl } from '@/boundary/constants/appConstants';
 import { CreateMagicProjectRequest, SavePdfRequest } from '@/boundary/interfaces/magicStudio';
 import axios from 'axios';
+import { JournalQueryParameters } from '@/boundary/parameters/journalQueryParameters';
+import { MagicStudioQueryParameters } from '@/boundary/parameters/magicStudioQueryParameters';
 
 export async function createProject(createRequest: CreateMagicProjectRequest) {
   try {
@@ -19,9 +21,10 @@ export async function createProject(createRequest: CreateMagicProjectRequest) {
   }
 }
 
-export async function fetchMagicStudioProjects() {
+export async function fetchMagicStudioProjects(queryParams: MagicStudioQueryParameters) {
   try {
-    const response = await fetch(`${internalBaseUrl}/api/magic-studio/list`, {
+    const apiUrl = `${internalBaseUrl}/api/magic-studio/list/${JSON.stringify(queryParams)}`;
+    const response = await fetch(apiUrl, {
       method: 'GET',
       headers: {
         'x-api-key': `${apiKey}`,

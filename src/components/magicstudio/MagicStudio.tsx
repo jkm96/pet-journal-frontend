@@ -34,6 +34,7 @@ import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import { getRandomColorClass } from '@/helpers/stylingHelpers';
 import CreateJournalEntryModal
   from '@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
+import { MagicStudioQueryParameters } from '@/boundary/parameters/magicStudioQueryParameters';
 
 export default function MagicStudio() {
   const [isLoadingProjects, setIsLoadingProjects] = useState<boolean>(true);
@@ -45,12 +46,12 @@ export default function MagicStudio() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    fetchProjects();
+    fetchProjects(new MagicStudioQueryParameters());
   };
 
-  const fetchProjects = async () => {
+  const fetchProjects = async (queryParameters: MagicStudioQueryParameters) => {
     setIsLoadingProjects(true);
-    await fetchMagicStudioProjects()
+    await fetchMagicStudioProjects(queryParameters)
       .then((response) => {
         if (response.statusCode === 200) {
           const projects = response.data;
@@ -67,7 +68,7 @@ export default function MagicStudio() {
   };
 
   useEffect(() => {
-    fetchProjects();
+    fetchProjects(new MagicStudioQueryParameters());
   }, []);
 
   return (
