@@ -70,13 +70,13 @@ export default function MagicStudio() {
       </div>
 
       {isLoadingProjects ? (
-        <div className='flex h-screen items-center justify-center'>
+        <div className='flex items-center justify-center'>
           <CircularProgress color={'primary'} className={'p-4'} label='Loading your projects...' />
         </div>
       ) : (
         <>
           {magicProjects.length < 1 ? (
-            <div className='flex h-screen items-center justify-center'>
+            <div className='flex items-center justify-center'>
               <p className='text-danger-400'>No projects were found!</p>
             </div>
           ) : (

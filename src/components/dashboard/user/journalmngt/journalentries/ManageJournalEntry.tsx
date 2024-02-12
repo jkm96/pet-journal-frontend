@@ -228,8 +228,7 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
                                  createdAt={journalEntryDetails.createdAt}
                                  mood={journalEntryDetails.mood}
                                  tags={journalEntryDetails.tags}
-                                 pets={pets}
-                                 showChips={true} />
+                                 pets={pets}/>
             <CardBody className='overflow-visible py-2'>
               <div className='mt-1 mb-1'>
                 {journalEntryDetails.content}

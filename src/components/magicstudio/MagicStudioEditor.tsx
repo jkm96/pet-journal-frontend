@@ -188,7 +188,13 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
             <Text style={styles.header} fixed>
               ~ Made with love for pet lovers ~
             </Text>
-            <Text style={styles.title}>Test Title</Text>
+            <Text style={[styles.title, {
+              color: textColor,
+              fontFamily: textFontFamily,
+              fontWeight: textFontWeight,
+            }]}>
+              {toTitleCase(magicProjectDetails.project.title)}
+            </Text>
             <Text style={{ textAlign: 'center' }}>{user?.username}</Text>
           </Page>
           {magicProjectDetails.projectEntries.map((journalEntry) => (
@@ -197,15 +203,26 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
               <Text style={styles.header} fixed>
                 ~ Made with love for pet lovers ~
               </Text>
-              <Text style={styles.subtitle}>{toTitleCase(journalEntry.title)}</Text>
+              <Text style={[styles.subtitle, {
+                color: textColor,
+                fontFamily: textFontFamily,
+                fontWeight: textFontWeight,
+              }]}>
+                {toTitleCase(journalEntry.title)}</Text>
               <Text
                 style={styles.author}>{formatDate(journalEntry.createdAt)}</Text>
 
-              <Text style={styles.moodtags}>
+              <Text style={[styles.moodtags, {
+                fontFamily: textFontFamily,
+                fontWeight: textFontWeight,
+              }]}>
                 {RenderMoodTagsWithColors(journalEntry.mood.split(',').map(item => item.trim()))}
               </Text>
 
-              <Text style={styles.moodtags}>
+              <Text style={[styles.moodtags, {
+                fontFamily: textFontFamily,
+                fontWeight: textFontWeight,
+              }]}>
                 {RenderMoodTagsWithColors(journalEntry.tags.split(',').map(item => item.trim()))}
               </Text>
 
@@ -393,7 +410,10 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
                                        mood={journalEntry.mood}
                                        tags={journalEntry.tags}
                                        pets={journalEntry.pets.map(pet => pet.name)}
-                                       showChips={false} />
+                                       showChips={false}
+                                       textColor={textColor}
+                                       textFontFamily={textFontFamily}
+                                       textFontWeight={textFontWeight} />
                   <CardBody className='overflow-visible py-2'>
                     <div
                       style={{
