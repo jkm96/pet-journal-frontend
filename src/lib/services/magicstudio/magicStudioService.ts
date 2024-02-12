@@ -1,7 +1,5 @@
 import { apiKey, internalBaseUrl } from '@/boundary/constants/appConstants';
 import { CreateMagicProjectRequest, SavePdfRequest } from '@/boundary/interfaces/magicStudio';
-import axios from 'axios';
-import { JournalQueryParameters } from '@/boundary/parameters/journalQueryParameters';
 import { MagicStudioQueryParameters } from '@/boundary/parameters/magicStudioQueryParameters';
 
 export async function createProject(createRequest: CreateMagicProjectRequest) {
@@ -65,6 +63,25 @@ export async function getProjectDetails(projectSlug: string) {
         'Content-type': 'application/json',
       },
       body: null,
+    });
+
+    return response.json();
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deleteMagicProject(projectId: number) {
+  try {
+    const response = await fetch(`${internalBaseUrl}/api/magic-studio/delete`, {
+      method: 'POST',
+      headers: {
+        'x-api-key': `${apiKey}`,
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        projectId: projectId
+      }),
     });
 
     return response.json();

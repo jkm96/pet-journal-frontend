@@ -1,39 +1,14 @@
 import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
-import TextIcon from '@/components/shared/icons/TextIcon';
-import { Avatar, Button, Card, CardBody, Chip, CircularProgress, Input } from '@nextui-org/react';
-import React, { useEffect, useRef, useState } from 'react';
-import BGColorIcon from '@/components/shared/icons/BGColorIcon';
-import {
-  backgroundColorOptions,
-  textColorOptions,
-  textFontFamilyOptions,
-  textFontWeightOptions,
-} from '@/lib/utils/magicStudioUtils';
-import { JournalQueryParameters } from '@/boundary/parameters/journalQueryParameters';
-import { getJournalEntries } from '@/lib/services/journal-entries/journalEntryService';
+import { Avatar, Button, Card, CardBody, CircularProgress } from '@nextui-org/react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import CreateProjectModal from '@/components/magicstudio/modals/CreateProjectModal';
-import ReactPDF, { Document, Page, PDFDownloadLink, Text, usePDF, View } from '@react-pdf/renderer';
-import { MagicStudioPdfStyle, PdfPreviewStyle, toTitleCase } from '@/lib/utils/pdfUtils';
-import Font = ReactPDF.Font;
-import { useAuth } from '@/hooks/useAuth';
-import { User } from '@/boundary/interfaces/user';
-import { JournalEntryResponse } from '@/boundary/interfaces/journal';
 import { formatDate } from '@/helpers/dateHelpers';
-import RenderMoodTagsWithColors from '@/components/dashboard/user/journalmngt/journalentries/RenderMoodTagsWithColors';
-import RenderPdfGridImages from '@/components/dashboard/user/journalmngt/journalentries/RenderPdfGridImages';
-import { SearchIcon } from '@/components/shared/icons/SearchIcon';
-import Spinner from '@/components/shared/icons/Spinner';
-import { PlusFilledIcon } from '@nextui-org/shared-icons';
-import { fetchMagicStudioProjects, savePdfDocToDatabase } from '@/lib/services/magicstudio/magicStudioService';
-import { MagicStudioProjectResponse, SavePdfRequest } from '@/boundary/interfaces/magicStudio';
-import { groupEntriesByMonth } from '@/lib/utils/journalUtils';
+import { fetchMagicStudioProjects } from '@/lib/services/magicstudio/magicStudioService';
+import { MagicStudioProjectResponse } from '@/boundary/interfaces/magicStudio';
 import Link from 'next/link';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
-import { getRandomColorClass } from '@/helpers/stylingHelpers';
-import CreateJournalEntryModal
-  from '@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
 import { MagicStudioQueryParameters } from '@/boundary/parameters/magicStudioQueryParameters';
 
 export default function MagicStudio() {

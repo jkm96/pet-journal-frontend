@@ -1,9 +1,9 @@
 import { apiKey, internalBaseUrl } from '@/boundary/constants/appConstants';
 import {
-    AddPetTraitRequest,
-    CreatePetRequest,
-    EditPetRequest,
-    UpdatePetProfileImageRequest,
+  AddPetTraitRequest,
+  CreatePetRequest,
+  EditPetRequest,
+  UpdatePetProfileImageRequest,
 } from '@/boundary/interfaces/pet';
 import axios from 'axios';
 import { handleApiException } from '@/helpers/responseHelpers';

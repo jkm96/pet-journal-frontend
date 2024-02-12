@@ -9,7 +9,7 @@ import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import { Button } from '@nextui-org/button';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import CreateJournalEntryModal
-    from '@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
+  from '@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
 import { formatDate } from '@/helpers/dateHelpers';
 import { getRandomColorClass } from '@/helpers/stylingHelpers';
 import { JournalQueryParameters } from '@/boundary/parameters/journalQueryParameters';
@@ -102,7 +102,8 @@ export default function JournalEntriesOverview() {
                                 Search
                             </label>
                             <input
-                                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                                className="peer block w-full rounded-md border border-gray-200
+                                py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                                 placeholder="Search for journal entries"
                                 onChange={handleSearch}
                                 defaultValue={searchTerm}

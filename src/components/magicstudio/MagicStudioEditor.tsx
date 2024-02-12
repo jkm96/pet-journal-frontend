@@ -1,6 +1,6 @@
 import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
 import TextIcon from '@/components/shared/icons/TextIcon';
-import { Button, Card, CardBody, Chip, CircularProgress, Input } from '@nextui-org/react';
+import { Button, Card, CardBody, Chip, CircularProgress } from '@nextui-org/react';
 import React, { useEffect, useRef, useState } from 'react';
 import BGColorIcon from '@/components/shared/icons/BGColorIcon';
 import {
@@ -9,27 +9,22 @@ import {
   textFontFamilyOptions,
   textFontWeightOptions,
 } from '@/lib/utils/magicStudioUtils';
-import { JournalQueryParameters } from '@/boundary/parameters/journalQueryParameters';
-import { getJournalEntries } from '@/lib/services/journal-entries/journalEntryService';
 import { toast } from 'react-toastify';
-import { PlusIcon } from '@/components/shared/icons/PlusIcon';
-import CreateProjectModal from '@/components/magicstudio/modals/CreateProjectModal';
-import ReactPDF, { Document, Page, pdf, PDFDownloadLink, Text, usePDF, View } from '@react-pdf/renderer';
-import { MagicStudioPdfStyle, PdfPreviewStyle, toTitleCase } from '@/lib/utils/pdfUtils';
-import Font = ReactPDF.Font;
+import ReactPDF, { Document, Page, pdf, Text, View } from '@react-pdf/renderer';
+import { MagicStudioPdfStyle, toTitleCase } from '@/lib/utils/pdfUtils';
 import { useAuth } from '@/hooks/useAuth';
-import { User } from '@/boundary/interfaces/user';
-import { JournalEntryResponse } from '@/boundary/interfaces/journal';
 import { formatDate } from '@/helpers/dateHelpers';
 import RenderMoodTagsWithColors from '@/components/dashboard/user/journalmngt/journalentries/RenderMoodTagsWithColors';
 import RenderPdfGridImages from '@/components/dashboard/user/journalmngt/journalentries/RenderPdfGridImages';
-import { SearchIcon } from '@/components/shared/icons/SearchIcon';
-import Spinner from '@/components/shared/icons/Spinner';
-import { PlusFilledIcon } from '@nextui-org/shared-icons';
 import { getProjectDetails, savePdfDocToDatabase } from '@/lib/services/magicstudio/magicStudioService';
 import { PdfContent, ProjectDetailsResponse, SavePdfRequest } from '@/boundary/interfaces/magicStudio';
 import { saveAs } from 'file-saver';
 import RenderJournalHeader from '@/components/dashboard/user/journalmngt/journalentries/RenderJournalHeader';
+import DeleteMagicProjectModal from '@/components/magicstudio/modals/DeleteMagicProjectModal';
+import TrashIcon from '@/components/shared/icons/TrashIcon';
+import Font = ReactPDF.Font;
+import { PlusIcon } from '@/components/shared/icons/PlusIcon';
+import DownloadIcon from '@/components/home/icons/DownloadIcon';
 
 type SectionVisibility = {
   textSection: boolean;
@@ -55,6 +50,15 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
   const [textColor, setTextColor] = useState<string>('black');
   const [textFontFamily, setTextFontFamily] = useState<string>('Times-Roman');
   const [textFontWeight, setTextFontWeight] = useState(300);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    fetchProjectDetails(slug);
+  };
   const fetchProjectDetails = async (slug: string) => {
     setIsLoadingDetails(true);
     await getProjectDetails(slug)
@@ -162,10 +166,8 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
     await savePdfDocToDatabase(request)
       .then((response) => {
         if (response.statusCode === 200) {
-          console.log('save pdf response', response.data.pdfContent);
           const pdfContent = response.data.pdfContent;
           const elements: PdfContent = JSON.parse(pdfContent);
-          console.log('elements', elements);
         }
       })
       .catch((error) => {
@@ -247,49 +249,65 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
               <div className='flex gap-3'>
                 {magicProjectDetails && (
                   <>
-                    <Button onPress={handleDownload}
-                            color="primary"
-                            size="sm">
-                      Download
-                    </Button>
+                    <div className='gap-3 hidden lg:block'>
+                      <Button onPress={handleDownload}
+                              color='primary'
+                              size='sm'>
+                        Download
+                      </Button>
+                    </div>
+
+                    <div className='gap-3 hidden lg:block'>
+                      <Button onPress={handleOpenModal}
+                              startContent={<TrashIcon color='#ffffff' />}
+                              color='danger'
+                              size='sm'
+                              variant='shadow'>
+                        Delete
+                      </Button>
+                      <DeleteMagicProjectModal
+                        projectId={magicProjectDetails.project.id}
+                        isOpen={isModalOpen} onClose={handleCloseModal} />
+                    </div>
                   </>
                 )}
               </div>
             </div>
           </div>
 
-          <div className='grid grid-cols-12 gap-4'>
+          <div className='grid grid-cols-12 gap-4 border-t-1 border-t-column-400'>
             {/* First Column */}
-            <div className='col-span-12 md:col-span-1 lg:col-span-1 bg-column-100 p-4'>
-            <h2>Elements</h2>
+            <div className='col-span-12 md:col-span-1 lg:col-span-1 md:p-4 p-1'>
+              <h2>Elements</h2>
+              <div className='flex flex-wrap max-w-sm'>
+                <div className='flex flex-col m-1'>
+                  <Button isIconOnly
+                          color='primary'
+                          aria-label='Toggle textSection'
+                          onClick={() => handleElementsButtonClick('textSection')}
+                  >
+                    <TextIcon width={30} height={30} color='#fff' />
+                  </Button>
+                  <p>Text</p>
+                </div>
 
-              <div className='text-center'>
-                <Button isIconOnly
-                        color='primary'
-                        aria-label='Toggle textSection'
-                        onClick={() => handleElementsButtonClick('textSection')}
-                >
-                  <TextIcon width={30} height={30} color='#fff' />
-                </Button>
-                <p>Text</p>
-              </div>
-
-              <div className='text-center mt-4'>
-                <Button
-                  isIconOnly
-                  aria-label='Toggle backgroundSection'
-                  onClick={() => handleElementsButtonClick('backgroundSection')}
-                >
-                  <BGColorIcon width={30} height={30} color='#fff' />
-                </Button>
-                <p>Background</p>
+                <div className='flex flex-col m-1'>
+                  <Button
+                    isIconOnly
+                    aria-label='Toggle backgroundSection'
+                    onClick={() => handleElementsButtonClick('backgroundSection')}
+                  >
+                    <BGColorIcon width={30} height={30} color='#fff' />
+                  </Button>
+                  <p>Background</p>
+                </div>
               </div>
             </div>
 
             {/* Second Column */}
-            <div className='col-span-12 md:col-span-2 lg:col-span-2 p-4'>
+            <div className='col-span-12 md:col-span-2 lg:col-span-2 md:p-4 p-1'>
 
-            {activeSection === 'textSection' && (
+              {activeSection === 'textSection' && (
                 <div className=''>
                   <h3>Font Color</h3>
                   {textColorOptions.map((color, index) => (
@@ -363,60 +381,81 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
             </div>
 
             {/* Third Column */}
-            <div className='col-span-12 md:col-span-9 lg:col-span-9 p-4' style={{ maxHeight: '700px', overflowY: 'auto' }}>
-            {magicProjectDetails.projectEntries.map((journalEntry) => (
-                  <Card
-                    key={journalEntry.id}
-                    className="mb-5"
-                    style={{ backgroundColor: backgroundColor}}>
-                    <RenderJournalHeader title={journalEntry.title}
-                                         createdAt={journalEntry.createdAt}
-                                         mood={journalEntry.mood}
-                                         tags={journalEntry.tags}
-                                         pets={journalEntry.pets.map(pet => pet.name)}
-                                         showChips={false} />
-                    <CardBody className='overflow-visible py-2'>
+            <div className='col-span-12 md:col-span-9 lg:col-span-9 md:p-4 p-1'
+                 style={{ maxHeight: '700px', overflowY: 'auto' }}>
+              {magicProjectDetails.projectEntries.map((journalEntry) => (
+                <Card
+                  key={journalEntry.id}
+                  className='mb-5'
+                  style={{ backgroundColor: backgroundColor }}>
+                  <RenderJournalHeader title={journalEntry.title}
+                                       createdAt={journalEntry.createdAt}
+                                       mood={journalEntry.mood}
+                                       tags={journalEntry.tags}
+                                       pets={journalEntry.pets.map(pet => pet.name)}
+                                       showChips={false} />
+                  <CardBody className='overflow-visible py-2'>
+                    <div
+                      style={{
+                        color: textColor,
+                        fontFamily: textFontFamily,
+                        fontWeight: textFontWeight,
+                      }}
+                      className='mt-1 mb-1'>
+                      {journalEntry.content}
+                    </div>
+
+                    <div className='flex flex-wrap md:-m-2 mt-3'>
                       <div
-                        style={{
-                          color: textColor,
-                          fontFamily: textFontFamily,
-                          fontWeight: textFontWeight,
-                        }}
-                        className='mt-1 mb-1'>
-                        {journalEntry.content}
+                        className={`flex ${journalEntry.journalAttachments.length <= 3 ? 'w-full' : 'w-1/2'} flex-wrap`}>
+                        {journalEntry.journalAttachments.slice(0, 3).map((image, index) => (
+                          <div key={index}
+                               className={`w-${index === 2 || journalEntry.journalAttachments.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}>
+                            <img
+                              alt={`gallery-${index + 1}`}
+                              className='block h-full w-full rounded-lg object-cover object-center'
+                              src={image.sourceUrl}
+                            />
+                          </div>
+                        ))}
                       </div>
 
-                      <div className='flex flex-wrap md:-m-2 mt-3'>
-                        <div
-                          className={`flex ${journalEntry.journalAttachments.length <= 3 ? 'w-full' : 'w-1/2'} flex-wrap`}>
-                          {journalEntry.journalAttachments.slice(0, 3).map((image, index) => (
-                            <div key={index}
-                                 className={`w-${index === 2 || journalEntry.journalAttachments.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}>
-                              <img
-                                alt={`gallery-${index + 1}`}
-                                className='block h-full w-full rounded-lg object-cover object-center'
-                                src={image.sourceUrl}
-                              />
-                            </div>
-                          ))}
-                        </div>
-
-                        <div className='flex w-1/2 flex-wrap'>
-                          {journalEntry.journalAttachments.slice(3).map((image, index) => (
-                            <div key={index} className={`w-${index === 0 ? 'full' : '1/2'} p-1 md:p-2`}>
-                              <img
-                                alt={`gallery-${index + 4}`}
-                                className='block h-full w-full rounded-lg object-cover object-center'
-                                src={image.sourceUrl}
-                              />
-                            </div>
-                          ))}
-                        </div>
+                      <div className='flex w-1/2 flex-wrap'>
+                        {journalEntry.journalAttachments.slice(3).map((image, index) => (
+                          <div key={index} className={`w-${index === 0 ? 'full' : '1/2'} p-1 md:p-2`}>
+                            <img
+                              alt={`gallery-${index + 4}`}
+                              className='block h-full w-full rounded-lg object-cover object-center'
+                              src={image.sourceUrl}
+                            />
+                          </div>
+                        ))}
                       </div>
-                    </CardBody>
-                  </Card>
-                ))}
+                    </div>
+                  </CardBody>
+                </Card>
+              ))}
             </div>
+          </div>
+
+          <div className='fixed bottom-16 right-4 md:hidden'>
+            <Button onPress={handleDownload}
+                    isIconOnly={true}
+                    color='primary'
+                    radius='full'
+                    variant='shadow'>
+              <DownloadIcon color='#ffffff' />
+            </Button>
+          </div>
+
+          <div className='fixed bottom-4 right-4 md:hidden'>
+            <Button onPress={handleOpenModal}
+                    isIconOnly={true}
+                    color='danger'
+                    radius='full'
+                    variant='shadow'>
+              <TrashIcon color='#ffffff' />
+            </Button>
           </div>
         </>
       )}

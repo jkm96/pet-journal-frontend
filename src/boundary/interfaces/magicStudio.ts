@@ -1,4 +1,3 @@
-import { number } from 'prop-types';
 import { JournalEntryResponse } from '@/boundary/interfaces/journal';
 
 export interface CreateMagicProjectRequest {

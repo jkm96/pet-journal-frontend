@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { validateCreatePetFormInputErrors } from '@/helpers/validationHelpers';
 import {
-    Button,
-    Input,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    Select,
-    SelectItem,
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Select,
+  SelectItem,
 } from '@nextui-org/react';
 import { toast } from 'react-toastify';
 import Spinner from '@/components/shared/icons/Spinner';

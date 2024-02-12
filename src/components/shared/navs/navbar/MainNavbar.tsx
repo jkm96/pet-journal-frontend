@@ -12,7 +12,6 @@ import {
   NavbarMenuToggle,
 } from '@nextui-org/react';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
-import Image from 'next/image';
 
 export default function MainNavbar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
