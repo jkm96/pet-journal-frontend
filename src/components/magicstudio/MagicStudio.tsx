@@ -30,7 +30,6 @@ export default function MagicStudio() {
       .then((response) => {
         if (response.statusCode === 200) {
           const projects = response.data;
-          console.log("projects", projects)
           setMagicProjects(projects)
         }
       })

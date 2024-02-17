@@ -14,8 +14,11 @@ import EditPetModal from '@/components/dashboard/user/petmngt/pets/modals/EditPe
 import CameraIcon from '@/components/shared/icons/CameraIcon';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
 import DeletePetModal from '@/components/dashboard/user/petmngt/pets/modals/DeletePetModal';
+import { useRouter } from 'next/navigation';
+import { GoBackButton } from '@/components/common/navigation/GoBackButton';
 
 export default function ManagePetProfile({slug}: { slug: string }) {
+    const router = useRouter()
     const [petProfileDetails, setPetProfileDetails] = useState<PetProfileResponse>({} as PetProfileResponse);
     const [isLoadingPetDetails, setIsLoadingPetDetails] = useState(true);
     const [currentTrait, setCurrentTrait] = useState<Trait>({trait: '', type: ''});
@@ -115,49 +118,53 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                 </div>
             ) : (
                 <>
-                    <Breadcrumb pageName={`${toTitleCase(petProfileDetails.name)}'s Profile`}/>
+                    <Breadcrumb pageName={`${toTitleCase(petProfileDetails.name)}'s Profile`} />
 
                     <div className="flex flex-col gap-4 m-2">
                         <div className="flex justify-between gap-3 items-end">
                             <div className="flex gap-3">
+                                <GoBackButton onPress={() => router.back()} />
+
                                 <Button onPress={() => openModal("editPet")}
-                                        startContent={<EditIcon/>}
+                                        startContent={<EditIcon />}
                                         color="primary"
                                         className="mr-2"
+                                        size="sm"
                                         variant="shadow">
                                     Edit Pet
                                 </Button>
 
                                 {modals.editPet && (
-                                    <EditPetModal
-                                        editPetRequest={editPetRequest}
-                                        isOpen={modals.editPet}
-                                        onClose={() => closeModal("editPet")}
-                                    />
+                                  <EditPetModal
+                                    editPetRequest={editPetRequest}
+                                    isOpen={modals.editPet}
+                                    onClose={() => closeModal("editPet")}
+                                  />
                                 )}
 
-                               <Button onPress={() => openModal("deletePet")}
-                                        startContent={<TrashIcon color="#ffffff"/>}
+                                <Button onPress={() => openModal("deletePet")}
+                                        startContent={<TrashIcon color="#ffffff" />}
                                         color="danger"
                                         className="mr-2"
+                                        size="sm"
                                         variant="shadow">
                                     Delete Pet
                                 </Button>
 
                                 {modals.deletePet && (
-                                    <DeletePetModal
-                                        petId={petProfileDetails.id}
-                                        isOpen={modals.deletePet}
-                                        onClose={() => closeModal("deletePet")}
-                                    />
+                                  <DeletePetModal
+                                    petId={petProfileDetails.id}
+                                    isOpen={modals.deletePet}
+                                    onClose={() => closeModal("deletePet")}
+                                  />
                                 )}
 
                                 {modals.updateProfileImage && (
-                                    <UpdateProfilePictureModal
-                                        petId={petProfileDetails.id}
-                                        isOpen={modals.updateProfileImage}
-                                        onClose={() => closeModal("updateProfileImage")}
-                                    />
+                                  <UpdateProfilePictureModal
+                                    petId={petProfileDetails.id}
+                                    isOpen={modals.updateProfileImage}
+                                    onClose={() => closeModal("updateProfileImage")}
+                                  />
                                 )}
                             </div>
                         </div>
@@ -167,11 +174,11 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                         <div className="md:w-1/2 m-2 bg-white rounded-md">
                             <div className="relative">
                                 <img
-                                    className="w-full"
-                                    src={petProfileDetails.profileUrl}
-                                    alt={petProfileDetails.slug}/>
+                                  className="w-full"
+                                  src={petProfileDetails.profileUrl}
+                                  alt={petProfileDetails.slug} />
                                 <Button onPress={() => openModal("updateProfileImage")}
-                                        startContent={<CameraIcon/>}
+                                        startContent={<CameraIcon />}
                                         color="primary"
                                         size="sm"
                                         className="absolute top-5 right-5"
@@ -180,36 +187,36 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                                 </Button>
                             </div>
                         </div>
-                    <PetProfileCard petProfileDetails={petProfileDetails}/>
+                        <PetProfileCard petProfileDetails={petProfileDetails} />
                     </div>
 
-                    <PetTraits petTraits={petProfileDetails?.petTraits}/>
+                    <PetTraits petTraits={petProfileDetails?.petTraits} />
 
                     <div className="py-4 m-4">
                         <h3>Add Pet Trait(s)</h3>
                         <div className="grid md:grid-cols-3 md:gap-6">
                             <div className="col-6 mt-2">
                                 <Input
-                                    aria-label="Trait"
-                                    type="text"
-                                    size="sm"
-                                    variant="bordered"
-                                    radius="sm"
-                                    placeholder="Enter trait"
-                                    value={currentTrait.trait}
-                                    onChange={(e) => handleInputChange('trait', e.target.value)}
+                                  aria-label="Trait"
+                                  type="text"
+                                  size="sm"
+                                  variant="bordered"
+                                  radius="sm"
+                                  placeholder="Enter trait"
+                                  value={currentTrait.trait}
+                                  onChange={(e) => handleInputChange('trait', e.target.value)}
                                 />
                             </div>
 
                             <div className="col-5 mt-2">
                                 <Select
-                                    aria-label="Type"
-                                    variant="bordered"
-                                    name="type"
-                                    size="sm"
-                                    placeholder="Select type"
-                                    value={currentTrait.type}
-                                    onChange={(e) => handleInputChange('type', e.target.value)}
+                                  aria-label="Type"
+                                  variant="bordered"
+                                  name="type"
+                                  size="sm"
+                                  placeholder="Select type"
+                                  value={currentTrait.type}
+                                  onChange={(e) => handleInputChange('type', e.target.value)}
                                 >
                                     <SelectItem key={"like"} value="like">Like</SelectItem>
                                     <SelectItem key={"dislike"} value="dislike">Dislike</SelectItem>
@@ -228,30 +235,30 @@ export default function ManagePetProfile({slug}: { slug: string }) {
                         </div>
 
                         {traits.map((trait, index) => (
-                            <div key={index} className="m-2">
+                          <div key={index} className="m-2">
                                 <span className="">
                                     {trait.trait} - {trait.type}
                                 </span>
-                                <Button
-                                    onPress={() => removeTrait(index)}
-                                    className="p-0"
-                                    size="sm"
-                                    isIconOnly
-                                    style={{padding: 0, fontSize: "larger"}}
-                                    color="danger">
-                                    x
-                                </Button>
-                            </div>
+                              <Button
+                                onPress={() => removeTrait(index)}
+                                className="p-0"
+                                size="sm"
+                                isIconOnly
+                                style={{ padding: 0, fontSize: "larger" }}
+                                color="danger">
+                                  x
+                              </Button>
+                          </div>
                         ))}
 
                         {traits.length > 0 && (
-                            <Button color="primary"
-                                    type="submit"
-                                    isLoading={isSubmitting}
-                                    spinner={<Spinner/>}
-                                    onClick={handleSubmit}>
-                                {isSubmitting ? "Submitting..." : "Submit Trait"}
-                            </Button>
+                          <Button color="primary"
+                                  type="submit"
+                                  isLoading={isSubmitting}
+                                  spinner={<Spinner />}
+                                  onClick={handleSubmit}>
+                              {isSubmitting ? "Submitting..." : "Submit Trait"}
+                          </Button>
                         )}
                     </div>
                 </>

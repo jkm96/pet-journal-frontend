@@ -99,7 +99,7 @@ export default function MyJournalOverview() {
         } else {
             params.delete('periodTo');
         }
-
+        params.set('fetch', 'all');
         replace(`${pathname}?${params.toString()}`);
         setQueryParams((prevParams) => ({
             ...prevParams,
@@ -109,6 +109,33 @@ export default function MyJournalOverview() {
             fetch: "all",
         }));
     };
+
+    const clearFilters = () => {
+        setSearchTerm('');
+        setPeriodFrom('');
+        setPeriodTo('');
+        const params = new URLSearchParams();
+        params.delete('searchTerm');
+        params.delete('periodFrom');
+        params.delete('periodTo');
+        params.set('fetch', 'all');
+        replace(`${pathname}?${params.toString()}`);
+        setQueryParams((prevParams) => ({
+            ...prevParams,
+            searchTerm: '',
+            periodFrom: '',
+            periodTo: '',
+            fetch: 'all',
+        }));
+        fetchAllJournalEntries({
+            ...queryParams,
+            searchTerm: '',
+            periodFrom: '',
+            periodTo: '',
+            fetch: 'all',
+        });
+    };
+
 
     useEffect(() => {
         if (!isInitialLoad) {
@@ -200,6 +227,13 @@ export default function MyJournalOverview() {
                                         }}
                                     >
                                         Filter
+                                    </Button>
+                                    <Button
+                                        className="mt-1 ml-2"
+                                        color="primary"
+                                        onClick={(e) => clearFilters()}
+                                    >
+                                        Clear
                                     </Button>
                                 </div>
                             </div>

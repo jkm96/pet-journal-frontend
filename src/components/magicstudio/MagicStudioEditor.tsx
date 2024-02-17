@@ -22,9 +22,10 @@ import { saveAs } from 'file-saver';
 import RenderJournalHeader from '@/components/dashboard/user/journalmngt/journalentries/RenderJournalHeader';
 import DeleteMagicProjectModal from '@/components/magicstudio/modals/DeleteMagicProjectModal';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
-import Font = ReactPDF.Font;
-import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import DownloadIcon from '@/components/home/icons/DownloadIcon';
+import { GoBackButton } from '@/components/common/navigation/GoBackButton';
+import { useRouter } from 'next/navigation';
+import Font = ReactPDF.Font;
 
 type SectionVisibility = {
   textSection: boolean;
@@ -38,6 +39,7 @@ Font.register({
 const styles = MagicStudioPdfStyle();
 
 export default function MagicStudioEditor({ slug }: { slug: string }) {
+  const router = useRouter()
   const { user } = useAuth();
   const [isLoadingDetails, setIsLoadingDetails] = useState<boolean>(true);
   const [magicProjectDetails, setMagicProjectDetails] = useState<ProjectDetailsResponse>({} as ProjectDetailsResponse);
@@ -178,6 +180,9 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
       });
   };
 
+  const projectPdfDocument2 = () => {
+    return <Document></Document>;
+  }
   const projectPdfDocument = () => {
     if (magicProjectDetails.projectEntries === undefined) {
       return <Document></Document>;
@@ -261,9 +266,13 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
         </div>
       ) : (
         <>
+          <h3 className="m-2 mt-0">{magicProjectDetails.project.title}</h3>
+
           <div className='flex flex-col gap-4 m-2'>
             <div className='md:flex justify-between gap-3 items-end'>
               <div className='flex gap-3'>
+                <GoBackButton onPress={() => router.back()} />
+
                 {magicProjectDetails && (
                   <>
                     <div className='gap-3 hidden lg:block'>

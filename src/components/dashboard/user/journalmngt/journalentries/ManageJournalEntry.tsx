@@ -30,6 +30,8 @@ import ReactPDF, { PDFDownloadLink } from '@react-pdf/renderer';
 import DownloadIcon from '@/components/shared/icons/DownloadIcon';
 import { useAuth } from '@/hooks/useAuth';
 import { PdfPreviewStyle } from '@/lib/utils/pdfUtils';
+import { GoBackButton } from '@/components/common/navigation/GoBackButton';
+import { useRouter } from 'next/navigation';
 import Font = ReactPDF.Font;
 
 Font.register({
@@ -40,6 +42,7 @@ Font.register({
 const styles = PdfPreviewStyle();
 
 export default function ManageJournalEntry({ slug }: { slug: string }) {
+  const router = useRouter()
   const { user } = useAuth();
   const [journalEntryDetails, setJournalEntryDetails] = useState<JournalEntryResponse>({} as JournalEntryResponse);
   const [isLoadingDetails, setIsLoadingDetails] = useState(true);
@@ -155,10 +158,12 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
             <div className='flex justify-between gap-3 items-end'>
               <div className='w-full sm:max-w-[44%]'>
                 <div className='relative flex flex-1 flex-shrink-0'>
+                  <GoBackButton onPress={() => router.back()} />
                   <Button onPress={() => openModal('editJournal')}
                           startContent={<EditIcon />}
                           color='primary'
-                          className={'mr-2'}
+                          className='mr-2'
+                          size="sm"
                           variant='shadow'>
                     Edit Journal
                   </Button>
@@ -175,6 +180,7 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
                   <Button onPress={() => openModal('uploadAttachments')}
                           startContent={<UploadIcon color='#ffffff' />}
                           color='primary'
+                          size="sm"
                           variant='shadow'>
                     Upload Attachment
                   </Button>
@@ -191,6 +197,7 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
                           startContent={<TrashIcon color='#ffffff' />}
                           color='danger'
                           className='ml-2'
+                          size="sm"
                           variant='shadow'>
                     Delete Journal
                   </Button>
@@ -207,6 +214,7 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
                 <Button onPress={() => openModal('previewAndPrintEntry')}
                         startContent={<FileEyeIcon color='#ffffff' />}
                         color='primary'
+                        size="sm"
                         variant='shadow'>
                   Preview and Print
                 </Button>

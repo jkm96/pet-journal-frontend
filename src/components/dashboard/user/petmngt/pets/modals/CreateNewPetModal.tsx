@@ -52,7 +52,6 @@ export default function CreateNewPetModal({isOpen, onClose}: {
     };
 
     const handlePetCreation = async (e: any) => {
-        console.log("handling pet creation")
         e.preventDefault();
         setIsSubmitting(true);
 

@@ -33,3 +33,20 @@ export async function fetchCheckoutSession(sessionId: string) {
         throw error;
     }
 }
+
+export async function getUserBillingDetails(userEmail: string) {
+    try {
+        const response = await fetch(`${internalBaseUrl}/api/payments/billing-info/${userEmail}`, {
+            method: 'GET',
+            headers: {
+                'x-api-key': `${apiKey}`,
+                'Content-type': 'application/json',
+            },
+            body: null,
+        });
+
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
+}
