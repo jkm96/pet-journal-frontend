@@ -5,7 +5,7 @@ import Loader from '@/components/common/dashboard/Loader';
 import React, { useState } from 'react';
 import { RedirectUserToDashboard } from '@/components/common/auth/RedirectUserToDashboard';
 import { useRouter } from 'next/navigation';
-import Home from '@/components/home/Home';
+import Home from '@/components/site/Home';
 
 export default function HomePage() {
     const router = useRouter()

@@ -1,4 +1,4 @@
-import CheckMarkIcon from '@/components/home/icons/CheckMarkIcon';
+import CheckMarkIcon from '@/components/site/icons/CheckMarkIcon';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 
 export function Pricing() {

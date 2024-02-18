@@ -15,7 +15,7 @@ import {
   TableRow,
 } from '@nextui-org/react';
 import { formatDate } from '@/helpers/dateHelpers';
-import DownloadIcon from '@/components/home/icons/DownloadIcon';
+import DownloadIcon from '@/components/site/icons/DownloadIcon';
 import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import { MagicStudioPdfStyle } from '@/lib/utils/pdfUtils';

@@ -22,7 +22,7 @@ import { saveAs } from 'file-saver';
 import RenderJournalHeader from '@/components/dashboard/user/journalmngt/journalentries/RenderJournalHeader';
 import DeleteMagicProjectModal from '@/components/magicstudio/modals/DeleteMagicProjectModal';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
-import DownloadIcon from '@/components/home/icons/DownloadIcon';
+import DownloadIcon from '@/components/site/icons/DownloadIcon';
 import { GoBackButton } from '@/components/common/navigation/GoBackButton';
 import { useRouter } from 'next/navigation';
 import Font = ReactPDF.Font;

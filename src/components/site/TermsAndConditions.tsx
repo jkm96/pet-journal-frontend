@@ -1,19 +1,17 @@
 import MainNavbar from '@/components/shared/navs/navbar/MainNavbar';
 import React, { useEffect, useState } from 'react';
-import { Footer } from '@/components/home/sections/Footer';
-import DOMPurify from 'dompurify';
-import { fetchPrivacyPolicy } from '@/lib/services/sitecontent/siteContentService';
-import { JournalImageBuffer } from '@/boundary/interfaces/journal';
-import { toast } from 'react-toastify';
-import { SiteContentResponse } from '@/boundary/interfaces/siteContent';
+import { Footer } from '@/components/site/sections/Footer';
 import { SiteContentQueryParameters } from '@/boundary/parameters/contentQueryParameters';
+import { fetchPrivacyPolicy } from '@/lib/services/sitecontent/siteContentService';
+import DOMPurify from 'dompurify';
+import { toast } from 'react-toastify';
 
-export function PrivacyPolicy() {
+export function TermsAndConditions() {
   const [htmlContent, setHtmlContent] = useState('');
 
   const fetchContent = async () =>{
     const param = new SiteContentQueryParameters();
-    param.type = "privacy"
+    param.type = "terms"
     await fetchPrivacyPolicy(param)
       .then((response) => {
         if (response.statusCode === 200) {
@@ -23,14 +21,13 @@ export function PrivacyPolicy() {
         }
       })
       .catch((error) => {
-        toast.error(`Error fetching privacy policy: ${error}`);
+        toast.error(`Error fetching terms and conditions: ${error}`);
       });
   }
 
   useEffect(() => {
     fetchContent()
   }, []);
-
   return (
     <>
       <MainNavbar />
@@ -39,15 +36,13 @@ export function PrivacyPolicy() {
         <section className='bg-gray-50'>
           <div className='relative pb-4'>
             <div className='mx-auto max-w-5xl px-4 sm:px-6'>
-              <p
-                dangerouslySetInnerHTML={{ __html: htmlContent }}
-              />
+
             </div>
           </div>
         </section>
       </main>
 
-      <Footer />
+      <Footer/>
     </>
   );
 }

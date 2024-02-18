@@ -4,10 +4,10 @@ import { useAuth } from '@/hooks/useAuth';
 import React, { useState } from 'react';
 import { RedirectUserToDashboard } from '@/components/common/auth/RedirectUserToDashboard';
 import Loader from '@/components/common/dashboard/Loader';
-import Home from '@/components/home/Home';
+import Home from '@/components/site/Home';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
-import { PrivacyPolicy } from '@/components/home/PrivacyPolicy';
-import { TermsAndConditions } from '@/components/home/TermsAndConditions';
+import { PrivacyPolicy } from '@/components/site/PrivacyPolicy';
+import { TermsAndConditions } from '@/components/site/TermsAndConditions';
 
 export default function TermsConditionsPage() {
   const router = useRouter()

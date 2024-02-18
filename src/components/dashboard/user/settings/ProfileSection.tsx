@@ -12,7 +12,7 @@ export default function ProfileSection({user}: ProfileSectionProps) {
                 className="overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div className="relative z-20 h-35 md:h-65">
                     <img
-                        src={user?.profileCoverUrl ?? "/images/cover/cover-01.png"}
+                        src={user?.profileCoverUrl}
                         alt="profile cover"
                         className="h-full w-full rounded-tl-sm rounded-tr-sm object-cover object-center"
                         width={970}

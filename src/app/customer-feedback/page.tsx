@@ -7,8 +7,9 @@ import Loader from '@/components/common/dashboard/Loader';
 import Home from '@/components/site/Home';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import { PrivacyPolicy } from '@/components/site/PrivacyPolicy';
+import { CustomerFeedback } from '@/components/site/CustomerFeedback';
 
-export default function PrivacyPolicyPage() {
+export default function CustomerFeedbackPage() {
   const router = useRouter()
   const {user, loading: authLoading} = useAuth();
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ export default function PrivacyPolicyPage() {
   if (loading || authLoading) {
     return <Loader/>;
   } else if (!user) {
-    return <PrivacyPolicy/>
+    return <CustomerFeedback/>
   } else {
     router.push(NAVIGATION_LINKS.USER_DASHBOARD);
   }

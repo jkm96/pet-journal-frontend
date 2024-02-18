@@ -2,6 +2,7 @@ export const NAVIGATION_LINKS = {
     HOME: '/',
     PRIVACY_POLICY: '/privacy-policy',
     TERMS_CONDITIONS: '/terms-conditions',
+    CUSTOMER_FEEDBACK: '/customer-feedback',
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
     PAYMENTS: '/payments',
