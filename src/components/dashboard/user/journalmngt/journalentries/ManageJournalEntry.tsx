@@ -9,7 +9,7 @@ import {
 import {
   getJournalEntryAttachmentBuffers,
   getJournalEntryDetails,
-} from '@/lib/services/journal-entries/journalEntryService';
+} from '@/lib/services/journalentries/journalEntryService';
 import { Card, CardBody, CircularProgress } from '@nextui-org/react';
 import RenderJournalHeader from '@/components/dashboard/user/journalmngt/journalentries/RenderJournalHeader';
 import { Button } from '@nextui-org/button';

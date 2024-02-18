@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { getJournalEntries } from '@/lib/services/journal-entries/journalEntryService';
+import { getJournalEntries } from '@/lib/services/journalentries/journalEntryService';
 import { JournalEntryResponse } from '@/boundary/interfaces/journal';
 import { Avatar, Card, CardBody, CircularProgress } from '@nextui-org/react';
 import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';

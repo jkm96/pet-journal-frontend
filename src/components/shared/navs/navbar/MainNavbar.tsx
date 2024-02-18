@@ -38,12 +38,12 @@ export default function MainNavbar() {
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 <NavbarItem>
-                    <Link color="foreground" href="#">
+                    <Link color="foreground" href="#features">
                         Features
                     </Link>
                 </NavbarItem>
                 <NavbarItem isActive>
-                    <Link color="foreground" href="#">
+                    <Link color="foreground" href="#pricing">
                         Pricing
                     </Link>
                 </NavbarItem>
@@ -54,7 +54,7 @@ export default function MainNavbar() {
                 </NavbarItem>
                 <NavbarItem>
                     <Link className="text-black-2" href={NAVIGATION_LINKS.REGISTER}>
-                        <Button color="primary">Get Started</Button>
+                        <Button size="sm" color="primary">Get Started</Button>
                     </Link>
                 </NavbarItem>
             </NavbarContent>

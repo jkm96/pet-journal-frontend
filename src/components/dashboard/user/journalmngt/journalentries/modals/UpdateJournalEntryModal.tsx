@@ -16,7 +16,7 @@ import React, { useEffect, useState } from 'react';
 import { UpdateJournalEntryRequest } from '@/boundary/interfaces/journal';
 import { validateEditJournalFormInputErrors } from '@/helpers/validationHelpers';
 import { toast } from 'react-toastify';
-import { updateJournalEntry } from '@/lib/services/journal-entries/journalEntryService';
+import { updateJournalEntry } from '@/lib/services/journalentries/journalEntryService';
 import { PetProfileResponse } from '@/boundary/interfaces/pet';
 import { getUserPets } from '@/lib/utils/petUtils';
 

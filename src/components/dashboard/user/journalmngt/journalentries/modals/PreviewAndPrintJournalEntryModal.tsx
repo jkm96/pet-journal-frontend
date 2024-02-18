@@ -7,7 +7,7 @@ import { useAuth } from '@/hooks/useAuth';
 import RenderMoodTagsWithColors from '@/components/dashboard/user/journalmngt/journalentries/RenderMoodTagsWithColors';
 import { formatDate } from '@/helpers/dateHelpers';
 import { toast } from 'react-toastify';
-import { getJournalEntryAttachmentBuffers } from '@/lib/services/journal-entries/journalEntryService';
+import { getJournalEntryAttachmentBuffers } from '@/lib/services/journalentries/journalEntryService';
 import { PdfPreviewStyle, toTitleCase } from '@/lib/utils/pdfUtils';
 import RenderPdfGridImages from '@/components/dashboard/user/journalmngt/journalentries/RenderPdfGridImages';
 import Font = ReactPDF.Font;

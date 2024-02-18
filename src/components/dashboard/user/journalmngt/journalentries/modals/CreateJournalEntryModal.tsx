@@ -16,7 +16,7 @@ import Spinner from '@/components/shared/icons/Spinner';
 import { journalTags, moodTags } from '@/boundary/constants/petConstants';
 import { CustomCheckbox } from '@/components/shared/formelements/CustomCheckbox';
 import { Textarea } from '@nextui-org/input';
-import { createJournalEntry } from '@/lib/services/journal-entries/journalEntryService';
+import { createJournalEntry } from '@/lib/services/journalentries/journalEntryService';
 import { areFilesValid, validateCreateJournalFormInputErrors } from '@/helpers/validationHelpers';
 import { getUserPets } from '@/lib/utils/petUtils';
 import TrashIcon from '@/components/shared/icons/TrashIcon';

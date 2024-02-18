@@ -1,4 +1,4 @@
-import { getJournalEntries } from '@/lib/services/journal-entries/journalEntryService';
+import { getJournalEntries } from '@/lib/services/journalentries/journalEntryService';
 import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import { JournalEntryResponse } from '@/boundary/interfaces/journal';
@@ -73,6 +73,8 @@ export default function MyJournalOverview() {
         setSearchTerm(searchParams.get('searchTerm') ?? '')
         setPeriodFrom(searchParams.get('periodFrom') ?? '')
         setPeriodTo(searchParams.get('periodTo') ?? '')
+        searchParams.set('fetch', 'all');
+        replace(`${pathname}?${searchParams.toString()}`);
         fetchAllJournalEntries(queryParams);
     }, []);
 

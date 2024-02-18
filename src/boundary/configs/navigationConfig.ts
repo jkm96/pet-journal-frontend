@@ -1,5 +1,7 @@
 export const NAVIGATION_LINKS = {
     HOME: '/',
+    PRIVACY_POLICY: '/privacy-policy',
+    TERMS_CONDITIONS: '/terms-conditions',
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
     PAYMENTS: '/payments',

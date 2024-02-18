@@ -11,6 +11,13 @@ export function getJournalQueryParams(queryParams: string) {
     return {pageSize, pageNumber, orderBy, searchTerm, periodFrom, periodTo, fetch};
 }
 
+export function getContentQueryParams(queryParams: string) {
+    const searchParams = JSON.parse(queryParams);
+    const type = searchParams.type ?? '';
+
+    return {type};
+}
+
 export function getMagicStudioQueryParams(queryParams: string) {
     const searchParams = JSON.parse(queryParams);
     const pageSize = searchParams.pageSize;

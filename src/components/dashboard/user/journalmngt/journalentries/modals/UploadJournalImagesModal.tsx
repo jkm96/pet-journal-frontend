@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { UploadJournalImageRequest } from '@/boundary/interfaces/journal';
 import { areFilesValid } from '@/helpers/validationHelpers';
-import { uploadJournalAttachments } from '@/lib/services/journal-entries/journalEntryService';
+import { uploadJournalAttachments } from '@/lib/services/journalentries/journalEntryService';
 import { DragDropSection } from '@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
 
 const initialFormState: UploadJournalImageRequest = {

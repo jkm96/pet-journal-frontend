@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { apiKey, cookieName, internalBaseUrl } from '@/boundary/constants/appConstants';
 import { getAccessToken } from '@/lib/services/token/tokenService';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 
 export async function middleware(request: NextRequest) {
     if (request.url.includes('/api/')) {
