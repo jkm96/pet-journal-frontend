@@ -1,33 +1,97 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { apiKey, cookieName, internalBaseUrl } from '@/boundary/constants/appConstants';
 import { getAccessToken } from '@/lib/services/token/tokenService';
-import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import { authRoutes, NAVIGATION_LINKS, protectedRoutes, publicRoutes } from '@/boundary/configs/navigationConfig';
+import { AccessTokenModel } from '@/boundary/interfaces/token';
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    {
+      source: '/((?!_next/static|_next/image|favicon.ico).*)',
+      missing: [
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
+      ],
+    },
+  ],
+};
 
 export async function middleware(request: NextRequest) {
-    if (request.url.includes('/api/')) {
-        const clientApiKey = request.headers.get("x-api-key");
-        if (clientApiKey !== apiKey) {
-            return NextResponse.json("Unauthorized access");
-        }
+  const pathName = request.nextUrl.pathname;
+  if (request.url.includes('/api/')) {
+    const clientApiKey = request.headers.get('x-api-key');
+    if (clientApiKey !== apiKey) {
+      return NextResponse.redirect(NAVIGATION_LINKS.LOGIN);
+    }
+  }
+
+  //if authenticated and accessing protected routes
+  //if authenticated and accessing public/auth routes
+  //if not authenticated and accessing  protected routes
+  //if not authenticated and accessing public/auth routes
+  if (request.url.includes(`${internalBaseUrl}`)) {
+    const cookie = request.cookies.get(cookieName)?.value;
+    console.log('pathName', pathName);
+    if (cookie === undefined) {
+      if (!authRoutes.includes(pathName) && protectedRoutes.includes(pathName)) {
+        console.log('User is not authenticated and trying to access a protected route');
+        // User is not authenticated and trying to access a protected route
+        return NextResponse.redirect(new URL(NAVIGATION_LINKS.LOGIN, request.url));
+      } else if (publicRoutes.includes(pathName) || authRoutes.includes(pathName)) {
+        console.log('User is not authenticated and trying to access a public/auth route');
+        // User is not authenticated and trying to access a public/auth route -  allow access
+        return NextResponse.next();
+      }
+    } else {
+      const tokenData: AccessTokenModel = JSON.parse(cookie);
+      const user = tokenData.user;
+      //check if user is subscribed, if not redirect to payments
+      if (!user.isSubscribed && !user.isAdmin && !pathName.includes(NAVIGATION_LINKS.PAYMENTS)){
+        return NextResponse.redirect(new URL(NAVIGATION_LINKS.PAYMENTS, request.url));
+      }
+
+      if (protectedRoutes.includes(pathName)) {
+        // User is authenticated and accessing a protected route
+        console.log('User is authenticated and trying to access a protected route');
+
+        return NextResponse.next();
+      } else if (publicRoutes.includes(pathName) || authRoutes.includes(pathName)) {
+        console.log('User is authenticated and trying to access a public/auth route');
+        // User is authenticated and accessing a public route
+        // redirect to dashboard
+        const accessPath = user.isAdmin ? NAVIGATION_LINKS.ADMIN_DASHBOARD : NAVIGATION_LINKS.USER_DASHBOARD
+        return NextResponse.redirect(new URL(accessPath, request.url));
+      }
     }
 
-    if (request.url.includes(`${internalBaseUrl}`)) {
-        let response = await getAccessToken()
-        if (response.statusCode === 200) {
-            const tokenResponse = response.data;
-            if (tokenResponse) {
-                let response = NextResponse.next();
-                response.cookies.set({
-                    name: `${cookieName}`,
-                    value: JSON.stringify(tokenResponse),
-                    httpOnly: true,
-                    secure: process.env.NODE_ENV !== "development",
-                    sameSite: "strict",
-                    path: "/",
-                });
+    console.log('allow access');
+    return NextResponse.next();
+  }
 
-                return response;
-            }
-        }
+  if (request.url.includes(`${internalBaseUrl}`)) {
+    let response = await getAccessToken();
+    if (response.statusCode === 200) {
+      const tokenResponse = response.data;
+      if (tokenResponse) {
+        let response = NextResponse.next();
+        response.cookies.set({
+          name: `${cookieName}`,
+          value: JSON.stringify(tokenResponse),
+          httpOnly: true,
+          secure: process.env.NODE_ENV !== 'development',
+          sameSite: 'strict',
+          path: '/',
+        });
+
+        return response;
+      }
     }
+  }
 }

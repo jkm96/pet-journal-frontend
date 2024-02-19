@@ -1,19 +1,21 @@
 "use client";
-import React, { useState } from 'react';
-import { useAuth } from '@/hooks/useAuth';
-import { RedirectUserToDashboard } from '@/components/common/auth/RedirectUserToDashboard';
+import React, { useEffect, useState } from 'react';
 import Loader from '@/components/common/dashboard/Loader';
 import AdminLoginForm from '@/components/auth/admin/AdminLoginForm';
 
 export default function AdminLoginPage() {
-    const {user, loading: authLoading} = useAuth();
     const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setLoading(false);
+        }, 1000); //1 second
 
-    RedirectUserToDashboard(user, setLoading)
+        return () => clearTimeout(timeout);
+    }, []);
 
-    if (loading || authLoading) {
+    if (loading) {
         return <Loader/>;
-    } else if (!user) {
+    } else {
         return <AdminLoginForm/>;
     }
 };

@@ -3,9 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Footer } from '@/components/site/sections/Footer';
 import DOMPurify from 'dompurify';
 import { fetchPrivacyPolicy } from '@/lib/services/sitecontent/siteContentService';
-import { JournalImageBuffer } from '@/boundary/interfaces/journal';
 import { toast } from 'react-toastify';
-import { SiteContentResponse } from '@/boundary/interfaces/siteContent';
 import { SiteContentQueryParameters } from '@/boundary/parameters/contentQueryParameters';
 
 export function PrivacyPolicy() {

@@ -25,7 +25,7 @@ export function Landing() {
                   <div className=''>
                     <a href={NAVIGATION_LINKS.REGISTER}
                        className='mt-8 mb-0 px-8 py-4 inline-block text-center border border-transparent
-                                                        rounded-md font-medium text-white bg-orange-500 hover:bg-orange-600'>
+                                                        rounded-md font-medium text-white'>
                       <Button color='primary' size='lg' className='text-lg'>Start with
                         Pet Diaries</Button>
                     </a>

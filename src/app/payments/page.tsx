@@ -1,23 +1,21 @@
 "use client";
-import React, { useState } from 'react';
-import { useAuth } from '@/hooks/useAuth';
-import { RedirectUserToDashboard } from '@/components/common/auth/RedirectUserToDashboard';
+import React, { useEffect, useState } from 'react';
 import Loader from '@/components/common/dashboard/Loader';
 import PaymentCheckout from '@/components/payments/PaymentCheckout';
-import { redirect } from 'next/navigation';
-import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 
 export default function PaymentsPage() {
-    const {user, loading: authLoading} = useAuth();
     const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setLoading(false);
+        }, 1000); //1 second
 
-    RedirectUserToDashboard(user, setLoading)
+        return () => clearTimeout(timeout);
+    }, []);
 
-    if (loading || authLoading) {
+    if (loading) {
         return <Loader/>;
-    } else if (user && !user.isSubscribed) {
+    } else {
         return <PaymentCheckout/>;
-    } else if (!user) {
-        redirect(NAVIGATION_LINKS.LOGIN)
     }
 };

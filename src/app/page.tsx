@@ -1,24 +1,21 @@
 "use client";
-import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
-import { useAuth } from '@/hooks/useAuth';
 import Loader from '@/components/common/dashboard/Loader';
-import React, { useState } from 'react';
-import { RedirectUserToDashboard } from '@/components/common/auth/RedirectUserToDashboard';
-import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 import Home from '@/components/site/Home';
 
 export default function HomePage() {
-    const router = useRouter()
-    const {user, loading: authLoading} = useAuth();
     const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setLoading(false);
+        }, 1000); //1 second
 
-    RedirectUserToDashboard(user, setLoading)
+        return () => clearTimeout(timeout);
+    }, []);
 
-    if (loading || authLoading) {
+    if (loading) {
         return <Loader/>;
-    } else if (!user) {
-        return <Home/>
     } else {
-        router.push(NAVIGATION_LINKS.USER_DASHBOARD);
+        return <Home/>;
     }
 }

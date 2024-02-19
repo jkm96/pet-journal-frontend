@@ -1,23 +1,21 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginForm from '@/components/auth/user/LoginForm';
-import { useAuth } from '@/hooks/useAuth';
-import { RedirectUserToDashboard } from '@/components/common/auth/RedirectUserToDashboard';
 import Loader from '@/components/common/dashboard/Loader';
-import { redirect } from 'next/navigation';
-import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 
 export default function LoginPage() {
-    const {user, loading: authLoading} = useAuth();
     const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setLoading(false);
+        }, 1000); //1 second
 
-    RedirectUserToDashboard(user, setLoading)
+        return () => clearTimeout(timeout);
+    }, []);
 
-    if (loading || authLoading) {
+    if (loading) {
         return <Loader/>;
-    } else if (!user) {
+    } else {
         return <LoginForm/>;
-    } else if (user && !user.isSubscribed) {
-        redirect(NAVIGATION_LINKS.PAYMENTS)
     }
 };

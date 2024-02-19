@@ -1,23 +1,21 @@
 "use client";
-import React, { useState } from 'react';
-import { useAuth } from '@/hooks/useAuth';
-import { RedirectUserToDashboard } from '@/components/common/auth/RedirectUserToDashboard';
+import React, { useEffect, useState } from 'react';
 import Loader from '@/components/common/dashboard/Loader';
 import CheckoutReturn from '@/components/payments/CheckoutReturn';
-import { redirect } from 'next/navigation';
-import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 
 export default function CheckoutReturnPage() {
-    const {user, loading: authLoading} = useAuth();
-    const [isLoading, setIsLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setLoading(false);
+        }, 1000); //1 second
 
-    RedirectUserToDashboard(user, setIsLoading)
+        return () => clearTimeout(timeout);
+    }, []);
 
-    if (isLoading || authLoading) {
+    if (loading) {
         return <Loader/>;
-    } else if (user) {
+    } else {
         return <CheckoutReturn/>;
-    } else if (!user) {
-        redirect(NAVIGATION_LINKS.LOGIN)
     }
 };

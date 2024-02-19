@@ -4,9 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import React, { useState } from 'react';
 import { RedirectUserToDashboard } from '@/components/common/auth/RedirectUserToDashboard';
 import Loader from '@/components/common/dashboard/Loader';
-import Home from '@/components/site/Home';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
-import { PrivacyPolicy } from '@/components/site/PrivacyPolicy';
 import { CustomerFeedback } from '@/components/site/CustomerFeedback';
 
 export default function CustomerFeedbackPage() {
