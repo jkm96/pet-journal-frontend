@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { validateLoginFormInputErrors } from '@/helpers/validationHelpers';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
@@ -29,6 +29,7 @@ export default function LoginForm() {
         username: "", password: "",
     });
     const toggleVisibility = () => setIsVisible(!isVisible);
+    const [status, setStatus] = useState<any>(null);
 
     const handleChange = (e: any) => {
         const {name, value} = e.target;
@@ -62,12 +63,19 @@ export default function LoginForm() {
             setLoginFormData(initialFormState)
             let responseData: AccessTokenModel = response.data;
             storeAuthToken(responseData);
-            router.push(NAVIGATION_LINKS.USER_DASHBOARD)
+            setStatus('logged')
         } else {
             setIsSubmitting(false);
             toast.error(response.message ?? "Unknown error occurred")
         }
     };
+
+    useEffect(() => {
+        if (status === 'logged'){
+            router.push(NAVIGATION_LINKS.USER_DASHBOARD)
+        }
+    }, [status]);
+
     return (
         <>
             <MainNavbar/>

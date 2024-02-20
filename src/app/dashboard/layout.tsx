@@ -14,7 +14,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 1000); //1 second
+    }, 500); //1 second
 
     return () => clearTimeout(timeout);
   }, []);
