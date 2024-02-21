@@ -1,3 +1,7 @@
+import { Button } from '@nextui-org/react';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import Link from 'next/link';
+
 function PermissionDeniedMessage() {
     return (
         <div className="grid m-4 place-items-center">
@@ -7,6 +11,9 @@ function PermissionDeniedMessage() {
                 resource.</h3>
             <h3 className="w3-center w3-animate-zoom text-danger">🚫🚫🚫🚫</h3>
             <h6 className="w3-center w3-animate-zoom">error code:403 forbidden</h6>
+            <Link href={NAVIGATION_LINKS.LOGIN}>
+              <Button color="primary" size="sm">Login Again</Button>
+            </Link>
         </div>
     );
 }
