@@ -5,8 +5,8 @@ import { Button } from '@nextui-org/button';
 import { EditIcon } from '@nextui-org/shared-icons';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
 import { UserResponse } from '@/boundary/interfaces/user';
-import ToggleUserStatusModal from '@/components/dashboard/admin/manageusers/modals/ToggleUserStatusModal';
-import ToggleUserSubscriptionModal from '@/components/dashboard/admin/manageusers/modals/ToggleUserSubscriptionModal';
+import ToggleUserStatusModal from '@/components/admin/manageusers/modals/ToggleUserStatusModal';
+import ToggleUserSubscriptionModal from '@/components/admin/manageusers/modals/ToggleUserSubscriptionModal';
 import { getUserById } from '@/lib/services/admin/manageUserService';
 
 export default function ManageUserSection({userId}: { userId: number }) {

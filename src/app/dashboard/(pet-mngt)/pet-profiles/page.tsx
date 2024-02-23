@@ -2,7 +2,7 @@
 
 import AuthorizeComponent from '@/components/common/auth/AuthorizeComponent';
 import PetJournalPermission, { MapPermission } from '@/boundary/enums/permissions';
-import PetProfilesOverview from '@/components/dashboard/user/petmngt/pets/profile/PetProfilesOverviewSection';
+import PetProfilesOverview from '@/components/user/petmngt/pets/profile/PetProfilesOverviewSection';
 
 function PetProfilesPage() {
     return (

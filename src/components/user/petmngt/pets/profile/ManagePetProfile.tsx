@@ -6,14 +6,14 @@ import { Button, CircularProgress, Input, Select, SelectItem } from '@nextui-org
 import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
 import { toTitleCase } from '@/lib/utils/pdfUtils';
 import { EditIcon } from '@nextui-org/shared-icons';
-import { PetProfileCard } from '@/components/dashboard/user/petmngt/pets/profile/PetProfileCard';
+import { PetProfileCard } from '@/components/user/petmngt/pets/profile/PetProfileCard';
 import Spinner from '@/components/shared/icons/Spinner';
-import PetTraits from '@/components/dashboard/user/petmngt/pets/profile/PetTraits';
-import UpdateProfilePictureModal from '@/components/dashboard/user/petmngt/pets/modals/UpdateProfilePictureModal';
-import EditPetModal from '@/components/dashboard/user/petmngt/pets/modals/EditPetModal';
+import PetTraits from '@/components/user/petmngt/pets/profile/PetTraits';
+import UpdateProfilePictureModal from '@/components/user/petmngt/pets/modals/UpdateProfilePictureModal';
+import EditPetModal from '@/components/user/petmngt/pets/modals/EditPetModal';
 import CameraIcon from '@/components/shared/icons/CameraIcon';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
-import DeletePetModal from '@/components/dashboard/user/petmngt/pets/modals/DeletePetModal';
+import DeletePetModal from '@/components/user/petmngt/pets/modals/DeletePetModal';
 import { useRouter } from 'next/navigation';
 import { GoBackButton } from '@/components/common/navigation/GoBackButton';
 

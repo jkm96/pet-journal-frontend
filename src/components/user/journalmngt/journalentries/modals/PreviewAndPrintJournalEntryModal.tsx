@@ -4,12 +4,12 @@ import Spinner from '@/components/shared/icons/Spinner';
 import React, { useEffect, useState } from 'react';
 import { JournalImageBuffer, PrintJournalEntryRequest } from '@/boundary/interfaces/journal';
 import { useAuth } from '@/hooks/useAuth';
-import RenderMoodTagsWithColors from '@/components/dashboard/user/journalmngt/journalentries/RenderMoodTagsWithColors';
+import RenderMoodTagsWithColors from '@/components/user/journalmngt/journalentries/RenderMoodTagsWithColors';
 import { formatDate } from '@/helpers/dateHelpers';
 import { toast } from 'react-toastify';
 import { getJournalEntryAttachmentBuffers } from '@/lib/services/journalentries/journalEntryService';
 import { PdfPreviewStyle, toTitleCase } from '@/lib/utils/pdfUtils';
-import RenderPdfGridImages from '@/components/dashboard/user/journalmngt/journalentries/RenderPdfGridImages';
+import RenderPdfGridImages from '@/components/user/journalmngt/journalentries/RenderPdfGridImages';
 import Font = ReactPDF.Font;
 
 export function getJournalEntryPdfDocument(printJournalRequest: PrintJournalEntryRequest, imageBuffers: JournalImageBuffer[], styles: any, username: string | undefined) {

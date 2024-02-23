@@ -7,14 +7,14 @@ import { CircularProgress, Input } from '@nextui-org/react';
 import { JournalQueryParameters } from '@/boundary/parameters/journalQueryParameters';
 import { Button } from '@nextui-org/button';
 import { PlusFilledIcon } from '@nextui-org/shared-icons';
-import JournalEntriesGrid from '@/components/dashboard/user/journalmngt/myjournal/JournalEntriesGrid';
-import PreviewMyJournal, { getDocument } from '@/components/dashboard/user/journalmngt/myjournal/PreviewMyJournal';
+import JournalEntriesGrid from '@/components/user/journalmngt/myjournal/JournalEntriesGrid';
+import PreviewMyJournal, { getDocument } from '@/components/user/journalmngt/myjournal/PreviewMyJournal';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useAuth } from '@/hooks/useAuth';
 import Spinner from '@/components/shared/icons/Spinner';
 import { SearchIcon } from '@/components/shared/icons/SearchIcon';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import PrintJournalModal from '@/components/dashboard/user/journalmngt/myjournal/modals/PrintJournalModal';
+import PrintJournalModal from '@/components/user/journalmngt/myjournal/modals/PrintJournalModal';
 import DownloadIcon from '@/components/shared/icons/DownloadIcon';
 
 export default function MyJournalOverview() {
@@ -299,6 +299,7 @@ export default function MyJournalOverview() {
                             ) : (
                                 <>
                                     <JournalEntriesGrid journalEntries={journalEntries}/>
+
                                     <div className="fixed bottom-4 right-4 md:hidden">
                                         <Button onPress={handleOpenModal}
                                                 isIconOnly

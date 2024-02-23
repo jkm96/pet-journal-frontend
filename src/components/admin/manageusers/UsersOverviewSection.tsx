@@ -18,7 +18,7 @@ import { UserQueryParameters } from '@/boundary/parameters/userQueryParameters';
 import { UserResponse } from '@/boundary/interfaces/user';
 import PaginationComponent from '@/components/common/pagination/PaginationComponent';
 import { TableVisibleColumns } from '@/components/common/filter/TableVisibleColumns';
-import RenderUserCell from '@/components/dashboard/admin/manageusers/RenderUserCell';
+import RenderUserCell from '@/components/admin/manageusers/RenderUserCell';
 import { SearchIcon } from '@/components/shared/icons/SearchIcon';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 

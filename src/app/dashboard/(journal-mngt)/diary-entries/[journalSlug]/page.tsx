@@ -2,7 +2,7 @@
 
 import AuthorizeComponent from '@/components/common/auth/AuthorizeComponent';
 import PetJournalPermission, { MapPermission } from '@/boundary/enums/permissions';
-import ManageJournalEntry from '@/components/dashboard/user/journalmngt/journalentries/ManageJournalEntry';
+import ManageJournalEntry from '@/components/user/journalmngt/journalentries/ManageJournalEntry';
 
 function ManageJournalEntryPage({params}: { params: { journalSlug: string } }) {
     return (

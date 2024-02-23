@@ -12,7 +12,7 @@ import { Button } from '@nextui-org/button';
 import { toast } from 'react-toastify';
 import Spinner from '@/components/shared/icons/Spinner';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
-import MainNavbar from '@/components/shared/navs/navbar/MainNavbar';
+import MainNavbar from '@/components/site/sections/MainNavbar';
 import { Footer } from '@/components/site/sections/Footer';
 
 const initialFormState: LoginUserRequest = {

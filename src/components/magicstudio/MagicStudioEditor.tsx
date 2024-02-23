@@ -14,18 +14,20 @@ import ReactPDF, { Document, Page, pdf, Text, View } from '@react-pdf/renderer';
 import { MagicStudioPdfStyle, toTitleCase } from '@/lib/utils/pdfUtils';
 import { useAuth } from '@/hooks/useAuth';
 import { formatDate } from '@/helpers/dateHelpers';
-import RenderMoodTagsWithColors from '@/components/dashboard/user/journalmngt/journalentries/RenderMoodTagsWithColors';
-import RenderPdfGridImages from '@/components/dashboard/user/journalmngt/journalentries/RenderPdfGridImages';
+import RenderMoodTagsWithColors from '@/components/user/journalmngt/journalentries/RenderMoodTagsWithColors';
+import RenderPdfGridImages from '@/components/user/journalmngt/journalentries/RenderPdfGridImages';
 import { getProjectDetails, savePdfDocToDatabase } from '@/lib/services/magicstudio/magicStudioService';
 import { PdfContent, ProjectDetailsResponse, SavePdfRequest } from '@/boundary/interfaces/magicStudio';
 import { saveAs } from 'file-saver';
-import RenderJournalHeader from '@/components/dashboard/user/journalmngt/journalentries/RenderJournalHeader';
+import RenderJournalHeader from '@/components/user/journalmngt/journalentries/RenderJournalHeader';
 import DeleteMagicProjectModal from '@/components/magicstudio/modals/DeleteMagicProjectModal';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
 import DownloadIcon from '@/components/site/icons/DownloadIcon';
 import { GoBackButton } from '@/components/common/navigation/GoBackButton';
 import { useRouter } from 'next/navigation';
 import Font = ReactPDF.Font;
+import { CloseIcon } from '@nextui-org/shared-icons';
+import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 
 type SectionVisibility = {
   textSection: boolean;
@@ -39,7 +41,7 @@ Font.register({
 const styles = MagicStudioPdfStyle();
 
 export default function MagicStudioEditor({ slug }: { slug: string }) {
-  const router = useRouter()
+  const router = useRouter();
   const { user } = useAuth();
   const [isLoadingDetails, setIsLoadingDetails] = useState<boolean>(true);
   const [magicProjectDetails, setMagicProjectDetails] = useState<ProjectDetailsResponse>({} as ProjectDetailsResponse);
@@ -53,6 +55,11 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
   const [textFontFamily, setTextFontFamily] = useState<string>('Times-Roman');
   const [textFontWeight, setTextFontWeight] = useState(300);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [buttonsVisible, setButtonsVisible] = useState(false);
+
+  const toggleButtons = () => {
+    setButtonsVisible(!buttonsVisible);
+  };
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -182,7 +189,7 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
 
   const projectPdfDocument2 = () => {
     return <Document></Document>;
-  }
+  };
   const projectPdfDocument = () => {
     if (magicProjectDetails.projectEntries === undefined) {
       return <Document></Document>;
@@ -266,7 +273,7 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
         </div>
       ) : (
         <>
-          <h3 className="m-2 mt-0">{magicProjectDetails.project.title}</h3>
+          <h3 className='m-2 mt-0'>{magicProjectDetails.project.title}</h3>
 
           <div className='flex flex-col gap-4 m-2'>
             <div className='md:flex justify-between gap-3 items-end'>
@@ -467,24 +474,38 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
             </div>
           </div>
 
-          <div className='fixed bottom-16 right-4 md:hidden'>
-            <Button onPress={handleDownload}
-                    isIconOnly={true}
-                    color='primary'
-                    radius='full'
-                    variant='shadow'>
-              <DownloadIcon color='#ffffff' />
-            </Button>
-          </div>
+          {buttonsVisible && (
+            <>
+              <div className='fixed bottom-28 right-4 md:hidden'>
+                <Button onPress={handleDownload}
+                        isIconOnly={true}
+                        color='primary'
+                        radius='full'
+                        variant='shadow'>
+                  <DownloadIcon color='#ffffff' />
+                </Button>
+              </div>
 
+              <div className='fixed bottom-16 right-4 md:hidden'>
+                <Button onPress={handleOpenModal}
+                        isIconOnly={true}
+                        color='danger'
+                        radius='full'
+                        variant='shadow'>
+                  <TrashIcon color='#ffffff' />
+                </Button>
+              </div>
+            </>
+          )}
           <div className='fixed bottom-4 right-4 md:hidden'>
-            <Button onPress={handleOpenModal}
-                    isIconOnly={true}
-                    color='danger'
+            <Button onPress={toggleButtons}
+                    isIconOnly
+                    color={buttonsVisible ? 'danger' : 'primary'}
                     radius='full'
                     variant='shadow'>
-              <TrashIcon color='#ffffff' />
+              {buttonsVisible ? <CloseIcon /> : <PlusIcon />}
             </Button>
+
           </div>
         </>
       )}

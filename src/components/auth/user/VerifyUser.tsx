@@ -4,7 +4,7 @@ import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import { useRouter } from 'next/navigation';
 import { CircularProgress } from '@nextui-org/react';
 import { verifyUserEmailAsync } from '@/lib/services/auth/userAuthService';
-import MainNavbar from '@/components/shared/navs/navbar/MainNavbar';
+import MainNavbar from '@/components/site/sections/MainNavbar';
 
 export default function VerifyUser() {
     const router = useRouter()

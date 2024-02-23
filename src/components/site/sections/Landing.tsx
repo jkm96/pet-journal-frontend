@@ -4,7 +4,7 @@ import React from 'react';
 
 export function Landing() {
   return(
-    <section className='bg-gray-50'>
+    <section className='bg-gray-50' id="home">
       <div className='relative pt-8 sm:pt-24 pb-4'>
         <div className='mx-auto max-w-5xl px-4 sm:px-6'>
           <div className='text-center'>

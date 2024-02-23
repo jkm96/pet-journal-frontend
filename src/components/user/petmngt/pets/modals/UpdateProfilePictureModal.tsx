@@ -3,7 +3,7 @@ import Spinner from '@/components/shared/icons/Spinner';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { areFilesValid } from '@/helpers/validationHelpers';
-import { DragDropSection } from '@/components/dashboard/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
+import { DragDropSection } from '@/components/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
 import { UpdatePetProfileImageRequest } from '@/boundary/interfaces/pet';
 import { updateProfileImage } from '@/lib/services/pet/petProfileService';
 

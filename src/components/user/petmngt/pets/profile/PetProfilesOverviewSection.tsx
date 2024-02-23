@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
-import CreateNewPetModal from '@/components/dashboard/user/petmngt/pets/modals/CreateNewPetModal';
+import CreateNewPetModal from '@/components/user/petmngt/pets/modals/CreateNewPetModal';
 import { getUserPets } from '@/lib/utils/petUtils';
 import { AddRecordFab } from '@/components/common/dashboard/AddRecordFab';
 

@@ -1,7 +1,7 @@
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react';
 import Spinner from '@/components/shared/icons/Spinner';
 import React, { useState } from 'react';
-import { getDocument } from '@/components/dashboard/user/journalmngt/myjournal/PreviewMyJournal';
+import { getDocument } from '@/components/user/journalmngt/myjournal/PreviewMyJournal';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { JournalEntryResponse } from '@/boundary/interfaces/journal';
 import { useAuth } from '@/hooks/useAuth';

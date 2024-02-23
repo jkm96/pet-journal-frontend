@@ -1,4 +1,4 @@
-import { ProfileSectionProps } from '@/components/dashboard/user/settings/ProfileSection';
+import { ProfileSectionProps } from '@/components/user/settings/ProfileSection';
 import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import { getUserBillingDetails } from '@/lib/services/payments/paymentsService';
@@ -19,7 +19,7 @@ import DownloadIcon from '@/components/site/icons/DownloadIcon';
 import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import { MagicStudioPdfStyle } from '@/lib/utils/pdfUtils';
-import InvoicePdfDocument from '@/components/dashboard/user/settings/InvoiceDocument';
+import InvoicePdfDocument from '@/components/user/settings/InvoiceDocument';
 
 const styles = MagicStudioPdfStyle();
 

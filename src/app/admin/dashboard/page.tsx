@@ -1,6 +1,6 @@
 "use client";
 
-import AdminDashboardSection from '@/components/dashboard/admin/AdminDashboardSection';
+import AdminDashboardSection from '@/components/admin/AdminDashboardSection';
 
 function AdminDashboardPage() {
     return (

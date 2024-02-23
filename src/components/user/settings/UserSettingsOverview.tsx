@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Tab, Tabs } from '@nextui-org/react';
 import { useAuth } from '@/hooks/useAuth';
-import ProfileSection from '@/components/dashboard/user/settings/ProfileSection';
+import ProfileSection from '@/components/user/settings/ProfileSection';
 import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
-import BillingSection from '@/components/dashboard/user/settings/BillingSection';
+import BillingSection from '@/components/user/settings/BillingSection';
 
 type TabValue = 'profile' | 'billing' | 'account';
 
