@@ -280,7 +280,7 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
           {buttonsVisible && (
             <>
               <div className='fixed bottom-52 right-4 md:hidden'>
-                <Button onPress={() => openModal('editJournal')}
+                <Button onClick={(e) =>  { e.stopPropagation(); openModal('editJournal')}}
                         isIconOnly
                         color='success'
                         radius='full'
@@ -290,7 +290,7 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
               </div>
 
               <div className='fixed bottom-40 right-4 md:hidden'>
-                <Button onPress={() => openModal('uploadAttachments')}
+                <Button onClick={(e) => { e.stopPropagation(); openModal('uploadAttachments')}}
                         isIconOnly
                         color='warning'
                         radius='full'
@@ -317,7 +317,7 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
               </div>
 
               <div className='fixed bottom-16 right-4 md:hidden'>
-                <Button onPress={() => openModal('deleteJournal')}
+                <Button onClick={(e) => { e.stopPropagation(); openModal('deleteJournal')}}
                         isIconOnly
                         color='danger'
                         radius='full'
