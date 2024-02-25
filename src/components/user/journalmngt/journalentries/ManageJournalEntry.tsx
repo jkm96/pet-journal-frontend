@@ -158,20 +158,20 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
         </div>
       ) : (
         <>
-          <div className='m-2 flex justify-between gap-3'>
+          <div className='m-2 flex flex-col justify-between gap-3'>
             <div className='relative flex flex-1 flex-shrink-0'>
               <GoBackButton onPress={() => router.back()} />
 
               <span className='hidden md:block lg:block'>
                     <Button onPress={() => openModal('editJournal')}
                             startContent={<EditIcon />}
-                            color='primary'
+                            color='success'
                             className='mr-2'
                             size='sm'
                             variant='shadow'>
                       Edit Journal
                     </Button>
-                  </span>
+              </span>
 
               {modals.editJournal && (
                 <UpdateJournalEntryModal
@@ -185,7 +185,7 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
               <span className='hidden md:block lg:block'>
               <Button onPress={() => openModal('uploadAttachments')}
                       startContent={<UploadIcon color='#ffffff' />}
-                      color='primary'
+                      color='warning'
                       size='sm'
                       variant='shadow'>
                 Upload Attachment

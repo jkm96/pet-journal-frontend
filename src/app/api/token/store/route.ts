@@ -5,6 +5,7 @@ import { AccessTokenModel } from '@/boundary/interfaces/token';
 export async function POST(request: NextRequest) {
     try {
         const tokenRequest = await request.text();
+
         const response = NextResponse.json(
             {
                 "data": "",

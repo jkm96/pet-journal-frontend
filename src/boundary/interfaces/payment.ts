@@ -11,6 +11,7 @@ export interface CreatePaymentRequest {
     created: any;
     expiresAt: any;
     paymentStatus: string;
+    paymentIntent: string;
     status: string;
 }
 

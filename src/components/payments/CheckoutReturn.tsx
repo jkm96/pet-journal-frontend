@@ -6,11 +6,8 @@ import { useRouter } from 'next/navigation';
 import { CircularProgress } from '@nextui-org/react';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import Link from 'next/link';
-import { AccessTokenModel } from '@/boundary/interfaces/token';
-import { useAuth } from '@/hooks/useAuth';
 
 export default function CheckoutReturn() {
-    const {clearAuthToken, storeAuthToken} = useAuth();
     const router = useRouter()
     const [status, setStatus] = useState(null);
     const [customerEmail, setCustomerEmail] = useState('');
@@ -22,12 +19,6 @@ export default function CheckoutReturn() {
             .then((response) => {
                 if (response.statusCode === 200) {
                     const session: CheckoutSessionModel = response.data.sessionData;
-
-                    if (session.sessionStatus === 'complete') {
-                        clearAuthToken();
-                        let responseData: AccessTokenModel = response.data.cookieRequest;
-                        storeAuthToken(responseData);
-                    }
                     setCustomerEmail(session.customerEmail)
                     setStatus(session.sessionStatus)
                 }
@@ -69,16 +60,12 @@ export default function CheckoutReturn() {
                 <>
                     {status === 'complete' ? (
                         <>
-                            <p>
+                            <div>
                                 Thank you for choosing our services! A confirmation email will be promptly dispatched to
                                 the email address you provided ({customerEmail}). If you have any inquiries or require
                                 further assistance, please do not hesitate to contact our dedicated support team at{" "}
-                                <a href="mailto:support@example.com">support@example.com</a>. We value your business and
-                                are here to ensure your experience is seamless.
-                            </p>
-                            <p>
-                                Thank you for being a valued member of our community.
-                            </p>
+                                <a href="mailto:support@example.com">support@example.com</a>.
+                            </div>
                         </>
                     ) : (
                         <p>

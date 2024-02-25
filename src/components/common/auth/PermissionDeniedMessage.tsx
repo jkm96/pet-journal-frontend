@@ -11,9 +11,9 @@ function PermissionDeniedMessage() {
                 resource.</h3>
             <h3 className="w3-center w3-animate-zoom text-danger">🚫🚫🚫🚫</h3>
             <h6 className="w3-center w3-animate-zoom">error code:403 forbidden</h6>
-            <Link href={NAVIGATION_LINKS.LOGIN}>
-              <Button color="primary" size="sm">Login Again</Button>
-            </Link>
+            {/*<Link href={NAVIGATION_LINKS.LOGIN}>*/}
+            {/*  <Button color="primary" size="sm">Login Again</Button>*/}
+            {/*</Link>*/}
         </div>
     );
 }

@@ -10,7 +10,6 @@ export async function storeAccessTokenInCookie(storeTokenRequest: AccessTokenMod
                 'Content-type': 'application/json',
             },
             body: JSON.stringify(storeTokenRequest),
-            credentials: 'same-origin'
         });
 
         return response.json();

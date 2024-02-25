@@ -17,6 +17,8 @@ import { SearchIcon } from '@/components/shared/icons/SearchIcon';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { AddRecordFab } from '@/components/common/dashboard/AddRecordFab';
 import { groupEntriesByMonth } from '@/lib/utils/journalUtils';
+import { EditIcon } from '@nextui-org/shared-icons';
+
 
 export default function JournalEntriesOverview() {
     const [queryParams, setQueryParams] = useState<JournalQueryParameters>(new JournalQueryParameters());
@@ -92,7 +94,7 @@ export default function JournalEntriesOverview() {
 
     return (
         <>
-            <Breadcrumb pageName="Diary Entries"/>
+            <Breadcrumb pageName="Diary Entries" />
 
             <div className="flex flex-col gap-4 m-2">
                 <div className="flex justify-between gap-3 items-end">
@@ -102,91 +104,95 @@ export default function JournalEntriesOverview() {
                                 Search
                             </label>
                             <input
-                                className="peer block w-full rounded-md border border-gray-200
+                              className="peer block w-full rounded-md border border-gray-200
                                 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                                placeholder="Search for journal entries"
-                                onChange={handleSearch}
-                                defaultValue={searchTerm}
+                              placeholder="Search for journal entries"
+                              onChange={handleSearch}
+                              defaultValue={searchTerm}
                             />
                             <SearchIcon
-                                className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"/>
+                              className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
                         </div>
                     </div>
                     <div className="gap-3 hidden lg:block">
                         <Button onPress={handleOpenModal}
-                                startContent={<PlusIcon/>}
+                                startContent={<PlusIcon />}
                                 color="primary"
                                 variant="shadow">
                             Add Journal
                         </Button>
-                        <CreateJournalEntryModal isOpen={isModalOpen} onClose={handleCloseModal}/>
+                        <CreateJournalEntryModal isOpen={isModalOpen} onClose={handleCloseModal} />
                     </div>
                 </div>
             </div>
 
             {isLoadingJournalEntries ? (
-                <div className={"grid place-items-center"}>
-                    <CircularProgress color={"primary"} className={"p-4"} label="Loading your diary entries...."/>
-                </div>
+              <div className={"grid place-items-center"}>
+                  <CircularProgress color={"primary"} className={"p-4"} label="Loading your diary entries..." />
+              </div>
             ) : (
-                <>
-                    {journalEntries.length < 1 ? (
-                        <>
-                            <div className="text-center">
-                                <p className="text-danger-400">No diary entries found!</p>
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            {Object.keys(groupEntriesByMonth(journalEntries)).map((monthYear) => (
-                                <div key={monthYear}>
-                                    <h2 className="text-2xl mt-4">{monthYear}</h2>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                                        {groupEntriesByMonth(journalEntries)[monthYear].map((journal) => (
-                                            <Link key={journal.id}
-                                                  href={`${NAVIGATION_LINKS.DIARY_ENTRIES}/${journal.slug}`}>
-                                                <Card
-                                                    key={journal.id}
-                                                    isBlurred
-                                                    className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
-                                                    shadow="sm"
-                                                >
-                                                    <CardBody>
-                                                        <div
-                                                            className="grid grid-cols-6 md:grid-cols-12 sm:grid-cols-12 lg:gap-6 md:gap-4 items-center justify-center">
-                                                            <div
-                                                                className="relative col-span-1 md:col-span-1 sm:col-span-6 mb-2 md:mb-0">
-                                                                <Avatar
-                                                                    name={journal.title}
-                                                                    radius={"sm"}
-                                                                    isBordered
-                                                                    color={getRandomColorClass(journal.mood)}
-                                                                />
-                                                            </div>
+              <>
+                  {journalEntries.length < 1 ? (
+                    <>
+                        <div className="text-center">
+                            <p className="text-danger-400">No diary entries found!</p>
+                        </div>
+                    </>
+                  ) : (
+                    <>
+                        {Object.keys(groupEntriesByMonth(journalEntries)).map((monthYear) => (
+                          <div key={monthYear}>
+                              <h2 className="text-2xl mt-4">{monthYear}</h2>
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                                  {groupEntriesByMonth(journalEntries)[monthYear].map((journal) => (
+                                    <Link key={journal.id}
+                                          href={`${NAVIGATION_LINKS.DIARY_ENTRIES}/${journal.slug}`}>
+                                        <Card
+                                          key={journal.id}
+                                          isBlurred
+                                          className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
+                                          shadow="sm"
+                                        >
+                                            <CardBody>
+                                                <div
+                                                  className="grid grid-cols-6 md:grid-cols-12 sm:grid-cols-12 lg:gap-6 md:gap-4 items-center justify-center">
+                                                    <div
+                                                      className="relative col-span-1 md:col-span-1 sm:col-span-6 mb-2 md:mb-0">
+                                                        <Avatar
+                                                          name={journal.title}
+                                                          radius={"sm"}
+                                                          isBordered
+                                                          color={getRandomColorClass(journal.mood)}
+                                                        />
+                                                    </div>
 
-                                                            <div
-                                                                className="flex flex-col col-span-5 md:col-span-11 md:ml-3 sm:col-span-6">
-                                                                <div className="flex flex-col gap-0">
-                                                                    <h3 className="font-semibold text-foreground/90">{journal.title}</h3>
-                                                                    <p className="text-small text-foreground/80">
-                                                                        {formatDate(journal.createdAt)} | {journal.event}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
+                                                    <div
+                                                      className="flex flex-col col-span-5 md:col-span-11 md:ml-3 sm:col-span-6">
+                                                        <div className="flex flex-col gap-0">
+                                                            <h3
+                                                              className="font-semibold text-foreground/90">{journal.title}</h3>
+                                                            <p className="text-small text-foreground/80">
+                                                                {formatDate(journal.createdAt)} | {journal.event}
+                                                            </p>
                                                         </div>
-                                                    </CardBody>
-                                                </Card>
-                                            </Link>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
-                        </>
-                    )}
-                </>
+                                                    </div>
+                                                </div>
+                                            </CardBody>
+                                        </Card>
+                                    </Link>
+                                  ))}
+                              </div>
+                          </div>
+                        ))}
+                    </>
+                  )}
+              </>
             )}
 
-            <AddRecordFab onPress={handleOpenModal}/>
+            <AddRecordFab onClick={(e:any) => {
+                e.stopPropagation();
+                handleOpenModal()
+            }} />
         </>
     )
 }

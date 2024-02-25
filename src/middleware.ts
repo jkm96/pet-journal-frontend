@@ -28,7 +28,7 @@ export async function middleware(request: NextRequest) {
   if (request.url.includes('/api/')) {
     const clientApiKey = request.headers.get('x-api-key');
     if (clientApiKey !== apiKey) {
-      return NextResponse.redirect(NAVIGATION_LINKS.LOGIN);
+      return NextResponse.redirect(new URL(NAVIGATION_LINKS.LOGIN, request.url));
     }
   }
 
@@ -71,7 +71,6 @@ export async function middleware(request: NextRequest) {
       }
     }
 
-    console.log('allow access');
     return NextResponse.next();
   }
 

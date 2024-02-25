@@ -108,7 +108,10 @@ export default function PetProfilesOverviewSection() {
                 </>
             )}
 
-            <AddRecordFab onPress={handleOpenModal}/>
+            <AddRecordFab onClick={(e:any) => {
+                e.stopPropagation();
+                handleOpenModal()
+            }} />
         </>
     )
 }
