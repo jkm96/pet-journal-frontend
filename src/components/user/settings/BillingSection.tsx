@@ -21,8 +21,6 @@ import { saveAs } from 'file-saver';
 import { MagicStudioPdfStyle } from '@/lib/utils/pdfUtils';
 import InvoicePdfDocument from '@/components/user/settings/InvoiceDocument';
 
-const styles = MagicStudioPdfStyle();
-
 export default function BillingSection({ user }: ProfileSectionProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [billingInfo, setBillingInfo] = useState<UserSubscriptionResponse[]>([]);
@@ -60,7 +58,7 @@ export default function BillingSection({ user }: ProfileSectionProps) {
       {isLoading ? (
         <div className={'grid place-items-center'}>
           <CircularProgress color={'primary'} className={'p-4'}
-                            label='Loading your billing details....' />
+                            label='Loading your billing status...' />
         </div>
       ) : (
         <>
@@ -70,8 +68,8 @@ export default function BillingSection({ user }: ProfileSectionProps) {
               <TableColumn>Price</TableColumn>
               <TableColumn className="hidden md:table-cell lg:table-cell">Start Date</TableColumn>
               <TableColumn className="hidden md:table-cell lg:table-cell">End Date</TableColumn>
+              <TableColumn className="hidden md:table-cell lg:table-cell">Plan</TableColumn>
               <TableColumn>Status</TableColumn>
-              <TableColumn className="hidden md:table-cell lg:table-cell">Payment</TableColumn>
               <TableColumn>Action</TableColumn>
             </TableHeader>
             <TableBody>
@@ -81,18 +79,18 @@ export default function BillingSection({ user }: ProfileSectionProps) {
                   <TableCell>${billing.subscriptionPlan.price}</TableCell>
                   <TableCell className="hidden md:table-cell lg:table-cell">{formatDate(billing.startDate)}</TableCell>
                   <TableCell className="hidden md:table-cell lg:table-cell">{formatDate(billing.endDate)}</TableCell>
+                  <TableCell className="hidden md:table-cell lg:table-cell">
+                    <Chip color={billing.subscriptionPlan.name == "paid" ? 'success':'danger'}
+                          size='sm'
+                          variant="shadow">
+                      {billing.subscriptionPlan.name}
+                    </Chip>
+                  </TableCell>
                   <TableCell>
                     <Chip color={billing.status == "ACTIVE" ? 'success':'danger'}
                           size='sm'
                           variant="shadow">
                       {billing.status}
-                    </Chip>
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell lg:table-cell">
-                    <Chip color={billing.stripePaymentStatus == "paid" ? 'success':'danger'}
-                          size='sm'
-                          variant="shadow">
-                      {billing.stripePaymentStatus}
                     </Chip>
                   </TableCell>
                   <TableCell>
@@ -101,7 +99,7 @@ export default function BillingSection({ user }: ProfileSectionProps) {
                             size="sm"
                             style={{backgroundColor:'transparent'}}
                     >
-                      <DownloadIcon color='#FFCC00'/>
+                      <DownloadIcon color={"#24ed0d"}/>
                     </Button>
                   </TableCell>
                 </TableRow>

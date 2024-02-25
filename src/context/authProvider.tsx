@@ -41,20 +41,20 @@ export function AuthProvider({ children }: AuthContextProps) {
   };
 
   useEffect(() => {
-    // const fetchAccessToken = async () => {
-    //   const response = await getAccessToken();
-    //   if (response.statusCode === 200) {
-    //     const tokenResponse = JSON.parse(response.data);
-    //     setUser(tokenResponse.user);
-    //   } else {
-    //     setUser(null);
-    //   }
-    //   setLoading(false);
-    // };
-    //
-    // fetchAccessToken().catch(error => {
-    //   console.error('Error fetching user data:', error);
-    // });
+    const fetchAccessToken = async () => {
+      const response = await getAccessToken();
+      if (response.statusCode === 200) {
+        const tokenResponse = JSON.parse(response.data);
+        setUser(tokenResponse.user);
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    };
+
+    fetchAccessToken().catch(error => {
+      console.error('Error fetching user data:', error);
+    });
   }, []);
 
   return (

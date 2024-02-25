@@ -1,9 +1,7 @@
 function UserDashboardSection() {
 
     return (
-        <>
-            <p>User Dashboard Page</p>
-        </>
+        <>Coming soon ...</>
     )
 }
 

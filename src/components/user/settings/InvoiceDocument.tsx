@@ -47,7 +47,7 @@ const InvoicePdfDocument = (billing: UserSubscriptionResponse, user: User | null
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>Invoice Status:</Text>
-            <Text>{billing.stripePaymentStatus.toUpperCase()}</Text>
+            <Text>Paid</Text>
           </View>
         </View>
         <View style={styles.section}>
