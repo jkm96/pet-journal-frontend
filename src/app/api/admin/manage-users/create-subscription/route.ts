@@ -1,12 +1,13 @@
+import { NextRequest } from 'next/server';
 import { handleApiException, handleAxiosResponse } from '@/helpers/responseHelpers';
 import adminApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
-import { NextRequest } from 'next/server';
 
-export async function GET(request: NextRequest, {params}: { params: { userId: number } }) {
+export async function POST(request: NextRequest) {
     try {
-        const userId = params.userId;
         const config = getAxiosConfigs(request);
-        const response = await adminApiClient.get(`api/v1/admin/manage-users/${userId}`, config);
+        const requestBody = await request.json();
+        const response = await adminApiClient
+            .post("api/v1/admin/user-subscriptions", requestBody, config);
 
         return handleAxiosResponse(response);
     } catch (error: unknown) {

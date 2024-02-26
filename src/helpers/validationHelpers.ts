@@ -2,6 +2,7 @@ import { LoginUserRequest, RegisterUserRequest } from '@/boundary/interfaces/aut
 import { CreatePetRequest, EditPetRequest } from '@/boundary/interfaces/pet';
 import { CreateJournalEntryRequest, UpdateJournalEntryRequest } from '@/boundary/interfaces/journal';
 import { CreateMagicProjectRequest } from '@/boundary/interfaces/magicStudio';
+import { CreateUserSubscriptionRequest } from '@/boundary/interfaces/admin';
 
 export function isEmailValid(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -64,6 +65,24 @@ export function validateLoginFormInputErrors(formData: LoginUserRequest) {
 
     for (const key in errors) {
         if (errors[key as keyof LoginUserRequest] !== "") {
+            return errors;
+        }
+    }
+
+    return null;
+}
+
+export function validateSubscriptionFormInputErrors(formData: CreateUserSubscriptionRequest) {
+    const errors: CreateUserSubscriptionRequest = {
+        customerEmail: '', customerId: ''
+    }
+
+    if (formData.customerId.trim() === "") {
+        errors.customerId = "Customer Id cannot be empty";
+    }
+
+    for (const key in errors) {
+        if (key !== "customerEmail" && errors[key as keyof CreateUserSubscriptionRequest] !== "") {
             return errors;
         }
     }

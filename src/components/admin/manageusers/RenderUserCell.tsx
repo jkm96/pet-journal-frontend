@@ -15,10 +15,12 @@ export default function RenderUserCell(user: UserResponse, columnKey: string | n
             );
         case "username":
             return (
-                <User
+              <Link href={`${NAVIGATION_LINKS.MANAGE_USERS}/${user.id}`}>
+                  <User
                     className="text-bold text-small capitalize"
                     name={user.username}
-                />
+                  />
+              </Link>
             );
         case "isActive":
             return (
@@ -50,6 +52,6 @@ export default function RenderUserCell(user: UserResponse, columnKey: string | n
                 </div>
             );
         default:
-            return cellValue;
+            return <Link href={`${NAVIGATION_LINKS.MANAGE_USERS}/${user.id}`}>cellValue</Link>;
     }
 }

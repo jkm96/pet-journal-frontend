@@ -5,8 +5,10 @@ import { useRouter } from 'next/navigation';
 import { CircularProgress } from '@nextui-org/react';
 import { verifyUserEmailAsync } from '@/lib/services/auth/userAuthService';
 import MainNavbar from '@/components/site/sections/MainNavbar';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function VerifyUser() {
+    const {clearAuthToken} = useAuth();
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(true);
     const [status, setStatus] = useState<any>(null);
@@ -17,6 +19,7 @@ export default function VerifyUser() {
         await verifyUserEmailAsync(token)
             .then((response) => {
                 if (response.statusCode === 200) {
+                    clearAuthToken();
                     setStatus('verified')
                     setMessage(response.message)
                 } else {
@@ -25,8 +28,8 @@ export default function VerifyUser() {
                 }
             })
             .catch((error) => {
-                console.error("Error completing checkout", error);
-                toast.error(`Error completing checkout: ${error}`)
+                console.error("Error verifying your email", error);
+                toast.error(`Error verifying your email: ${error}`)
             })
             .finally(() => {
                 setIsLoading(false);
@@ -43,7 +46,7 @@ export default function VerifyUser() {
     useEffect(() => {
         if (status === 'verified') {
             setTimeout(() => {
-                router.push(NAVIGATION_LINKS.USER_DASHBOARD)
+                router.push(NAVIGATION_LINKS.LOGIN)
             }, 5000);
         }
     }, [status]);

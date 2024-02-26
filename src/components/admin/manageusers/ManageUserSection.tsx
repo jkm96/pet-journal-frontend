@@ -8,6 +8,9 @@ import { UserResponse } from '@/boundary/interfaces/user';
 import ToggleUserStatusModal from '@/components/admin/manageusers/modals/ToggleUserStatusModal';
 import ToggleUserSubscriptionModal from '@/components/admin/manageusers/modals/ToggleUserSubscriptionModal';
 import { getUserById } from '@/lib/services/admin/manageUserService';
+import { PlusIcon } from '@/components/shared/icons/PlusIcon';
+import CreateUserSubscriptionModal from '@/components/admin/manageusers/modals/CreateUserSubscriptionModal';
+import { CreateUserSubscriptionRequest } from '@/boundary/interfaces/admin';
 
 export default function ManageUserSection({userId}: { userId: number }) {
     const [userDetails, setUserDetails] = useState<UserResponse>({} as UserResponse);
@@ -15,6 +18,7 @@ export default function ManageUserSection({userId}: { userId: number }) {
     const [modals, setModals] = useState({
         toggleUser: false,
         toggleSubscription: false,
+        createSubscription: false,
     });
 
     const openModal = (modalName: string) => {
@@ -33,6 +37,8 @@ export default function ManageUserSection({userId}: { userId: number }) {
                 if (response.statusCode === 200) {
                     const user: UserResponse = response.data;
                     setUserDetails(user)
+                }else{
+                    toast.error(`Error fetching user details: ${response.message}`)
                 }
             })
             .catch((error) => {
@@ -48,12 +54,17 @@ export default function ManageUserSection({userId}: { userId: number }) {
         fetchUserDetails(userId);
     }, [userId]);
 
+    const createRequest : CreateUserSubscriptionRequest = {
+        customerEmail: userDetails.email,
+        customerId: ''
+    }
+
     return (
         <>
             {isLoadingDetails ? (
-                <div className={"grid place-items-center"}>
-                    <CircularProgress color={"primary"} className={"p-4"}
-                                      label="Loading user details...."/>
+              <div className='flex items-center justify-center'>
+                    <CircularProgress color="primary" className="p-4"
+                                      label="Loading user details..."/>
                 </div>
             ) : (
                 <>
@@ -65,6 +76,7 @@ export default function ManageUserSection({userId}: { userId: number }) {
                                             startContent={<EditIcon/>}
                                             color={userDetails.isActive ? "danger" : "success"}
                                             className="mr-2"
+                                            size="sm"
                                             variant="shadow">
                                         {userDetails.isActive ? "Deactivate" : "Activate"}
                                     </Button>
@@ -82,6 +94,7 @@ export default function ManageUserSection({userId}: { userId: number }) {
                                             startContent={<TrashIcon color='#ffffff'/>}
                                             color={userDetails.isSubscribed ? "danger" : "success"}
                                             className="ml-2"
+                                            size="sm"
                                             variant="shadow">
                                         {userDetails.isSubscribed ? "Unsubscribe" : "Subscribe"}
                                     </Button>
@@ -92,6 +105,23 @@ export default function ManageUserSection({userId}: { userId: number }) {
                                             currentStatus={userDetails.isSubscribed ? "Unsubscribe" : "Subscribe"}
                                             isOpen={modals.toggleSubscription}
                                             onClose={() => closeModal("toggleSubscription")}
+                                        />
+                                    )}
+
+                                    <Button onPress={() => openModal("createSubscription")}
+                                            startContent={<PlusIcon color='#ffffff'/>}
+                                            color="primary"
+                                            className="ml-2"
+                                            size="sm"
+                                            variant="shadow">
+                                        Create Payment
+                                    </Button>
+
+                                    {modals.createSubscription && (
+                                        <CreateUserSubscriptionModal
+                                            createRequest={createRequest}
+                                            isOpen={modals.createSubscription}
+                                            onClose={() => closeModal("createSubscription")}
                                         />
                                     )}
                                 </div>

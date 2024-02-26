@@ -79,6 +79,8 @@ export default function UsersOverviewSection() {
                     setRowsPerPage(pagingMetaData.pageSize);
                     setTotalPages(pagingMetaData.totalPages);
                     setUserList(data);
+                }else{
+                    toast.error(`Error fetching users: ${response.message}`);
                 }
             })
             .catch((error) => {

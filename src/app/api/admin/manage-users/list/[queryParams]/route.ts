@@ -7,7 +7,7 @@ export async function GET(request: NextRequest, {params}: { params: { queryParam
     try {
         const queryParams = getUserQueryParams(params.queryParams);
         const config = getAxiosConfigs(request, queryParams);
-        const response = await adminApiClient.get('api/v1/admin/user', config);
+        const response = await adminApiClient.get('api/v1/admin/manage-users', config);
         return handleAxiosResponse(response);
     } catch (error: unknown) {
         return handleApiException(error);
