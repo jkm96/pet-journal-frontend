@@ -52,6 +52,6 @@ export default function RenderUserCell(user: UserResponse, columnKey: string | n
                 </div>
             );
         default:
-            return <Link href={`${NAVIGATION_LINKS.MANAGE_USERS}/${user.id}`}>cellValue</Link>;
+            return <Link href={`${NAVIGATION_LINKS.MANAGE_USERS}/${user.id}`}>{cellValue}</Link>;
     }
 }

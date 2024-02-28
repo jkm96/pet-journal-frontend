@@ -2,27 +2,9 @@ import { apiKey, internalBaseUrl } from '@/boundary/constants/appConstants';
 import { UserQueryParameters } from '@/boundary/parameters/userQueryParameters';
 import { CreateUserSubscriptionRequest } from '@/boundary/interfaces/admin';
 
-export async function getUsers(queryParams: UserQueryParameters) {
+export async function toggleUserSubscription(userId: number) {
     try {
-        const apiUrl = `${internalBaseUrl}/api/admin/manage-users/list/${JSON.stringify(queryParams)}`;
-        const response = await fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-                'x-api-key': apiKey,
-                'Content-type': 'application/json',
-            },
-            body: null,
-        });
-
-        return response.json();
-    } catch (error) {
-        throw error;
-    }
-}
-
-export async function toggleUser(userId: number) {
-    try {
-        const response = await fetch(`${internalBaseUrl}/api/admin/manage-users/toggle`, {
+        const response = await fetch(`${internalBaseUrl}/api/admin/user-subscriptions/toggle-subscription`, {
             method: 'POST',
             headers: {
                 'x-api-key': `${apiKey}`,
@@ -37,9 +19,26 @@ export async function toggleUser(userId: number) {
     }
 }
 
-export async function getUserById(userId: string) {
+export async function createUserSubscription(createRequest: CreateUserSubscriptionRequest) {
     try {
-        const apiUrl = `${internalBaseUrl}/api/admin/manage-users/${userId}`;
+        const response = await fetch(`${internalBaseUrl}/api/admin/user-subscriptions/create-subscription`, {
+            method: 'POST',
+            headers: {
+                'x-api-key': `${apiKey}`,
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(createRequest),
+        });
+
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function getUserSubscriptions(userId: string) {
+    try {
+        const apiUrl = `${internalBaseUrl}/api/admin/user-subscriptions/${userId}`;
         const response = await fetch(apiUrl, {
             method: 'GET',
             headers: {

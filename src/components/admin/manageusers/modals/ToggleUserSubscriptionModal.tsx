@@ -2,7 +2,7 @@ import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from
 import Spinner from '@/components/shared/icons/Spinner';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { toggleUserSubscription } from '@/lib/services/admin/manageUserService';
+import { toggleUserSubscription } from '@/lib/services/admin/manageUserSubscriptionsService';
 
 export default function ToggleUserSubscriptionModal({userId, currentStatus, isOpen, onClose}: {
     userId: number,

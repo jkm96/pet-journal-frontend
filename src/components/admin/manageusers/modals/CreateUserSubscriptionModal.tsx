@@ -2,10 +2,10 @@ import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader
 import Spinner from '@/components/shared/icons/Spinner';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { createUserSubscription } from '@/lib/services/admin/manageUserService';
 import { LoginUserRequest } from '@/boundary/interfaces/auth';
 import { CreateUserSubscriptionRequest } from '@/boundary/interfaces/admin';
 import { validateLoginFormInputErrors, validateSubscriptionFormInputErrors } from '@/helpers/validationHelpers';
+import { createUserSubscription } from '@/lib/services/admin/manageUserSubscriptionsService';
 
 export default function CreateUserSubscriptionModal({createRequest, isOpen, onClose}: {
   createRequest: CreateUserSubscriptionRequest,

@@ -34,7 +34,7 @@ export default function ProfileSection({user}: ProfileSectionProps) {
                         className="relative z-30 mx-auto -mt-22 h-30 w-full max-w-30 rounded-full bg-white/20 p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3">
                         <div className="relative drop-shadow-2">
                             <img
-                                src={user?.profileUrl ?? "/images/user/user-06.png"}
+                                src={user?.profileUrl ?? ""}
                                 className="rounded-full"
                                 width={160}
                                 height={160}
