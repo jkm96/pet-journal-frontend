@@ -2,7 +2,6 @@ import { ProfileSectionProps } from '@/components/user/settings/ProfileSection';
 import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import { getUserBillingDetails } from '@/lib/services/payments/paymentsService';
-import { UserSubscriptionResponse } from '@/boundary/interfaces/payment';
 import {
   Button,
   Chip,
@@ -19,6 +18,7 @@ import DownloadIcon from '@/components/site/icons/DownloadIcon';
 import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import InvoicePdfDocument from '@/components/user/settings/InvoiceDocument';
+import { UserSubscriptionResponse } from '@/boundary/interfaces/userSubscription';
 
 export default function BillingSection({ user }: ProfileSectionProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
