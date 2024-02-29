@@ -9,19 +9,20 @@ import { redirect } from 'next/navigation';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 
 export default function AdminDashboardLayout({children}: { children: React.ReactNode; }) {
-    const {user, loading: authLoading} = useAuth();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        setTimeout(() => setLoading(false), 1000);
+        const timeout = setTimeout(() => {
+            setLoading(false);
+        }, 500); //1 second
+
+        return () => clearTimeout(timeout);
     }, []);
 
-    if (loading || authLoading) {
+    if (loading) {
         return <Loader/>;
-    } else if (!user) {
-        redirect(NAVIGATION_LINKS.ADMIN_LOGIN)
-    } else if (user && user.isAdmin) {
+    } else {
         return (
             <div className="dark:bg-boxdark-2 dark:text-bodydark">
                 <div className="flex h-screen overflow-hidden">

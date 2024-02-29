@@ -18,7 +18,6 @@ import { formatDate } from '@/helpers/dateHelpers';
 import DownloadIcon from '@/components/site/icons/DownloadIcon';
 import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
-import { MagicStudioPdfStyle } from '@/lib/utils/pdfUtils';
 import InvoicePdfDocument from '@/components/user/settings/InvoiceDocument';
 
 export default function BillingSection({ user }: ProfileSectionProps) {

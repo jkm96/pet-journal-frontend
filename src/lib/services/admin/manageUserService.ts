@@ -1,6 +1,5 @@
 import { apiKey, internalBaseUrl } from '@/boundary/constants/appConstants';
 import { UserQueryParameters } from '@/boundary/parameters/userQueryParameters';
-import { CreateUserSubscriptionRequest } from '@/boundary/interfaces/admin';
 
 export async function getUsers(queryParams: UserQueryParameters) {
     try {

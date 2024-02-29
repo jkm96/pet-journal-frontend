@@ -4,10 +4,6 @@ import { checkEmailVerificationStatus, hasRequiredPermissions } from '@/helpers/
 import Authorizing from '@/components/common/auth/Authorizing';
 import PermissionDeniedMessage from '@/components/common/auth/PermissionDeniedMessage';
 import UnVerifiedEmail from '@/components/common/auth/UnVerifiedEmail';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/hooks/useAuth';
-import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
-import { toast } from 'react-toastify';
 
 const AuthorizeComponent = (requiredPermissions: any) => (WrappedComponent: any) => {
   const AuthComponent = (props: any) => {

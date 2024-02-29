@@ -19,8 +19,8 @@ export interface UserResponse {
     isSubscribed: boolean;
     isAdmin: boolean;
     isActive: boolean;
-    emailVerifiedAt: null;
-    createdAt: Date;
-    updatedAt: Date;
+    emailVerifiedAt: string;
+    createdAt: string;
+    updatedAt: string;
     permissions: number[];
 }

@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
-import { CircularProgress, Input } from '@nextui-org/react';
+import { CircularProgress } from '@nextui-org/react';
 import { Button } from '@nextui-org/button';
 import { EditIcon } from '@nextui-org/shared-icons';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
@@ -38,6 +38,7 @@ export default function ManageUserSection({ userId }: { userId: number }) {
       .then((response) => {
         if (response.statusCode === 200) {
           const user: UserResponse = response.data;
+          console.log('user',user)
           setUserDetails(user);
         } else {
           toast.error(`Error fetching user details: ${response.message}`);

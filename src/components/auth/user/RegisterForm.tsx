@@ -13,7 +13,6 @@ import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import { AccessTokenModel } from '@/boundary/interfaces/token';
 import { useAuth } from '@/hooks/useAuth';
 import MainNavbar from '@/components/site/sections/MainNavbar';
-import { Footer } from '@/components/site/sections/Footer';
 
 const initialFormState: RegisterUserRequest = {
     email: "", username: "", password: "", confirmPassword: ""

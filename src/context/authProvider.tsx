@@ -4,9 +4,6 @@ import { User } from '@/boundary/interfaces/user';
 import AuthContext from './authContext';
 import { AccessTokenModel } from '@/boundary/interfaces/token';
 import { getAccessToken, storeAccessTokenInCookie } from '@/lib/services/token/tokenService';
-import { fetchCheckoutSession } from '@/lib/services/payments/paymentsService';
-import { CheckoutSessionModel } from '@/boundary/interfaces/payment';
-import { toast } from 'react-toastify';
 
 type AuthContextProps = {
   children: React.ReactNode;

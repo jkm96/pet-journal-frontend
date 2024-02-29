@@ -16,13 +16,10 @@ import { Button } from '@nextui-org/button';
 import PreviewAndPrintJournalEntryModal, {
   getJournalEntryPdfDocument,
 } from '@/components/user/journalmngt/journalentries/modals/PreviewAndPrintJournalEntryModal';
-import UploadJournalImagesModal
-  from '@/components/user/journalmngt/journalentries/modals/UploadJournalImagesModal';
-import UpdateJournalEntryModal
-  from '@/components/user/journalmngt/journalentries/modals/UpdateJournalEntryModal';
+import UploadJournalImagesModal from '@/components/user/journalmngt/journalentries/modals/UploadJournalImagesModal';
+import UpdateJournalEntryModal from '@/components/user/journalmngt/journalentries/modals/UpdateJournalEntryModal';
 import { CloseIcon, EditIcon } from '@nextui-org/shared-icons';
-import DeleteJournalEntryModal
-  from '@/components/user/journalmngt/journalentries/modals/DeleteJournalEntryModal';
+import DeleteJournalEntryModal from '@/components/user/journalmngt/journalentries/modals/DeleteJournalEntryModal';
 import UploadIcon from '@/components/shared/icons/UploadIcon';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
 import FileEyeIcon from '@/components/shared/icons/FileEyeIcon';
@@ -32,8 +29,8 @@ import { useAuth } from '@/hooks/useAuth';
 import { PdfPreviewStyle } from '@/lib/utils/pdfUtils';
 import { GoBackButton } from '@/components/common/navigation/GoBackButton';
 import { useRouter } from 'next/navigation';
-import Font = ReactPDF.Font;
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
+import Font = ReactPDF.Font;
 
 Font.register({
   family: 'Oswald',

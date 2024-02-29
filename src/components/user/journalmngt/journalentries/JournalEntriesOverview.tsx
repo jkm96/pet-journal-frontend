@@ -8,8 +8,7 @@ import Link from 'next/link';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import { Button } from '@nextui-org/button';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
-import CreateJournalEntryModal
-  from '@/components/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
+import CreateJournalEntryModal from '@/components/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
 import { formatDate } from '@/helpers/dateHelpers';
 import { getRandomColorClass } from '@/helpers/stylingHelpers';
 import { JournalQueryParameters } from '@/boundary/parameters/journalQueryParameters';
@@ -17,7 +16,6 @@ import { SearchIcon } from '@/components/shared/icons/SearchIcon';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { AddRecordFab } from '@/components/common/dashboard/AddRecordFab';
 import { groupEntriesByMonth } from '@/lib/utils/journalUtils';
-import { EditIcon } from '@nextui-org/shared-icons';
 
 
 export default function JournalEntriesOverview() {

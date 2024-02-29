@@ -25,9 +25,9 @@ import TrashIcon from '@/components/shared/icons/TrashIcon';
 import DownloadIcon from '@/components/site/icons/DownloadIcon';
 import { GoBackButton } from '@/components/common/navigation/GoBackButton';
 import { useRouter } from 'next/navigation';
-import Font = ReactPDF.Font;
 import { CloseIcon } from '@nextui-org/shared-icons';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
+import Font = ReactPDF.Font;
 
 type SectionVisibility = {
   textSection: boolean;
