@@ -10,7 +10,7 @@ import React from 'react';
 
 export function Benefits() {
   return (
-    <section className='bg-gray-50' id="features">
+    <section className='bg-gray-50' id='features'>
       <div className='max-w-7xl mx-auto py-0 px-4 sm:px-6'>
         <div className='max-w-3xl mx-auto text-center'>
           <p className='mt-2 text-3xl font-extrabold text-black-2'>

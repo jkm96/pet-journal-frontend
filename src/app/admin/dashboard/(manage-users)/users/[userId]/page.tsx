@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
 import ManageUserSection from '@/components/admin/manageusers/ManageUserSection';
 
-function ManageUserPage({params}: { params: { userId: number } }) {
-    return (
-        <>
-            <ManageUserSection userId={params.userId}/>
-        </>
-    )
+function ManageUserPage({ params }: { params: { userId: number } }) {
+  return (
+    <>
+      <ManageUserSection userId={params.userId} />
+    </>
+  );
 }
 
-export default ManageUserPage
+export default ManageUserPage;

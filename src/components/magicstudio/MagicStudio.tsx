@@ -30,7 +30,7 @@ export default function MagicStudio() {
       .then((response) => {
         if (response.statusCode === 200) {
           const projects = response.data;
-          setMagicProjects(projects)
+          setMagicProjects(projects);
         }
       })
       .catch((error) => {
@@ -49,10 +49,10 @@ export default function MagicStudio() {
     <>
       <Breadcrumb pageName='Magic Studio' />
 
-      <div className="flex flex-col gap-4 m-2">
-        <div className="flex justify-between gap-3 items-end">
+      <div className='flex flex-col gap-4 m-2'>
+        <div className='flex justify-between gap-3 items-end'>
 
-          <div className="gap-3 hidden lg:block">
+          <div className='gap-3 hidden lg:block'>
             <Button
               onPress={handleOpenModal}
               startContent={<PlusIcon />}
@@ -79,44 +79,45 @@ export default function MagicStudio() {
               <p className='text-danger-400'>No projects were found!</p>
             </div>
           ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                {magicProjects.map((project) => (
-                  <Link key={project.id}
-                        href={`${NAVIGATION_LINKS.MAGIC_STUDIO}/${project.slug}`}>
-                    <Card
-                      key={project.id}
-                      isBlurred
-                      className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
-                      shadow="sm"
-                    >
-                      <CardBody>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
+              {magicProjects.map((project) => (
+                <Link key={project.id}
+                      href={`${NAVIGATION_LINKS.MAGIC_STUDIO}/${project.slug}`}>
+                  <Card
+                    key={project.id}
+                    isBlurred
+                    className='border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]'
+                    shadow='sm'
+                  >
+                    <CardBody>
+                      <div
+                        className='grid grid-cols-6 md:grid-cols-12 sm:grid-cols-12 lg:gap-6 md:gap-4 items-center justify-center'>
                         <div
-                          className="grid grid-cols-6 md:grid-cols-12 sm:grid-cols-12 lg:gap-6 md:gap-4 items-center justify-center">
-                          <div
-                            className="relative col-span-1 md:col-span-1 sm:col-span-6 mb-2 md:mb-0">
-                            <Avatar
-                              name={project.title}
-                              radius="sm"
-                              isBordered
-                              color="primary"
-                            />
-                          </div>
+                          className='relative col-span-1 md:col-span-1 sm:col-span-6 mb-2 md:mb-0'>
+                          <Avatar
+                            name={project.title}
+                            radius='sm'
+                            isBordered
+                            color='primary'
+                          />
+                        </div>
 
-                          <div
-                            className="flex flex-col col-span-5 md:col-span-11 md:ml-3 sm:col-span-6">
-                            <div className="flex flex-col gap-0">
-                              <h3 className="font-semibold text-foreground/90">{project.title}</h3>
-                              <p className="text-small text-foreground/80">
-                                {formatDate(project.createdAt)} | <span className="text-small">from {project.periodFrom} to {project.periodTo}</span>
-                              </p>
-                            </div>
+                        <div
+                          className='flex flex-col col-span-5 md:col-span-11 md:ml-3 sm:col-span-6'>
+                          <div className='flex flex-col gap-0'>
+                            <h3 className='font-semibold text-foreground/90'>{project.title}</h3>
+                            <p className='text-small text-foreground/80'>
+                              {formatDate(project.createdAt)} | <span
+                              className='text-small'>from {project.periodFrom} to {project.periodTo}</span>
+                            </p>
                           </div>
                         </div>
-                      </CardBody>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
+                      </div>
+                    </CardBody>
+                  </Card>
+                </Link>
+              ))}
+            </div>
           )}
         </>
       )}

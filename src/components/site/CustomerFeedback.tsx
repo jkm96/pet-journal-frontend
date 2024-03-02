@@ -1,5 +1,5 @@
 export function CustomerFeedback() {
-  return(
+  return (
     <>Customer Service</>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 export class SiteContentQueryParameters {
-    public type: string;
+  public type: string;
 
-    constructor() {
-        this.type = '';
-    }
+  constructor() {
+    this.type = '';
+  }
 }

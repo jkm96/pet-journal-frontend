@@ -47,7 +47,7 @@ export default function BillingSection({ user }: ProfileSectionProps) {
   };
 
   async function downloadInvoice(billing: UserSubscriptionResponse) {
-    const pdfContent = InvoicePdfDocument(billing,user);
+    const pdfContent = InvoicePdfDocument(billing, user);
     const blob = await pdf(pdfContent).toBlob();
     saveAs(blob, `${billing.invoice}.pdf`);
   }
@@ -61,13 +61,13 @@ export default function BillingSection({ user }: ProfileSectionProps) {
         </div>
       ) : (
         <>
-          <Table  aria-label={user?.username}>
+          <Table aria-label={user?.username}>
             <TableHeader>
               <TableColumn>Invoice</TableColumn>
               <TableColumn>Price</TableColumn>
-              <TableColumn className="hidden md:table-cell lg:table-cell">Start Date</TableColumn>
-              <TableColumn className="hidden md:table-cell lg:table-cell">End Date</TableColumn>
-              <TableColumn className="hidden md:table-cell lg:table-cell">Plan</TableColumn>
+              <TableColumn className='hidden md:table-cell lg:table-cell'>Start Date</TableColumn>
+              <TableColumn className='hidden md:table-cell lg:table-cell'>End Date</TableColumn>
+              <TableColumn className='hidden md:table-cell lg:table-cell'>Plan</TableColumn>
               <TableColumn>Status</TableColumn>
               <TableColumn>Action</TableColumn>
             </TableHeader>
@@ -76,29 +76,29 @@ export default function BillingSection({ user }: ProfileSectionProps) {
                 <TableRow key={billing.id}>
                   <TableCell>{billing.invoice}</TableCell>
                   <TableCell>${billing.subscriptionPlan.price}</TableCell>
-                  <TableCell className="hidden md:table-cell lg:table-cell">{formatDate(billing.startDate)}</TableCell>
-                  <TableCell className="hidden md:table-cell lg:table-cell">{formatDate(billing.endDate)}</TableCell>
-                  <TableCell className="hidden md:table-cell lg:table-cell">
-                    <Chip color={billing.subscriptionPlan.name == "paid" ? 'success':'danger'}
+                  <TableCell className='hidden md:table-cell lg:table-cell'>{formatDate(billing.startDate)}</TableCell>
+                  <TableCell className='hidden md:table-cell lg:table-cell'>{formatDate(billing.endDate)}</TableCell>
+                  <TableCell className='hidden md:table-cell lg:table-cell'>
+                    <Chip color={billing.subscriptionPlan.name == 'paid' ? 'success' : 'danger'}
                           size='sm'
-                          variant="shadow">
+                          variant='shadow'>
                       {billing.subscriptionPlan.name}
                     </Chip>
                   </TableCell>
                   <TableCell>
-                    <Chip color={billing.status == "ACTIVE" ? 'success':'danger'}
+                    <Chip color={billing.status == 'ACTIVE' ? 'success' : 'danger'}
                           size='sm'
-                          variant="shadow">
+                          variant='shadow'>
                       {billing.status}
                     </Chip>
                   </TableCell>
                   <TableCell>
-                    <Button onPress={()=>downloadInvoice(billing)}
+                    <Button onPress={() => downloadInvoice(billing)}
                             isIconOnly
-                            size="sm"
-                            style={{backgroundColor:'transparent'}}
+                            size='sm'
+                            style={{ backgroundColor: 'transparent' }}
                     >
-                      <DownloadIcon color={"#24ed0d"}/>
+                      <DownloadIcon color={'#24ed0d'} />
                     </Button>
                   </TableCell>
                 </TableRow>

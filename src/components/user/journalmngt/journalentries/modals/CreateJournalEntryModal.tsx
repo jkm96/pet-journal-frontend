@@ -375,10 +375,11 @@ export default function CreateJournalEntryModal({ isOpen, onClose }: {
                       </>
                     ) : (
                       <>
-                       <p className="text-center p-10">
-                           You should have some pets under your profile to proceed.
-                           Kindly add some pets <Link className='text-primary' href={NAVIGATION_LINKS.PET_PROFILES}>here</Link>
-                       </p>
+                        <p className='text-center p-10'>
+                          You should have some pets under your profile to proceed.
+                          Kindly add some pets <Link className='text-primary'
+                                                     href={NAVIGATION_LINKS.PET_PROFILES}>here</Link>
+                        </p>
                       </>
                     )}
                 </>

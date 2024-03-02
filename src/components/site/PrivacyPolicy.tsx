@@ -9,9 +9,9 @@ import { SiteContentQueryParameters } from '@/boundary/parameters/contentQueryPa
 export function PrivacyPolicy() {
   const [htmlContent, setHtmlContent] = useState('');
 
-  const fetchContent = async () =>{
+  const fetchContent = async () => {
     const param = new SiteContentQueryParameters();
-    param.type = "privacy"
+    param.type = 'privacy';
     await fetchPrivacyPolicy(param)
       .then((response) => {
         if (response.statusCode === 200) {
@@ -23,10 +23,10 @@ export function PrivacyPolicy() {
       .catch((error) => {
         toast.error(`Error fetching privacy policy: ${error}`);
       });
-  }
+  };
 
   useEffect(() => {
-    fetchContent()
+    fetchContent();
   }, []);
 
   return (

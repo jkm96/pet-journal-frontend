@@ -37,7 +37,7 @@ export async function fetchMagicStudioProjects(queryParams: MagicStudioQueryPara
   }
 }
 
-export async function savePdfDocToDatabase(request:SavePdfRequest) {
+export async function savePdfDocToDatabase(request: SavePdfRequest) {
   try {
     const response = await fetch(`${internalBaseUrl}/api/magic-studio/save-pdf`, {
       method: 'POST',
@@ -80,7 +80,7 @@ export async function deleteMagicProject(projectId: number) {
         'Content-type': 'application/json',
       },
       body: JSON.stringify({
-        projectId: projectId
+        projectId: projectId,
       }),
     });
 

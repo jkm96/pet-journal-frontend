@@ -9,9 +9,9 @@ import { toast } from 'react-toastify';
 export function TermsAndConditions() {
   const [htmlContent, setHtmlContent] = useState('');
 
-  const fetchContent = async () =>{
+  const fetchContent = async () => {
     const param = new SiteContentQueryParameters();
-    param.type = "terms"
+    param.type = 'terms';
     await fetchPrivacyPolicy(param)
       .then((response) => {
         if (response.statusCode === 200) {
@@ -23,10 +23,10 @@ export function TermsAndConditions() {
       .catch((error) => {
         toast.error(`Error fetching terms and conditions: ${error}`);
       });
-  }
+  };
 
   useEffect(() => {
-    fetchContent()
+    fetchContent();
   }, []);
   return (
     <>
@@ -42,7 +42,7 @@ export function TermsAndConditions() {
         </section>
       </main>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }

@@ -1,12 +1,13 @@
-"use client";
+'use client';
 
 import AdminDashboardSection from '@/components/admin/AdminDashboardSection';
 
 function AdminDashboardPage() {
-    return (
-        <>
-            <AdminDashboardSection/>
-        </>
-    )
+  return (
+    <>
+      <AdminDashboardSection />
+    </>
+  );
 }
-export default AdminDashboardPage
+
+export default AdminDashboardPage;

@@ -1,7 +1,7 @@
 import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
-import { UserSubscriptionResponse } from '@/boundary/interfaces/payment';
 import { formatDate } from '@/helpers/dateHelpers';
 import { User } from '@/boundary/interfaces/user';
+import { UserSubscriptionResponse } from '@/boundary/interfaces/userSubscription';
 
 const styles = StyleSheet.create({
   page: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   row: {
-    fontSize:14,
+    fontSize: 14,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 5,
@@ -30,16 +30,16 @@ const InvoicePdfDocument = (billing: UserSubscriptionResponse, user: User | null
   return (
     <Document>
       <Page size='A4' style={styles.page}>
-        <Text style={[styles.header,{textAlign:'center'}]}>Pet Diaries</Text>
+        <Text style={[styles.header, { textAlign: 'center' }]}>Pet Diaries</Text>
         <View style={styles.section}>
           <Text style={styles.header}>Invoice Details</Text>
           <View style={styles.row}>
             <Text style={styles.label}>Customer Ref:</Text>
-            <Text style={{ textAlign:'left'}}>{user?.email}</Text>
+            <Text style={{ textAlign: 'left' }}>{user?.email}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>Invoice Number:</Text>
-            <Text style={{ textAlign:'left'}}>{billing.invoice}</Text>
+            <Text style={{ textAlign: 'left' }}>{billing.invoice}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>Invoice Date:</Text>

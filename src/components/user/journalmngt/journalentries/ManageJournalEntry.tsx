@@ -277,22 +277,28 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
           {buttonsVisible && (
             <>
               <div className='fixed bottom-52 right-4 md:hidden'>
-                <Button onClick={(e) =>  { e.stopPropagation(); openModal('editJournal')}}
+                <Button onClick={(e) => {
+                  e.stopPropagation();
+                  openModal('editJournal');
+                }}
                         isIconOnly
                         color='success'
                         radius='full'
                         variant='shadow'>
-                  <EditIcon color={"#fff"} />
+                  <EditIcon color={'#fff'} />
                 </Button>
               </div>
 
               <div className='fixed bottom-40 right-4 md:hidden'>
-                <Button onClick={(e) => { e.stopPropagation(); openModal('uploadAttachments')}}
+                <Button onClick={(e) => {
+                  e.stopPropagation();
+                  openModal('uploadAttachments');
+                }}
                         isIconOnly
                         color='warning'
                         radius='full'
                         variant='shadow'>
-                  <UploadIcon color={"#fff"}/>
+                  <UploadIcon color={'#fff'} />
                 </Button>
               </div>
 
@@ -314,12 +320,15 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
               </div>
 
               <div className='fixed bottom-16 right-4 md:hidden'>
-                <Button onClick={(e) => { e.stopPropagation(); openModal('deleteJournal')}}
+                <Button onClick={(e) => {
+                  e.stopPropagation();
+                  openModal('deleteJournal');
+                }}
                         isIconOnly
                         color='danger'
                         radius='full'
                         variant='shadow'>
-                  <TrashIcon color={"#fff"}/>
+                  <TrashIcon color={'#fff'} />
                 </Button>
               </div>
             </>

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { useEffect, useState } from 'react';
 import Loader from '@/components/common/dashboard/Loader';
 import { TermsAndConditions } from '@/components/site/TermsAndConditions';
@@ -14,8 +14,8 @@ export default function TermsConditionsPage() {
   }, []);
 
   if (loading) {
-    return <Loader/>;
+    return <Loader />;
   } else {
-    return <TermsAndConditions/>;
+    return <TermsAndConditions />;
   }
 }

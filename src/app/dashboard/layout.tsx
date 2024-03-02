@@ -17,7 +17,7 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
   }, []);
 
   if (loading) {
-    return <Loader/>;
+    return <Loader />;
   } else {
     return (
       <div className='dark:bg-boxdark-2 dark:text-bodydark'>

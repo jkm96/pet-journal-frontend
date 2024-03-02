@@ -5,7 +5,7 @@ import { handleApiException, handleAxiosResponse } from '@/helpers/responseHelpe
 export async function GET(request: NextRequest, { params }: { params: { userEmail: string } }) {
   try {
     const userEmail = params.userEmail;
-    console.log("email",userEmail)
+    console.log('email', userEmail);
     const config = getAxiosConfigs(request);
     const response = await petJournalApiClient.get(`api/v1/payment/billing-info/${userEmail}`, config);
     return handleAxiosResponse(response);

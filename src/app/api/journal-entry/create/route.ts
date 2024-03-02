@@ -3,13 +3,13 @@ import petJournalApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
 import { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
-    try {
-        const config = getAxiosConfigs(request);
-        const formData = await request.formData();
-        const response = await petJournalApiClient
-            .post('api/v1/journal-entry/create', formData, config);
-        return handleAxiosResponse(response);
-    } catch (error: unknown) {
-        return handleApiException(error);
-    }
+  try {
+    const config = getAxiosConfigs(request);
+    const formData = await request.formData();
+    const response = await petJournalApiClient
+      .post('api/v1/journal-entry/create', formData, config);
+    return handleAxiosResponse(response);
+  } catch (error: unknown) {
+    return handleApiException(error);
+  }
 }

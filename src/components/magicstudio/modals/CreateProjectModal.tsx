@@ -8,7 +8,7 @@ import { createProject } from '@/lib/services/magicstudio/magicStudioService';
 
 const initialFormState: CreateMagicProjectRequest = {
   pdf_content: 'Text Content',
-  periodFrom: '', periodTo: '', title: ''
+  periodFrom: '', periodTo: '', title: '',
 };
 
 export default function CreateProjectModal({ isOpen, onClose }: {
@@ -55,7 +55,7 @@ export default function CreateProjectModal({ isOpen, onClose }: {
   return (
     <>
       <Modal
-        backdrop="blur"
+        backdrop='blur'
         isOpen={isOpen}
         onOpenChange={() => {
           onClose();
@@ -72,7 +72,8 @@ export default function CreateProjectModal({ isOpen, onClose }: {
               <ModalHeader className='flex flex-col gap-1'>Create Project</ModalHeader>
               <ModalBody>
                 <p>
-                  The period from and period to are optional. If unselected, the project created with use the current months diary entries.
+                  The period from and period to are optional. If unselected, the project created with use the current
+                  months diary entries.
                 </p>
                 <form onSubmit={handleProjectCreation}>
                   <div className='grid md:grid-cols-3 md:gap-6'>

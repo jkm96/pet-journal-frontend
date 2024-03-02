@@ -53,7 +53,7 @@ const DropdownUser = () => {
                     <img
                       width={112}
                       height={112}
-                      className="rounded-full"
+                      className='rounded-full'
                       src={user?.profileUrl}
                       alt='User'
                     />

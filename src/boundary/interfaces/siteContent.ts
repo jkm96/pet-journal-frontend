@@ -1,4 +1,4 @@
 export type SiteContentResponse = {
-  content:string;
-  type:string;
+  content: string;
+  type: string;
 }

@@ -3,15 +3,15 @@ import { handleApiException, handleAxiosResponse } from '@/helpers/responseHelpe
 import adminApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
 
 export async function POST(request: NextRequest) {
-    try {
-        const config = getAxiosConfigs(request);
-        const requestBody = await request.json();
-        const {userId} = requestBody;
-        const response = await adminApiClient
-            .put(`api/v1/admin/user/${userId}/toggle-status`, requestBody, config);
+  try {
+    const config = getAxiosConfigs(request);
+    const requestBody = await request.json();
+    const { userId } = requestBody;
+    const response = await adminApiClient
+      .put(`api/v1/admin/user/${userId}/toggle-status`, requestBody, config);
 
-        return handleAxiosResponse(response);
-    } catch (error: unknown) {
-        return handleApiException(error);
-    }
+    return handleAxiosResponse(response);
+  } catch (error: unknown) {
+    return handleApiException(error);
+  }
 }

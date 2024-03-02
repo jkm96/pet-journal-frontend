@@ -1,77 +1,77 @@
 import { PetProfileResponse } from '@/boundary/interfaces/pet';
 
 export interface JournalEntryResponse {
-    id: number;
-    slug: string;
-    title: string;
-    event: string;
-    content: string;
-    profileUrl: string;
-    location: string;
-    mood: string;
-    tags: string;
-    createdAt: string;
-    updatedAt: string;
-    pets: PetProfileResponse[];
-    journalAttachments: JournalAttachment[];
+  id: number;
+  slug: string;
+  title: string;
+  event: string;
+  content: string;
+  profileUrl: string;
+  location: string;
+  mood: string;
+  tags: string;
+  createdAt: string;
+  updatedAt: string;
+  pets: PetProfileResponse[];
+  journalAttachments: JournalAttachment[];
 }
 
 export interface CreateJournalEntryRequest {
-    title: string;
-    event: string;
-    content: string;
-    location: string;
-    mood: string;
-    tags: string;
-    petIds: number[]
-    attachments: FileList | null;
+  title: string;
+  event: string;
+  content: string;
+  location: string;
+  mood: string;
+  tags: string;
+  petIds: number[];
+  attachments: FileList | null;
 }
 
 export interface UpdateJournalEntryRequest {
-    journalId: number;
-    title: string;
-    event: string;
-    content: string;
-    location: string;
-    mood: string;
-    tags: string;
-    petIds: number[]
+  journalId: number;
+  title: string;
+  event: string;
+  content: string;
+  location: string;
+  mood: string;
+  tags: string;
+  petIds: number[];
 }
 
 export interface JournalAttachment {
-    id: number;
-    type: string;
-    sourceUrl: string;
-    createdAt: string;
-    updatedAt: string;
-    journalEntryId: number;
-    buffer: JournalImageBuffer;
+  id: number;
+  type: string;
+  sourceUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  journalEntryId: number;
+  buffer: JournalImageBuffer;
 }
 
 export interface PrintJournalEntryRequest {
-    id: number;
-    title: string;
-    slug: string;
-    event: string;
-    content: string;
-    location: string;
-    moods: string[];
-    tags: string[];
-    createdAt: string;
-    pets: string[];
-    journalAttachments: string[];
+  id: number;
+  title: string;
+  slug: string;
+  event: string;
+  content: string;
+  location: string;
+  moods: string[];
+  tags: string[];
+  createdAt: string;
+  pets: string[];
+  journalAttachments: string[];
 }
 
 export interface JournalImageBuffer {
-    imageBuffer: string;
-    imageType: string;
+  imageBuffer: string;
+  imageType: string;
 }
 
 export interface UploadJournalImageRequest {
-    journalId: number
-    attachments: FileList | null;
+  journalId: number;
+  attachments: FileList | null;
 }
 
 export interface FilterProps {
-    searchParams?: { searchTerm?: string; periodFrom?: string; periodTo?: string; };
+  searchParams?: { searchTerm?: string; periodFrom?: string; periodTo?: string; };
 }

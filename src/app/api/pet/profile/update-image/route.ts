@@ -3,14 +3,14 @@ import petJournalApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
 import { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
-    try {
-        const config = getAxiosConfigs(request);
-        const formData = await request.formData();
-        const response = await petJournalApiClient
-            .post('api/v1/pet/profile/edit-picture', formData, config);
+  try {
+    const config = getAxiosConfigs(request);
+    const formData = await request.formData();
+    const response = await petJournalApiClient
+      .post('api/v1/pet/profile/edit-picture', formData, config);
 
-        return handleAxiosResponse(response);
-    } catch (error: unknown) {
-        return handleApiException(error);
-    }
+    return handleAxiosResponse(response);
+  } catch (error: unknown) {
+    return handleApiException(error);
+  }
 }

@@ -38,7 +38,7 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
 
   return (
     <section>
-      <h3 className="m-2">User Subscriptions</h3>
+      <h3 className='m-2'>User Subscriptions</h3>
 
       {isLoadingDetails ? (
         <div className='flex items-center justify-center'>
@@ -50,7 +50,7 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
           <Accordion variant='splitted'>
             {userSubscriptionDetails.map((subscription) => (
               <AccordionItem key={subscription.id}
-                             className="px-0"
+                             className='px-0'
                              aria-label={subscription.customerId}
                              startContent={subscription.status === 'ACTIVE' ?
                                <Chip size='sm' color='success'>Active</Chip> :
@@ -60,7 +60,7 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
                              indicator={subscription.status == 'ACTIVE' ? <CheckMarkIcon color={'#24ed0d'} /> :
                                <CloseIcon color={'#e30f0f'} />}
               >
-                <h3 className="mt-2 mb-3">Subscription Details</h3>
+                <h3 className='mt-2 mb-3'>Subscription Details</h3>
 
                 <div className='flex flex-col gap-4'>
                   <div className='flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4'>
@@ -129,10 +129,10 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
                       value={formatDate(subscription.updatedAt)}
                       labelPlacement={'outside'}
                     />
+                  </div>
                 </div>
-              </div>
 
-                <h3 className="mt-2 mb-2">Subscription Plan Details</h3>
+                <h3 className='mt-2 mb-2'>Subscription Plan Details</h3>
                 <div className='flex flex-col gap-4'>
                   <div className='flex w-full flex-wrap items-end md:flex-nowrap mb-6 md:mb-0 gap-4'>
                     <Input
@@ -184,11 +184,11 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
                       value={formatDate(subscription.updatedAt)}
                       labelPlacement={'outside'}
                     />
+                  </div>
                 </div>
-              </div>
 
               </AccordionItem>
-              ))}
+            ))}
           </Accordion>
         </>
       )}

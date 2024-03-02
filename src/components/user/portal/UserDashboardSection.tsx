@@ -1,8 +1,8 @@
 function UserDashboardSection() {
 
-    return (
-        <>Coming soon ...</>
-    )
+  return (
+    <>Coming soon ...</>
+  );
 }
 
 export default UserDashboardSection;

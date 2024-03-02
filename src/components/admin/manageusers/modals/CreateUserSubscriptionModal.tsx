@@ -6,7 +6,7 @@ import { CreateUserSubscriptionRequest } from '@/boundary/interfaces/admin';
 import { validateSubscriptionFormInputErrors } from '@/helpers/validationHelpers';
 import { createUserSubscription } from '@/lib/services/admin/manageUserSubscriptionsService';
 
-export default function CreateUserSubscriptionModal({createRequest, isOpen, onClose}: {
+export default function CreateUserSubscriptionModal({ createRequest, isOpen, onClose }: {
   createRequest: CreateUserSubscriptionRequest,
   isOpen: boolean,
   onClose: () => void
@@ -14,13 +14,13 @@ export default function CreateUserSubscriptionModal({createRequest, isOpen, onCl
   const [createSubscriptionFormData, setCreateSubscriptionFormData] = useState(createRequest);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [inputErrors, setInputErrors] = useState({
-    customerEmail: '', customerId: ''
+    customerEmail: '', customerId: '',
   });
 
   const handleChange = (e: any) => {
-    const {name, value} = e.target;
-    setCreateSubscriptionFormData({...createSubscriptionFormData, [name]: value});
-  }
+    const { name, value } = e.target;
+    setCreateSubscriptionFormData({ ...createSubscriptionFormData, [name]: value });
+  };
 
   const createSubscription = async (e: any) => {
     e.preventDefault();
@@ -36,14 +36,14 @@ export default function CreateUserSubscriptionModal({createRequest, isOpen, onCl
 
     const response = await createUserSubscription(createSubscriptionFormData);
     if (response.statusCode === 200) {
-      toast.success(response.message ?? "User subscription created successfully")
+      toast.success(response.message ?? 'User subscription created successfully');
       setIsSubmitting(false);
-      onClose()
+      onClose();
     } else {
       setIsSubmitting(false);
-      toast.error(response.message ?? "Unknown error occurred")
+      toast.error(response.message ?? 'Unknown error occurred');
     }
-  }
+  };
 
   return (
     <>
@@ -53,58 +53,58 @@ export default function CreateUserSubscriptionModal({createRequest, isOpen, onCl
           onClose();
         }}
         onClose={onClose}
-        size="sm"
-        placement="center"
-        scrollBehavior="inside"
+        size='sm'
+        placement='center'
+        scrollBehavior='inside'
       >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Create User Subscription</ModalHeader>
+              <ModalHeader className='flex flex-col gap-1'>Create User Subscription</ModalHeader>
               <ModalBody>
                 <form onSubmit={createSubscription}>
-                  <div className="flex flex-wrap md:flex-nowrap gap-4 m-2">
-                    <Input type="text"
-                           color="default"
+                  <div className='flex flex-wrap md:flex-nowrap gap-4 m-2'>
+                    <Input type='text'
+                           color='default'
                            onChange={handleChange}
                            value={createSubscriptionFormData.customerEmail}
-                           label="Customer Email"
+                           label='Customer Email'
                            disabled={true}
-                           name="customerEmail"
-                           variant={"bordered"}
-                           placeholder="Enter customer email"
+                           name='customerEmail'
+                           variant={'bordered'}
+                           placeholder='Enter customer email'
                            onInput={() => {
-                             setInputErrors({...inputErrors, customerEmail: ""});
+                             setInputErrors({ ...inputErrors, customerEmail: '' });
                            }}
-                           isInvalid={inputErrors.customerEmail !== ""}
-                           errorMessage={inputErrors.customerEmail}/>
+                           isInvalid={inputErrors.customerEmail !== ''}
+                           errorMessage={inputErrors.customerEmail} />
                   </div>
 
-                  <div className="flex flex-wrap md:flex-nowrap gap-4 m-2">
-                    <Input type="text"
-                           color="default"
+                  <div className='flex flex-wrap md:flex-nowrap gap-4 m-2'>
+                    <Input type='text'
+                           color='default'
                            onChange={handleChange}
                            value={createSubscriptionFormData.customerId}
-                           label="Customer Id"
-                           name="customerId"
-                           variant={"bordered"}
-                           placeholder="Enter customer id"
+                           label='Customer Id'
+                           name='customerId'
+                           variant={'bordered'}
+                           placeholder='Enter customer id'
                            onInput={() => {
-                             setInputErrors({...inputErrors, customerId: ""});
+                             setInputErrors({ ...inputErrors, customerId: '' });
                            }}
-                           isInvalid={inputErrors.customerId !== ""}
-                           errorMessage={inputErrors.customerId}/>
+                           isInvalid={inputErrors.customerId !== ''}
+                           errorMessage={inputErrors.customerId} />
                   </div>
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" onPress={onClose}>
+                <Button color='primary' onPress={onClose}>
                   No
                 </Button>
-                <Button color="danger"
-                        type="submit"
+                <Button color='danger'
+                        type='submit'
                         isLoading={isSubmitting}
-                        spinner={<Spinner/>}
+                        spinner={<Spinner />}
                         onClick={createSubscription}>
                   Add Subscription
                 </Button>
@@ -114,5 +114,5 @@ export default function CreateUserSubscriptionModal({createRequest, isOpen, onCl
         </ModalContent>
       </Modal>
     </>
-  )
+  );
 }

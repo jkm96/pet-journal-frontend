@@ -3,13 +3,13 @@ import { handleApiException, handleAxiosResponse } from '@/helpers/responseHelpe
 import petJournalApiClient from '@/lib/axios/axiosClient';
 
 export async function POST(request: NextRequest) {
-    try {
-        const requestBody = await request.json();
-        const response = await petJournalApiClient
-            .post('api/v1/user/register', requestBody);
+  try {
+    const requestBody = await request.json();
+    const response = await petJournalApiClient
+      .post('api/v1/user/register', requestBody);
 
-        return handleAxiosResponse(response);
-    } catch (error: unknown) {
-        return handleApiException(error);
-    }
+    return handleAxiosResponse(response);
+  } catch (error: unknown) {
+    return handleApiException(error);
+  }
 }

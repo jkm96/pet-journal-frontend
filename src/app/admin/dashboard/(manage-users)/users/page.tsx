@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
 import UsersOverviewSection from '@/components/admin/manageusers/UsersOverviewSection';
 
 function ManageUsersPage() {
-    return (
-        <>
-            <UsersOverviewSection/>
-        </>
-    )
+  return (
+    <>
+      <UsersOverviewSection />
+    </>
+  );
 }
 
-export default ManageUsersPage
+export default ManageUsersPage;

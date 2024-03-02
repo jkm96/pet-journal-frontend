@@ -6,9 +6,9 @@ export class MagicStudioQueryParameters extends RequestParameters {
   public periodTo: string;
 
   constructor() {
-    super(10, 1, "createdAt desc");
-    this.searchTerm = "";
-    this.periodFrom = "";
-    this.periodTo = "";
+    super(10, 1, 'createdAt desc');
+    this.searchTerm = '';
+    this.periodFrom = '';
+    this.periodTo = '';
   }
 }
