@@ -20,8 +20,10 @@ export function TermsAndConditions() {
       .then((response) => {
         if (response.statusCode === 200) {
           const content: SiteContentResponse = response.data[0];
-          content.content = DOMPurify.sanitize(content.content);
-          setSiteContent(content);
+         if (content){
+           content.content = DOMPurify.sanitize(content.content);
+           setSiteContent(content);
+         }
         }
       })
       .catch((error) => {
@@ -50,11 +52,15 @@ export function TermsAndConditions() {
                 </div>
               ) : (
                 <>
-                  <h3 className="text-black-2 font-bold">{siteContent.title}</h3>
-                  <h4 className="mb-3 mt-3 text-black-2">Last updated: {formatDate(siteContent.updatedAt)}</h4>
-                  <p
-                    dangerouslySetInnerHTML={{ __html: siteContent.content }}
-                  />
+                  {siteContent && siteContent.title ? (
+                    <>
+                      <h3 className='text-black-2 font-bold'>{siteContent.title}</h3>
+                      <h4 className='mb-3 mt-3 text-black-2'>Last updated: {formatDate(siteContent.updatedAt)}</h4>
+                      <p dangerouslySetInnerHTML={{ __html: siteContent.content }} />
+                    </>
+                  ) : (
+                    <p className="text-center p-10">We are reviewing our terms and conditions</p>
+                  )}
                 </>
               )}
             </div>
