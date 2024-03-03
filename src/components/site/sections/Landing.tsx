@@ -1,6 +1,7 @@
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import { Button } from '@nextui-org/react';
 import React from 'react';
+import Link from 'next/link';
 
 export function Landing() {
   return (
@@ -22,13 +23,14 @@ export function Landing() {
                     any time, and print them
                     beautifully.</b></p>
 
-                  <div className=''>
-                    <a href={NAVIGATION_LINKS.REGISTER}
-                       className='mt-8 mb-0 px-8 py-4 inline-block text-center border border-transparent
-                                                        rounded-md font-medium text-white'>
-                      <Button color='primary' size='lg' className='text-lg'>Start with
-                        Pet Diaries</Button>
-                    </a>
+                  <div className='mt-8 mb-8'>
+                    <Link href={NAVIGATION_LINKS.REGISTER}>
+                      <Button color='primary'
+                              size='lg'
+                              className='px-8 py-4 text-center border border-transparent rounded-md font-medium text-white'>
+                        Get Started with Pet Diaries
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>

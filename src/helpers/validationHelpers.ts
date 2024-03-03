@@ -1,8 +1,14 @@
-import { LoginUserRequest, RegisterUserRequest } from '@/boundary/interfaces/auth';
+import {
+  ForgotPasswordRequest,
+  LoginUserRequest,
+  RegisterUserRequest,
+  ResetPasswordRequest,
+} from '@/boundary/interfaces/auth';
 import { CreatePetRequest, EditPetRequest } from '@/boundary/interfaces/pet';
 import { CreateJournalEntryRequest, UpdateJournalEntryRequest } from '@/boundary/interfaces/journal';
 import { CreateMagicProjectRequest } from '@/boundary/interfaces/magicStudio';
 import { CreateUserSubscriptionRequest } from '@/boundary/interfaces/admin';
+import { CreateSiteContentRequest, CustomerFeedbackRequest } from '@/boundary/interfaces/siteContent';
 
 export function isEmailValid(email: string): boolean {
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -26,19 +32,7 @@ export function validateRegisterFormInputErrors(formData: RegisterUserRequest) {
     errors.username = 'Username must be at least 4 characters long';
   }
 
-  if (formData.password.trim() === '') {
-    errors.password = 'Password cannot be empty';
-  } else if (formData.password.trim().length < 6) {
-    errors.password = 'Password must be at least 6 characters long';
-  }
-
-  if (formData.confirmPassword.trim() === '') {
-    errors.confirmPassword = 'Confirm password cannot be empty';
-  } else if (formData.confirmPassword.trim().length < 6) {
-    errors.confirmPassword = 'Confirm password must be at least 6 characters long';
-  } else if (formData.confirmPassword.trim() !== formData.password.trim()) {
-    errors.confirmPassword = 'Passwords do not match';
-  }
+  validatePasswordCreation(formData, errors);
 
   // Check if there are any errors and return null if all input is valid
   for (const key in errors) {
@@ -65,6 +59,89 @@ export function validateLoginFormInputErrors(formData: LoginUserRequest) {
 
   for (const key in errors) {
     if (errors[key as keyof LoginUserRequest] !== '') {
+      return errors;
+    }
+  }
+
+  return null;
+}
+
+export function validateFeedbackFormInputErrors(formData: CustomerFeedbackRequest) {
+  const errors: CustomerFeedbackRequest = {
+    email: '', feedback: '', rating: 0,
+  };
+
+  if (formData.email.trim() === '') {
+    errors.email = 'Email cannot be empty';
+  } else if (!isEmailValid(formData.email.trim())) {
+    errors.email = 'Invalid email address';
+  }
+
+  if (formData.feedback.trim() === '') {
+    errors.feedback = 'Description cannot be empty';
+  }
+
+  for (const key in errors) {
+    if (key !== "rating" && errors[key as keyof CustomerFeedbackRequest] !== '') {
+      return errors;
+    }
+  }
+
+  return null;
+}
+
+export function validateForgotPassFormInputErrors(formData: ForgotPasswordRequest) {
+  const errors: ForgotPasswordRequest = {
+    email: ''
+  };
+
+  if (formData.email.trim() === '') {
+    errors.email = 'Email cannot be empty';
+  } else if (!isEmailValid(formData.email.trim())) {
+    errors.email = 'Invalid email address';
+  }
+
+  for (const key in errors) {
+    if (errors[key as keyof ForgotPasswordRequest] !== '') {
+      return errors;
+    }
+  }
+
+  return null;
+}
+
+function validatePasswordCreation(formData: ResetPasswordRequest | RegisterUserRequest, errors: ResetPasswordRequest | RegisterUserRequest) {
+  if (formData.password.trim() === '') {
+    errors.password = 'Password cannot be empty';
+  } else if (formData.password.trim().length < 6) {
+    errors.password = 'Password must be at least 6 characters long';
+  }
+
+  if (formData.confirmPassword.trim() === '') {
+    errors.confirmPassword = 'Confirm password cannot be empty';
+  } else if (formData.confirmPassword.trim().length < 6) {
+    errors.confirmPassword = 'Confirm password must be at least 6 characters long';
+  } else if (formData.confirmPassword.trim() !== formData.password.trim()) {
+    errors.confirmPassword = 'Passwords do not match';
+  }
+}
+
+export function validateResetPassFormInputErrors(formData: ResetPasswordRequest) {
+  const errors: ResetPasswordRequest = {
+    confirmPassword: '', password: '', token: '',
+    email: ''
+  };
+
+  if (formData.email.trim() === '') {
+    errors.email = 'Email cannot be empty';
+  } else if (!isEmailValid(formData.email.trim())) {
+    errors.email = 'Invalid email address';
+  }
+
+  validatePasswordCreation(formData, errors);
+
+  for (const key in errors) {
+    if (key !== 'token' && errors[key as keyof ResetPasswordRequest] !== '') {
       return errors;
     }
   }
@@ -187,10 +264,23 @@ export function validateCreateJournalFormInputErrors(formData: CreateJournalEntr
     attachments: null, content: '', event: '', location: '', mood: '', petIds: [], tags: '', title: '',
   };
 
+  validateTitleAndContent(formData, errors);
+
+  // Check if there are any errors and return null if all input is valid
+  for (const key in errors) {
+    if (key !== 'petIds' && key !== 'attachments' && errors[key as keyof CreateJournalEntryRequest] !== '') {
+      return errors;
+    }
+  }
+
+  return null;
+}
+
+function validateTitleAndContent(formData: CreateSiteContentRequest|CreateJournalEntryRequest|UpdateJournalEntryRequest, errors: CreateSiteContentRequest|CreateJournalEntryRequest|UpdateJournalEntryRequest) {
   if (formData.title.trim() === '') {
-    errors.title = 'title cannot be empty';
+    errors.title = 'Title cannot be empty';
   } else if (formData.title.trim().length < 8) {
-    errors.title = 'title must be at least 8 characters long';
+    errors.title = 'Title must be at least 8 characters long';
   }
 
   if (formData.content.trim() === '') {
@@ -198,10 +288,26 @@ export function validateCreateJournalFormInputErrors(formData: CreateJournalEntr
   } else if (formData.content.trim().length < 20) {
     errors.content = 'description must be at least 20 characters long';
   }
+}
+
+export function validateSiteContentFormInputErrors(formData: CreateSiteContentRequest) {
+  const errors: CreateSiteContentRequest = {
+    content: '', type: '', title: '',
+  };
+
+  if (formData.type.trim() === '') {
+    errors.type = 'Type cannot be empty';
+  }
+
+  if (formData.title.trim() === '') {
+    errors.title = 'Title cannot be empty';
+  } else if (formData.title.trim().length < 8) {
+    errors.title = 'Title must be at least 8 characters long';
+  }
 
   // Check if there are any errors and return null if all input is valid
   for (const key in errors) {
-    if (key !== 'petIds' && key !== 'attachments' && errors[key as keyof CreateJournalEntryRequest] !== '') {
+    if (key !== "content" && errors[key as keyof CreateSiteContentRequest] !== '') {
       return errors;
     }
   }
@@ -215,17 +321,7 @@ export function validateEditJournalFormInputErrors(formData: UpdateJournalEntryR
     journalId: 0, petIds: [], content: '', event: '', location: '', mood: '', tags: '', title: '',
   };
 
-  if (formData.title.trim() === '') {
-    errors.title = 'Title cannot be empty';
-  } else if (formData.title.trim().length < 8) {
-    errors.title = 'Title must be at least 8 characters long';
-  }
-
-  if (formData.content.trim() === '') {
-    errors.content = 'description cannot be empty';
-  } else if (formData.content.trim().length < 20) {
-    errors.content = 'description must be at least 20 characters long';
-  }
+  validateTitleAndContent(formData, errors);
 
   // Check if there are any errors and return null if all input is valid
   for (const key in errors) {
@@ -243,4 +339,4 @@ export function areFilesValid(files: FileList | null) {
     const invalidFiles = Array.from(files).filter((file) => !allowedFileTypes.includes(file.type));
     return invalidFiles.length <= 0;
   }
-};
+}

@@ -8,7 +8,7 @@ import { Footer } from '@/components/site/sections/Footer';
 export default function Home() {
   return (
     <>
-      <MainNavbar />
+      <MainNavbar/>
 
       <main className='relative'>
         <Landing />

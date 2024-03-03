@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { apiKey, cookieName, internalBaseUrl } from '@/boundary/constants/appConstants';
 import { getAccessToken } from '@/lib/services/token/tokenService';
-import { authRoutes, NAVIGATION_LINKS, protectedRoutes, publicRoutes } from '@/boundary/configs/navigationConfig';
+import {
+  authRoutes,
+  NAVIGATION_LINKS,
+  protectedRoutes,
+  publicRoutes,
+  specialRoutes,
+} from '@/boundary/configs/navigationConfig';
 import { AccessTokenModel } from '@/boundary/interfaces/token';
 
 export const config = {
@@ -37,6 +43,11 @@ export async function middleware(request: NextRequest) {
   //if not authenticated and accessing  protected routes
   //if not authenticated and accessing public/auth routes
   if (request.url.includes(`${internalBaseUrl}`)) {
+    if (specialRoutes.includes(pathName)) {
+      console.log('User is accessing a special route');
+      // Allow access to a special routes
+      return NextResponse.next();
+    }
     const cookie = request.cookies.get(cookieName)?.value;
     console.log('pathName', pathName);
     if (cookie === undefined) {

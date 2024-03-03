@@ -11,12 +11,14 @@
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-react": "^6.2.0",
     "@nextui-org/react": "^2.2.9",
     "@react-pdf/renderer": "^3.1.14",
     "@stripe/react-stripe-js": "^2.4.0",
     "@stripe/stripe-js": "^2.2.2",
     "axios": "^1.6.2",
     "camelcase-keys": "^9.1.2",
+    "ckeditor5-custom-build": "file:ckeditor5",
     "dompurify": "^3.0.8",
     "file-saver": "^2.0.5",
     "formidable": "^3.5.1",

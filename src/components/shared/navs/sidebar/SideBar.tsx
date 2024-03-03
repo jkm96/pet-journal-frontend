@@ -115,14 +115,27 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
                 <li>
                   <Link
-                    href={NAVIGATION_LINKS.MANAGE_USERS}
+                    href={NAVIGATION_LINKS.ADMIN_MANAGE_USERS}
                     onClick={() => setSidebarOpen(false)}
                     className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
                                                             text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                      pathname === NAVIGATION_LINKS.MANAGE_USERS && 'text-white'
+                      pathname === NAVIGATION_LINKS.ADMIN_MANAGE_USERS && 'text-white'
                     } `}>
                     <DashboardIcon />
                     Users
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href={NAVIGATION_LINKS.ADMIN_MANAGE_SITE_CONTENT}
+                    onClick={() => setSidebarOpen(false)}
+                    className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
+                                                            text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                      pathname === NAVIGATION_LINKS.ADMIN_MANAGE_SITE_CONTENT && 'text-white'
+                    } `}>
+                    <DashboardIcon />
+                    Site Content
                   </Link>
                 </li>
               </>

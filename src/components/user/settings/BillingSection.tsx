@@ -71,7 +71,9 @@ export default function BillingSection({ user }: ProfileSectionProps) {
               <TableColumn>Status</TableColumn>
               <TableColumn>Action</TableColumn>
             </TableHeader>
-            <TableBody>
+            <TableBody
+              emptyContent={!isLoading && billingInfo.length === 0 ? 'No data to display.' : null}
+            >
               {billingInfo.map((billing) => (
                 <TableRow key={billing.id}>
                   <TableCell>{billing.invoice}</TableCell>

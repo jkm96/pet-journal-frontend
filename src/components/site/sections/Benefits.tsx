@@ -11,7 +11,7 @@ import React from 'react';
 export function Benefits() {
   return (
     <section className='bg-gray-50' id='features'>
-      <div className='max-w-7xl mx-auto py-0 px-4 sm:px-6'>
+      <div className='mx-auto py-0 px-4 sm:px-6 max-w-[1024px]'>
         <div className='max-w-3xl mx-auto text-center'>
           <p className='mt-2 text-3xl font-extrabold text-black-2'>
             Discover the Unique Advantages of Pet Diaries
@@ -23,7 +23,7 @@ export function Benefits() {
         </div>
 
         <dl
-          className='mt-4 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-8'>
+          className='mt-4 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-3 lg:gap-x-8'>
           <div className='relative'>
             <dt>
               <MemoriesIcon />

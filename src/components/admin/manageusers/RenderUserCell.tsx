@@ -15,7 +15,7 @@ export default function RenderUserCell(user: UserResponse, columnKey: string | n
       );
     case 'username':
       return (
-        <Link href={`${NAVIGATION_LINKS.MANAGE_USERS}/${user.id}`}>
+        <Link href={`${NAVIGATION_LINKS.ADMIN_MANAGE_USERS}/${user.id}`}>
           <User
             className='text-bold text-small capitalize'
             name={user.username}
@@ -46,12 +46,12 @@ export default function RenderUserCell(user: UserResponse, columnKey: string | n
     case 'actions':
       return (
         <div className='relative flex justify-center items-center gap-2'>
-          <Link href={`${NAVIGATION_LINKS.MANAGE_USERS}/${user.id}`}>
+          <Link href={`${NAVIGATION_LINKS.ADMIN_MANAGE_USERS}/${user.id}`}>
             <Chip color='success'>View</Chip>
           </Link>
         </div>
       );
     default:
-      return <Link href={`${NAVIGATION_LINKS.MANAGE_USERS}/${user.id}`}>{cellValue}</Link>;
+      return <Link href={`${NAVIGATION_LINKS.ADMIN_MANAGE_USERS}/${user.id}`}>{cellValue}</Link>;
   }
 }

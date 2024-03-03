@@ -1,6 +1,9 @@
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
+import { useAuth } from '@/hooks/useAuth';
 
 export function Footer() {
+  const { user } = useAuth();
+
   return (
     <footer className='bg-white dark:bg-gray-900 footer'>
 
@@ -22,8 +25,19 @@ export function Footer() {
                   <li className='mb-4'>
                     <a href={NAVIGATION_LINKS.HOME} className='hover:underline'>Home</a>
                   </li>
-                  <li>
-                    <a href={NAVIGATION_LINKS.REGISTER} className='hover:underline'>Register</a>
+                  {user ? (<></>):(
+                    <li>
+                      <a href={NAVIGATION_LINKS.REGISTER} className='hover:underline'>Register</a>
+                    </li>
+                  )}
+                </ul>
+              </div>
+
+              <div>
+                <h2 className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>Customer Center</h2>
+                <ul className='text-gray-500 dark:text-gray-400 font-medium'>
+                  <li className='mb-4'>
+                    <a href={NAVIGATION_LINKS.CUSTOMER_FEEDBACK} className='hover:underline'>Customer Feedback</a>
                   </li>
                 </ul>
               </div>

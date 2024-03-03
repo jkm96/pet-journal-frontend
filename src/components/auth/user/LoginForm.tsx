@@ -57,7 +57,7 @@ export default function LoginForm() {
 
     let response = await loginUser(loginFormData);
     if (response.statusCode === 200) {
-      toast.success('Logged in successfully');
+      toast.success(response.message);
       setIsSubmitting(false);
       setLoginFormData(initialFormState);
       let responseData: AccessTokenModel = response.data;
@@ -102,7 +102,8 @@ export default function LoginForm() {
                        setInputErrors({ ...inputErrors, username: '' });
                      }}
                      isInvalid={inputErrors.username !== ''}
-                     errorMessage={inputErrors.username} />
+                     errorMessage={inputErrors.username}
+              />
             </div>
 
             <div className='flex flex-wrap md:flex-nowrap gap-4 m-2'>
@@ -147,13 +148,16 @@ export default function LoginForm() {
               </Button>
             </div>
 
-            <div className='mt-6 text-center'>
-              <p>
-                Don’t have any account?{' '}
-                <Link href={NAVIGATION_LINKS.REGISTER} className='text-primary'>
-                  Sign Up
+            <div className='mt-6 text-center flex justify-between'>
+
+                <Link href={NAVIGATION_LINKS.FORGOT_PASSWORD} className='text-primary ml-1 md:ml-3'>
+                  <span className="text-black-2">Forgot your password?</span> Reset
                 </Link>
-              </p>
+
+                <Link href={NAVIGATION_LINKS.REGISTER} className='text-primary mr-1 md:mr-3'>
+                  <span className="text-black-2">Don’t have any account?</span> Sign Up
+                </Link>
+
             </div>
           </form>
         </div>

@@ -2,26 +2,34 @@ import MainNavbar from '@/components/site/sections/MainNavbar';
 import React, { useEffect, useState } from 'react';
 import { Footer } from '@/components/site/sections/Footer';
 import DOMPurify from 'dompurify';
-import { fetchPrivacyPolicy } from '@/lib/services/sitecontent/siteContentService';
+import { fetchSiteContentAsync } from '@/lib/services/sitecontent/siteContentService';
 import { toast } from 'react-toastify';
 import { SiteContentQueryParameters } from '@/boundary/parameters/contentQueryParameters';
+import { SiteContentResponse } from '@/boundary/interfaces/siteContent';
+import { formatDate } from '@/helpers/dateHelpers';
+import { CircularProgress } from '@nextui-org/react';
 
 export function PrivacyPolicy() {
-  const [htmlContent, setHtmlContent] = useState('');
+  const [siteContent, setSiteContent] = useState({} as SiteContentResponse);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchContent = async () => {
+    setIsLoading(true);
     const param = new SiteContentQueryParameters();
     param.type = 'privacy';
-    await fetchPrivacyPolicy(param)
+    await fetchSiteContentAsync(param)
       .then((response) => {
         if (response.statusCode === 200) {
-          const content = response.data.content;
-          const sanitizedContent = DOMPurify.sanitize(content);
-          setHtmlContent(sanitizedContent);
+          const content: SiteContentResponse = response.data[0];
+          content.content = DOMPurify.sanitize(content.content);
+          setSiteContent(content);
         }
       })
       .catch((error) => {
         toast.error(`Error fetching privacy policy: ${error}`);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -37,9 +45,20 @@ export function PrivacyPolicy() {
         <section className='bg-gray-50'>
           <div className='relative pb-4'>
             <div className='mx-auto max-w-5xl px-4 sm:px-6'>
-              <p
-                dangerouslySetInnerHTML={{ __html: htmlContent }}
-              />
+              {isLoading ? (
+                  <div className={'grid place-items-center'}>
+                    <CircularProgress color={'primary'} className={'p-4'}
+                                      label='Fetching privacy policy ...' />
+                  </div>
+              ) : (
+                <>
+                  <h3 className="text-black-2 font-bold">{siteContent.title}</h3>
+                  <h4 className="mb-3 mt-3 text-black-2">Last updated: {formatDate(siteContent.updatedAt)}</h4>
+                  <p
+                    dangerouslySetInnerHTML={{ __html: siteContent.content }}
+                  />
+                </>
+              )}
             </div>
           </div>
         </section>

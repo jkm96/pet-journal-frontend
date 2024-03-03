@@ -5,6 +5,7 @@ export const NAVIGATION_LINKS = {
   CUSTOMER_FEEDBACK: '/customer-feedback',
   LOGIN: '/auth/login',
   REGISTER: '/auth/register',
+  FORGOT_PASSWORD: '/auth/forgot-password',
 
   PAYMENTS: '/payments',
   CHECKOUT_RETURN: '/payments/checkout-return',
@@ -18,8 +19,9 @@ export const NAVIGATION_LINKS = {
 
   ADMIN_LOGIN: '/auth/admin/login',
   ADMIN_DASHBOARD: '/admin/dashboard',
-  MANAGE_USERS: '/admin/dashboard/users',
-  MANAGE_USER_SUBSCRIPTIONS: '/admin/dashboard/user-subscriptions',
+  ADMIN_MANAGE_USERS: '/admin/dashboard/users',
+  ADMIN_MANAGE_USER_SUBSCRIPTIONS: '/admin/dashboard/user-subscriptions',
+  ADMIN_MANAGE_SITE_CONTENT: '/admin/dashboard/site-content',
 };
 
 export const protectedRoutes = [
@@ -34,15 +36,22 @@ export const protectedRoutes = [
   NAVIGATION_LINKS.SETTINGS,
 
   NAVIGATION_LINKS.ADMIN_DASHBOARD,
+  NAVIGATION_LINKS.ADMIN_MANAGE_USERS,
+  NAVIGATION_LINKS.ADMIN_MANAGE_SITE_CONTENT,
+  NAVIGATION_LINKS.ADMIN_MANAGE_USER_SUBSCRIPTIONS,
 ];
 export const authRoutes = [
   NAVIGATION_LINKS.LOGIN,
   NAVIGATION_LINKS.REGISTER,
+  NAVIGATION_LINKS.FORGOT_PASSWORD,
   NAVIGATION_LINKS.ADMIN_LOGIN,
 ];
 
 export const publicRoutes = [
   NAVIGATION_LINKS.HOME,
+];
+
+export const specialRoutes = [
   NAVIGATION_LINKS.PRIVACY_POLICY,
   NAVIGATION_LINKS.TERMS_CONDITIONS,
   NAVIGATION_LINKS.CUSTOMER_FEEDBACK,
