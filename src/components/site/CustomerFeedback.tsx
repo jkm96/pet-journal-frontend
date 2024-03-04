@@ -80,19 +80,20 @@ export function CustomerFeedback() {
           <div className='mx-auto max-w-5xl md:px-4'>
             <div className='container mx-auto flex flex-col md:flex-row my-6 md:my-24'>
               <div className='flex flex-col w-full lg:w-1/3 md:p-8 lg:mb-0 mt-3'>
-                <p className='text-black-2 text-lg uppercase tracking-loose'>REVIEW</p>
-                <p className='text-3xl text-black-2 md:text-5xl my-4 leading-relaxed md:leading-snug'>Leave us a
+                <p className='text-black-2 text-lg font-bold uppercase tracking-loose'>REVIEW</p>
+                <p className='text-3xl text-black-2 md:text-5xl my-4'>Leave us a
                   feedback!</p>
                 <p className='text-sm md:text-base text-black-2 text-opacity-100'>
                   Please provide your valuable feedback. It will help <span className="text-column-500 font-bold">improve our services</span> and <span className="text-column-500 font-bold">serve you better</span>.
                 </p>
               </div>
+
               <div className='flex flex-col lg:w-2/3 justify-center'>
                 <div className='flex flex-wrap justify-center w-full md:px-4'>
-                  <div className='relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white'>
-                    <div className='flex-auto p-5 lg:p-10'>
-                      <h4 className='text-2xl mb-4 text-black text-center font-semibold'>Have a suggestion?</h4>
-                      <form onSubmit={handleFeedbackSubmit}>
+                  <div className='relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg bg-white'>
+                    <h4 className='text-2xl mt-5 mb-4 text-black-2 font-bold'>Have a suggestion?</h4>
+                    <div className='flex-auto p-2'>
+                      <form onSubmit={handleFeedbackSubmit} className="mt-4">
 
                         <Input type='text'
                                color='default'
