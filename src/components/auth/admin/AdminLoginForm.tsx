@@ -18,7 +18,7 @@ const initialFormState: LoginUserRequest = {
 };
 
 export default function AdminLoginForm() {
-  const { storeAuthToken } = useAuth();
+  const { storeAuthToken, loading } = useAuth();
   const router = useRouter();
   const [status, setStatus] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -56,12 +56,13 @@ export default function AdminLoginForm() {
 
     let response = await loginAdmin(loginFormData);
     if (response.statusCode === 200) {
-      toast.success('Logged in successfully');
+      toast.success(response.message);
       setIsSubmitting(false);
       setLoginFormData(initialFormState);
       let responseData: AccessTokenModel = response.data;
       storeAuthToken(responseData);
-      setStatus('logged');
+      if (!loading)
+        setStatus('logged');
     } else {
       setIsSubmitting(false);
       toast.error(response.message ?? 'Unknown error occurred');
@@ -73,7 +74,7 @@ export default function AdminLoginForm() {
       router.push(NAVIGATION_LINKS.ADMIN_DASHBOARD);
     }
   }, [status]);
-  
+
   return (
     <>
       <MainNavbar />

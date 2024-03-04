@@ -14,12 +14,16 @@ export function AuthProvider({ children }: AuthContextProps) {
   const [loading, setLoading] = useState(true);
 
   const storeAuthToken = async (tokenData: AccessTokenModel) => {
+    setLoading(true)
     const cookieRequest: AccessTokenModel = {
       token: tokenData.token,
       user: tokenData.user,
     };
 
-    await storeAccessTokenInCookie(cookieRequest);
+    const response = await storeAccessTokenInCookie(cookieRequest);
+    if (response.statusCode == 200){
+      setLoading(false)
+    }
     const userObject: User = {
       id: tokenData.user.id,
       username: tokenData.user.username,
