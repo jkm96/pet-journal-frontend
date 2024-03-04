@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { validateLoginFormInputErrors } from '@/helpers/validationHelpers';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
@@ -20,6 +20,7 @@ const initialFormState: LoginUserRequest = {
 export default function AdminLoginForm() {
   const { storeAuthToken } = useAuth();
   const router = useRouter();
+  const [status, setStatus] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [loginFormData, setLoginFormData] = useState(initialFormState);
@@ -60,12 +61,19 @@ export default function AdminLoginForm() {
       setLoginFormData(initialFormState);
       let responseData: AccessTokenModel = response.data;
       storeAuthToken(responseData);
-      router.push(NAVIGATION_LINKS.ADMIN_DASHBOARD);
+      setStatus('logged');
     } else {
       setIsSubmitting(false);
       toast.error(response.message ?? 'Unknown error occurred');
     }
   };
+
+  useEffect(() => {
+    if (status === 'logged') {
+      router.push(NAVIGATION_LINKS.ADMIN_DASHBOARD);
+    }
+  }, [status]);
+  
   return (
     <>
       <MainNavbar />
