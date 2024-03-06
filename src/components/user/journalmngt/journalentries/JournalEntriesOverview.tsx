@@ -17,7 +17,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { AddRecordFab } from '@/components/common/dashboard/AddRecordFab';
 import { groupEntriesByMonth } from '@/lib/utils/journalUtils';
 
-
 export default function JournalEntriesOverview() {
   const [queryParams, setQueryParams] = useState<JournalQueryParameters>(new JournalQueryParameters());
   const [journalEntries, setJournalEntries] = useState<JournalEntryResponse[]>([]);

@@ -57,12 +57,13 @@ export default function LoginForm() {
 
     let response = await loginUser(loginFormData);
     if (response.statusCode === 200) {
-      toast.success(response.message);
+      toast.success(response.message ?? "Logged in successfully");
       setIsSubmitting(false);
       setLoginFormData(initialFormState);
       let responseData: AccessTokenModel = response.data;
-      storeAuthToken(responseData);
-      setStatus('logged');
+      const success = await storeAuthToken(responseData);
+      if (success)
+        setStatus('user_logged');
     } else {
       setIsSubmitting(false);
       toast.error(response.message ?? 'Unknown error occurred');
@@ -70,7 +71,7 @@ export default function LoginForm() {
   };
 
   useEffect(() => {
-    if (status === 'logged') {
+    if (status === 'user_logged') {
       router.push(NAVIGATION_LINKS.USER_DASHBOARD);
     }
   }, [status]);

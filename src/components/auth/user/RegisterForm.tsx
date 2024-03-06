@@ -46,20 +46,10 @@ export default function RegisterForm() {
       return;
     }
 
-    if (
-      registerFormData.email.trim() === '' ||
-      registerFormData.username.trim() === '' ||
-      registerFormData.password.trim() === '' ||
-      registerFormData.confirmPassword.trim() === ''
-    ) {
-      setIsSubmitting(false);
-      return;
-    }
-
     let response = await registerUser(registerFormData);
     if (response.statusCode === 200) {
       let responseData: AccessTokenModel = response.data;
-      storeAuthToken(responseData);
+      await storeAuthToken(responseData);
       setIsSubmitting(false);
       setRegisterFormData(initialFormState);
       toast.success('Registered successfully');

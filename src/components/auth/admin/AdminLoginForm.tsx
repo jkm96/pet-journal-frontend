@@ -18,7 +18,7 @@ const initialFormState: LoginUserRequest = {
 };
 
 export default function AdminLoginForm() {
-  const { storeAuthToken, loading } = useAuth();
+  const { storeAuthToken } = useAuth();
   const router = useRouter();
   const [status, setStatus] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -46,22 +46,16 @@ export default function AdminLoginForm() {
       return;
     }
 
-    if (
-      loginFormData.username.trim() === '' ||
-      loginFormData.password.trim() === ''
-    ) {
-      setIsSubmitting(false);
-      return;
-    }
-
     let response = await loginAdmin(loginFormData);
     if (response.statusCode === 200) {
       toast.success(response.message);
       setIsSubmitting(false);
       setLoginFormData(initialFormState);
       let responseData: AccessTokenModel = response.data;
-      storeAuthToken(responseData);
-      if (!loading)
+      const success = await storeAuthToken(responseData);
+      console.log("store response",success)
+      console.log("stored token")
+      if (success)
         setStatus('logged');
     } else {
       setIsSubmitting(false);

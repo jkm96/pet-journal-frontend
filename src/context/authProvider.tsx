@@ -13,28 +13,35 @@ export function AuthProvider({ children }: AuthContextProps) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const storeAuthToken = async (tokenData: AccessTokenModel) => {
-    setLoading(true)
-    const cookieRequest: AccessTokenModel = {
-      token: tokenData.token,
-      user: tokenData.user,
-    };
+  const storeAuthToken = async (tokenData: AccessTokenModel):Promise<boolean> => {
+    try {
+      const cookieRequest: AccessTokenModel = {
+        token: tokenData.token,
+        user: tokenData.user,
+      };
 
-    const response = await storeAccessTokenInCookie(cookieRequest);
-    if (response.statusCode == 200){
-      setLoading(false)
+      const response = await storeAccessTokenInCookie(cookieRequest);
+      if (response.statusCode == 200) {
+        const userObject: User = {
+          id: tokenData.user.id,
+          username: tokenData.user.username,
+          email: tokenData.user.email,
+          isEmailVerified: tokenData.user.isEmailVerified,
+          isSubscribed: tokenData.user.isSubscribed,
+          isAdmin: tokenData.user.isAdmin,
+          profileUrl: tokenData.user.profileUrl ?? '',
+          profileCoverUrl: tokenData.user.profileCoverUrl ?? '',
+        };
+        setUser(userObject);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error('Error storing token:', error);
+      return false;
     }
-    const userObject: User = {
-      id: tokenData.user.id,
-      username: tokenData.user.username,
-      email: tokenData.user.email,
-      isEmailVerified: tokenData.user.isEmailVerified,
-      isSubscribed: tokenData.user.isSubscribed,
-      isAdmin: tokenData.user.isAdmin,
-      profileUrl: tokenData.user.profileUrl ?? '',
-      profileCoverUrl: tokenData.user.profileCoverUrl ?? '',
-    };
-    setUser(userObject);
   };
 
   const clearAuthToken = async () => {

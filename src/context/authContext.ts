@@ -2,17 +2,20 @@ import { createContext } from 'react';
 import { User } from '@/boundary/interfaces/user';
 import { AccessTokenModel } from '@/boundary/interfaces/token';
 
-const AuthContextDefaultValue = {
-  user: null as User | null,
-  loading: true,
-  storeAuthToken: (tokenData: AccessTokenModel) => {
-  },
-  clearAuthToken: () => {
-  },
+type AuthContextType = {
+  user: User | null;
+  loading: boolean;
+  storeAuthToken: (tokenData: AccessTokenModel) => Promise<boolean>;
+  clearAuthToken: () => void;
 };
 
-const AuthContext = createContext<typeof AuthContextDefaultValue>(
-  AuthContextDefaultValue,
-);
+const AuthContextDefaultValue: AuthContextType = {
+  user: null,
+  loading: true,
+  storeAuthToken: async(tokenData: AccessTokenModel) => false,
+  clearAuthToken: () => {},
+};
+
+const AuthContext = createContext<AuthContextType>(AuthContextDefaultValue);
 
 export default AuthContext;
