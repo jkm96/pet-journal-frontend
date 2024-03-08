@@ -1,28 +1,20 @@
 import {
   Button,
-  CheckboxGroup,
   Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
-  ModalHeader, Select, SelectItem,
+  ModalHeader,
+  Select,
+  SelectItem,
 } from '@nextui-org/react';
-import { CustomCheckbox } from '@/components/shared/formelements/CustomCheckbox';
-import { Textarea } from '@nextui-org/input';
-import { journalTags, moodTags, species } from '@/boundary/constants/petConstants';
 import Spinner from '@/components/shared/icons/Spinner';
-import React, { useEffect, useState } from 'react';
-import { UpdateJournalEntryRequest } from '@/boundary/interfaces/journal';
-import { validateEditJournalFormInputErrors, validateSiteContentFormInputErrors } from '@/helpers/validationHelpers';
+import React, { useState } from 'react';
+import { validateSiteContentFormInputErrors } from '@/helpers/validationHelpers';
 import { toast } from 'react-toastify';
-import { updateJournalEntry } from '@/lib/services/journalentries/journalEntryService';
-import { PetProfileResponse } from '@/boundary/interfaces/pet';
-import { getUserPets } from '@/lib/utils/petUtils';
 import { CreateSiteContentRequest } from '@/boundary/interfaces/siteContent';
 import { createSiteContentAsync } from '@/lib/services/sitecontent/siteContentService';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import Editor from 'ckeditor5-custom-build';
 import dynamic from 'next/dynamic';
 
 const initialFormState: CreateSiteContentRequest = {

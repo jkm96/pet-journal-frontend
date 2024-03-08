@@ -2,7 +2,7 @@ import MainNavbar from '@/components/site/sections/MainNavbar';
 import React, { useEffect, useState } from 'react';
 import { Footer } from '@/components/site/sections/Footer';
 import { SiteContentQueryParameters } from '@/boundary/parameters/contentQueryParameters';
-import {  fetchSiteContentAsync } from '@/lib/services/sitecontent/siteContentService';
+import { fetchSiteContentAsync } from '@/lib/services/sitecontent/siteContentService';
 import DOMPurify from 'dompurify';
 import { toast } from 'react-toastify';
 import { CircularProgress } from '@nextui-org/react';

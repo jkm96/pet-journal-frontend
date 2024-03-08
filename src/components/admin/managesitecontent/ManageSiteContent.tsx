@@ -1,19 +1,12 @@
 import dynamic from 'next/dynamic';
 import { validateSiteContentFormInputErrors } from '@/helpers/validationHelpers';
-import {
-  createSiteContentAsync,
-  fetchSiteContentAsync,
-  fetchSiteContentByIdAsync,
-  updateSiteContentAsync,
-} from '@/lib/services/sitecontent/siteContentService';
+import { fetchSiteContentByIdAsync, updateSiteContentAsync } from '@/lib/services/sitecontent/siteContentService';
 import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import { CreateSiteContentRequest, SiteContentResponse } from '@/boundary/interfaces/siteContent';
 import { Button, CircularProgress, Input, Select, SelectItem } from '@nextui-org/react';
 import Spinner from '@/components/shared/icons/Spinner';
 import { contentTypes } from '@/components/admin/managesitecontent/modals/CreateSiteContentModal';
-import { SiteContentQueryParameters } from '@/boundary/parameters/contentQueryParameters';
-import DOMPurify from 'dompurify';
 
 const CustomEditor = dynamic( () => {
   return import( '@/components/ckeditor5/custom-editor' );

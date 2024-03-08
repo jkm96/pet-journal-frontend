@@ -1,12 +1,10 @@
 import { SiteContentQueryParameters } from '@/boundary/parameters/contentQueryParameters';
 import { fetchSiteContentAsync } from '@/lib/services/sitecontent/siteContentService';
-import DOMPurify from 'dompurify';
 import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import { SiteContentResponse } from '@/boundary/interfaces/siteContent';
 import {
   Button,
-  Chip,
   CircularProgress,
   Table,
   TableBody,
@@ -16,28 +14,32 @@ import {
   TableRow,
 } from '@nextui-org/react';
 import { formatDate } from '@/helpers/dateHelpers';
-import DownloadIcon from '@/components/site/icons/DownloadIcon';
 import Link from 'next/link';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
 import { SearchIcon } from '@/components/shared/icons/SearchIcon';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
-import CreateJournalEntryModal from '@/components/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
 import CreateSiteContentModal from '@/components/admin/managesitecontent/modals/CreateSiteContentModal';
 
 export function SiteContentOverviewSection() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [siteContent,setSiteContent] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [wasModalOpened, setWasModalOpened] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
+    setWasModalOpened(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    fetchContent();
+    if (wasModalOpened) {
+      fetchContent();
+      setWasModalOpened(false);
+    }
   };
+
   const fetchContent = async () => {
     const param = new SiteContentQueryParameters();
     param.type = 'all';

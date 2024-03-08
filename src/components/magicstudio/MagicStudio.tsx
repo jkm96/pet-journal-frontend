@@ -53,16 +53,20 @@ export default function MagicStudio() {
         <div className='flex justify-between gap-3 items-end'>
 
           <div className='gap-3 hidden lg:block'>
-            <Button
-              onPress={handleOpenModal}
-              startContent={<PlusIcon />}
-              color='primary'
-              variant='shadow'
-            >
-              Create A Project
-            </Button>
-            {isModalOpen && (
-              <CreateProjectModal isOpen={isModalOpen} onClose={handleCloseModal} />
+            {!isLoadingProjects && magicProjects.length > 0 && (
+              <>
+                <Button
+                  onPress={handleOpenModal}
+                  startContent={<PlusIcon />}
+                  color='primary'
+                  variant='shadow'
+                >
+                  Create A Project
+                </Button>
+                {isModalOpen && (
+                  <CreateProjectModal isOpen={isModalOpen} onClose={handleCloseModal} />
+                )}
+              </>
             )}
           </div>
         </div>
@@ -76,7 +80,12 @@ export default function MagicStudio() {
         <>
           {magicProjects.length < 1 ? (
             <div className='flex items-center justify-center'>
-              <p className='text-danger-400'>No projects were found!</p>
+              <p className='text-danger-400'>No projects were found!
+                Please add some diary entries under
+                <span className="font-bold text-primary">
+                  <Link href={NAVIGATION_LINKS.DIARY_ENTRIES}> Diary Entries</Link>
+                </span> to proceed
+              </p>
             </div>
           ) : (
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>

@@ -34,7 +34,6 @@ export default function BillingSection({ user }: ProfileSectionProps) {
       .then((response) => {
         if (response.statusCode === 200) {
           const payments = response.data;
-          console.log('payments', payments);
           setBillingInfo(payments);
         }
       })

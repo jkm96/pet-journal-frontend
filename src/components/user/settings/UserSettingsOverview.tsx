@@ -82,7 +82,7 @@ export default function UserSettingsOverview() {
           >
             {selectedTab === 'account' && (
               <div>
-                <p>Account settings go here</p>
+                <p>Account settings coming soon ...</p>
               </div>
             )}
           </Tab>

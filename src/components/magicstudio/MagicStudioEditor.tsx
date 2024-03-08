@@ -505,7 +505,6 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
                     variant='shadow'>
               {buttonsVisible ? <CloseIcon /> : <PlusIcon />}
             </Button>
-
           </div>
         </>
       )}

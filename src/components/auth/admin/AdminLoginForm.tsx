@@ -53,8 +53,6 @@ export default function AdminLoginForm() {
       setLoginFormData(initialFormState);
       let responseData: AccessTokenModel = response.data;
       const success = await storeAuthToken(responseData);
-      console.log("store response",success)
-      console.log("stored token")
       if (success)
         setStatus('logged');
     } else {

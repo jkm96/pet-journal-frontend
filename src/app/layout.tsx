@@ -4,7 +4,6 @@ import { UIProvider } from '@/context/uiProvider';
 import { AuthProvider } from '@/context/authProvider';
 import ToastContainerWrapper from '@/components/common/notifications/ToastComponent';
 import React from 'react';
-import MainNavbar from '@/components/site/sections/MainNavbar';
 
 export const metadata: Metadata = {
   title: 'Online Diary for Pet Lovers | Pet Diaries',

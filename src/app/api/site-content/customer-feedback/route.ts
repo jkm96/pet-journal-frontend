@@ -1,5 +1,5 @@
 import { handleApiException, handleAxiosResponse } from '@/helpers/responseHelpers';
-import petJournalApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
+import petJournalApiClient from '@/lib/axios/axiosClient';
 import { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {

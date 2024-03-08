@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { ForgotPasswordRequest, LoginUserRequest } from '@/boundary/interfaces/auth';
+import { ForgotPasswordRequest } from '@/boundary/interfaces/auth';
 import { Input } from '@nextui-org/react';
 import MainNavbar from '@/components/site/sections/MainNavbar';
 import Spinner from '@/components/shared/icons/Spinner';
 import { Button } from '@nextui-org/button';
-import { validateForgotPassFormInputErrors, validateLoginFormInputErrors } from '@/helpers/validationHelpers';
-import { loginUser, requestPasswordReset } from '@/lib/services/auth/userAuthService';
+import { validateForgotPassFormInputErrors } from '@/helpers/validationHelpers';
+import { requestPasswordReset } from '@/lib/services/auth/userAuthService';
 import { toast } from 'react-toastify';
-import { AccessTokenModel } from '@/boundary/interfaces/token';
 
 const initialFormState: ForgotPasswordRequest = {
   email: '',

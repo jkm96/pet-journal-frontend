@@ -2,18 +2,13 @@ import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import { useRouter } from 'next/navigation';
-import { CircularProgress, Input } from '@nextui-org/react';
-import {
-  changeUserPasswordAsync,
-  requestPasswordReset,
-  verifyUserEmailAsync,
-} from '@/lib/services/auth/userAuthService';
+import { Input } from '@nextui-org/react';
+import { changeUserPasswordAsync } from '@/lib/services/auth/userAuthService';
 import MainNavbar from '@/components/site/sections/MainNavbar';
-import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@nextui-org/button';
 import Spinner from '@/components/shared/icons/Spinner';
-import { validateForgotPassFormInputErrors, validateResetPassFormInputErrors } from '@/helpers/validationHelpers';
-import { ForgotPasswordRequest, ResetPasswordRequest } from '@/boundary/interfaces/auth';
+import { validateResetPassFormInputErrors } from '@/helpers/validationHelpers';
+import { ResetPasswordRequest } from '@/boundary/interfaces/auth';
 import { EyeFilledIcon, EyeSlashFilledIcon } from '@nextui-org/shared-icons';
 import Link from 'next/link';
 
