@@ -17,7 +17,6 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
       .then((response) => {
         if (response.statusCode === 200) {
           const subscription: UserSubscriptionResponse[] = response.data;
-          console.log('subscription', subscription);
           setUserSubscriptionDetails(subscription);
         } else {
           toast.error(`Error fetching user subscriptions details: ${response.message}`);

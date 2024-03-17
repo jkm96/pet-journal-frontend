@@ -31,7 +31,7 @@ export async function GET(request: NextRequest, { params }: { params: { sessionI
       };
       const response = await petJournalApiClient
         .post('api/v1/payment/create', JSON.stringify(sessionDetails), config);
-
+      console.log('payment request', response);
       const tokenResponse = response.data.data;
       const cookieRequest: AccessTokenModel = {
         token: tokenResponse.token,
@@ -60,16 +60,15 @@ export async function GET(request: NextRequest, { params }: { params: { sessionI
         path: '/',
       });
       return cookieResponse;
+    } else {
+      return NextResponse.json(
+        {
+          'data': sessionData,
+          'message': 'Successfully fetched session',
+          'statusCode': 200,
+        },
+        { status: 200 });
     }
-
-    return NextResponse.json(
-      {
-        'data': sessionData,
-        'message': 'Successfully fetched session',
-        'statusCode': 200,
-      },
-      { status: 200 });
-
   } catch (e) {
     return NextResponse.json(
       { error: `An error occurred fetching payment session: ${e}` }, { status: 400 },

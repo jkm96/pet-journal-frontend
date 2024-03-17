@@ -98,7 +98,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           </h3>
 
           <ul className='mb-6 flex flex-col gap-4'>
-            {user?.isAdmin ? (
+            {user?.isAdmin && (
               <>
                 <li>
                   <Link
@@ -139,7 +139,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   </Link>
                 </li>
               </>
-            ) : (
+            )}
+
+            {!user?.isAdmin && (
               <>
                 {/* <!-- Menu Item Dashboard --> */}
                 <li>

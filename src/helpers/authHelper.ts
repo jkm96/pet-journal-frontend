@@ -24,8 +24,10 @@ export async function checkEmailVerificationStatus() {
   const response = await getAccessToken();
   if (response.statusCode === 200) {
     const tokenResponse: AccessTokenModel = JSON.parse(response.data);
-    if (tokenResponse.user.isEmailVerified) {
+    if (tokenResponse.user.isGracePeriodExpired && tokenResponse.user.isEmailVerified) {
       return true;
+    }else{
+      return false;
     }
   }
 

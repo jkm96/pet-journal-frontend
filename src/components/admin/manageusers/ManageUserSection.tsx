@@ -38,7 +38,6 @@ export default function ManageUserSection({ userId }: { userId: number }) {
       .then((response) => {
         if (response.statusCode === 200) {
           const user: UserResponse = response.data;
-          console.log('user', user);
           setUserDetails(user);
         } else {
           toast.error(`Error fetching user details: ${response.message}`);

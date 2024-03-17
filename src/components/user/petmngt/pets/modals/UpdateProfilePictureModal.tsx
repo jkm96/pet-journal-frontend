@@ -22,7 +22,6 @@ export default function UpdateProfilePictureModal({ petId, isOpen, onClose }: {
 
   const handleFileChange = (e: any) => {
     const uploadedFiles = e.target.files;
-    console.log('FileList:', uploadedFiles);
 
     if (!areFilesValid(uploadedFiles)) {
       toast.error('Please select only PNG or JPG files.');

@@ -61,7 +61,6 @@ export default function EditPetModal({ editPetRequest, isOpen, onClose }: {
       setIsSubmitting(false);
       return;
     }
-    console.log('editPetFormData', editPetFormData);
     let response = await editPetProfile(editPetFormData);
     if (response.statusCode === 200) {
       toast.success(response.message ?? 'Pet profile update successfully');

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Loader from '@/components/common/dashboard/Loader';
 import Sidebar from '@/components/shared/navs/sidebar/SideBar';
 import Header from '@/components/shared/navs/header/Header';
+import UnverifiedEmailMessage from '@/components/common/notifications/UnverifiedEmailMessage';
 
 export default function UserDashboardLayout({ children }: { children: React.ReactNode; }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -40,7 +41,9 @@ export default function UserDashboardLayout({ children }: { children: React.Reac
 
             {/* <!-- ===== Main Content Start ===== --> */}
             <main>
-              <div className='sm:m-1 md:p-10 lg:p-6 2xl:p-6'>
+              <UnverifiedEmailMessage />
+
+              <div className='sm:m-1 md:p-8 lg:p-6 2xl:p-6'>
                 {children}
               </div>
             </main>

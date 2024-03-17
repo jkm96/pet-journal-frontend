@@ -22,7 +22,6 @@ export default function UploadJournalImagesModal({ journalId, isOpen, onClose }:
 
   const handleFileChange = (e: any) => {
     const uploadedFiles = e.target.files;
-    console.log('FileList:', uploadedFiles);
 
     if (!areFilesValid(uploadedFiles)) {
       toast.error('Please select only PNG or JPG files.');
@@ -63,7 +62,6 @@ export default function UploadJournalImagesModal({ journalId, isOpen, onClose }:
       toast.error('Please upload only PNG or JPG files.');
       return;
     }
-    console.log('uploadImageFormData', uploadImageFormData);
     const response = await uploadJournalAttachments(uploadImageFormData);
     if (response.statusCode === 200) {
       toast.success(response.message ?? 'Attachments uploaded successfully');

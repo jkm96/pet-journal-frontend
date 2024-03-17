@@ -45,7 +45,6 @@ export default function CreateSiteContentModal({ isOpen, onClose }: {
   };
 
   const handleEditorChange = (data: string) => {
-    console.log("data",data)
     setCreateContentRequest({ ...createContentRequest, content: data });
   };
 

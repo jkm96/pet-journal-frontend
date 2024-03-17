@@ -6,7 +6,6 @@ export async function POST(request: NextRequest) {
   try {
     const config = getAxiosConfigs(request);
     const requestBody = await request.json();
-    console.log('request body', requestBody);
     const response = await petJournalApiClient
       .post('api/v1/magic-studio/save-pdf', requestBody, config);
 

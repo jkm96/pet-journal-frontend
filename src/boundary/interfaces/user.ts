@@ -7,9 +7,13 @@ export interface User {
   isEmailVerified: boolean;
   isSubscribed: boolean;
   isAdmin: boolean;
+  gracePeriodCount: number;
+  isGracePeriodExpired: boolean;
 }
 
 export interface UserResponse {
+  isGracePeriodExpired: boolean;
+  gracePeriodCount: number;
   id: number;
   username: string;
   email: string;

@@ -48,7 +48,6 @@ export function SiteContentOverviewSection() {
       .then((response) => {
         if (response.statusCode === 200) {
           const content = response.data;
-          console.log("content",content)
           setSiteContent(content)
         }else{
           toast.error(response.message)

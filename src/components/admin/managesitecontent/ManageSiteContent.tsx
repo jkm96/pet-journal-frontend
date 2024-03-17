@@ -47,7 +47,6 @@ export function ManageSiteContent({contentId}:{contentId:number}) {
   };
 
   const handleEditorChange = (data: string) => {
-    console.log("content",data)
     setUpdateContentRequest({ ...updateContentRequest, content: data });
   };
 

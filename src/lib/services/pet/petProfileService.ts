@@ -136,7 +136,6 @@ export async function updateProfileImage(uploadRequest: UpdatePetProfileImageReq
         formData.append('profilePicture', file, file.name);
       }
     }
-    console.log('uploadRequest', uploadRequest);
     const response = await axios.post(`${internalBaseUrl}/api/pet/profile/update-image`, formData, {
       headers: {
         'x-api-key': `${apiKey}`,

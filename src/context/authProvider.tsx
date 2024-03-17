@@ -23,6 +23,8 @@ export function AuthProvider({ children }: AuthContextProps) {
       const response = await storeAccessTokenInCookie(cookieRequest);
       if (response.statusCode == 200) {
         const userObject: User = {
+          gracePeriodCount: tokenData.user.gracePeriodCount,
+          isGracePeriodExpired: tokenData.user.isGracePeriodExpired ,
           id: tokenData.user.id,
           username: tokenData.user.username,
           email: tokenData.user.email,
@@ -30,7 +32,7 @@ export function AuthProvider({ children }: AuthContextProps) {
           isSubscribed: tokenData.user.isSubscribed,
           isAdmin: tokenData.user.isAdmin,
           profileUrl: tokenData.user.profileUrl ?? '',
-          profileCoverUrl: tokenData.user.profileCoverUrl ?? '',
+          profileCoverUrl: tokenData.user.profileCoverUrl ?? ''
         };
         setUser(userObject);
         return true;
