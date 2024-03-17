@@ -1,5 +1,5 @@
 import { handleApiException, handleAxiosResponse } from '@/helpers/responseHelpers';
-import petJournalApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
+import petDiariesApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
 import { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const config = getAxiosConfigs(request);
     const requestBody = await request.json();
     const { journalId } = requestBody;
-    const response = await petJournalApiClient
+    const response = await petDiariesApiClient
       .put(`api/v1/journal-entry/${journalId}/edit`, requestBody, config);
 
     return handleAxiosResponse(response);

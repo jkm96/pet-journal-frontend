@@ -1,10 +1,10 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { cookieName, petJournalApiBaseUrl } from '@/boundary/constants/appConstants';
+import { cookieName, petDiaryApiBaseUrl } from '@/boundary/constants/appConstants';
 import { NextRequest } from 'next/server';
 import { AccessTokenModel } from '@/boundary/interfaces/token';
 
-const petJournalApiClient = axios.create({
-  baseURL: `${petJournalApiBaseUrl}`,
+const petDiariesApiClient = axios.create({
+  baseURL: `${petDiaryApiBaseUrl}`,
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ const petJournalApiClient = axios.create({
   // httpsAgent: new https.Agent({ rejectUnauthorized: false })
 });
 
-petJournalApiClient.interceptors.request.use(
+petDiariesApiClient.interceptors.request.use(
   function(config: any) {
     if (
       config.url.includes('journal-entry/create') ||
@@ -33,7 +33,7 @@ petJournalApiClient.interceptors.request.use(
     return Promise.reject(error);
   },
 );
-export default petJournalApiClient;
+export default petDiariesApiClient;
 
 export function getAxiosConfigs(request: NextRequest, queryParams?: any) {
   const tokenCookie = request.cookies.get(`${cookieName}`)?.value as string;

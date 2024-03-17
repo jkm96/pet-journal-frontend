@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CheckoutSessionModel, CreatePaymentRequest } from '@/boundary/interfaces/payment';
 import { AccessTokenModel } from '@/boundary/interfaces/token';
-import petJournalApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
+import petDiariesApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
 import { cookieName } from '@/boundary/constants/appConstants';
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -29,7 +29,7 @@ export async function GET(request: NextRequest, { params }: { params: { sessionI
         status: session.status,
         subscription: session.subscription,
       };
-      const response = await petJournalApiClient
+      const response = await petDiariesApiClient
         .post('api/v1/payment/create', JSON.stringify(sessionDetails), config);
       console.log('payment request', response);
       const tokenResponse = response.data.data;
