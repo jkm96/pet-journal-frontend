@@ -1,6 +1,6 @@
 import React from 'react';
 import { Chip } from '@nextui-org/react';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 import { getMoodColorClassList } from '@/helpers/stylingHelpers';
 import { toTitleCase } from '@/lib/utils/pdfUtils';
 
@@ -29,7 +29,7 @@ const renderListWithColors = (data: string, showChips: boolean, textFontFamily?:
               key={item}
               variant='solid'
               color={colorArray[index]}
-              className={`font-bold text-medium ${colorArray[index]}`}
+              className={`font-bold text-tiny ${colorArray[index]}`}
             >
               {item}
             </Chip>
@@ -37,7 +37,7 @@ const renderListWithColors = (data: string, showChips: boolean, textFontFamily?:
             <span key={item}
                   style={{ fontFamily: textFontFamily, fontWeight: textFontWeight }}
                   color={colorArray[index]}
-                  className={`text-medium mr-1 text-${colorArray[index]}`}>
+                  className={`text-tiny mr-1 text-${colorArray[index]}`}>
             {item}
           </span>
           )
@@ -62,10 +62,10 @@ const RenderJournalHeader: React.FC<RenderJournalHeaderProps> = (
 ) => {
   return (
     <div className='pb-0 pt-2 px-4 flex-col items-start'>
-      <p className='text-tiny font-bold'
+      <p className='font-bold text-xl'
          style={{ color: textColor, fontFamily: textFontFamily, fontWeight: textFontWeight }}>{toTitleCase(title)}</p>
       <small className='text-default-500' style={{ fontFamily: textFontFamily }}>
-        {formatDate(createdAt)}
+        {formatDateWithTime(createdAt)}
       </small>
       <div className='flex flex-col mt-1'>
         {renderListWithColors(

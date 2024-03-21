@@ -49,7 +49,7 @@ export function DragDropSection(
 
   return <>
     <div
-      className='h-32 w-full overflow-hidden relative shadow-md border-2 items-center rounded-md cursor-pointer border-gray-400 border-dotted'>
+      className='h-32 w-full mt-2 overflow-hidden relative shadow-md border-2 items-center rounded-md cursor-pointer border-gray-400 border-dotted'>
 
       {numberOfFiles > 1 ? (
         <input type='file' onChange={handleFileChange} className='h-full w-full opacity-0 z-10 absolute'
@@ -224,9 +224,9 @@ export default function CreateJournalEntryModal({ isOpen, onClose }: {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className='flex flex-col gap-1'>Create Journal Entry</ModalHeader>
+              <ModalHeader className='flex flex-col gap-1'>Create Diary Entry</ModalHeader>
               {isLoading ? (
-                <div className='text-center'>Loading your pets...</div>
+                <div className='text-center p-14'>Loading your pets...</div>
               ) : (
                 <>
                   {pets.length != 0 ?
@@ -235,7 +235,7 @@ export default function CreateJournalEntryModal({ isOpen, onClose }: {
                         <>
                           <ModalBody>
                             <form onSubmit={handleJournalCreation}>
-                              <h3>Journal Details</h3>
+                              <h3 className="mb-1">Diary Details</h3>
 
                               <div className='grid md:grid-cols-2 md:gap-6'>
                                 <Input type='text'
@@ -263,7 +263,7 @@ export default function CreateJournalEntryModal({ isOpen, onClose }: {
                                        labelPlacement={'outside'}
                                        name='event'
                                        variant={'bordered'}
-                                       placeholder='Enter event'
+                                       placeholder='Enter event (optional)'
                                        onInput={() => {
                                          setInputErrors({ ...inputErrors, event: '' });
                                        }}
@@ -310,12 +310,12 @@ export default function CreateJournalEntryModal({ isOpen, onClose }: {
                                           errorMessage={inputErrors.content} />
                               </div>
 
-                              <div className='w-full rounded-md'>
-                                <label className='mt-1 mb-1'>Upload images</label>
+                              <div className='w-full rounded-md mt-2 mb-2'>
+                                <label className='pb-2'>Upload Images</label>
                                 {DragDropSection(handleFileChange, previewFile, removeImage, 2)}
                               </div>
 
-                              <div className='grid md:grid-cols-2 md:gap-6'>
+                              <div className='grid md:grid-cols-2 md:gap-6 '>
                                 <div className='flex flex-col gap-1 w-full'>
                                   <CheckboxGroup
                                     className='gap-1'
@@ -368,7 +368,7 @@ export default function CreateJournalEntryModal({ isOpen, onClose }: {
                                     isLoading={isSubmitting}
                                     spinner={<Spinner />}
                                     onClick={handleJournalCreation}>
-                              {isSubmitting ? 'Submitting...' : 'Create Journal'}
+                              {isSubmitting ? 'Submitting...' : 'Submit'}
                             </Button>
                           </ModalFooter>
                         </>

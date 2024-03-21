@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/react';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 import Link from 'next/link';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
@@ -122,7 +122,7 @@ export function SiteContentOverviewSection() {
                     <Link href={`${NAVIGATION_LINKS.ADMIN_MANAGE_SITE_CONTENT}/${content.id}`}>{content.title}</Link>
                   </TableCell>
                   <TableCell>{content.type}</TableCell>
-                  <TableCell className='hidden md:table-cell lg:table-cell'>{formatDate(content.createdAt)}</TableCell>
+                  <TableCell className='hidden md:table-cell lg:table-cell'>{formatDateWithTime(content.createdAt)}</TableCell>
                   <TableCell>
                     <Link href={NAVIGATION_LINKS.ADMIN_MANAGE_SITE_CONTENT}>View</Link>
                   </TableCell>

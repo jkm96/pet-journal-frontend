@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { JournalImageBuffer, PrintJournalEntryRequest } from '@/boundary/interfaces/journal';
 import { useAuth } from '@/hooks/useAuth';
 import RenderMoodTagsWithColors from '@/components/user/journalmngt/journalentries/RenderMoodTagsWithColors';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 import { toast } from 'react-toastify';
 import { getJournalEntryAttachmentBuffers } from '@/lib/services/journalentries/journalEntryService';
 import { PdfPreviewStyle, toTitleCase } from '@/lib/utils/pdfUtils';
@@ -22,7 +22,7 @@ export function getJournalEntryPdfDocument(printJournalRequest: PrintJournalEntr
         <Text style={styles.subtitle}>{toTitleCase(printJournalRequest.title)}</Text>
         <Text style={styles.author}>{username}</Text>
         <Text
-          style={styles.author}>{formatDate(printJournalRequest.createdAt)}</Text>
+          style={styles.author}>{formatDateWithTime(printJournalRequest.createdAt)}</Text>
 
         <Text style={styles.moodtags}>
           {RenderMoodTagsWithColors(printJournalRequest.moods)}

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import CreateProjectModal from '@/components/magicstudio/modals/CreateProjectModal';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 import { fetchMagicStudioProjects } from '@/lib/services/magicstudio/magicStudioService';
 import { MagicStudioProjectResponse } from '@/boundary/interfaces/magicStudio';
 import Link from 'next/link';
@@ -116,7 +116,7 @@ export default function MagicStudio() {
                           <div className='flex flex-col gap-0'>
                             <h3 className='font-semibold text-foreground/90'>{project.title}</h3>
                             <p className='text-small text-foreground/80'>
-                              {formatDate(project.createdAt)} | <span
+                              {formatDateWithTime(project.createdAt)} | <span
                               className='text-small'>from {project.periodFrom} to {project.periodTo}</span>
                             </p>
                           </div>

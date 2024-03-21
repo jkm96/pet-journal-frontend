@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { getUserSubscriptions } from '@/lib/services/admin/manageUserSubscriptionsService';
 import { UserSubscriptionResponse } from '@/boundary/interfaces/userSubscription';
 import { Accordion, AccordionItem, Chip, CircularProgress, Input } from '@nextui-org/react';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 import { CloseIcon } from '@nextui-org/shared-icons';
 import CheckMarkIcon from '@/components/site/icons/CheckMarkIcon';
 
@@ -55,7 +55,7 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
                                <Chip size='sm' color='success'>Active</Chip> :
                                <Chip size='sm' color='danger'>Expired</Chip>}
                              title={`${subscription.customerId}-${subscription.invoice}`}
-                             subtitle={formatDate(subscription.createdAt)}
+                             subtitle={formatDateWithTime(subscription.createdAt)}
                              indicator={subscription.status == 'ACTIVE' ? <CheckMarkIcon color={'#24ed0d'} /> :
                                <CloseIcon color={'#e30f0f'} />}
               >
@@ -101,7 +101,7 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
                       type='text'
                       label='Start Date'
                       readOnly={true}
-                      value={formatDate(subscription.startDate)}
+                      value={formatDateWithTime(subscription.startDate)}
                       labelPlacement={'outside'}
                     />
 
@@ -109,7 +109,7 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
                       type='text'
                       label='End Date'
                       readOnly={true}
-                      value={formatDate(subscription.endDate)}
+                      value={formatDateWithTime(subscription.endDate)}
                       labelPlacement={'outside'}
                     />
 
@@ -117,7 +117,7 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
                       type='text'
                       label='Created At'
                       readOnly={true}
-                      value={formatDate(subscription.createdAt)}
+                      value={formatDateWithTime(subscription.createdAt)}
                       labelPlacement={'outside'}
                     />
 
@@ -125,7 +125,7 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
                       type='text'
                       label='Updated At'
                       readOnly={true}
-                      value={formatDate(subscription.updatedAt)}
+                      value={formatDateWithTime(subscription.updatedAt)}
                       labelPlacement={'outside'}
                     />
                   </div>
@@ -172,7 +172,7 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
                       type='text'
                       label='Created At'
                       readOnly={true}
-                      value={formatDate(subscription.createdAt)}
+                      value={formatDateWithTime(subscription.createdAt)}
                       labelPlacement={'outside'}
                     />
 
@@ -180,7 +180,7 @@ export function UserSubscriptionSection({ userId }: { userId: number }) {
                       type='text'
                       label='Updated At'
                       readOnly={true}
-                      value={formatDate(subscription.updatedAt)}
+                      value={formatDateWithTime(subscription.updatedAt)}
                       labelPlacement={'outside'}
                     />
                   </div>

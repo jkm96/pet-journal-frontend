@@ -108,6 +108,7 @@ export default function ManagePetProfile({ slug }: { slug: string }) {
     name: petProfileDetails.name,
     nickname: petProfileDetails.nickname,
     species: petProfileDetails.species,
+    dateOfBirth: petProfileDetails.dateOfBirth || '',
   };
 
   return (

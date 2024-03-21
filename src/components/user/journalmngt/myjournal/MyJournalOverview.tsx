@@ -278,6 +278,7 @@ export default function MyJournalOverview() {
           </div>
         </div>
       </div>
+
       {isLoadingEntries ? (
         <div className={'grid place-items-center'}>
           <CircularProgress color={'primary'} className={'p-4'} label='Loading your journal entries....' />

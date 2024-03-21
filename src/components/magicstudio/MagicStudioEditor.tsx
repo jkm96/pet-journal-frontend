@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 import ReactPDF, { Document, Page, pdf, Text, View } from '@react-pdf/renderer';
 import { MagicStudioPdfStyle, toTitleCase } from '@/lib/utils/pdfUtils';
 import { useAuth } from '@/hooks/useAuth';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 import RenderMoodTagsWithColors from '@/components/user/journalmngt/journalentries/RenderMoodTagsWithColors';
 import RenderPdfGridImages from '@/components/user/journalmngt/journalentries/RenderPdfGridImages';
 import { getProjectDetails, savePdfDocToDatabase } from '@/lib/services/magicstudio/magicStudioService';
@@ -222,7 +222,7 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
               }]}>
                 {toTitleCase(journalEntry.title)}</Text>
               <Text
-                style={styles.author}>{formatDate(journalEntry.createdAt)}</Text>
+                style={styles.author}>{formatDateWithTime(journalEntry.createdAt)}</Text>
 
               <Text style={[styles.moodtags, {
                 fontFamily: textFontFamily,

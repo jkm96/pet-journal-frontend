@@ -122,7 +122,7 @@ export default function CreateNewPetModal({ isOpen, onClose }: {
                            labelPlacement={'outside'}
                            name='name'
                            variant={'bordered'}
-                           placeholder='Enter pet name'
+                           placeholder='What is your pet name?'
                            onInput={() => {
                              setInputErrors({ ...inputErrors, name: '' });
                            }}
@@ -133,7 +133,7 @@ export default function CreateNewPetModal({ isOpen, onClose }: {
                            className='mt-2 mb-1 '
                            onChange={handleChange}
                            value={createPetFormData.nickname || ''}
-                           label='nickname'
+                           label='Nickname'
                            radius={'sm'}
                            labelPlacement={'outside'}
                            name='nickname'
@@ -146,14 +146,15 @@ export default function CreateNewPetModal({ isOpen, onClose }: {
                            errorMessage={inputErrors.nickname} />
                   </div>
 
-                  <div className='grid md:grid-cols-2 md:gap-6'>
+                  <div className='grid md:grid-cols-2 mt-1 md:gap-6'>
+                    <div className="w-full flex flex-row flex-wrap">
                     <Select
                       items={species}
                       label='Pet Species'
                       labelPlacement={'outside'}
                       variant='bordered'
                       name='species'
-                      placeholder='Select pet species'
+                      placeholder='Select your favorite pet'
                       onChange={handleChange}
                       onSelectionChange={() => {
                         setInputErrors({ ...inputErrors, species: '' });
@@ -167,12 +168,13 @@ export default function CreateNewPetModal({ isOpen, onClose }: {
                         </SelectItem>
                       }
                     </Select>
+                    </div>
 
                     <Input type='text'
                            className='mt-2 mb-1 '
                            onChange={handleChange}
                            value={createPetFormData.breed || ''}
-                           label='breed'
+                           label='Breed'
                            radius={'sm'}
                            labelPlacement={'outside'}
                            name='breed'
@@ -185,17 +187,17 @@ export default function CreateNewPetModal({ isOpen, onClose }: {
                            errorMessage={inputErrors.breed} />
                   </div>
 
-                  <div className='grid md:grid-cols-2 md:gap-6'>
+                  <div className='grid md:grid-cols-2 mt-1 md:gap-6'>
                     <Input type='text'
                            color='default'
                            className='mt-2 mb-1 '
                            onChange={handleChange}
                            value={createPetFormData.dateOfBirth || ''}
-                           label='dateOfBirth'
+                           label='Date Of Birth'
                            labelPlacement={'outside'}
                            name='dateOfBirth'
                            variant={'bordered'}
-                           placeholder='Enter pet dateOfBirth'
+                           placeholder='When was your pet born?'
                            onInput={() => {
                              setInputErrors({ ...inputErrors, dateOfBirth: '' });
                            }}
@@ -205,7 +207,7 @@ export default function CreateNewPetModal({ isOpen, onClose }: {
                     <div className='mt-2'>
                       <label
                         className='block text-sm font-medium text-gray-900 dark:text-white'
-                        htmlFor='multiple_files'>Attach profile picture</label>
+                        htmlFor='multiple_files'>Attach Profile Picture</label>
                       <input
                         onChange={handleFileChange}
                         name={'profilePicture'}

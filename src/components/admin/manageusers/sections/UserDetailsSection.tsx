@@ -1,6 +1,6 @@
 import { UserResponse } from '@/boundary/interfaces/user';
 import { Input } from '@nextui-org/react';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 
 export function UserDetailsSection({ userDetails }: { userDetails: UserResponse }) {
   return (
@@ -55,7 +55,7 @@ export function UserDetailsSection({ userDetails }: { userDetails: UserResponse 
               type='text'
               label='Email VerifiedAt'
               readOnly={true}
-              value={userDetails.emailVerifiedAt != '' ? formatDate(userDetails.emailVerifiedAt) : ''}
+              value={userDetails.emailVerifiedAt != '' ? formatDateWithTime(userDetails.emailVerifiedAt) : ''}
               labelPlacement={'outside'}
             />
 
@@ -63,7 +63,7 @@ export function UserDetailsSection({ userDetails }: { userDetails: UserResponse 
               type='text'
               label='Created At'
               readOnly={true}
-              value={formatDate(userDetails.createdAt)}
+              value={formatDateWithTime(userDetails.createdAt)}
               labelPlacement={'outside'}
             />
           </div>

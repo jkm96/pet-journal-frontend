@@ -9,6 +9,7 @@ import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import CreateNewPetModal from '@/components/user/petmngt/pets/modals/CreateNewPetModal';
 import { getUserPets } from '@/lib/utils/petUtils';
 import { AddRecordFab } from '@/components/common/dashboard/AddRecordFab';
+import { getSpeciesColor } from '@/helpers/stylingHelpers';
 
 export default function PetProfilesOverviewSection() {
   const [petProfiles, setPetProfiles] = useState<PetProfileResponse[]>([]);
@@ -34,7 +35,7 @@ export default function PetProfilesOverviewSection() {
     <>
       {isLoadingPetProfiles ? (
         <div className={'grid place-items-center'}>
-          <CircularProgress color={'primary'} className={'p-4'} label='Loading your pet profiles....' />
+          <CircularProgress color={'primary'} className={'p-4'} label='Loading your pets...' />
         </div>
       ) : (
         <>
@@ -73,7 +74,7 @@ export default function PetProfilesOverviewSection() {
                       <CardHeader className='justify-between'>
                         <div className='flex gap-5'>
                           <Avatar isBordered
-                                  color={profile.species == 'dog' ? 'success' : 'secondary'}
+                                  color={getSpeciesColor(profile.species)}
                                   radius='full' size='md' name={profile.name} />
                           <div className='flex flex-col gap-1 items-start justify-center'>
                             <h4 className='uppercase font-bold leading-none text-default-600'>
@@ -85,7 +86,7 @@ export default function PetProfilesOverviewSection() {
 
                         <Button
                           variant='bordered'
-                          color={profile.species == 'dog' ? 'success' : 'secondary'}
+                          color={getSpeciesColor(profile.species)}
                           radius='sm'
                           size='sm'>
                           Profile

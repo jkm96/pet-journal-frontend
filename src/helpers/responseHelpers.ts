@@ -9,7 +9,7 @@ export function handleAxiosResponse(response: AxiosResponse<any>) {
     // console.log("api response", axiosResponse)
     return createNextResponse(200, axiosResponse.message, axiosResponse.data);
   } else {
-    return createNextResponse(axiosResponse.statusCode, axiosResponse.message);
+    return createNextResponse(axiosResponse.statusCode, axiosResponse.message,axiosResponse.data);
   }
 }
 

@@ -251,7 +251,7 @@ export function validateEditPetFormInputErrors(formData: EditPetRequest) {
 
   // Check if there are any errors and return null if all input is valid
   for (const key in errors) {
-    if (errors[key as keyof EditPetRequest] !== '') {
+    if (key !== "petId" && errors[key as keyof EditPetRequest] !== '') {
       return errors;
     }
   }

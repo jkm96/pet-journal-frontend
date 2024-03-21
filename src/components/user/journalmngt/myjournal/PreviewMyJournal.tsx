@@ -2,7 +2,7 @@ import React from 'react';
 import { JournalEntryResponse } from '@/boundary/interfaces/journal';
 import ReactPDF, { Document, Page, PDFViewer, Text, View } from '@react-pdf/renderer';
 import { PdfPreviewStyle, toTitleCase } from '@/lib/utils/pdfUtils';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 import RenderMoodTagsWithColors from '@/components/user/journalmngt/journalentries/RenderMoodTagsWithColors';
 import { useAuth } from '@/hooks/useAuth';
 import { User } from '@/boundary/interfaces/user';
@@ -31,7 +31,7 @@ export function getDocument(journalTitle: string, user: User | null, journalEntr
         </Text>
         <Text style={styles.subtitle}>{toTitleCase(journalEntry.title)}</Text>
         <Text
-          style={styles.author}>{formatDate(journalEntry.createdAt)}</Text>
+          style={styles.author}>{formatDateWithTime(journalEntry.createdAt)}</Text>
 
         <Text style={styles.moodtags}>
           {RenderMoodTagsWithColors(journalEntry.mood.split(',').map(item => item.trim()))}

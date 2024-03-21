@@ -10,7 +10,7 @@ import {
   getJournalEntryAttachmentBuffers,
   getJournalEntryDetails,
 } from '@/lib/services/journalentries/journalEntryService';
-import { Card, CardBody, CircularProgress } from '@nextui-org/react';
+import { Card, CardBody, CircularProgress, Input } from '@nextui-org/react';
 import RenderJournalHeader from '@/components/user/journalmngt/journalentries/RenderJournalHeader';
 import { Button } from '@nextui-org/button';
 import PreviewAndPrintJournalEntryModal, {
@@ -18,7 +18,7 @@ import PreviewAndPrintJournalEntryModal, {
 } from '@/components/user/journalmngt/journalentries/modals/PreviewAndPrintJournalEntryModal';
 import UploadJournalImagesModal from '@/components/user/journalmngt/journalentries/modals/UploadJournalImagesModal';
 import UpdateJournalEntryModal from '@/components/user/journalmngt/journalentries/modals/UpdateJournalEntryModal';
-import { CloseIcon, EditIcon } from '@nextui-org/shared-icons';
+import { CloseIcon, EditIcon, PlusFilledIcon } from '@nextui-org/shared-icons';
 import DeleteJournalEntryModal from '@/components/user/journalmngt/journalentries/modals/DeleteJournalEntryModal';
 import UploadIcon from '@/components/shared/icons/UploadIcon';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
@@ -31,6 +31,9 @@ import { GoBackButton } from '@/components/common/navigation/GoBackButton';
 import { useRouter } from 'next/navigation';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import Font = ReactPDF.Font;
+import { SearchIcon } from '@/components/shared/icons/SearchIcon';
+import { getDocument } from '@/components/user/journalmngt/myjournal/PreviewMyJournal';
+import Spinner from '@/components/shared/icons/Spinner';
 
 Font.register({
   family: 'Oswald',
@@ -155,83 +158,93 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
         </div>
       ) : (
         <>
-          <div className='m-2 flex flex-col justify-between gap-3'>
-            <div className='relative flex flex-1 flex-shrink-0'>
-              <GoBackButton onPress={() => router.back()} />
+          <div className='flex flex-col gap-4 m-2'>
+            <div className='md:flex justify-between gap-3 items-end'>
+              <div className='md:grid md:grid-cols-5 md:gap-4'>
+                <div className='relative flex flex-1 flex-shrink-0'>
 
-              <span className='hidden md:block lg:block'>
+                  <GoBackButton onPress={() => router.back()} />
+
+                  <span className='hidden md:block lg:block'>
                     <Button onPress={() => openModal('editJournal')}
                             startContent={<EditIcon />}
                             color='success'
                             className='mr-2'
                             size='sm'
                             variant='shadow'>
-                      Edit Journal
+                      Edit Entry
                     </Button>
-              </span>
+                  </span>
 
-              {modals.editJournal && (
-                <UpdateJournalEntryModal
-                  editJournalRequest={editJournalRequest}
-                  userPets={journalEntryDetails.pets}
-                  isOpen={modals.editJournal}
-                  onClose={() => closeModal('editJournal')}
-                />
-              )}
+                  {modals.editJournal && (
+                    <UpdateJournalEntryModal
+                      editJournalRequest={editJournalRequest}
+                      userPets={journalEntryDetails.pets}
+                      isOpen={modals.editJournal}
+                      onClose={() => closeModal('editJournal')}
+                    />
+                  )}
 
-              <span className='hidden md:block lg:block'>
-              <Button onPress={() => openModal('uploadAttachments')}
-                      startContent={<UploadIcon color='#ffffff' />}
-                      color='warning'
-                      size='sm'
-                      variant='shadow'>
-                Upload Attachment
-              </Button>
-              </span>
+                  <span className='hidden md:block lg:block'>
+                    <Button onPress={() => openModal('uploadAttachments')}
+                            startContent={<UploadIcon color='#ffffff' />}
+                            color='warning'
+                            size='sm'
+                            variant='shadow'>
+                      Upload Attachment
+                    </Button>
+                  </span>
 
-              {modals.uploadAttachments && (
-                <UploadJournalImagesModal
-                  journalId={journalEntryDetails.id}
-                  isOpen={modals.uploadAttachments}
-                  onClose={() => closeModal('uploadAttachments')}
-                />
-              )}
+                  {modals.uploadAttachments && (
+                    <UploadJournalImagesModal
+                      journalId={journalEntryDetails.id}
+                      isOpen={modals.uploadAttachments}
+                      onClose={() => closeModal('uploadAttachments')}
+                    />
+                  )}
 
-              <span className='hidden md:block lg:block'>
-              <Button onPress={() => openModal('deleteJournal')}
-                      startContent={<TrashIcon color='#ffffff' />}
-                      color='danger'
-                      className='ml-2'
-                      size='sm'
-                      variant='shadow'>
-                Delete Journal
-              </Button>
-              </span>
-              {modals.deleteJournal && (
-                <DeleteJournalEntryModal
-                  journalId={editJournalRequest.journalId}
-                  isOpen={modals.deleteJournal}
-                  onClose={() => closeModal('deleteJournal')}
-                />
-              )}
+                  <span className='hidden md:block lg:block'>
+                    <Button onPress={() => openModal('deleteJournal')}
+                            startContent={<TrashIcon color='#ffffff' />}
+                            color='danger'
+                            className='ml-2'
+                            size='sm'
+                            variant='shadow'>
+                      Delete Entry
+                    </Button>
+                  </span>
+
+                  {modals.deleteJournal && (
+                    <DeleteJournalEntryModal
+                      journalId={editJournalRequest.journalId}
+                      isOpen={modals.deleteJournal}
+                      onClose={() => closeModal('deleteJournal')}
+                    />
+                  )}
+
+                </div>
+              </div>
+
+              <div className='flex gap-3'>
+                <div className='hidden lg:block'>
+                  <Button onPress={() => openModal('previewAndPrintEntry')}
+                          startContent={<FileEyeIcon color='#ffffff' />}
+                          color='primary'
+                          size='sm'
+                          variant='shadow'>
+                    Preview and Print
+                  </Button>
+
+                  {modals.previewAndPrintEntry && (
+                    <PreviewAndPrintJournalEntryModal
+                      printJournalRequest={printJournalRequest}
+                      isOpen={modals.previewAndPrintEntry}
+                      onClose={() => closeModal('previewAndPrintEntry')}
+                    />
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-          <div className='gap-3 hidden md:block lg:block'>
-            <Button onPress={() => openModal('previewAndPrintEntry')}
-                    startContent={<FileEyeIcon color='#ffffff' />}
-                    color='primary'
-                    size='sm'
-                    variant='shadow'>
-              Preview and Print
-            </Button>
-
-            {modals.previewAndPrintEntry && (
-              <PreviewAndPrintJournalEntryModal
-                printJournalRequest={printJournalRequest}
-                isOpen={modals.previewAndPrintEntry}
-                onClose={() => closeModal('previewAndPrintEntry')}
-              />
-            )}
           </div>
 
           <Card className='py-4'>

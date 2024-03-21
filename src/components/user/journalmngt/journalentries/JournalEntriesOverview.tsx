@@ -9,7 +9,7 @@ import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import { Button } from '@nextui-org/button';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import CreateJournalEntryModal from '@/components/user/journalmngt/journalentries/modals/CreateJournalEntryModal';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 import { getRandomColorClass } from '@/helpers/stylingHelpers';
 import { JournalQueryParameters } from '@/boundary/parameters/journalQueryParameters';
 import { SearchIcon } from '@/components/shared/icons/SearchIcon';
@@ -116,7 +116,7 @@ export default function JournalEntriesOverview() {
                     startContent={<PlusIcon />}
                     color='primary'
                     variant='shadow'>
-              Add Journal
+              Create Entry
             </Button>
             <CreateJournalEntryModal isOpen={isModalOpen} onClose={handleCloseModal} />
           </div>
@@ -169,7 +169,7 @@ export default function JournalEntriesOverview() {
                                   <h3
                                     className='font-semibold text-foreground/90'>{journal.title}</h3>
                                   <p className='text-small text-foreground/80'>
-                                    {formatDate(journal.createdAt)} | {journal.event}
+                                    {formatDateWithTime(journal.createdAt)} {journal.event ? (<>| {journal.event}</>):(<></>)}
                                   </p>
                                 </div>
                               </div>

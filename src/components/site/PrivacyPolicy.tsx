@@ -6,7 +6,7 @@ import { fetchSiteContentAsync } from '@/lib/services/sitecontent/siteContentSer
 import { toast } from 'react-toastify';
 import { SiteContentQueryParameters } from '@/boundary/parameters/contentQueryParameters';
 import { SiteContentResponse } from '@/boundary/interfaces/siteContent';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 import { CircularProgress } from '@nextui-org/react';
 
 export function PrivacyPolicy() {
@@ -57,7 +57,7 @@ export function PrivacyPolicy() {
                   {siteContent && siteContent.title ? (
                     <>
                       <h3 className='text-black-2 font-bold'>{siteContent.title}</h3>
-                      <h4 className='mb-3 mt-3 text-black-2'>Last updated: {formatDate(siteContent.updatedAt)}</h4>
+                      <h4 className='mb-3 mt-3 text-black-2'>Last updated: {formatDateWithTime(siteContent.updatedAt)}</h4>
                       <p dangerouslySetInnerHTML={{ __html: siteContent.content }} />
                     </>
                   ) : (

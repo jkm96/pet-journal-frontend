@@ -68,4 +68,30 @@ const getPdfMoodColorClassList = (moods: string[]): PdfColorName[] => {
   });
 };
 
-export { getRandomColorClass, getMoodColorClassList, getPdfMoodColorClassList };
+const getSpeciesColor = (species:string) => {
+  switch (species) {
+    case 'dog':
+      return 'danger';
+    case 'cat':
+      return 'primary';
+    case 'bird':
+      return 'warning';
+    case 'fish':
+      return 'primary';
+    case 'rabbit':
+      return 'primary';
+    case 'hamster':
+      return 'danger';
+    case 'horse':
+      return 'success';
+    case 'ferret':
+      return 'secondary';
+    case 'guinea pig':
+      return 'success';
+    default:
+      return 'default';
+  }
+}
+
+export { getRandomColorClass, getMoodColorClassList, getPdfMoodColorClassList ,getSpeciesColor};
+

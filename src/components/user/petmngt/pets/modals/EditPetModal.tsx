@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { validateEditPetFormInputErrors } from '@/helpers/validationHelpers';
 import {
   Button,
@@ -34,7 +34,9 @@ export default function EditPetModal({ editPetRequest, isOpen, onClose }: {
   onClose: () => void
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [editPetFormData, setEditPetFormData] = useState(editPetRequest);
+  const [editPetFormData, setEditPetFormData] = useState<EditPetRequest>({
+    ...editPetRequest,
+  });
   const [inputErrors, setInputErrors] = useState(initialFormState);
 
   const handleChange = (e: any) => {
@@ -47,20 +49,13 @@ export default function EditPetModal({ editPetRequest, isOpen, onClose }: {
     setIsSubmitting(true);
 
     const inputErrors = validateEditPetFormInputErrors(editPetFormData);
+
     if (inputErrors && Object.keys(inputErrors).length > 0) {
       setInputErrors(inputErrors);
       setIsSubmitting(false);
       return;
     }
 
-    if (
-      editPetFormData.name.trim() === '' ||
-      editPetFormData.description.trim() === '' ||
-      editPetFormData.species.trim() === ''
-    ) {
-      setIsSubmitting(false);
-      return;
-    }
     let response = await editPetProfile(editPetFormData);
     if (response.statusCode === 200) {
       toast.success(response.message ?? 'Pet profile update successfully');
@@ -139,7 +134,8 @@ export default function EditPetModal({ editPetRequest, isOpen, onClose }: {
                       name='species'
                       className='mt-2 mb-1'
                       value={editPetFormData.species}
-                      placeholder='Select pet species'
+                      defaultSelectedKeys={[editPetFormData.species]}
+                      placeholder='Select your favorite pet'
                       onChange={handleChange}
                       onSelectionChange={() => {
                         setInputErrors({ ...inputErrors, species: '' });
@@ -175,11 +171,11 @@ export default function EditPetModal({ editPetRequest, isOpen, onClose }: {
                            className='mt-2 mb-1 '
                            onChange={handleChange}
                            value={editPetFormData.dateOfBirth || ''}
-                           label='DateOfBirth'
+                           label='Date Of Birth'
                            labelPlacement={'outside'}
                            name='dateOfBirth'
                            variant={'bordered'}
-                           placeholder='Enter pet dateOfBirth'
+                           placeholder='When was your pet born?'
                            onInput={() => {
                              setInputErrors({ ...inputErrors, dateOfBirth: '' });
                            }}

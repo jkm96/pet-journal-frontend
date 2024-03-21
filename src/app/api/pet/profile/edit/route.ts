@@ -4,6 +4,7 @@ import { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
+    console.info("edit pet profile")
     const config = getAxiosConfigs(request);
     const requestBody = await request.json();
     const { petId } = requestBody;

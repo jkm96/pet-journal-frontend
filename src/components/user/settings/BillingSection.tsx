@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/react';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 import DownloadIcon from '@/components/site/icons/DownloadIcon';
 import { pdf } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
@@ -77,8 +77,8 @@ export default function BillingSection({ user }: ProfileSectionProps) {
                 <TableRow key={billing.id}>
                   <TableCell>{billing.invoice}</TableCell>
                   <TableCell>${billing.subscriptionPlan.price}</TableCell>
-                  <TableCell className='hidden md:table-cell lg:table-cell'>{formatDate(billing.startDate)}</TableCell>
-                  <TableCell className='hidden md:table-cell lg:table-cell'>{formatDate(billing.endDate)}</TableCell>
+                  <TableCell className='hidden md:table-cell lg:table-cell'>{formatDateWithTime(billing.startDate)}</TableCell>
+                  <TableCell className='hidden md:table-cell lg:table-cell'>{formatDateWithTime(billing.endDate)}</TableCell>
                   <TableCell className='hidden md:table-cell lg:table-cell'>
                     <Chip color={billing.subscriptionPlan.name == 'paid' ? 'success' : 'danger'}
                           size='sm'

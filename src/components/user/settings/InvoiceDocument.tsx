@@ -1,5 +1,5 @@
 import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
-import { formatDate } from '@/helpers/dateHelpers';
+import { formatDateWithTime } from '@/helpers/dateHelpers';
 import { User } from '@/boundary/interfaces/user';
 import { UserSubscriptionResponse } from '@/boundary/interfaces/userSubscription';
 
@@ -43,7 +43,7 @@ const InvoicePdfDocument = (billing: UserSubscriptionResponse, user: User | null
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>Invoice Date:</Text>
-            <Text>{formatDate(billing.createdAt)}</Text>
+            <Text>{formatDateWithTime(billing.createdAt)}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>Invoice Status:</Text>
@@ -58,11 +58,11 @@ const InvoicePdfDocument = (billing: UserSubscriptionResponse, user: User | null
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>Start Date:</Text>
-            <Text>{formatDate(billing.startDate)}</Text>
+            <Text>{formatDateWithTime(billing.startDate)}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>End Date:</Text>
-            <Text>{formatDate(billing.endDate)}</Text>
+            <Text>{formatDateWithTime(billing.endDate)}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>Status:</Text>
