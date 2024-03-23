@@ -10,6 +10,7 @@ import { MagicStudioProjectResponse } from '@/boundary/interfaces/magicStudio';
 import Link from 'next/link';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import { MagicStudioQueryParameters } from '@/boundary/parameters/magicStudioQueryParameters';
+import { AddRecordFab } from '@/components/common/dashboard/AddRecordFab';
 
 export default function MagicStudio() {
   const [isLoadingProjects, setIsLoadingProjects] = useState<boolean>(true);
@@ -53,20 +54,17 @@ export default function MagicStudio() {
         <div className='flex justify-between gap-3 items-end'>
 
           <div className='gap-3 hidden lg:block'>
-            {!isLoadingProjects && magicProjects.length > 0 && (
-              <>
-                <Button
-                  onPress={handleOpenModal}
-                  startContent={<PlusIcon />}
-                  color='primary'
-                  variant='shadow'
-                >
-                  Create A Project
-                </Button>
-                {isModalOpen && (
-                  <CreateProjectModal isOpen={isModalOpen} onClose={handleCloseModal} />
-                )}
-              </>
+            <Button
+              onPress={handleOpenModal}
+              startContent={<PlusIcon />}
+              size={'sm'}
+              color='primary'
+              variant='shadow'
+            >
+              Create Project
+            </Button>
+            {isModalOpen && (
+              <CreateProjectModal isOpen={isModalOpen} onClose={handleCloseModal} />
             )}
           </div>
         </div>
@@ -78,8 +76,8 @@ export default function MagicStudio() {
         </div>
       ) : (
         <>
-          {magicProjects.length < 1 ? (
-            <div className='flex items-center justify-center'>
+          {magicProjects.length == 0 ? (
+            <div className='flex items-center justify-center m-2'>
               <p className='text-danger-400'>No projects were found!
                 Please add some diary entries under
                 <span className="font-bold text-primary">
@@ -115,9 +113,9 @@ export default function MagicStudio() {
                           className='flex flex-col col-span-5 md:col-span-11 md:ml-3 sm:col-span-6'>
                           <div className='flex flex-col gap-0'>
                             <h3 className='font-semibold text-foreground/90'>{project.title}</h3>
-                            <p className='text-small text-foreground/80'>
+                            <p className='text-tiny md:text-small text-foreground/80'>
                               {formatDateWithTime(project.createdAt)} | <span
-                              className='text-small'>from {project.periodFrom} to {project.periodTo}</span>
+                              className='text-tiny md:text-small'>From <span className='font-bold'>{project.periodFrom}</span> To <span className='font-bold'>{project.periodTo}</span></span>
                             </p>
                           </div>
                         </div>
@@ -130,6 +128,12 @@ export default function MagicStudio() {
           )}
         </>
       )}
+
+      <AddRecordFab onClick={(e: any) => {
+        e.stopPropagation();
+        handleOpenModal();
+      }} />
+
     </>
   );
 }

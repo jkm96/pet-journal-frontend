@@ -29,7 +29,7 @@ const renderListWithColors = (data: string, showChips: boolean, textFontFamily?:
               key={item}
               variant='solid'
               color={colorArray[index]}
-              className={`font-bold text-tiny ${colorArray[index]}`}
+              className={`font-bold text-tiny mr-1 ${colorArray[index]}`}
             >
               {item}
             </Chip>

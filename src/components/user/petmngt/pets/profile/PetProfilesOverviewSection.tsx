@@ -46,6 +46,7 @@ export default function PetProfilesOverviewSection() {
               <div className='gap-3 hidden lg:block'>
                 <Button onPress={handleOpenModal}
                         startContent={<PlusIcon />}
+                        size={'sm'}
                         color='primary'
                         variant='shadow'>
                   Add Pet

@@ -104,7 +104,7 @@ export default function UpdateJournalEntryModal({ editJournalRequest, userPets, 
 
     const response = await updateJournalEntry(updateJournalEntryRequest);
     if (response.statusCode === 200) {
-      toast.success('Journal entry updated successfully');
+      toast.success('Diary entry updated successfully');
       setIsSubmitting(false);
       onClose();
     } else {
@@ -132,13 +132,13 @@ export default function UpdateJournalEntryModal({ editJournalRequest, userPets, 
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className='flex flex-col gap-1'>Update Journal Entry</ModalHeader>
+              <ModalHeader className='flex flex-col gap-1'>Update Diary Entry</ModalHeader>
               <ModalBody>
                 {isLoading ? (
                   <div className='text-center'>Loading your pets...</div>
                 ) : (
                   <form onSubmit={handleJournalUpdate}>
-                    <h3>Journal Details</h3>
+                    <h3>Entry Details</h3>
 
                     <div className='grid md:grid-cols-2 md:gap-6'>
                       <Input type='text'
@@ -267,7 +267,7 @@ export default function UpdateJournalEntryModal({ editJournalRequest, userPets, 
                         isLoading={isSubmitting}
                         spinner={<Spinner />}
                         onClick={handleJournalUpdate}>
-                  {isSubmitting ? 'Submitting...' : 'Update Journal'}
+                  {isSubmitting ? 'Submitting...' : 'Update Entry'}
                 </Button>
               </ModalFooter>
             </>

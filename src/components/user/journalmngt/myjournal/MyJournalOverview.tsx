@@ -168,23 +168,29 @@ export default function MyJournalOverview() {
                   type='text'
                   variant={'bordered'}
                   size='sm'
+                  classNames={{
+                    inputWrapper:["h-10"]
+                  }}
                   value={journalTitle}
                   onChange={handleTitleChange}
-                  placeholder='Enter your journal title here'
+                  placeholder='Enter your diary title here'
                 />
               </div>
             </>
           ) : (
             <>
               <div className='md:grid md:grid-cols-5 md:gap-4'>
-                <div className='relative flex flex-1 lg:flex-shrink-0'>
+                <div className='relative flex flex-1 lg:flex-shrink-0 h-10'>
                   <Input
-                    placeholder='Search for journal entries'
+                    placeholder='Search your entries'
                     onChange={(e) => {
                       setSearchTerm(e.target.value);
                     }}
                     value={searchTerm}
                     size='sm'
+                    classNames={{
+                      inputWrapper:["h-10"]
+                    }}
                     variant='bordered'
                     startContent={<SearchIcon />}
                   />
@@ -199,6 +205,9 @@ export default function MyJournalOverview() {
                       onChange={(e) => {
                         setPeriodFrom(e.target.value);
                       }}
+                      classNames={{
+                        inputWrapper:["h-10"]
+                      }}
                       variant='bordered'
                       value={periodFrom}
                     />
@@ -212,6 +221,9 @@ export default function MyJournalOverview() {
                       onChange={(e) => {
                         setPeriodTo(e.target.value);
                       }}
+                      classNames={{
+                        inputWrapper:["h-10"]
+                      }}
                       variant='bordered'
                       value={periodTo}
                     />
@@ -222,6 +234,7 @@ export default function MyJournalOverview() {
                   <Button
                     className='mt-1'
                     disabled={disabled}
+                    size='sm'
                     color='primary'
                     onClick={(e) => {
                       e.preventDefault();
@@ -230,12 +243,14 @@ export default function MyJournalOverview() {
                   >
                     Filter
                   </Button>
+
                   <Button
                     className='mt-1 ml-2'
+                    size='sm'
                     color='primary'
                     onClick={(e) => clearFilters()}
                   >
-                    Clear
+                    Reset
                   </Button>
                 </div>
               </div>
@@ -251,6 +266,7 @@ export default function MyJournalOverview() {
                   {({ blob, url, loading, error }) =>
                     loading ? 'Loading document...' : <Button color='primary'
                                                               type='submit'
+                                                              size={'sm'}
                                                               isLoading={isSubmitting}
                                                               spinner={<Spinner />}>
                       Download Journal
@@ -261,6 +277,7 @@ export default function MyJournalOverview() {
                 <Button onPress={handleGoBackClick}
                         startContent={<PlusFilledIcon />}
                         color='danger'
+                        size='sm'
                         variant='shadow'>
                   End Preview
                 </Button>
@@ -270,6 +287,7 @@ export default function MyJournalOverview() {
                 <Button onPress={handlePreviewClick}
                         startContent={<PlusFilledIcon />}
                         color='primary'
+                        size="sm"
                         variant='shadow'>
                   Preview
                 </Button>

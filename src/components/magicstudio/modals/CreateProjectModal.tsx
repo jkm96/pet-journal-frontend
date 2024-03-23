@@ -72,8 +72,7 @@ export default function CreateProjectModal({ isOpen, onClose }: {
               <ModalHeader className='flex flex-col gap-1'>Create Project</ModalHeader>
               <ModalBody>
                 <p>
-                  The period from and period to are optional. If unselected, the project created with use the current
-                  months diary entries.
+                  <span className="text-danger">*</span> Kindly note that period from and period to are optional. However, if unselected, the project created will use diary entries within the current month.
                 </p>
                 <form onSubmit={handleProjectCreation}>
                   <div className='grid md:grid-cols-3 md:gap-6'>
@@ -81,7 +80,7 @@ export default function CreateProjectModal({ isOpen, onClose }: {
                            color='default'
                            onChange={handleChange}
                            value={createProjectFormData.title}
-                           label='Title'
+                           label='Project Title'
                            labelPlacement={'outside'}
                            name='title'
                            variant={'bordered'}
@@ -126,11 +125,14 @@ export default function CreateProjectModal({ isOpen, onClose }: {
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button color='danger' onPress={onClose}>
+                <Button color='danger'
+                        size={'sm'}
+                        onPress={onClose}>
                   Close
                 </Button>
                 <Button color='primary'
                         type='submit'
+                        size={'sm'}
                         isLoading={isSubmitting}
                         spinner={<Spinner />}
                         onClick={handleProjectCreation}

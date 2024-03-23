@@ -86,7 +86,7 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
         }
       })
       .catch((error) => {
-        toast.error(`Error fetching your journal entry details: ${error}`);
+        toast.error(`Error fetching your diary entry details: ${error}`);
       })
       .finally(() => {
         setIsLoadingDetails(false);
@@ -106,7 +106,7 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
         }
       })
       .catch((error) => {
-        toast.error(`Error fetching your journal entry image buffers: ${error}`);
+        toast.error(`Error fetching your diary entry image buffers: ${error}`);
       });
   };
 
@@ -154,14 +154,14 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
       {isLoadingDetails ? (
         <div className={'grid place-items-center'}>
           <CircularProgress color={'primary'} className={'p-4'}
-                            label='Loading your journal entry details....' />
+                            label='Loading your diary entry details....' />
         </div>
       ) : (
         <>
           <div className='flex flex-col gap-4 m-2'>
             <div className='md:flex justify-between gap-3 items-end'>
               <div className='md:grid md:grid-cols-5 md:gap-4'>
-                <div className='relative flex flex-1 flex-shrink-0'>
+                <div className='relative flex flex-1'>
 
                   <GoBackButton onPress={() => router.back()} />
 

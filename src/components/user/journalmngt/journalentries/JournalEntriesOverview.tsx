@@ -138,8 +138,8 @@ export default function JournalEntriesOverview() {
           ) : (
             <>
               {Object.keys(groupEntriesByMonth(journalEntries)).map((monthYear) => (
-                <div key={monthYear}>
-                  <h2 className='text-2xl mt-4'>{monthYear}</h2>
+                <div key={monthYear} className="m-2">
+                  <h2 className='text-xl mt-4'>{monthYear}</h2>
                   <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
                     {groupEntriesByMonth(journalEntries)[monthYear].map((journal) => (
                       <Link key={journal.id}

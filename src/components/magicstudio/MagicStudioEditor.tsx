@@ -187,9 +187,6 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
       });
   };
 
-  const projectPdfDocument2 = () => {
-    return <Document></Document>;
-  };
   const projectPdfDocument = () => {
     if (magicProjectDetails.projectEntries === undefined) {
       return <Document></Document>;
@@ -273,7 +270,7 @@ export default function MagicStudioEditor({ slug }: { slug: string }) {
         </div>
       ) : (
         <>
-          <h3 className='m-2 mt-0'>{magicProjectDetails.project.title}</h3>
+          <h3 className='m-2 mt-0 text-2xl font-bold'>{toTitleCase(magicProjectDetails.project.title)}</h3>
 
           <div className='flex flex-col gap-4 m-2'>
             <div className='md:flex justify-between gap-3 items-end'>
