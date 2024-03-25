@@ -201,6 +201,7 @@ export default function MyJournalOverview() {
                     <Input
                       type='date'
                       size='sm'
+                      label={'Period From'}
                       placeholder='Period From'
                       onChange={(e) => {
                         setPeriodFrom(e.target.value);
@@ -217,6 +218,7 @@ export default function MyJournalOverview() {
                     <Input
                       type='date'
                       size='sm'
+                      label='Period To'
                       placeholder='Period To'
                       onChange={(e) => {
                         setPeriodTo(e.target.value);

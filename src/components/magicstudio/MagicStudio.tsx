@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import CreateProjectModal from '@/components/magicstudio/modals/CreateProjectModal';
-import { formatDateWithTime } from '@/helpers/dateHelpers';
+import { formatDateWithoutTime, formatDateWithTime } from '@/helpers/dateHelpers';
 import { fetchMagicStudioProjects } from '@/lib/services/magicstudio/magicStudioService';
 import { MagicStudioProjectResponse } from '@/boundary/interfaces/magicStudio';
 import Link from 'next/link';
@@ -78,12 +78,7 @@ export default function MagicStudio() {
         <>
           {magicProjects.length == 0 ? (
             <div className='flex items-center justify-center m-2'>
-              <p className='text-danger-400'>No projects were found!
-                Please add some diary entries under
-                <span className="font-bold text-primary">
-                  <Link href={NAVIGATION_LINKS.DIARY_ENTRIES}> Diary Entries</Link>
-                </span> to proceed
-              </p>
+              <p className='text-danger-400'>No projects were found! </p>
             </div>
           ) : (
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
@@ -114,8 +109,10 @@ export default function MagicStudio() {
                           <div className='flex flex-col gap-0'>
                             <h3 className='font-semibold text-foreground/90'>{project.title}</h3>
                             <p className='text-tiny md:text-small text-foreground/80'>
-                              {formatDateWithTime(project.createdAt)} | <span
-                              className='text-tiny md:text-small'>From <span className='font-bold'>{project.periodFrom}</span> To <span className='font-bold'>{project.periodTo}</span></span>
+                              {formatDateWithoutTime(project.createdAt)} | <span
+                              className='text-tiny md:text-small'>From <span
+                              className='font-bold'>{project.periodFrom}</span> To <span
+                              className='font-bold'>{project.periodTo}</span></span>
                             </p>
                           </div>
                         </div>

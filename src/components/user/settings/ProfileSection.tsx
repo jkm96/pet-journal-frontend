@@ -19,14 +19,14 @@ export default function ProfileSection({ user }: ProfileSectionProps) {
             height={260}
           />
           <div className='absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4'>
-            <label
-              htmlFor='cover'
-              className='flex cursor-pointer items-center justify-center gap-2 rounded bg-primary py-1 px-2 text-sm font-medium text-white hover:bg-opacity-80 xsm:px-4'
-            >
-              <input type='file' name='cover' id='cover' className='sr-only' />
-              <span><CameraIcon /></span>
-              <span>Edit</span>
-            </label>
+            {/*<label*/}
+            {/*  htmlFor='cover'*/}
+            {/*  className='flex cursor-pointer items-center justify-center gap-2 rounded bg-primary py-1 px-2 text-sm font-medium text-white hover:bg-opacity-80 xsm:px-4'*/}
+            {/*>*/}
+            {/*  <input type='file' name='cover' id='cover' className='sr-only' />*/}
+            {/*  <span><CameraIcon /></span>*/}
+            {/*  <span>Edit</span>*/}
+            {/*</label>*/}
           </div>
         </div>
         <div className='px-4 pb-6 text-center lg:pb-8 xl:pb-11.5'>

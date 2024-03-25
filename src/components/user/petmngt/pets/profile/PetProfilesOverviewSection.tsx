@@ -33,30 +33,31 @@ export default function PetProfilesOverviewSection() {
 
   return (
     <>
+      <Breadcrumb pageName='Pet Profiles' />
+
+      <div className='flex flex-col gap-4 m-2'>
+        <div className='flex justify-between gap-3 items-end'>
+          <div className='gap-3 hidden lg:block'>
+            <Button onPress={handleOpenModal}
+                    startContent={<PlusIcon />}
+                    size={'sm'}
+                    color='primary'
+                    variant='shadow'>
+              Add Pet
+            </Button>
+            {isModalOpen && (
+              <CreateNewPetModal isOpen={isModalOpen} onClose={handleCloseModal} />
+            )}
+          </div>
+        </div>
+      </div>
+
       {isLoadingPetProfiles ? (
         <div className={'grid place-items-center'}>
           <CircularProgress color={'primary'} className={'p-4'} label='Loading your pets...' />
         </div>
       ) : (
         <>
-          <Breadcrumb pageName='Pet Profiles' />
-
-          <div className='flex flex-col gap-4 m-2'>
-            <div className='flex justify-between gap-3 items-end'>
-              <div className='gap-3 hidden lg:block'>
-                <Button onPress={handleOpenModal}
-                        startContent={<PlusIcon />}
-                        size={'sm'}
-                        color='primary'
-                        variant='shadow'>
-                  Add Pet
-                </Button>
-                {isModalOpen && (
-                  <CreateNewPetModal isOpen={isModalOpen} onClose={handleCloseModal} />
-                )}
-              </div>
-            </div>
-          </div>
           {petProfiles.length < 1 ? (
             <>
               <div className='text-center'>

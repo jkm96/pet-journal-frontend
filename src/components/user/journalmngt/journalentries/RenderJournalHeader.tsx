@@ -3,6 +3,8 @@ import { Chip } from '@nextui-org/react';
 import { formatDateWithTime } from '@/helpers/dateHelpers';
 import { getMoodColorClassList } from '@/helpers/stylingHelpers';
 import { toTitleCase } from '@/lib/utils/pdfUtils';
+import Link from 'next/link';
+import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 
 interface RenderJournalHeaderProps {
   title: string;
@@ -14,6 +16,7 @@ interface RenderJournalHeaderProps {
   textColor?: string;
   textFontFamily?: string;
   textFontWeight?: number;
+  diarySlug?: string;
 }
 
 const renderListWithColors = (data: string, showChips: boolean, textFontFamily?: string, textFontWeight?: number) => {
@@ -58,12 +61,15 @@ const RenderJournalHeader: React.FC<RenderJournalHeaderProps> = (
     textColor,
     textFontFamily,
     textFontWeight,
+    diarySlug,
   },
 ) => {
   return (
     <div className='pb-0 pt-2 px-4 flex-col items-start'>
       <p className='font-bold text-xl'
-         style={{ color: textColor, fontFamily: textFontFamily, fontWeight: textFontWeight }}>{toTitleCase(title)}</p>
+         style={{ color: textColor, fontFamily: textFontFamily, fontWeight: textFontWeight }}>
+        <Link href={`${NAVIGATION_LINKS.DIARY_ENTRIES}/${diarySlug}`}>{toTitleCase(title)}</Link>
+      </p>
       <small className='text-default-500' style={{ fontFamily: textFontFamily }}>
         {formatDateWithTime(createdAt)}
       </small>

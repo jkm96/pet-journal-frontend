@@ -111,7 +111,9 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
   };
 
   useEffect(() => {
-    getImageBuffers(journalEntryDetails.id);
+    if (journalEntryDetails){
+      getImageBuffers(journalEntryDetails.id);
+    }
   }, [journalEntryDetails.id]);
 
   const createRecords = (journals: JournalEntryResponse) => {
@@ -259,30 +261,59 @@ export default function ManageJournalEntry({ slug }: { slug: string }) {
               </div>
 
               <div className='flex flex-wrap md:-m-2 mt-3'>
-                <div className={`flex ${journalImages.length <= 3 ? 'w-full' : 'w-1/2'} flex-wrap`}>
-                  {journalImages.slice(0, 3).map((image, index) => (
-                    <div key={index}
-                         className={`w-${index === 2 || journalImages.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}>
-                      <img
-                        alt={`gallery-${index + 1}`}
-                        className='block h-full w-full rounded-lg object-cover object-center'
-                        src={image}
-                      />
-                    </div>
-                  ))}
-                </div>
 
-                <div className='flex w-1/2 flex-wrap'>
-                  {journalImages.slice(3).map((image, index) => (
-                    <div key={index} className={`w-${index === 0 ? 'full' : '1/2'} p-1 md:p-2`}>
-                      <img
-                        alt={`gallery-${index + 4}`}
-                        className='block h-full w-full rounded-lg object-cover object-center'
-                        src={image}
-                      />
-                    </div>
-                  ))}
-                </div>
+                <>
+                  <div className={`flex ${journalImages.length <= 3 ? 'w-full' : 'w-1/2'} flex-wrap`}>
+                    {journalImages.slice(0, 3).map((image, index) => (
+                      <div key={index}
+                           className={`w-${index === 2 || journalImages.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}>
+                        <img
+                          alt={`gallery-${index + 1}`}
+                          className='block h-full w-full rounded-lg object-cover object-center'
+                          src={image}
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className='flex w-1/2 flex-wrap'>
+                    {journalImages.slice(3,7).map((image, index) => (
+                      <div key={index} className={`w-${index === 0 ? 'full' : '1/2'} p-1 md:p-2`}>
+                        <img
+                          alt={`gallery-${index + 4}`}
+                          className='block h-full w-full rounded-lg object-cover object-center'
+                          src={image}
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className={`flex ${journalImages.length <= 3 ? 'w-full' : 'w-1/2'} flex-wrap`}>
+                    {journalImages.slice(7,10).map((image, index) => (
+                      <div key={index}
+                           className={`w-${index === 2 || journalImages.length <= 1 ? 'full' : '1/2'} p-1 md:p-2`}>
+                        <img
+                          alt={`gallery-${index + 1}`}
+                          className='block h-full w-full rounded-lg object-cover object-center'
+                          src={image}
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className='flex w-1/2 flex-wrap'>
+                    {journalImages.slice(10,12).map((image, index) => (
+                      <div key={index} className={`w-${index === 0 ? 'full' : '1/2'} p-1 md:p-2`}>
+                        <img
+                          alt={`gallery-${index + 4}`}
+                          className='block h-full w-full rounded-lg object-cover object-center'
+                          src={image}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </>
+
               </div>
             </CardBody>
           </Card>

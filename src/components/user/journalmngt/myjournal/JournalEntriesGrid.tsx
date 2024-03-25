@@ -18,7 +18,7 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({ journalEntries 
   return (
     <>
       {Object.keys(groupEntriesByMonth(journalEntries)).map((monthYear) => (
-        <div className="m-2" key={monthYear}>
+        <div className='m-2' key={monthYear}>
 
           <h2 className='text-xl mt-4'>{monthYear}</h2>
 
@@ -30,7 +30,8 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({ journalEntries 
                   createdAt={journal.createdAt}
                   mood={journal.mood}
                   tags={journal.tags}
-                  pets={journal.pets.map((pet) => pet.name)} />
+                  pets={journal.pets.map((pet) => pet.name)}
+                  diarySlug={journal.slug} />
                 <CardBody className='overflow-visible py-2'>
                   <div className='mt-1 mb-1'>
                     {showFullContent === index ? `${journal.content}...` : `${journal.content.slice(0, 180)}...`}
@@ -69,8 +70,8 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({ journalEntries 
                                 {journal.journalAttachments.length === 2 ? (
                                   <img
                                     alt={`gallery-${imgIndex + 1}`}
-                                    className='block w-full rounded-lg object-center'
-                                    style={{ height: 250 }}
+                                    className='block w-full rounded-lg object-center sm:h-200'
+                                    // style={{ height: 200 }}
                                     src={image.sourceUrl}
                                   />
                                 ) : (
@@ -89,7 +90,7 @@ const JournalEntriesGrid: React.FC<JournalEntriesGridProps> = ({ journalEntries 
                       )}
 
                     <div className='flex w-1/2 flex-wrap'>
-                      {journal.journalAttachments.slice(3).map((image, imgIndex) => (
+                      {journal.journalAttachments.slice(3,6).map((image, imgIndex) => (
                         <div key={imgIndex}
                              className={`w-${imgIndex === 0 ? 'full' : '1/2'} p-1 md:p-2`}>
                           <img
