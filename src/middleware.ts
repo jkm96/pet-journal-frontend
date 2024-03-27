@@ -51,6 +51,20 @@ export async function middleware(request: NextRequest) {
     const cookie = request.cookies.get(cookieName)?.value;
     console.log('pathName', pathName);
     if (cookie === undefined) {
+      console.log('cookie is undefined')
+      if (protectedRoutes.some(route => pathName.startsWith(route))) {
+        console.log('User is not authenticated and trying to access a protected route');
+        if (pathName.includes('admin')) {
+          // Redirect to admin login
+          console.log('Redirecting to admin login');
+          return NextResponse.redirect(new URL(NAVIGATION_LINKS.ADMIN_LOGIN, request.url));
+        } else {
+          // Redirect to user login
+          console.log('Redirecting to user login');
+          return NextResponse.redirect(new URL(NAVIGATION_LINKS.LOGIN, request.url));
+        }
+      }
+
       if (!authRoutes.includes(pathName) && protectedRoutes.includes(pathName)) {
         console.log('User is not authenticated and trying to access a protected route');
         // User is not authenticated and trying to access a protected route

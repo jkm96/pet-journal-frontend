@@ -107,6 +107,7 @@ export function ManageSiteContent({contentId}:{contentId:number}) {
                 variant='bordered'
                 name='type'
                 value={updateContentRequest.type}
+                defaultSelectedKeys={[updateContentRequest.type]}
                 placeholder='Select type'
                 onChange={handleChange}
                 onSelectionChange={() => {
