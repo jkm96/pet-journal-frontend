@@ -1,11 +1,11 @@
 'use client';
 
-import { SiteContentOverviewSection } from '@/components/admin/managesitecontent/SiteContentOverviewSection';
+import { SiteContentOverview } from '@/components/admin/managesitecontent/SiteContentOverview';
 
 function ManageSiteContentPage() {
   return (
     <>
-      <SiteContentOverviewSection />
+      <SiteContentOverview />
     </>
   );
 }

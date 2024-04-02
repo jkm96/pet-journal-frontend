@@ -22,6 +22,7 @@ export const NAVIGATION_LINKS = {
   ADMIN_MANAGE_USERS: '/admin/dashboard/users',
   ADMIN_MANAGE_USER_SUBSCRIPTIONS: '/admin/dashboard/user-subscriptions',
   ADMIN_MANAGE_SITE_CONTENT: '/admin/dashboard/site-content',
+  ADMIN_MANAGE_CUSTOMER_FEEDBACK:  '/admin/dashboard/customer-feedback',
 };
 
 export const protectedRoutes = [

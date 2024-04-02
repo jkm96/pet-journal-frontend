@@ -12,9 +12,3 @@ export type CreateSiteContentRequest = {
   content: string;
   type: string;
 }
-
-export type CustomerFeedbackRequest = {
-  email:string;
-  rating:number;
-  feedback: string;
-}

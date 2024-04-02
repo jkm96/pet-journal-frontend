@@ -138,6 +138,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     Site Content
                   </Link>
                 </li>
+
+                <li>
+                  <Link
+                    href={NAVIGATION_LINKS.ADMIN_MANAGE_CUSTOMER_FEEDBACK}
+                    onClick={() => setSidebarOpen(false)}
+                    className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium 
+                                                            text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                      pathname === NAVIGATION_LINKS.ADMIN_MANAGE_CUSTOMER_FEEDBACK && 'text-white'
+                    } `}>
+                    <DashboardIcon />
+                    Feedback
+                  </Link>
+                </li>
               </>
             )}
 

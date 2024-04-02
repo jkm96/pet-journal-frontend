@@ -21,7 +21,7 @@ import { SearchIcon } from '@/components/shared/icons/SearchIcon';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import CreateSiteContentModal from '@/components/admin/managesitecontent/modals/CreateSiteContentModal';
 
-export function SiteContentOverviewSection() {
+export function SiteContentOverview() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [siteContent,setSiteContent] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -67,7 +67,7 @@ export function SiteContentOverviewSection() {
 
   return (
     <>
-      <Breadcrumb pageName='Diary Entries' />
+      <Breadcrumb pageName='Site Content' />
 
       <div className='flex flex-col gap-4 m-2'>
         <div className='flex justify-between gap-3 items-end'>

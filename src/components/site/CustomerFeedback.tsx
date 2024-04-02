@@ -4,12 +4,12 @@ import { Textarea } from '@nextui-org/input';
 import { Input } from '@nextui-org/react';
 import Spinner from '@/components/shared/icons/Spinner';
 import { Button } from '@nextui-org/button';
-import { CustomerFeedbackRequest } from '@/boundary/interfaces/siteContent';
 import { validateFeedbackFormInputErrors } from '@/helpers/validationHelpers';
 import { toast } from 'react-toastify';
 import { giveFeedbackAsync } from '@/lib/services/sitecontent/siteContentService';
 import { useAuth } from '@/hooks/useAuth';
 import MainNavbar from '@/components/site/sections/MainNavbar';
+import { CustomerFeedbackRequest } from '@/boundary/interfaces/customer';
 
 const initialFormState: CustomerFeedbackRequest = {
   rating: 4, email: '', feedback: '',
@@ -145,7 +145,7 @@ export function CustomerFeedback() {
                             value='Submit'
                             isLoading={isSubmitting}
                             spinner={<Spinner />}
-                            className='w-1/2 mt-4.5 cursor-pointer rounded-lg border border-primary bg-success p-4 text-white transition hover:bg-opacity-90'
+                            className='w-full mt-4.5 cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90'
                           >
                             {isSubmitting ? 'Submitting...' : 'Submit'}
                           </Button>
