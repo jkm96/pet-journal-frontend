@@ -10,7 +10,7 @@ import {
   getJournalEntryAttachmentBuffers,
   getJournalEntryDetails,
 } from '@/lib/services/journalentries/journalEntryService';
-import { Card, CardBody, CircularProgress, Input } from '@nextui-org/react';
+import { Card, CardBody, CircularProgress } from '@nextui-org/react';
 import RenderJournalHeader from '@/components/user/journalmngt/journalentries/RenderJournalHeader';
 import { Button } from '@nextui-org/button';
 import PreviewAndPrintJournalEntryModal, {
@@ -18,7 +18,7 @@ import PreviewAndPrintJournalEntryModal, {
 } from '@/components/user/journalmngt/journalentries/modals/PreviewAndPrintJournalEntryModal';
 import UploadJournalImagesModal from '@/components/user/journalmngt/journalentries/modals/UploadJournalImagesModal';
 import UpdateJournalEntryModal from '@/components/user/journalmngt/journalentries/modals/UpdateJournalEntryModal';
-import { CloseIcon, EditIcon, PlusFilledIcon } from '@nextui-org/shared-icons';
+import { CloseIcon, EditIcon } from '@nextui-org/shared-icons';
 import DeleteJournalEntryModal from '@/components/user/journalmngt/journalentries/modals/DeleteJournalEntryModal';
 import UploadIcon from '@/components/shared/icons/UploadIcon';
 import TrashIcon from '@/components/shared/icons/TrashIcon';
@@ -31,9 +31,6 @@ import { GoBackButton } from '@/components/common/navigation/GoBackButton';
 import { useRouter } from 'next/navigation';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import Font = ReactPDF.Font;
-import { SearchIcon } from '@/components/shared/icons/SearchIcon';
-import { getDocument } from '@/components/user/journalmngt/myjournal/PreviewMyJournal';
-import Spinner from '@/components/shared/icons/Spinner';
 
 Font.register({
   family: 'Oswald',

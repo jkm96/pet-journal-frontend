@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 import CreateProjectModal from '@/components/magicstudio/modals/CreateProjectModal';
-import { formatDateWithoutTime, formatDateWithTime } from '@/helpers/dateHelpers';
+import { formatDateWithoutTime } from '@/helpers/dateHelpers';
 import { fetchMagicStudioProjects } from '@/lib/services/magicstudio/magicStudioService';
 import { MagicStudioProjectResponse } from '@/boundary/interfaces/magicStudio';
 import Link from 'next/link';

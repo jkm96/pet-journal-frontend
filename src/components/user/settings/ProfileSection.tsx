@@ -1,5 +1,4 @@
 import { User } from '@/boundary/interfaces/user';
-import CameraIcon from '@/components/shared/icons/CameraIcon';
 
 export interface ProfileSectionProps {
   user: User | null;

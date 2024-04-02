@@ -1,25 +1,10 @@
-import { SiteContentQueryParameters } from '@/boundary/parameters/contentQueryParameters';
-import { fetchSiteContentAsync } from '@/lib/services/sitecontent/siteContentService';
 import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
-import { SiteContentResponse } from '@/boundary/interfaces/siteContent';
-import {
-  Button,
-  CircularProgress,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from '@nextui-org/react';
+import { CircularProgress, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react';
 import { formatDateWithTime } from '@/helpers/dateHelpers';
 import Link from 'next/link';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
 import Breadcrumb from '@/components/shared/breadcrumbs/Breadcrumb';
-import { SearchIcon } from '@/components/shared/icons/SearchIcon';
-import { PlusIcon } from '@/components/shared/icons/PlusIcon';
-import CreateSiteContentModal from '@/components/admin/managesitecontent/modals/CreateSiteContentModal';
 import { fetchCustomerFeedbackAsync } from '@/lib/services/admin/manageFeedbackService';
 import { CustomerFeedbackResponse } from '@/boundary/interfaces/customer';
 

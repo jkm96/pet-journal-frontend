@@ -1,6 +1,5 @@
 import { Button } from '@nextui-org/button';
 import React from 'react';
-import { EditIcon } from '@nextui-org/shared-icons';
 import { PlusIcon } from '@/components/shared/icons/PlusIcon';
 
 export function AddRecordFab(props: { onClick: (e: any) => void }) {
