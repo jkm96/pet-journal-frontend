@@ -8,7 +8,8 @@ import { CreatePetRequest, EditPetRequest } from '@/boundary/interfaces/pet';
 import { CreateJournalEntryRequest, UpdateJournalEntryRequest } from '@/boundary/interfaces/journal';
 import { CreateMagicProjectRequest } from '@/boundary/interfaces/magicStudio';
 import { CreateUserSubscriptionRequest } from '@/boundary/interfaces/admin';
-import { CreateSiteContentRequest, CustomerFeedbackRequest } from '@/boundary/interfaces/siteContent';
+import { CreateSiteContentRequest } from '@/boundary/interfaces/siteContent';
+import { CustomerFeedbackRequest } from '@/boundary/interfaces/customer';
 
 export function isEmailValid(email: string): boolean {
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
