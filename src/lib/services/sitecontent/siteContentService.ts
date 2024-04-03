@@ -1,6 +1,7 @@
 import { apiKey, internalBaseUrl } from '@/boundary/constants/appConstants';
 import { SiteContentQueryParameters } from '@/boundary/parameters/contentQueryParameters';
-import { CreateSiteContentRequest, CustomerFeedbackRequest } from '@/boundary/interfaces/siteContent';
+import { CreateSiteContentRequest } from '@/boundary/interfaces/siteContent';
+import { CustomerFeedbackRequest } from '@/boundary/interfaces/customer';
 
 export async function createSiteContentAsync(request: CreateSiteContentRequest) {
   try {

@@ -63,7 +63,7 @@ export default function CheckoutReturn() {
               <div className='p-10 text-center'>
                 <p>
                   Thank you for choosing our services! A confirmation email will be promptly dispatched to
-                  the email address you provided test@email.com.
+                  the email address you provided.
                 </p>
                 <p>
                   If you have any inquiries or require
@@ -74,8 +74,8 @@ export default function CheckoutReturn() {
             </>
           ) : (
             <div className='p-10 text-center'>
-              The payment failed or was canceled. Please
-              <Link className='text-primary' href={NAVIGATION_LINKS.PAYMENTS}>Try Again</Link>
+              The payment failed or was canceled. Please <Link className='text-primary'
+                                                               href={NAVIGATION_LINKS.PAYMENTS}>Try Again</Link>
               or contact customer support.
             </div>
           )}
