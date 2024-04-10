@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import MainNavbar from '@/components/site/sections/MainNavbar';
 import { Benefits } from '@/components/site/sections/Benefits';

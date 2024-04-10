@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Loader from '@/components/common/dashboard/Loader';
 import { PrivacyPolicy } from '@/components/site/PrivacyPolicy';
+import { HtmlPageHead } from '@/lib/utils/seoUtils';
 
 export default function PrivacyPolicyPage() {
   const [loading, setLoading] = useState(true);
@@ -12,6 +13,12 @@ export default function PrivacyPolicyPage() {
 
     return () => clearTimeout(timeout);
   }, []);
+
+  const title = 'Privacy Policy - Online Diary for Pet Lovers. Keep your pet memories together';
+  const description = 'Pet Diaries helps you save your daily memories, download them at any time, and print them beautifully.';
+  const type = "website"
+
+  HtmlPageHead(title,description,type);
 
   if (loading) {
     return <Loader />;
