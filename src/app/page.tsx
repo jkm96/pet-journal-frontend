@@ -24,8 +24,6 @@ export default function HomePage() {
   if (loading) {
     return <Loader />;
   } else {
-    return (
-      <Home/>
-      )
+    return <Home/>;
   }
 }
