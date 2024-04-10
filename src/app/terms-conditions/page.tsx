@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import Loader from '@/components/common/dashboard/Loader';
 import { TermsAndConditions } from '@/components/site/TermsAndConditions';
-import { HtmlPageHead } from '@/lib/utils/seoUtils';
 
 export default function TermsConditionsPage() {
   const [loading, setLoading] = useState(true);
@@ -14,11 +13,11 @@ export default function TermsConditionsPage() {
     return () => clearTimeout(timeout);
   }, []);
 
-  const title = 'Terms & Conditions - Online Diary for Pet Lovers. Keep your pet memories together';
-  const description = 'Pet Diaries helps you save your daily memories, download them at any time, and print them beautifully.';
-  const type = "website"
-
-  HtmlPageHead(title,description,type);
+  // const title = 'Terms & Conditions - Online Diary for Pet Lovers. Keep your pet memories together';
+  // const description = 'Pet Diaries helps you save your daily memories, download them at any time, and print them beautifully.';
+  // const type = "website"
+  //
+  // HtmlPageHead(title,description,type);
 
   if (loading) {
     return <Loader />;
