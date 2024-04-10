@@ -1,6 +1,7 @@
-export function getMetadata(title: string, description: string) {
+export function getPageMetadata(title: string, description: string) {
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
   return {
+    metadataBase: new URL('https://petdiaries.io'),
     title: title,
     description: description,
     type: 'website',
@@ -9,7 +10,11 @@ export function getMetadata(title: string, description: string) {
     creator : 'Pet Diaries',
     keywords: 'pet diary, online pet diary, pet photo diary, centralized pet memories, pet lovers diary',
     robots : 'index, follow',
+    icons:{
+      icon: '/favicon.ico'
+    },
     openGraph: {
+      metadataBase: new URL('https://petdiaries.io'),
       title: title,
       description: description,
       type: 'website',
@@ -18,6 +23,9 @@ export function getMetadata(title: string, description: string) {
       creator : 'Pet Diaries',
       keywords: 'pet diary, online pet diary, pet photo diary, centralized pet memories, pet lovers diary',
       robots : 'index, follow',
+      icons:{
+        icon: '/favicon.ico'
+      }
     },
   };
 }

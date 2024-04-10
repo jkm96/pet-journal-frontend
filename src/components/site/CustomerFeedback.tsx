@@ -1,3 +1,5 @@
+'use client';
+
 import { Footer } from '@/components/site/sections/Footer';
 import React, { useEffect, useState } from 'react';
 import { Textarea } from '@nextui-org/input';

@@ -1,7 +1,8 @@
+'use client';
+
 import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
-import { useRouter } from 'next/navigation';
 import { Input } from '@nextui-org/react';
 import { changeUserPasswordAsync } from '@/lib/services/auth/userAuthService';
 import MainNavbar from '@/components/site/sections/MainNavbar';
@@ -12,14 +13,12 @@ import { ResetPasswordRequest } from '@/boundary/interfaces/auth';
 import { EyeFilledIcon, EyeSlashFilledIcon } from '@nextui-org/shared-icons';
 import Link from 'next/link';
 
-
 const initialFormState: ResetPasswordRequest = {
   confirmPassword: '', password: '', token: '',
   email: '',
 };
 
 export default function ChangePassword() {
-  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [resetPasswordRequest, setResetPasswordRequest] = useState(initialFormState);
   const [status, setStatus] = useState<{ code: number | null, message: string }>({ code: null, message: '' });

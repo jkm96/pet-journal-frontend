@@ -1,3 +1,5 @@
+'use client';
+
 import { toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import { NAVIGATION_LINKS } from '@/boundary/configs/navigationConfig';
