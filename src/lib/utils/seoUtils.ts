@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 export function HtmlPageHead(pageTitle:string,pageDescription:string,pageType:string) {
   useEffect(() => {

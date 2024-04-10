@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import Loader from '@/components/common/dashboard/Loader';
-import { CustomerFeedback } from '@/components/site/CustomerFeedback';
-import { HtmlPageHead } from '@/lib/utils/seoUtils';
-import { Benefits } from '@/components/site/sections/Benefits';
+import React from 'react';
 import Features from '@/components/site/Features';
 
 export default function FeaturesPage() {
