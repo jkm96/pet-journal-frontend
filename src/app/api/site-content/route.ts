@@ -4,9 +4,10 @@ import { NextRequest } from 'next/server';
 import { getContentQueryParams } from '@/helpers/urlHelpers';
 import { AxiosRequestConfig } from 'axios';
 
-export async function GET(request: NextRequest, { params }: { params: { queryParams: string } }) {
+export async function GET(request: NextRequest) {
   try {
-    const queryParams = getContentQueryParams(params.queryParams);
+    const data = await request.json();
+    const queryParams = getContentQueryParams(data.queryParams);
     const config: AxiosRequestConfig = {
       params: queryParams,
     };

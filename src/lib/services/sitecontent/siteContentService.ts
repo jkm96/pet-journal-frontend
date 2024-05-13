@@ -43,13 +43,15 @@ export async function updateSiteContentAsync(request: CreateSiteContentRequest,c
 
 export async function fetchSiteContentAsync(queryParams: SiteContentQueryParameters) {
   try {
-    const response = await fetch(`${internalBaseUrl}/api/site-content/${JSON.stringify(queryParams)}`, {
+    const response = await fetch(`${internalBaseUrl}/api/site-content`, {
       method: 'GET',
       headers: {
         'x-api-key': `${apiKey}`,
         'Content-type': 'application/json',
       },
-      body: null,
+      body: JSON.stringify({
+        'queryParams':queryParams
+      }),
     });
 
     return response.json();

@@ -1,5 +1,8 @@
-export function getJournalQueryParams(queryParams: string) {
-  const searchParams = JSON.parse(queryParams);
+import { JournalQueryParameters } from '@/boundary/parameters/journalQueryParameters';
+import { SiteContentQueryParameters } from '@/boundary/parameters/contentQueryParameters';
+import { MagicStudioQueryParameters } from '@/boundary/parameters/magicStudioQueryParameters';
+
+export function getJournalQueryParams(searchParams: JournalQueryParameters) {
   const pageSize = searchParams.pageSize;
   const pageNumber = searchParams.pageNumber;
   const orderBy = searchParams.orderBy;
@@ -11,15 +14,13 @@ export function getJournalQueryParams(queryParams: string) {
   return { pageSize, pageNumber, orderBy, searchTerm, periodFrom, periodTo, fetch };
 }
 
-export function getContentQueryParams(queryParams: string) {
-  const searchParams = JSON.parse(queryParams);
+export function getContentQueryParams(searchParams: SiteContentQueryParameters) {
   const type = searchParams.type ?? '';
 
   return { type };
 }
 
-export function getMagicStudioQueryParams(queryParams: string) {
-  const searchParams = JSON.parse(queryParams);
+export function getMagicStudioQueryParams(searchParams: MagicStudioQueryParameters) {
   const pageSize = searchParams.pageSize;
   const pageNumber = searchParams.pageNumber;
   const orderBy = searchParams.orderBy;

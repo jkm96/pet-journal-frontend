@@ -1,21 +1,14 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import Loader from '@/components/common/dashboard/Loader';
 import { ForgotPasswordForm } from '@/components/auth/user/ForgotPasswordForm';
+import { Metadata } from 'next';
+import { getPageMetadata } from '@/lib/utils/seoUtils';
+
+const title = 'Reset Password - Online Diary for Pet Lovers.';
+const description = 'Pet Diaries helps you save your daily memories, download them at any time, and print them beautifully.';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata(title, description);
+}
 
 export default function ForgotPasswordPage() {
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 1000); //1 second
-
-    return () => clearTimeout(timeout);
-  }, []);
-
-  if (loading) {
-    return <Loader />;
-  } else {
     return <ForgotPasswordForm />;
-  }
 };

@@ -21,14 +21,16 @@ export async function createProject(createRequest: CreateMagicProjectRequest) {
 
 export async function fetchMagicStudioProjects(queryParams: MagicStudioQueryParameters) {
   try {
-    const apiUrl = `${internalBaseUrl}/api/magic-studio/list/${JSON.stringify(queryParams)}`;
+    const apiUrl = `${internalBaseUrl}/api/magic-studio/list`;
     const response = await fetch(apiUrl, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'x-api-key': `${apiKey}`,
         'Content-type': 'application/json',
       },
-      body: null,
+      body: JSON.stringify({
+        'queryParams':queryParams
+      }),
     });
 
     return response.json();

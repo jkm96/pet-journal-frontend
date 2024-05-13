@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { ForgotPasswordRequest } from '@/boundary/interfaces/auth';
 import { Input } from '@nextui-org/react';

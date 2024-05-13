@@ -3,9 +3,10 @@ import petDiariesApiClient, { getAxiosConfigs } from '@/lib/axios/axiosClient';
 import { NextRequest } from 'next/server';
 import { getJournalQueryParams } from '@/helpers/urlHelpers';
 
-export async function GET(request: NextRequest, { params }: { params: { queryParams: string } }) {
+export async function POST(request: NextRequest) {
   try {
-    const queryParams = getJournalQueryParams(params.queryParams);
+    const data = await request.json();
+    const queryParams = getJournalQueryParams(data.queryParams);
     const config = getAxiosConfigs(request, queryParams);
     const response = await petDiariesApiClient.get('api/v1/journal-entry', config);
     return handleAxiosResponse(response);
